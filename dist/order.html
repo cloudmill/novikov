@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Novikov</title>
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="canonical" href="URL">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<meta name="description" content="Index page">
+		<meta name="keywords" content="index, page">
+		<meta name="author" content="">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:site" content="">
+		<meta name="twitter:image" content="">
+		<meta name="twitter:description" content="">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="">
+		<meta property="og:description" content="">
+		<meta property="og:image" content="assets/images/opengraph.jpg">
+		<meta property="og:type" content="website"><!-- iOS-->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Novikov">
+		<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.svg"><!-- Android-->
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="theme-color" content="#f8aa27">
+		<link rel="icon" type="image/png" href="images/favicons/android-chrome-192x192.png" sizes="192x192"><!-- Windows-->
+		<meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+		<meta name="msapplication-TileColor" content="#f8aa27">
+		<!--link(type='font/woff', href=require('font'), rel='preload', as='font', crossorigin)-->
+		<link rel="shortcut icon" href="assets/favicon.ico">
+		<link href="vendors.css" rel="stylesheet">
+		<link href="app.css" rel="stylesheet">
+	</head>
+
+	<body class="page-custom">
+		<!--[if lt IE 9]><p class="browsehappy">Данный сайт построен на передовых, современных технологиях и не поддерживает Ваш браузер. Настоятельно рекомендуем выбрать и установить любой из &nbsp;<a href="http://browsehappy.com/" target="_blank">современных браузеров.</a> Это бесплатно и займет всего несколько минут.</p><![endif]-->
+		<div class="loading"></div>
+		<div class="popup" id="mapMe" style="display: none">
+			<div class="close-popup close-popup--js"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="80" height="80" fill="black"></rect>
+					<rect x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white"></rect>
+					<rect x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white"></rect>
+				</svg></div>
+			<div class="popup-inner">
+				<div class="row between__xs bottom__xs">
+					<div class="col col__lg-8 col__md-8 col__xs-12">
+						<div class="input"><input class="control input__field autocomplete" type="text" name="search" id="search-o" placeholder="" required="required" /><label class="input__label" for="search-o"><span class="input__label-content">Улица, дом</span></label>
+							<div class="control-error"></div>
+						</div>
+					</div>
+					<div class="col col__lg-4 col__md-4 col__xs-12 text--right"><button class="btn btn--primary success--js">Подтвердить адрес</button></div>
+				</div>
+			</div>
+			<div class="relative">
+				<div class="error-tool">Выбранный адрес не входит в зону доставки</div>
+				<div id="map"></div>
+			</div>
+		</div>
+		<header class="page-header" data-aos="fade-down">
+			<div class="page-header__menu col__xl-4 col__lg-6 col__md-4 col__xs-4"><button class="header-menu--js btn btn-icon btn--default"><svg width="40" height="17" viewBox="0 0 40 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<line y1="0.5" x2="40" y2="0.5" stroke="black"></line>
+						<line y1="8.5" x2="40" y2="8.5" stroke="black"></line>
+						<line y1="16.5" x2="40" y2="16.5" stroke="black"></line>
+					</svg><span>Меню</span></button><button class="btn btn-border"><span class="add"><img src="assets/images/header.png" alt="" /></span><span>Заказать цветы</span></button></div>
+			<div class="page-header__logo col__xl-4 col__lg-3 col__md-4 col__xs-4"><a href="/"><img src="assets/images/logo.svg" alt="Novikov"></a></div>
+			<div class="page-header__info col__xl-4 col__lg-5 col__md-5 col__xs-4">
+				<ul class="page-header__lang hidden__sm hidden__xs">
+					<li class="active"><a href="#">Ru</a></li>
+					<li><a href="#">En</a></li>
+				</ul><a class="page-header__search header-search--js" href="#"><img src="assets/images/icons/search.svg" alt="" /></a><a class="page-header__cart" href="/order.html"><svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M15.8692 1.51345C15.7408 2.34816 15.4773 3.43541 14.916 4.27727C13.9059 5.79246 12.0315 6.2998 11.3671 6.44073C11.1453 6.48776 10.9295 6.49992 10.731 6.49992H5.04588C2.79016 6.49992 1.12349 8.60239 1.63822 10.7986L3.51322 18.7986C3.88411 20.381 5.29556 21.4999 6.92088 21.4999H23.0791C24.7044 21.4999 26.1159 20.381 26.4867 18.7986L28.3617 10.7986C28.8765 8.60239 27.2098 6.49992 24.9541 6.49992H19V5.49992H24.9541C27.8543 5.49992 29.9972 8.20309 29.3354 11.0268L27.4604 19.0268C26.9835 21.0613 25.1688 22.4999 23.0791 22.4999H6.92088C4.83118 22.4999 3.01646 21.0613 2.53961 19.0268L0.664606 11.0268C0.00280368 8.2031 2.14567 5.49992 5.04588 5.49992H10.731C10.8907 5.49992 11.0308 5.4898 11.1596 5.46249C11.796 5.32752 13.3102 4.88326 14.084 3.72257C14.5227 3.06444 14.7592 2.15169 14.8808 1.36139C14.9405 0.973584 14.9704 0.629915 14.9853 0.383738C14.9927 0.260879 14.9964 0.16291 14.9982 0.0965809C14.9991 0.0634318 14.9996 0.0382326 14.9998 0.0218298L15 0.00394544L15 0.000160787L15 -0.000244141C15 -0.000165398 15 -7.71449e-05 15.5 -7.71449e-05C16 -7.71449e-05 16 3.01818e-05 16 0.000147019V0.000428783L16 0.00116449L16 0.00332033L15.9999 0.0103351L15.9997 0.0349006C15.9994 0.0558514 15.9989 0.085828 15.9978 0.123968C15.9958 0.200217 15.9916 0.309279 15.9834 0.444233C15.9671 0.713681 15.9345 1.08876 15.8692 1.51345Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M9.51159 18.1568L7.82523 11.0747L8.79803 10.8431L10.4844 17.9252L9.51159 18.1568Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7981 18.1568L22.4845 11.0747L21.5117 10.8431L19.8253 17.9252L20.7981 18.1568Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 18V11H15.5V18H14.5Z" fill="black"></path>
+					</svg><span>8</span></a>
+			</div>
+		</header>
+		<nav class="navbar"><button class="header-menu--js btn btn-icon btn--default"><img src="assets/images/icons/cross.svg" alt="" /><span>Меню</span></button>
+			<ul class="main-nav">
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Рестораны">Рестораны</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Проекты">Проекты</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Партнеры">Партнеры</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Дисконтные карты">Дисконтные карты</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Сертификаты">Сертификаты</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="О компании">О компании</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Вакансии">Вакансии</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Контакты">Контакты</a></li>
+			</ul>
+		</nav>
+		<div class="search-block">
+			<div class="container">
+				<form class="search-block-form" method="POST" action=""><input type="text" placeholder="что вы хотите найти?"><button type="submit"><img src="assets/images/icons/search-btn.svg" alt="" /></button><a class="search-block--js" href="#"><img src="assets/images/icons/close.svg" alt="" /></a></form>
+			</div>
+		</div>
+		<main class="main">
+			<form action="" method="POST">
+				<div class="cart-block active" data-aos="fade-right">
+					<div class="cart-block-head">
+						<div class="head">ваш заказ</div>
+						<div class="page-header__cart active"><svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M15.8692 1.51345C15.7408 2.34816 15.4773 3.43541 14.916 4.27727C13.9059 5.79246 12.0315 6.2998 11.3671 6.44073C11.1453 6.48776 10.9295 6.49992 10.731 6.49992H5.04588C2.79016 6.49992 1.12349 8.60239 1.63822 10.7986L3.51322 18.7986C3.88411 20.381 5.29556 21.4999 6.92088 21.4999H23.0791C24.7044 21.4999 26.1159 20.381 26.4867 18.7986L28.3617 10.7986C28.8765 8.60239 27.2098 6.49992 24.9541 6.49992H19V5.49992H24.9541C27.8543 5.49992 29.9972 8.20309 29.3354 11.0268L27.4604 19.0268C26.9835 21.0613 25.1688 22.4999 23.0791 22.4999H6.92088C4.83118 22.4999 3.01646 21.0613 2.53961 19.0268L0.664606 11.0268C0.00280368 8.2031 2.14567 5.49992 5.04588 5.49992H10.731C10.8907 5.49992 11.0308 5.4898 11.1596 5.46249C11.796 5.32752 13.3102 4.88326 14.084 3.72257C14.5227 3.06444 14.7592 2.15169 14.8808 1.36139C14.9405 0.973584 14.9704 0.629915 14.9853 0.383738C14.9927 0.260879 14.9964 0.16291 14.9982 0.0965809C14.9991 0.0634318 14.9996 0.0382326 14.9998 0.0218298L15 0.00394544L15 0.000160787L15 -0.000244141C15 -0.000165398 15 -7.71449e-05 15.5 -7.71449e-05C16 -7.71449e-05 16 3.01818e-05 16 0.000147019V0.000428783L16 0.00116449L16 0.00332033L15.9999 0.0103351L15.9997 0.0349006C15.9994 0.0558514 15.9989 0.085828 15.9978 0.123968C15.9958 0.200217 15.9916 0.309279 15.9834 0.444233C15.9671 0.713681 15.9345 1.08876 15.8692 1.51345Z" fill="black"></path>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M9.51159 18.1568L7.82523 11.0747L8.79803 10.8431L10.4844 17.9252L9.51159 18.1568Z" fill="black"></path>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7981 18.1568L22.4845 11.0747L21.5117 10.8431L19.8253 17.9252L20.7981 18.1568Z" fill="black"></path>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 18V11H15.5V18H14.5Z" fill="black"></path>
+							</svg><span>8</span></div>
+					</div>
+					<div class="cart-block-body">
+						<div class="cart-block-item">
+							<div class="cart-block-item-size">
+								<div>Дисконтная карта</div>
+								<div class="incDec">
+									<div class="cart-id dec--js"><img src="assets/images/icons/cart-inc.svg" alt="" /></div>
+									<div class="cart-count">1</div>
+									<div class="cart-id inc--js"><img src="assets/images/icons/cart-dec.svg" alt="" /></div>
+								</div>
+							</div>
+							<div class="cart-block-item-price">
+								<div class="cart-pr" data-pr="10000"><span>10 000</span> ₽</div>
+								<div class="cart-wr">256 г</div>
+								<div class="cart-rm cart-rm--js"><img src="assets/images/icons/cart-close.svg" alt="" /></div>
+							</div>
+						</div>
+						<div class="cart-block-item">
+							<div class="cart-block-item-size">
+								<div>Light</div>
+								<div class="incDec">
+									<div class="cart-id dec--js"><img src="assets/images/icons/cart-inc.svg" alt="" /></div>
+									<div class="cart-count">1</div>
+									<div class="cart-id inc--js"><img src="assets/images/icons/cart-dec.svg" alt="" /></div>
+								</div>
+							</div>
+							<div class="cart-block-item-price">
+								<div class="cart-pr" data-pr="3000"><span>3 000</span> ₽</div>
+								<div class="cart-rm cart-rm--js"><img src="assets/images/icons/cart-close.svg" alt="" /></div>
+							</div>
+						</div>
+						<div class="cart-block-item cart-block-item--long">
+							<div class="cart-block-promo">
+								<div>Карта лояльности <br> или&nbsp;промокод</div>
+								<div class="input-group"><input class="control promo--js" type="text" name="promo">
+									<div class="input-group--btn"><button class="disabled" disabled><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<rect y="0.930664" width="40" height="40" fill="#000"></rect>
+												<path d="M12 21.3153L17.3333 25.9307L28 15.9307" stroke="#fff"></path>
+											</svg></button></div>
+								</div>
+							</div>
+						</div>
+						<div class="cart-block-summ">
+							<div>Сумма заказа</div>
+							<div class="card-summ"><b><span>10 000</span> ₽</b></div>
+						</div>
+					</div>
+					<div class="cart-block-bottom">
+						<div class="cart-block-count">
+							<div>Итого</div>
+							<div class="card-summ"><b><span>10 000</span> ₽</b></div>
+						</div><a class="btn btn--full btn--primary form--js" href="#">Заказать</a><!-- кнопка при минимальном заказе, удалить style='display: none'--><a class="btn btn--full btn--primary form--js disabled" href="#" disabled style="display: none">200 ₽ до минимальной суммы заказа</a>
+					</div>
+				</div>
+				<main class="page-order">
+					<div class="back-link" data-aos="fade-up"><a class="btn-icon" href="#"><svg width="45" height="30" viewBox="0 0 45 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.500191 15.4307C0.500191 23.165 6.73887 29.4307 14.4295 29.4307C22.1202 29.4307 28.3589 23.165 28.3589 15.4307C28.3589 7.69637 22.1202 1.43066 14.4295 1.43066C6.73887 1.43066 0.500191 7.69637 0.500191 15.4307Z" stroke="#E5E5E5"></path>
+								<path class="arr" d="M15.1914 12.5152L15.5886 12.8189L15.1914 12.5152ZM15.1914 18.3465L15.5886 18.0428L15.1914 18.3465ZM45 15.9308H9.29348V14.9308H45V15.9308ZM9.29348 15.4308C9.29348 14.9308 9.2933 14.9308 9.29313 14.9308C9.2931 14.9308 9.29294 14.9308 9.29287 14.9308C9.29272 14.9308 9.29263 14.9308 9.29259 14.9308C9.29251 14.9308 9.29265 14.9308 9.29301 14.9308C9.29372 14.9308 9.2953 14.9308 9.29773 14.9308C9.30257 14.9307 9.3108 14.9306 9.32224 14.9303C9.34514 14.9297 9.38091 14.9285 9.4283 14.9259C9.52314 14.9207 9.66424 14.9102 9.8418 14.8889C10.1975 14.8461 10.6962 14.7601 11.2606 14.5881C12.392 14.2433 13.7624 13.561 14.7942 12.2115L15.5886 12.8189C14.391 14.3851 12.8124 15.1606 11.5522 15.5447C10.9208 15.7371 10.363 15.8334 9.96122 15.8817C9.76004 15.9059 9.59712 15.9182 9.48263 15.9244C9.42536 15.9275 9.38013 15.9291 9.3482 15.9299C9.33224 15.9304 9.31959 15.9306 9.31042 15.9307C9.30583 15.9308 9.30212 15.9308 9.29929 15.9308C9.29787 15.9308 9.29668 15.9308 9.29571 15.9308C9.29523 15.9308 9.2948 15.9308 9.29443 15.9308C9.29424 15.9308 9.294 15.9308 9.29391 15.9308C9.29369 15.9308 9.29348 15.9308 9.29348 15.4308ZM14.7942 12.2115C15.3693 11.4594 15.7074 10.4851 15.8999 9.6698C15.995 9.267 16.0521 8.91365 16.0854 8.66197C16.102 8.53634 16.1125 8.43658 16.1189 8.36932C16.1221 8.3357 16.1242 8.31024 16.1255 8.29377C16.1261 8.28553 16.1265 8.27955 16.1268 8.27592C16.1269 8.27411 16.127 8.27288 16.1271 8.27226C16.1271 8.27195 16.1271 8.27178 16.1271 8.27178C16.1271 8.27177 16.1271 8.2718 16.1271 8.27188C16.1271 8.27191 16.1271 8.272 16.1271 8.27201C16.1271 8.27211 16.1271 8.27221 16.6261 8.30371C17.1251 8.33521 17.1251 8.33534 17.1251 8.33547C17.1251 8.33552 17.125 8.33566 17.125 8.33578C17.125 8.336 17.125 8.33627 17.125 8.33658C17.1249 8.33718 17.1249 8.33795 17.1248 8.33887C17.1247 8.3407 17.1245 8.34315 17.1243 8.34621C17.1239 8.35231 17.1233 8.36083 17.1224 8.37164C17.1207 8.39327 17.1182 8.42413 17.1145 8.46336C17.107 8.54181 17.0951 8.65394 17.0767 8.79297C17.0401 9.07063 16.9774 9.45777 16.8731 9.89959C16.6668 10.7735 16.2875 11.905 15.5886 12.8189L14.7942 12.2115ZM9.29348 15.4308C9.29348 14.9308 9.29369 14.9308 9.29391 14.9308C9.294 14.9308 9.29424 14.9308 9.29443 14.9308C9.2948 14.9308 9.29523 14.9308 9.29571 14.9308C9.29668 14.9308 9.29787 14.9308 9.29929 14.9309C9.30212 14.9309 9.30583 14.9309 9.31042 14.931C9.31959 14.9311 9.33224 14.9313 9.3482 14.9317C9.38013 14.9325 9.42536 14.9341 9.48263 14.9373C9.59712 14.9435 9.76004 14.9558 9.96122 14.98C10.363 15.0283 10.9208 15.1246 11.5522 15.317C12.8124 15.7011 14.391 16.4766 15.5886 18.0428L14.7942 18.6502C13.7624 17.3007 12.392 16.6184 11.2606 16.2736C10.6962 16.1015 10.1975 16.0156 9.8418 15.9728C9.66424 15.9515 9.52314 15.9409 9.4283 15.9358C9.38091 15.9332 9.34514 15.932 9.32224 15.9314C9.3108 15.9311 9.30257 15.9309 9.29773 15.9309C9.2953 15.9308 9.29372 15.9308 9.29301 15.9308C9.29265 15.9308 9.29251 15.9308 9.29259 15.9308C9.29263 15.9308 9.29272 15.9308 9.29287 15.9308C9.29294 15.9308 9.2931 15.9308 9.29313 15.9308C9.2933 15.9308 9.29348 15.9308 9.29348 15.4308ZM15.5886 18.0428C16.2875 18.9567 16.6668 20.0882 16.8731 20.9621C16.9774 21.4039 17.0401 21.791 17.0767 22.0687C17.0951 22.2077 17.107 22.3199 17.1145 22.3983C17.1182 22.4375 17.1207 22.4684 17.1224 22.49C17.1233 22.5008 17.1239 22.5093 17.1243 22.5155C17.1245 22.5185 17.1247 22.521 17.1248 22.5228C17.1249 22.5237 17.1249 22.5245 17.125 22.5251C17.125 22.5254 17.125 22.5257 17.125 22.5259C17.125 22.526 17.1251 22.5261 17.1251 22.5262C17.1251 22.5263 17.1251 22.5264 16.6261 22.5579C16.1271 22.5895 16.1271 22.5896 16.1271 22.5896C16.1271 22.5897 16.1271 22.5897 16.1271 22.5898C16.1271 22.5899 16.1271 22.5899 16.1271 22.5899C16.1271 22.5899 16.1271 22.5897 16.1271 22.5894C16.127 22.5888 16.1269 22.5876 16.1268 22.5857C16.1265 22.5821 16.1261 22.5761 16.1255 22.5679C16.1242 22.5514 16.1221 22.526 16.1189 22.4923C16.1125 22.4251 16.102 22.3253 16.0854 22.1997C16.0521 21.948 15.995 21.5947 15.8999 21.1919C15.7074 20.3765 15.3693 19.4023 14.7942 18.6502L15.5886 18.0428Z" fill="black"></path>
+							</svg><span>Вернуться</span></a></div>
+					<div class="m-auto col__xl-8 col__lg-10" data-aos="fade-up">
+						<h1 class="select-wrapper">оформление заказа</h1>
+						<div class="order-wrapper" data-aos="fade-up">
+							<div class="order-wrapper__item">
+								<h3>контактные данные</h3>
+								<div class="form__group">
+									<div class="input"><input class="control input__field" type="text" name="name" id="name-o" placeholder="" required="required" /><label class="input__label" for="name-o"><span class="input__label-content">ФИО получателя*</span></label>
+										<div class="control-error"></div>
+									</div>
+								</div>
+								<div class="form__group">
+									<div class="input"><input class="control input__field" type="text" name="phone" id="phone-o" placeholder="" required="required" /><label class="input__label" for="phone-o"><span class="input__label-content">Номер телефона*</span></label>
+										<div class="control-error"></div>
+									</div>
+								</div>
+								<div class="form__group">
+									<div class="input"><input class="control input__field" type="text" name="email" id="email-o" placeholder="" required="required" /><label class="input__label" for="email-o"><span class="input__label-content">E–mail*</span></label>
+										<div class="control-error"></div>
+									</div>
+								</div>
+								<div class="form__group checkbox"><input type="checkbox" id="signIt-o" required><label for="signIt-o">Даю согласание на обработку <a href="#">персональных данных</a>
+										<div class="control-error"></div>
+									</label></div>
+							</div>
+							<div class="tab-container order-wrapper__item" data-aos="fade-up">
+								<div class="tabs">
+									<div class="tab active" data-toggle-target=".tab-content-1">
+										<h3>Доставка</h3>
+									</div>
+									<div class="tab" data-toggle-target=".tab-content-2">
+										<h3>самовывоз</h3>
+									</div>
+								</div>
+								<div class="tab-content tab-content-1 active">
+									<div class="row order-wrapper__itemv">
+										<div class="col col__xl-4">
+											<div class="order-delivery"><a class="btn btn--default myModal" href="#">выбрать на карте</a>
+												<div class="order-delivery-adr">
+													<p></p><a class="text__sm myModal" href="#">Изменить</a>
+												</div>
+											</div>
+										</div>
+										<div class="col col__xl-4">
+											<div class="input"><input class="control input__field" type="text" name="number" id="number-o" placeholder="" required="required" /><label class="input__label" for="number-o"><span class="input__label-content">Номер квартиры</span></label>
+												<div class="control-error"></div>
+											</div>
+										</div>
+									</div>
+									<div class="control-error"></div>
+									<div class="order-wrapper__item order-wrapper__item--date" data-aos="fade-up">
+										<h3>дата и время доставки</h3>
+										<div class="order-date row">
+											<div class="col col__xl-4">
+												<div class="input"><input class="control input__field" type="text" name="date" id="date-o" placeholder="" required="required" /><label class="input__label" for="date-o"><span class="input__label-content">Дата</span></label>
+													<div class="control-error"></div>
+												</div>
+											</div>
+											<div class="col col__xl-4 select-wrapper"><select class="select-template" style="width: 190px">
+													<option value="11">11:00</option>
+													<option value="12">12:00</option>
+													<option value="13">13:00</option>
+												</select></div>
+										</div>
+									</div>
+									<div class="order-wrapper__item order-wrapper__item--taxi" data-aos="fade-up">
+										<div>На данный адрес доставка возможна через службу такси.<br>Узнать стоимость у менеджера: <a href="tel:89112862563">8 911 286-25-63</a></div>
+									</div>
+									<div class="order-wrapper__item" data-aos="fade-up">
+										<h3>способ оплаты</h3>
+										<div class="order-payment">
+											<div class="order-payment-not">
+												<p>Для выбора способа оплаты укажите способ доставки</p>
+											</div>
+											<div class="order-payment-fill">
+												<div class="radio--inline">
+													<div class="radio"><input type="radio" id="payku1" value="payku1" name="payku" /><label for="payku1">Картой онлайн</label></div>
+													<div class="radio"><input type="radio" id="payku2" value="payku2" name="payku" /><label for="payku2">Наличными курьеру</label></div>
+												</div>
+												<div class="control-error"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-content tab-content-2">
+									<div class="order-wrapper__item" data-aos="fade-up">
+										<p>г. Москва, ул. Петровка, 3/6, стр. 2</p>
+									</div>
+									<div class="order-wrapper__item" data-aos="fade-up">
+										<h3>дата и время доставки</h3>
+										<div class="row order-date">
+											<div class="col col__xl-4">
+												<div class="input"><input class="control input__field" type="text" name="date" id="date-o" placeholder="" required="required" /><label class="input__label" for="date-o"><span class="input__label-content">Дата</span></label>
+													<div class="control-error"></div>
+												</div>
+											</div>
+											<div class="col col__xl-4 select-wrapper"><select class="select-template" style="width: 190px">
+													<option value="11">11:00</option>
+													<option value="12">12:00</option>
+													<option value="13">13:00</option>
+												</select></div>
+										</div>
+									</div>
+									<div class="order-wrapper__item" data-aos="fade-up">
+										<h3>способ оплаты</h3>
+										<div class="order-payment">
+											<div class="radio--inline">
+												<div class="radio"><input type="radio" id="payby1" value="payby1" name="payby" /><label for="payby1">Картой онлайн</label></div>
+												<div class="radio"><input type="radio" id="payby2" value="payby2" name="payby" /><label for="payby2">Картой в ресторане</label></div>
+												<div class="radio"><input type="radio" id="payby3" value="payby3" name="payby" /><label for="payby3">Наличными в ресторане</label></div>
+											</div>
+											<div class="control-error"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</form>
+		</main>
+		<footer class="page-footer" data-aos="fade-up">
+			<div class="page-footer-top" data-aos="fade-up">
+				<div class="container">
+					<div class="row bottom__xs">
+						<div class="col col__lg-6 col__xs-12">
+							<div class="alpha">Будьте в курсе</div>
+							<p class="text__mg">Гастрономические новости, советы, акции и многое другое</p>
+						</div>
+						<div class="col col__lg-6 col__xs-12">
+							<form method="POST" action="">
+								<div class="form__group">
+									<div class="input"><input class="control" type="text" placeholder="E–mail" required>
+										<div class="control-error"></div>
+									</div><button type="submit"><img src="assets/images/icons/link-next-w.svg" alt="" /></button>
+								</div>
+								<div class="checkbox"><input type="checkbox" id="signIt" required><label for="signIt">Даю согласание на обработку <a href="#">персональных данных</a></label></div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-footer-bottom" data-aos="fade-up">
+				<div class="container">
+					<div class="row">
+						<div class="col col__lg-5 col__md-4 col__xs-12 hidden__xs hidden__sm"><img src="assets/images/logo-w.svg" alt="" /></div>
+						<div class="col col__lg-7 col__md-8 col__xs-12">
+							<div class="row between__xs">
+								<div class="col">
+									<ul class="footer-menu">
+										<li><a href="#">Рестораны</a></li>
+										<li><a href="#">О компании</a></li>
+										<li><a href="#">Партнеры</a></li>
+									</ul>
+								</div>
+								<div class="col">
+									<ul class="footer-menu">
+										<li><a href="#">Подарочные сертификаты</a></li>
+										<li><a href="#">Карта лояльности</a></li>
+										<li><a href="#">Дисконтные карты</a></li>
+									</ul>
+								</div>
+								<div class="col hidden__xs hidden__sm">
+									<ul class="footer-menu">
+										<li><a href="#">События</a></li>
+										<li><a href="#">Проекты</a></li>
+										<li><a href="#">Вакансии</a></li>
+										<li><a href="#">Контакты</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col col__md-12 col__xs-5">
+							<ul class="footer-menu">
+								<li><a href="#">Instagram</a></li>
+								<li><a href="#">Telegram</a></li>
+								<li><a href="#">Facebook</a></li>
+							</ul>
+						</div>
+						<div class="col col__lg-5 col__md-4 col__xs-7 page-footer-app"><a href="#"><img src="assets/images/appStore.svg" alt="" /></a></div>
+						<div class="col col__lg-7 col__md-8 col__xs-12 page-footer-app"><a class="copy" href="#">Политика конфиденциальности</a><a class="copy" href="#">Договор оферты</a></div>
+					</div>
+					<div class="page-footer-copy">
+						<div class="row">
+							<div class="col col__lg-5 col__xs-12"></div>
+							<div class="col col__lg-7 col__xs-12">
+								<div class="row between__xs middle__xs">
+									<div class="col">
+										<div class="copy">© Novikov Group 2021. Все права защищены</div>
+									</div>
+									<div class="col">
+										<div class="cloudmill">Сделано в <a href="#">CloudMill</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOHU9S0Ohhctt2VS6Qu3JrmaIjqFQNYk"></script>
+		<script type="text/javascript" src="assets/vendor.js"></script>
+		<script type="text/javascript" src="assets/app.js"></script>
+	</body>
+
+</html>
