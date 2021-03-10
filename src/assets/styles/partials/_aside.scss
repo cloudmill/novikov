@@ -1,0 +1,36 @@
+//
+// Partials -> Aside
+// ------------------------------------
+
+
+.with-aside {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  .sidebar {
+    width: 202px;
+  }
+
+  .section {
+    padding-left: 75px;
+    max-width: 1090px;
+  }
+
+  &--line {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 0 20px 160px;
+    padding: 0;
+    .sidebar {
+      padding-top: 20px;
+      width: 480px;
+      border-right: 1px solid black;
+    }
+
+    .section {
+      padding: 20px 0 20px 90px;
+      max-width: inherit;
+      width: calc(100% - 480px);
+    }
+  }
+}

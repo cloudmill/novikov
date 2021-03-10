@@ -1,0 +1,235 @@
+.event {
+  h1 {
+    margin-top: 0;
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+  &-tag {
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+
+  &-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    .title {
+      font-size: 13px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      font-family: $base-font-family-serif;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    img {
+      margin-bottom: 10px;
+    }
+  }
+
+  &-img {
+    margin-bottom: 80px;
+    img {
+      border-radius: 0px 60px;
+    }
+  }
+
+  &-desc {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    @media screen and (min-width: $screen-xl-min) {
+      padding-left: 360px;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+  }
+
+  &-video {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    position: relative;
+    svg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      z-index: 2;
+      margin: auto;
+    }
+  }
+
+  &-menu {
+    margin-top: 160px;
+    h3 {
+      font-size: 40px;
+      margin-top: 0;
+      margin-bottom: 80px;
+    }
+    h5 {
+      margin-top: 0;
+      font-size: 13px;
+      margin-bottom: 25px;
+      font-family: $base-font-family-serif;
+    }
+    ul {
+      font-size: 16px;
+      margin-bottom: 60px;
+      > li {
+        text-transform: initial;
+        margin-bottom: 5px;
+        &:before {
+          border-color: transparent transparent transparent black;
+        }
+      }
+    }
+  }
+
+  &-tooltip {
+    margin-top: 160px;
+    font-size: 16px;
+    padding: 40px 0;
+    border-top: 1px solid black;
+  }
+}
+
+video {
+  width: 100%;
+}
+
+.ticket {
+  color: white;
+  position: relative;
+  background:
+    url("../images/event/line-1.svg") no-repeat left center / auto 100%,
+    url("../images/event/line-2.svg") no-repeat right center / auto 102%;
+  margin-bottom: 160px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 12px;
+    right: 10px;
+    background: black;
+  }
+  &-top {
+    z-index: 9;
+    position: relative;
+    text-align: center;
+    padding-top: 5px;
+    h2 {
+      margin: 0;
+      font-size: 67px;
+      line-height: 1.1;
+      display: inline-block;
+      font-family: $base-font-family-serif;
+      padding-bottom: 10px;
+      border-bottom: 1px solid white;
+    }
+  }
+  &-body {
+    z-index: 9;
+    padding: 80px 0;
+    position: relative;
+    .name {
+      font-size: 20px;
+      padding: 0 180px 40px;
+      text-transform: uppercase;
+    }
+  }
+  &-buy {
+    padding: 0 270px;
+    a {
+      color: white;
+      border-color: white;
+
+      path.arr {
+        fill: white;
+      }
+    }
+    &-price {
+      font-size: 38px;
+      &--sm {
+        font-size: 20px;
+      }
+    }
+    &-title {
+      color: #9C9C9C;
+      font-size: 13px;
+      text-transform: uppercase;
+      font-family: $base-font-family-serif;
+    }
+    .incDec {
+      display: flex;
+      align-items: center;
+      font-size: 38px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+
+      .cart-id {
+        cursor: pointer;
+      }
+
+      .cart-count {
+        margin: 0 10px;
+        text-align: center;
+        min-width: 50px;
+      }
+    }
+  }
+}
+
+.template {
+  &-date {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  &-question {
+    margin-bottom: 60px;
+    &-phone,
+    &-title {
+      font-size: 20px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    &-phone {
+      text-decoration: none;
+      border-bottom: 1px solid black;
+      &:hover {
+        color: $color-type-2a;
+      }
+    }
+    &-info {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  }
+  &-social {
+    margin-bottom: 60px;
+    &-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    &-list {
+      a {
+        text-decoration: none;
+        &:hover {
+          color: $color-type-2a;
+        }
+      }
+    }
+  }
+}
+
+.page-template {
+  padding-top: 160px;
+}

@@ -1,0 +1,188 @@
+.restaurant {
+  text-decoration: none;
+  display: block;
+  &-img {
+    position: relative;
+    .badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      > * {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+    .logo {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      max-width: 154px;
+    }
+  }
+  &-desc {
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .inner {
+      display: flex;
+      > * {
+        width: 40%;
+        &:last-child {
+          width: 60%;
+        }
+        @media screen and (min-width: $screen-md-min) {
+          width: 50% !important;
+        }
+      }
+    }
+    .list {
+      display: flex;
+    }
+    .title {
+      margin-right: 30px;
+      font-family: $base-font-family-serif;
+      font-size: 13px;
+      line-height: 140%;
+      text-transform: uppercase;
+      color: black;
+    }
+    .text {
+      font-size: 14px;
+      line-height: 140%;
+      text-transform: uppercase;
+      color: black;
+    }
+  }
+}
+
+.page-restaurant {
+  padding-top: 160px;
+  .tab-content.list {
+    padding: 0 20px 80px;
+  }
+  h1 {
+    display: flex;
+    align-items: flex-end;
+    .select2 {
+      display: inline-block;
+      margin-left: 12px;
+      font-weight: 400;
+      .select2-selection--single {
+        font-size: 60px;
+      }
+      .select2-selection__rendered {
+        font-family: $base-font-family;
+        line-height: 1;
+      }
+      .select2-selection__arrow {
+        height: 90%;
+        width: 43px;
+        background: url('../images/icons/select-arr.svg') center right no-repeat;
+      }
+    }
+  }
+
+  .restaurant {
+    margin-bottom: 70px;
+  }
+
+  .tabs {
+    display: inline-flex;
+    border: 1px solid #E5E5E5;
+    border-radius: 60px;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 130px;
+      border-radius: 60px;
+      background-color: black;
+      transition: left .5s;
+    }
+    &.active {
+      &:after {
+        left: 119px;
+      }
+    }
+    .tab {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      transition: color .5s;
+      cursor: pointer;
+      &.active {
+        color: white;
+      }
+    }
+  }
+}
+
+.map-list {
+  display: flex;
+  //flex-wrap: wrap;
+  height: 700px;
+}
+
+#pvz_map {
+  height: 100%;
+  width: calc(100% - 370px);
+}
+
+.mapList {
+  height: 700px;
+  width: 370px;
+  border: 1px solid black;
+  border-right: none;
+
+  &-item {
+    padding: 20px 10px 20px 40px;
+    border-bottom: 1px solid #E5E5E5;
+    cursor: pointer;
+    background-color: white;
+    transition: all .5s;
+    .link {
+      display: none;
+      margin-top: 25px;
+      font-size: 16px;
+      transition: color .5s;
+      &:hover {
+        color: $color-type-2a;
+      }
+    }
+    .img {
+      display: none;
+      margin-left: -20px;
+      margin-bottom: 15px;
+    }
+
+    h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    &.active {
+      background-color: black;
+      color: white;
+      .text,
+      .link,
+      .title {
+        color: white;
+      }
+
+      .img,
+      .link {
+        display: block;
+      }
+    }
+  }
+}

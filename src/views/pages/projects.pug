@@ -1,0 +1,75 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-project
+    .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+      h1.select-wrapper проекты
+    .with-aside.with-aside--line
+      aside.sidebar(data-aos='fade-up')
+        -
+          items = [
+            'Novikov School',
+            'NOVIKOV INTERNATIONAL',
+            'Aeromenu by Novikov',
+            'NOVIKOV TV',
+            'Донна Маргарита',
+            'AGRONOM',
+            'Taste Wine by Novikov',
+            'HOW TO GREEN',
+            'How to eat',
+            'JUST FOR YOU',
+            'СТУДИЯ ЦВЕТОВ 55',
+            'NOVIKOV CATERING',
+            'GALLERY TO GO',
+            'NOVIKOV CATERING AVIATION',
+            'Gallery To Fly',
+            'Kids club',
+            'CHARITY',
+          ]
+
+        ul.projectList
+          each item, index in items
+            - let activeClass = ''
+            - if(index == 0) activeClass = 'active'
+            li(class=activeClass)
+              include ../components/_arr
+              a(href='#')= item
+
+      section.section
+        h2.alpha Novikov School
+        .project-info(data-aos='fade-up')
+          .project-info__item
+            +img('event/logo-1.svg')
+          .project-info__item
+            div Москва, ул. Петровка, 3/6, стр. 2
+            div: a(href='tel:84957898652') 8 495 789 86 52
+            div: a(href='http://www.novikovschool.ru', target="_blank") novikovschool.ru
+          .project-info__item
+            div: a(href='#', target="_blank") Instagram
+            div: a(href='#', target="_blank") Facebook
+            div: a(href='#', target="_blank") Telegram
+        .project-desc(data-aos='fade-up')
+          .col__xl-8.col__lg-10
+            ul.list--bullet.list--bullet--bl
+              li Кулинарные курсы для любителей и профессионалов
+              li Мастер-классы для взрослых, детей и подростков по разным темам и кухням мира
+              li Школа ресторанного менеджмента, тренинги по сервису для отелей и ресторанов
+          .slideshow-swiper.swiper-container(data-aos='fade-up')
+            .swiper-section
+              .swiper-buttons
+                .swiper-button-prev: +img('icons/sw-l.svg')
+                .swiper-button-next: +img('icons/sw-l.svg')
+              .swiper-pagination
+            .swiper-wrapper
+              - for (let x = 1; x < 7; x++)
+                .swiper-slide: span: +img('slider.jpg')
+
+
+block footer
+  include ../partials/_footer.pug

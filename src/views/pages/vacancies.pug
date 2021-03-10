@@ -1,0 +1,113 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+  include ../components/_vacancy-block
+  .overlay
+
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-vacancy
+    .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+      h1.select-wrapper Вакансии
+      .accordion
+        -
+          let items = [
+            {
+              name: 'Кондитер',
+              type: 'Francesco',
+              city: 'Санкт–Петербург',
+            },
+            {
+              name: 'Официант',
+              type: 'Francesco',
+              city: 'Санкт–Петербург',
+            },
+            {
+              name: 'Официант',
+              type: 'China Сlub',
+              city: 'Москва',
+            },
+            {
+              name: 'Повар',
+              type: 'Novikov Catering',
+              city: 'Москва',
+            },
+            {
+              name: 'Хостес',
+              type: 'Cantinetta Antinori',
+              city: 'Москва',
+            }
+          ]
+        .vacancy-title
+          .vacancy-title-name позиция
+          .vacancy-title-type ресторан/проект
+          .vacancy-title-city город
+        each item in items
+          .accordion__item.accordion__item--js(data-aos='fade-up')
+            .accordion-head
+              .accordion-head-name= item.name
+              .accordion-head-type= item.type
+              .accordion-head-city= item.city
+              .accordion-head-arr: include ../components/_arr-d
+            .accordion-body
+              div
+                .vacancy-body
+                  .vacancy-body__item
+                    .vacancy-body__item-name Обязанности
+                    .vacancy-body__item-desc
+                      ul.list--bullet.list--bullet--bl
+                        li Приготовление блюд-бортовое питание для бизнес авиации, контроль качества приготовления и отдачи блюд согласно технологии
+                        li Организация и контроль технологического процесса
+                        li Контроль качества сырья
+                  .vacancy-body__item
+                    .vacancy-body__item-name Требования
+                    .vacancy-body__item-desc
+                      ul.list--bullet.list--bullet--bl
+                        li Активность, выносливость, умение работать быстро
+                        li Опыт работы от 3 лет (в основном европейская и итальянская кухня)
+                        li Обязателен опыт работы с кухней премиум класса
+                  .vacancy-body__item
+                    .vacancy-body__item-name Условия
+                    .vacancy-body__item-desc
+                      ul.list--bullet.list--bullet--bl
+                        li График работы 5/2, выходные плавающие, ночные и дневные смены (9:00-21:00 и 21:00-9:00)
+                        li Своевременная выплата заработной платы
+                        li Официальное оформление по Трудовому законодательству
+                        li Бесплатное питание
+                        li В шаговой доступности от метро Пионерская
+                  .vacancy-body__item
+                    .vacancy-body__item-name Ключевые навыки
+                    .vacancy-body__item-desc
+                      ul.list--bullet.list--bullet--bl
+                        li Контроль качества
+                        li Работа в команде
+                        li Общественное питание
+                        li Горячий цех
+                .vacancy-bottom
+                  .vacancy-body__item
+                    .vacancy-body__item-name
+                    .vacancy-body__item-desc
+                      h5 Контактная информация
+                      .row.between__xs.bottom__xs
+                        .col.info
+                          .text__lg Ольга
+                          a(href='tel:89197706900') 8 919 770-69-00
+                          br
+                          a(href='mailto:4aristova@gmail.com') 4aristova@gmail.com
+                        .col
+                          a.btn-link.btn-icon.vacancy-block--js(href='#')
+                            span Откликнуться
+                            include ../components/_next
+      .vacancy-empty(data-aos='fade-up')
+        .vacancy-empty__item
+          h2 Не нашли подходящую вакансию?
+        .vacancy-empty__item.text__lg
+          div Пришлите резюме на
+          a(href='mailto:rabota@novikovgroup.ru') rabota@novikovgroup.ru
+
+block footer
+  include ../partials/_footer.pug

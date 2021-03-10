@@ -1,0 +1,42 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-search
+    .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+      h1.select-wrapper Результаты поиска
+      form(action='', method='POST')
+        .search-input
+          input.control(type='text', value='ресторан')
+          button(type='submit')
+            +img('icons/search.svg')
+      .text__md(data-aos='fade-up') Найдено результатов: 8
+      .search-list
+        - for (let x = 1; x < 6; x++)
+          .search-list__item(data-aos='fade-up')
+            a.search-list__item-name(href='#')
+              .text__lg Ресторан China club
+              .text__md …в Москве 5 апреля 1983 г. Свой кулинарный путь начинал в 2000 г. в элитном московском клубе-ресторане под руководством австрийского шеф-повара Эрвина Петерса.
+            .search-list__item-cat категория #[a(href='#') рестораны]
+          .search-list__item(data-aos='fade-up')
+            a.search-list__item-name(href='#')
+              .text__lg Ресторан China club
+              .text__md …из которых 10 лет он работал в ресторане «Марио», а затем занимал должность шеф-повара в ресторанах группы Аркадия Новикова GQ и Tatler Club.
+            .search-list__item-cat категория #[a(href='#') рестораны]
+          .search-list__item(data-aos='fade-up')
+            a.search-list__item-name(href='#')
+              .text__lg Сыроварня
+              .text__md Затем проработал в итальянском ресторане «Isola Pinocchio», потом су-шефом в сети паназиатской кухни «Zю кафе» … проекта – клуба-ресторана GIPSY в качестве су-шефа.
+            .search-list__item-cat категория #[a(href='#') рестораны]
+      .text--center(data-aos='fade-up')
+        a.btn-icon.text--uppercase(href='#')
+          span показать еще
+          +img('icons/select.svg')
+
+block footer
+  include ../partials/_footer.pug

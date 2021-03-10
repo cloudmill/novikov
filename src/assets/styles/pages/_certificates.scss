@@ -1,0 +1,125 @@
+.page-certificates {
+  overflow: hidden;
+}
+
+.certificates {
+  &-main {
+    padding: 160px 90px 200px;
+    margin: 0 20px;
+    color: white;
+    background: url("../images/certificates/main.jpg") no-repeat center top / 100% auto;
+    h1 {
+      margin-bottom: 80px;
+    }
+    p {
+      max-width: 440px;
+      margin-bottom: 0;
+    }
+  }
+  &-liner {
+    height: 150px;
+    width: 100%;
+    position: relative;
+    top: -60px;
+    background: url("../images/standard.svg") no-repeat center;
+  }
+
+  &-desc {
+    padding: 60px 20px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 160px 0 160px 20%;
+    }
+    h3 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+    .col__xl-5 {
+      @media screen and (min-width: $screen-lg-min) {
+        padding-right: 50px;
+      }
+      @media screen and (min-width: $screen-xl-min) {
+        padding-right: 100px;
+      }
+    }
+  }
+
+  &-list {
+    margin: 0 -20px;
+    padding: 0 20px 140px;
+    display: flex;
+    flex-wrap: wrap;
+    &__item {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background-color: white;
+      margin: 0 10px 20px;
+      position: relative;
+      width: calc(100% - 20px);
+      @media screen and (min-width: $screen-md-min) {
+        min-height: 28vw;
+        width: calc(100% / 2 - 20px);
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        width: calc(100% / 3 - 20px);
+      }
+      &--lite {
+        background-color: #C9EBF3;
+      }
+      &--standard {
+        background-color: #EEE;
+      }
+      &--classic {
+        background-color: #E9F3D8;
+      }
+      &--platinum {
+        background-color: #C8CBCD;
+      }
+      &--exclusive {
+        background-color: #908B88;
+      }
+      &-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .type {
+          font-size: 40px;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+        .price {
+          font-weight: 500;
+          font-size: 22px;
+          text-transform: uppercase;
+        }
+      }
+      &-bottom {
+        font-size: 14px;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .add {
+          cursor: pointer;
+        }
+      }
+      &-img {
+        margin: auto;
+        padding: 50px 0;
+        @media screen and (min-width: 1500px) {
+          img {
+            width: 22vw;
+          }
+        }
+      }
+      &-add {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        img {
+          background: white;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-partners
+    .m-auto.col__xl-8.col__lg-10
+      h1.select-wrapper партнеры
+    .partners
+      .logoList-list
+        - for (let x = 1; x < 3; x++)
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-1.jpg')
+            .logoList-desc
+              h4 СБЕР БАНК
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-2.jpg')
+            .logoList-desc
+              h4 ИК АТОН
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-3.jpg')
+            .logoList-desc
+              h4 MASTERCARD WORLD ELITE
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-4.jpg')
+            .logoList-desc
+              h4 АЛЬФА PRIVATE
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-5.jpg')
+            .logoList-desc
+              h4 ЛЕЧЕБНЫЙ ЦЕНТР
+              a(href='#') Сайт партнера
+          .logoList.logoList--right(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-1.jpg')
+            .logoList-desc
+              h4 СБЕР БАНК
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-2.jpg')
+            .logoList-desc
+              h4 ИК АТОН
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-3.jpg')
+            .logoList-desc
+              h4 MASTERCARD WORLD ELITE
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-4.jpg')
+            .logoList-desc
+              h4 АЛЬФА PRIVATE
+              a(href='#') Сайт партнера
+          .logoList(data-aos='fade-up')
+            .logoList-img
+              +img('discount/logo-5.jpg')
+            .logoList-desc
+              h4 ЛЕЧЕБНЫЙ ЦЕНТР
+              a(href='#') Сайт партнера
+
+
+block footer
+  include ../partials/_footer.pug

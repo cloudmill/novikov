@@ -1,0 +1,33 @@
+//
+// Modules -> Navs
+// --------------------------------------------------
+
+
+.main-nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
+  &__item {
+    position: relative;
+    display: block;
+  }
+  &__link {
+    position: relative;
+    padding: $nav-link-padding;
+    text-decoration: none;
+    display: block;
+    font-family: $base-font-family-serif;
+    font-size: 16px;
+    line-height: 140%;
+    text-transform: uppercase;
+    color: white;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 28px;
+    }
+
+    &:hover {
+      color: $color-type-2a;
+    }
+  }
+}

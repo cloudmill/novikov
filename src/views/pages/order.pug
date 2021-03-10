@@ -1,0 +1,95 @@
+extends ../layouts/master.pug
+
+block header
+  include ../components/_popup
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  form(action='', method='POST')
+    include ../components/_cart-block
+    main.page-order
+      .back-link(data-aos='fade-up')
+        a.btn-icon(href='#')
+          include ../components/_prev
+          span Вернуться
+      .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+        h1.select-wrapper оформление заказа
+        .order-wrapper(data-aos='fade-up')
+          .order-wrapper__item
+            h3 контактные данные
+            .form__group: +fieldInput('text', 'name', 'name-o', '', 'ФИО получателя*', true)
+            .form__group: +fieldInput('text', 'phone', 'phone-o', '', 'Номер телефона*', true)
+            .form__group: +fieldInput('text', 'email', 'email-o', '', 'E–mail*', true)
+            .form__group.checkbox
+              input(type="checkbox", id='signIt-o', required)
+              label(for='signIt-o')
+                | Даю согласание на обработку #[a(href='#') персональных данных]
+                .control-error
+          .tab-container.order-wrapper__item(data-aos='fade-up')
+            .tabs
+              .tab.active(data-toggle-target=".tab-content-1"): h3 Доставка
+              .tab(data-toggle-target=".tab-content-2"): h3 самовывоз
+            .tab-content.tab-content-1.active
+              .row.order-wrapper__itemv
+                .col.col__xl-4
+                  .order-delivery
+                    a.btn.btn--default.myModal(href='#') выбрать на карте
+                    .order-delivery-adr
+                      p
+                      a.text__sm.myModal(href='#') Изменить
+                .col.col__xl-4
+                  +fieldInput('text', 'number', 'number-o', '', 'Номер квартиры', true)
+              .control-error
+              .order-wrapper__item.order-wrapper__item--date(data-aos='fade-up')
+                h3 дата и время доставки
+                .order-date.row
+                  .col.col__xl-4
+                    +fieldInput('text', 'date', 'date-o', '', 'Дата', true)
+                  .col.col__xl-4.select-wrapper
+                    select.select-template(style='width: 190px')
+                      option(value='11') 11:00
+                      option(value='12') 12:00
+                      option(value='13') 13:00
+              .order-wrapper__item.order-wrapper__item--taxi(data-aos='fade-up')
+                div На данный адрес доставка возможна через службу такси.
+                  br
+                  | Узнать стоимость у менеджера: #[a(href='tel:89112862563') 8 911 286-25-63]
+              .order-wrapper__item(data-aos='fade-up')
+                h3 способ оплаты
+                .order-payment
+                  .order-payment-not
+                    p Для выбора способа оплаты укажите способ доставки
+                  .order-payment-fill
+                    .radio--inline
+                      +fieldRadio('payku', 'payku1', 'Картой онлайн', false)
+                      +fieldRadio('payku', 'payku2', 'Наличными курьеру', false)
+                    .control-error
+            .tab-content.tab-content-2
+              .order-wrapper__item(data-aos='fade-up')
+                p г. Москва, ул. Петровка, 3/6, стр. 2
+              .order-wrapper__item(data-aos='fade-up')
+                h3 дата и время доставки
+                .row.order-date
+                  .col.col__xl-4
+                    +fieldInput('text', 'date', 'date-o', '', 'Дата', true)
+                  .col.col__xl-4.select-wrapper
+                    select.select-template(style='width: 190px')
+                      option(value='11') 11:00
+                      option(value='12') 12:00
+                      option(value='13') 13:00
+              .order-wrapper__item(data-aos='fade-up')
+                h3 способ оплаты
+                .order-payment
+                  .radio--inline
+                    +fieldRadio('payby', 'payby1', 'Картой онлайн', false)
+                    +fieldRadio('payby', 'payby2', 'Картой в ресторане', false)
+                    +fieldRadio('payby', 'payby3', 'Наличными в ресторане', false)
+                  .control-error
+
+
+
+block footer
+  include ../partials/_footer.pug

@@ -1,0 +1,210 @@
+.page-discount {
+  overflow: hidden;
+}
+.main-discount {
+  padding: 160px 90px;
+  margin: 0 20px;
+  color: white;
+  background: url("../images/discount/main.jpg") no-repeat center top / 100% auto;
+  p {
+    max-width: 350px;
+    madgin-bottom: 60px;
+  }
+  h1 {
+    margin-bottom: 80px;
+  }
+  &-info {
+    padding-top: 20px;
+    border-top: 1px solid white;
+  }
+  &-title {
+    font-size: 38px;
+  }
+  &-desc {
+    font-size: 16px;
+  }
+}
+
+.discount-liner {
+  height: 150px;
+  width: 100%;
+  position: relative;
+  top: -60px;
+  background: url("../images/loyalty.svg") no-repeat center;
+}
+
+.card-discount {
+  padding-top: 160px;
+  &-inner {
+    max-width: 1090px;
+    margin: auto;
+    padding: 0 20px;
+    h3 {
+      font-size: 40px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-family: $base-font-family-serif;
+    }
+    a:not(.btn-link) {
+      font-size: 40px;
+      font-weight: 400;
+      text-decoration: none;
+      border-bottom: 1px solid black;
+    }
+    img {
+      margin-top: 40px;
+    }
+  }
+  .card {
+    color: white;
+    background: black;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    height: 325px;
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: $screen-md-min) {
+      max-height: 540px;
+      height: 52vw;
+      border-radius: 50px;
+      margin-bottom: 80px;
+    }
+    &-name {
+      text-align: center;
+      font-size: 8.6vw;
+      line-height: 1.3;
+      border-bottom: 1px solid white;
+      text-transform: uppercase;
+      padding: 10px 10px 0;
+      font-family: $base-font-family-serif;
+      @media screen and (min-width: $screen-md-min) {
+        line-height: 1.1;
+        padding: 0;
+        font-size: 9vw;
+      }
+      @media screen and (min-width: 1200px) {
+        font-size: 105px;
+      }
+    }
+    &-sub {
+      margin-top: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: $base-font-family-serif;
+      @media screen and (min-width: $screen-md-min) {
+        margin-top: 20px;
+      }
+    }
+    a {
+      color: white;
+      border-color: white;
+      path.arr {
+        fill: white;
+      }
+      &:hover {
+        color: $color-type-2a;
+        border-color: $color-type-2a;
+        path.arr {
+          fill: $color-type-2a;
+        }
+      }
+    }
+    &-container {
+      width: 100%;
+      padding: 20px;
+      max-width: 540px;
+      margin: auto;
+      text-align: center;
+      @media screen and (min-width: $screen-md-min) {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    &-price {
+      &-sub {
+        font-size: 13px;
+        font-family: $base-font-family-serif;
+        text-transform: uppercase;
+        color: #9C9C9C;
+        margin-bottom: 10px;
+      }
+      &-count {
+        font-size: 38px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.back-discount {
+  margin: 160px 0;
+  height: 620px;
+  width: 100%;
+  background: url("../images/discount/cards.jpg") no-repeat center / auto 100%;
+}
+
+.list-discount {
+  padding-bottom: 1px;
+  &-inner {
+    padding-left: 295px;
+  }
+  &-slider {
+    margin-bottom: 160px;
+  }
+  &-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+    padding-right: 20px;
+    h3 {
+      font-size: 40px;
+    }
+    .swiper-buttons {
+      > * {
+        position: static;
+      }
+    }
+    > * {
+      margin: 0;
+    }
+  }
+}
+.logoList-list {
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (min-width: $screen-xl-min) {
+    //flex-wrap: nowrap;
+  }
+}
+.logoList {
+  width: 250px;
+  &--right {
+    @media screen and (min-width: $screen-xl-min) {
+      margin-left: 270px;
+    }
+  }
+  &-desc {
+    h4 {
+      font-family: $base-font-family;
+    }
+    a {
+      font-size: 16px;
+      text-decoration: none;
+      border-bottom: 1px solid $black;
+      &:hover {
+        color: $color-type-2a;
+      }
+    }
+  }
+}
+
+.swiper-buttons {
+  display: flex;
+  .swiper-button-next {
+    margin-left: 20px;
+    //transform: rotate(180deg);
+  }
+}

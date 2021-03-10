@@ -1,0 +1,431 @@
+//
+// Partials -> Header
+// ------------------------------------
+
+
+//
+// Header
+//
+.page-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  position: fixed;
+  background: white;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 98;
+  @media screen and (min-width: $screen-md-min) {
+    padding: 20px;
+  }
+  &__logo {
+    text-align: center;
+    a {text-decoration: none;}
+  }
+  &__info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &__lang {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 0 0 10px;
+      border-bottom: 1px solid transparent;
+      transition: border-color .5s;
+      &:hover,
+      &.active {
+        border-color: $black;
+      }
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+  &__menu {
+    @media screen and (max-width: $screen-sm-max) {
+      .btn-icon {
+        padding: 10px;
+        height: 40px;
+        min-width: auto;
+        svg {
+          width: 25px;
+        }
+      }
+    }
+  }
+  &__cart,
+  &__search {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 70px;
+    border: 1px solid $gray-lighten;
+    text-decoration: none;
+    @media screen and (min-width: $screen-md-min) {
+      width: 60px;
+      height: 60px;
+      margin-left: 33px;
+    }
+    @media screen and (max-width: $screen-sm-max) {
+      img {
+        width: 19px;
+      }
+      svg {
+        width: 20px;
+      }
+    }
+  }
+  &__cart {
+    position: relative;
+    background-color: white;
+    transition: background-color .5s;
+    span {
+      height: 12px;
+      width: 12px;
+      font-weight: 600;
+      font-size: 8px;
+      color: white;
+      background: $color-type-2a;
+      border-radius: 0px 6px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: center;
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+      transition: background-color .5s;
+      @media screen and (min-width: $screen-md-min) {
+        height: 18px;
+        width: 18px;
+        font-size: 12px;
+      }
+    }
+    svg path {
+      transition: fill .5s;
+    }
+    &:hover,
+    &.active {
+      color: white;
+      background-color: $color-type-2a;
+      span {
+        background-color: black;
+      }
+      svg path {
+        fill: white;
+      }
+    }
+  }
+
+  .btn-border {
+    padding-left: 60px;
+    margin-left: 20px;
+    display: none;
+    @media screen and (min-width: $screen-lg-min) {
+      display: inline-flex;
+    }
+    .add {
+      width: 60px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 70px;
+      background: linear-gradient(90deg, #EE3A16 0%, rgba(238, 22, 35, 0.12) 40.02%);
+      &:after {
+        content: '';
+        background: white;
+        left: 1px;
+        top: 1px;
+        bottom: 1px;
+        right: 1px;
+        position: absolute;
+        border-radius: 70px;
+        z-index: 1;
+      }
+      img {
+        height: 38px;
+        position: relative;
+        z-index: 2;
+      }
+      + span {
+        margin-left: 14px;
+      }
+    }
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -600px;
+  z-index: 101;
+  overflow-y: auto;
+  width: 85%;
+  padding: 110px 40px 30px 40px;
+  background: url("../images/N.svg") no-repeat right bottom / 85% auto, $black;
+  transition: left .5s;
+  @media screen and (min-width: $screen-md-min) {
+    width: auto;
+    padding: 160px 150px 30px 90px;
+    background: url("../images/N.svg") no-repeat right bottom, $black;
+  }
+
+  @media screen and (max-width: $screen-sm-max) {
+    .btn-icon {
+      padding: 10px;
+      height: 40px;
+      min-width: auto;
+      img {
+        width: 16px;
+      }
+    }
+  }
+  &.active {
+    left: 0;
+  }
+
+  .btn--default {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    background: black;
+
+  }
+}
+
+.search-block {
+  background: $black;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -300px;
+  padding: 20px 0;
+  z-index: 99;
+  transition: top .5s;
+
+  @media screen and (min-width: $screen-md-min) {
+    padding: 70px;
+  }
+  &-form {
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: $screen-sm-max) {
+      img {
+        width: 38px;
+      }
+    }
+    button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input {
+      flex-grow: 4;
+      background: black;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 140%;
+      border: none;
+      text-transform: uppercase;
+      color: white;
+      @include placeholder(white);
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 35px;
+      }
+    }
+  }
+
+  &.active {
+    top: 0;
+  }
+}
+
+.cart-block {
+  background: white;
+  border-left: 1px solid #E5E5E5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -285px;
+  width: 285px;
+  z-index: 99;
+  transition: right .5s;
+  display: flex;
+  flex-direction: column;
+  &-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  &-body {
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+  }
+  &-promo {
+    font-size: 16px;
+    .filled {
+      border-color: black;
+    }
+    > div {
+      margin-bottom: 10px;
+    }
+  }
+  &-summ {
+    margin-top: 30px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-count {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-bottom {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid #E5E5E5;
+    b {
+      font-weight: 600;
+    }
+    .btn {
+      margin-top: 30px;
+    }
+  }
+
+  &-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #E5E5E5;
+    &--long {
+      position: relative;
+      &:after {
+        content: '';
+        height: 1px;
+        position: absolute;
+        left: -20px;
+        right: -20px;
+        bottom: -1px;
+        background-color: #E5E5E5;
+      }
+    }
+    &:first-child {
+      border-top: 1px solid black;
+    }
+    &-size {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 10px;
+      .incDec {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        .cart-id {
+          cursor: pointer;
+        }
+        .cart-count {
+          margin: 0 10px;
+        }
+      }
+    }
+    &-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .cart-pr {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .cart-wr {
+        font-size: 12px;
+        color: #9C9C9C;
+        margin-right: auto;
+        margin-left: 10px;
+      }
+      .cart-rm {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.active {
+    right: 0;
+  }
+}
+
+.vacancy-block {
+  background: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -650px;
+  padding: 60px;
+  max-width: 570px;
+  z-index: 99;
+  transition: left .5s;
+  form {
+    padding: 0 15px 0 30px;
+    height: 88%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  h3 {
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: -80px;
+  }
+
+  &.active {
+    left: 0;
+  }
+}
+
+.overlay {
+  background: rgba(black, .15);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 98;
+  opacity: 0;
+  transition: opacity .5s, width 0s .5s;
+  &.active {
+    width: 100%;
+    opacity: 1;
+    transition: opacity .5s .5s, width 0s;
+  }
+}
+
+.browsehappy {
+  @extend .container;
+}

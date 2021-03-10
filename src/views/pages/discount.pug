@@ -1,0 +1,116 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-discount
+    .main-discount(data-aos='fade-up')
+      h1 Дисконтная карта
+      .col__xl-5.col__lg-6
+        p Дисконтная программа Novikov Group — это система скидок для владельцев единых дисконтных карт Novikov Group, объединившая большинство проектов Аркадия Новикова.
+        .main-discount-info(data-aos='fade-up')
+          .row.between__xs
+            .col.col__lg-5.col__md-6.col__xs-12
+              .main-discount-title 10%
+              .main-discount-desc Скидка в ресторанах Novikov Group
+            .col.col__lg-5.col__md-6.col__xs-12
+              .main-discount-title 5–30%
+              .main-discount-desc Скидки в бутиках, фитнес-центрах, салонах и магазинах, участвующих в дисконтной программе
+    .discount-liner(data-aos='fade-up')
+    .card-discount(data-aos='fade-up')
+      .card-discount-inner
+        .card
+          .card-name оформить карту
+          .card-sub Срок действия 1 год
+          .card-container
+            .card-price
+              .card-price-sub итого без доставки
+              .card-price-count 10 000 ₽
+            +btnLink('Оформить карту')
+        .row(data-aos='fade-up')
+          .col.col__lg-6.col__xs-12
+            h3 По телефону
+            a(href='tel:84956461834') +7 495 646 18 34
+          .col.col__lg-6.col__xs-12
+            h3 В приложении Новиков.Еда
+            +img('appStore.svg')
+    .back-discount(data-aos='fade-up')
+    .list-discount(data-aos='fade-up')
+      .list-discount-inner
+        .list-discount-slider
+          .list-discount-title
+            h3 Рестораны–участники программы
+            .swiper-buttons
+              .swiper-button-prev: +img('icons/sw-l.svg')
+              .swiper-button-next: +img('icons/sw-r.svg')
+          .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
+            .swiper-wrapper
+              - for (let x = 2; x < 4; x++)
+                .swiper-slide.restaurant
+                  .restaurant-img
+                    +img('index/slide-1.jpg')
+                    .logo: +img('index/logo-1.jpg')
+                  .restaurant-desc
+                    h3 Nino
+                .swiper-slide.restaurant
+                  .restaurant-img
+                    +img('index/slide-2.jpg')
+                    .logo: +img('index/logo-2.jpg')
+                  .restaurant-desc
+                    h3 СЫРОВАРНЯ АЛЬМЕТЬЕВСК
+                .swiper-slide.restaurant
+                  .restaurant-img
+                    +img('index/slide-3.jpg')
+                  .restaurant-desc
+                    h3 aqua
+                .swiper-slide.restaurant
+                  .restaurant-img
+                    +img('index/slide-4.jpg')
+                  .restaurant-desc
+                    h3 КЛЁВО НА УСАЧЕВСКОМ
+        .list-discount-slider(data-aos='fade-up')
+          .list-discount-title
+            h3 Партнеры–участники программы
+            .swiper-buttons
+              .swiper-button-prev: +img('icons/sw-l.svg')
+              .swiper-button-next: +img('icons/sw-r.svg')
+          .carousel-swiper-l.swiper-container.carousel-swiper-logo(data-aos='fade-up')
+            .swiper-wrapper
+              - for (let x = 2; x < 4; x++)
+                .swiper-slide.logoList
+                  .logoList-img
+                    +img('discount/logo-1.jpg')
+                  .logoList-desc
+                    h4 СБЕР БАНК
+                    a(href='#') Сайт партнера
+                .swiper-slide.logoList
+                  .logoList-img
+                    +img('discount/logo-2.jpg')
+                  .logoList-desc
+                    h4 ИК АТОН
+                    a(href='#') Сайт партнера
+                .swiper-slide.logoList
+                  .logoList-img
+                    +img('discount/logo-3.jpg')
+                  .logoList-desc
+                    h4 MASTERCARD WORLD ELITE
+                    a(href='#') Сайт партнера
+                .swiper-slide.logoList
+                  .logoList-img
+                    +img('discount/logo-4.jpg')
+                  .logoList-desc
+                    h4 АЛЬФА PRIVATE
+                    a(href='#') Сайт партнера
+                .swiper-slide.logoList
+                  .logoList-img
+                    +img('discount/logo-5.jpg')
+                  .logoList-desc
+                    h4 ЛЕЧЕБНЫЙ ЦЕНТР
+                    a(href='#') Сайт партнера
+
+block footer
+  include ../partials/_footer.pug

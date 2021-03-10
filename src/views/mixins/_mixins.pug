@@ -1,0 +1,60 @@
+//- mixins
+
+
+//- menu
+mixin menu(items)
+  ul.main-nav
+    each item in items
+      li.main-nav__item
+        a.main-nav__link(href=item.href, title=item.title)= item.title
+
+mixin btnLink(text)
+  a.btn-link.btn-icon(href='#')
+    span= text
+    include ../components/_next
+
+//- form-input
+mixin fieldInput(type, name, id, placeholder, label, required, className)
+  .input
+    input.control.input__field(type=type, name=name, id=id, placeholder=placeholder, required=required, class=className)
+    label.input__label(for=id)
+      span.input__label-content= label
+    .control-error
+
+//- form-textarea
+mixin fieldTextarea(name, id, label, placeholder, rows, required, className)
+  .input
+    textarea.control.input__field(name=name, id=id, placeholder=placeholder, rows=rows, required=required, class=className)
+    label.input__label(for=id)
+      span.input__label-content= label
+    .control-error
+
+//- form-checkbox
+mixin fieldCheckbox(name, id, checked)
+  .checkbox
+    input(type="checkbox", id=id, checked=checked)
+    label(for=id)=name
+
+//- form-radio
+mixin fieldRadio(name, id, label, checked)
+  .radio
+    input(type="radio", id=id, value=id, name=name, checked=checked)
+    label(for=id)=label
+
+
+//- maps-iframe
+- var map = 'iframe src="putMapURLhere" width="100%" height="400" frameborder="0" style="pointer-events: none;" allowfullscreen></iframe';
+
+
+mixin img(src)
+  img(src='assets/images/' + src, alt='')
+
+//- article
+mixin article(title)
+  .article
+    .article-wrapper
+      h1= title
+      if block
+        block
+      else
+        p No content provided

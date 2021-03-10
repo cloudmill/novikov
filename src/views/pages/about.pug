@@ -1,0 +1,73 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-about
+    .about-main(data-aos='fade-up')
+      h1.select-wrapper История Novikov Group берет свое начало #[span в 1991 году]. Именно в этом году Аркадий Новиков открыл #[span свой первый ресторан —] #[a(href='#') Sirena], который стал первым рыбным рестораном столицы #[span с качественно новым подходом к кухне, обслуживанию, интерьеру и атмосфере.]
+      .row.between__xs
+        .col.col__xl-8.col__md-6.col__xs-12.about-main__dev(data-aos='fade-up')
+          p Это положило начало новому, постсоветскому этапу в развитии российского ресторанного бизнеса.
+          +img('about/about-1.jpg')
+          div В ресторане SIrena, 1991 год
+        .col.col__xl-4.col__md-6.col__xs-12.about-main__sub(data-aos='fade-up')
+          p Вслед за «Сиреной» А. Новиков открыл ресторан «Царская охота», где любили собираться общественные и политические деятели. Vogue Cafe, что сочетает в себе простую вкусную кухню и модную обстановку, и другие заведения, которые давно стали легендами и продолжают работать по сей день.
+          +img('about/about-2.jpg')
+    .main-slider.about-slider
+      .main-swiper.swiper-container(data-aos='fade-up')
+        .swiper-pagination
+        .swiper-wrapper
+          - for (let x = 2; x < 8; x++)
+            .swiper-slide: span: +img('about/about-3.jpg')
+        .swiper-buttons
+          .swiper-button-prev: +img('icons/sw-l.svg')
+          .swiper-button-next: +img('icons/sw-r.svg')
+    .about-history
+      .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+        .about-history-title нам #[span 30] лет
+        .text--right Фильм о Novikov Group
+        .event-video(data-aos='fade-up')
+          svg#play(width="279" height="279" viewBox="0 0 279 279" fill="none" xmlns="http://www.w3.org/2000/svg")
+            circle(cx="139.5" cy="139.5" r="59.5" fill="black")
+            circle(cx="139.5" cy="139.5" r="81" stroke="black")
+            circle(cx="139.5" cy="139.5" r="139" stroke="black")
+            path(d="M155 140C155 140 148.281 141.49 140.791 146.105C135.235 149.528 130 156 130 156L130 124C130 124 132.779 129.01 140.791 133.895C147.521 137.998 155 140 155 140Z" fill="white")
+          video#video(poster="assets/images/event/video.jpg" muted loop)
+            source(src="assets/images/video/video.mp4")
+        .history-slider.swiper-container(data-aos='fade-up')
+          .swiper-scrollbar
+          .swiper-wrapper
+            .swiper-slide
+              .history-year 2002
+              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+            .swiper-slide
+              .history-year 2005
+              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+            .swiper-slide
+              .history-year 2011
+              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+            .swiper-slide
+              .history-year 2013
+              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+            .swiper-slide
+              .history-year 2020
+              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+          .swiper-buttons
+            .swiper-button-prev: +img('icons/sw-l-w.svg')
+            .swiper-button-next: +img('icons/sw-r-w.svg')
+    .about-story(data-aos='fade-up')
+      .alpha.select-wrapper За #[span 30–летнюю историю компании] Аркадий Новиков открыл как семейные заведения, модные камерные места на Патриарших, так и рестораны высокой кухни.
+      .row.between__xs
+        .col.col__xl-4.col__md-6.col__xs-12.about-story__sub(data-aos='fade-up')
+          +img('about/about-4.jpg')
+        .col.col__xl-8.col__md-6.col__xs-12.about-story__dev(data-aos='fade-up')
+          +img('about/about-5.jpg')
+          p На сегодняшний день на счету Аркадия Новикова более 100 действующих проектов, включая популярные по всей России сети "Магадан", "Сыроварня", 5642 Высота, Avocado Queen, Farш, Prime Star, Krispy Kreme, Колбасный цех, а также такие уникальные проекты, как №13 Restaurant, "Рыбы нет", Bolshoi, China Club, Cantinetta Antinori, "Аист", " Узбекистан", "Причал", "Simach в Недальнем", школа ресторанного дела Novikov school и множество других
+
+block footer
+  include ../partials/_footer.pug

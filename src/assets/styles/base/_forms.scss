@@ -1,0 +1,381 @@
+//
+// Modules -> Forms
+// --------------------------------------------------
+
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: $line-height-computed;
+  font-size: ($base-font-size * 1.5);
+  line-height: inherit;
+  color: $legend-color;
+  border: 0;
+}
+
+label {
+  display: block;
+  max-width: 100%;
+  color: black;
+}
+
+
+input[type="search"] {
+  @include box-sizing(border-box);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9; // IE8-9
+  line-height: normal;
+}
+
+input[type="file"] {
+  display: block;
+}
+
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+select[multiple],
+select[size] {
+  height: auto;
+}
+
+// Focus for file, radio, and checkbox
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  @include tab-focus;
+}
+
+
+// Common form controls
+.control {
+  display: block;
+  width: 100%;
+  font-weight: 400;
+  height: 50px;
+  padding: $padding-base-vertical 0;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $input-color;
+  background-color: $input-bg;
+  background-image: none;
+  border: none;
+  border-radius: $input-border-radius;
+  border-bottom: 1px solid #E5E5E5;
+  @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+
+  &:hover {
+    border-color: black;
+  }
+
+  @include form-control-focus;
+
+  @include placeholder;
+
+  &-error {
+    font-size: 11px;
+    line-height: 160%;
+    color: $color-type-2a;
+    position: absolute;
+    bottom: 0;
+  }
+
+}
+
+.input {
+  position: relative;
+}
+
+// Reset height for `textarea`s
+textarea.control {
+  height: auto;
+  resize: none;
+  font-family: $base-font-family;
+}
+
+select.control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 30px;
+  //background: url("../images/icons/arrow-down.png") no-repeat center right 10px, $input-bg;
+  &:focus {
+    //background: url("../images/icons/arrow-up.png") no-repeat center right 10px, $input-bg;
+  }
+}
+
+// Search inputs in iOS
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+
+.form__group {
+  margin-bottom: $form-group-margin-bottom;
+}
+
+
+// Checkboxes and radios
+.radio,
+.checkbox {
+  position: relative;
+  display: block;
+
+  label {
+    padding-left: 45px;
+    margin: 0;
+    padding-top: 4px;
+    cursor: pointer;
+    line-height: 1.2;
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 25px;
+      height: 25px;
+      border: 1px solid $black;
+      background: $input-bg;
+      transition: background .5s;
+    }
+  }
+
+  .control-error {
+    position: absolute;
+    bottom: -20px;
+  }
+}
+
+.checkbox {
+  input[type="checkbox"] {display: none;}
+}
+.radio {
+  input[type="radio"] {display: none;}
+}
+
+.checkbox input[type="checkbox"]:checked + label:after {
+  background: url('../images/icons/chk-b.svg') center center no-repeat, $input-bg;
+}
+.radio input[type="radio"]:checked + label:after {
+  background: url('../images/icons/radio.svg') center center no-repeat, $input-bg;
+}
+
+
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: 20px;
+}
+
+.input {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  &__field {
+    position: relative;
+    display: block;
+    float: right;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    margin: 0;
+    text-align: left;
+    color: $black;
+    width: 100%;
+    font-size: 18px;
+    pointer-events: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &-content {
+      position: absolute;
+      display: block;
+      width: 100%;
+      padding: 0;
+      font-weight: 400;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.3s;
+    }
+    &:after,
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -2px;
+      width: 100%;
+      height: 100%;
+      border-bottom: 1px solid $gray;
+    }
+    &::after {
+      border-bottom: 1px solid black;
+      transform: translate3d(-100%, 0, 0);
+      transition: transform 0.3s;
+    }
+  }
+}
+
+
+.input__field:focus + .input__label::after,
+.input--filled .input__label::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.input__field:focus + .input__label .input__label-content,
+.input--filled .input__label-content {
+  transform: translate3d(0, -5px, 0) scale3d(0.7, 0.7, 1);
+}
+
+
+
+.input__file {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  &-body {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color .5s;
+    &:hover {
+      color: $color-type-2a;
+    }
+  }
+  &-js {
+    position: absolute;
+    top: 0;
+    left: -90px;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    cursor: pointer;
+    width: 150%;
+    opacity: 0;
+  }
+  .input__text-js {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+  }
+  &-close {
+    margin-left: 10px;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+}
+
+.radio--inline {
+  display: flex;
+  > .radio {
+    margin: 0 40px 0 0;
+  }
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+
+    .control {
+      position: relative;
+      z-index: 2;
+      margin-top: 1px;
+      padding: 10px;
+      width: 100%;
+      height: 39px;
+      margin-bottom: 0;
+      border: 1px solid #E5E5E5;
+    }
+
+    &--btn {
+      button {
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 0;
+      }
+      svg {
+        rect,
+        path {
+          transition: all .5s;
+        }
+      }
+      .disabled {
+        svg {
+          rect {
+            fill: #E5E5E5;
+          }
+          path {
+            stroke: #9C9C9C;
+          }
+        }
+      }
+    }
+}
+.input-group--addon,
+.input-group--btn,
+.input-group .control {
+  display: table-cell;
+}
+.input-group--addon,
+.input-group--btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.input-group--addon:first-child {
+  border-right: 0;
+}
+.input-group--addon:last-child {
+  border-left: 0;
+}
+
+.input-group--btn {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+}

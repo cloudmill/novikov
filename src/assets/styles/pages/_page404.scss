@@ -1,0 +1,24 @@
+.page-page404 {
+  text-align: center;
+  padding-top: 80px;
+  padding-bottom: 140px;
+  &-head {
+    font-size: 400px;
+    line-height: 0.8;
+    text-transform: uppercase;
+    font-family: $base-font-family-serif;
+  }
+  &-desc {
+    font-size: 28px;
+    line-height: 160%;
+    margin-bottom: 80px;
+  }
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    * + * {
+      margin-left: 60px;
+    }
+  }
+}

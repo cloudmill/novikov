@@ -1,0 +1,15 @@
+div#mapMe.popup(style="display: none")
+  .close-popup.close-popup--js
+    svg(width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg")
+      rect(width="80" height="80" fill="black")
+      rect(x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white")
+      rect(x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white")
+  .popup-inner
+    .row.between__xs.bottom__xs
+      .col.col__lg-8.col__md-8.col__xs-12
+        +fieldInput('text', 'search', 'search-o', '', 'Улица, дом', true, 'autocomplete')
+      .col.col__lg-4.col__md-4.col__xs-12.text--right
+        button.btn.btn--primary.success--js Подтвердить адрес
+  .relative
+    .error-tool Выбранный адрес не входит в зону доставки
+    #map

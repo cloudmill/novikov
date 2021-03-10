@@ -1,0 +1,286 @@
+//
+// Pages -> Index
+// ------------------------------------
+
+.page-main {
+  background: #F6F6F6;
+  position: relative;
+  &:before {
+    content: '';
+    background: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 32vh;
+    @media screen and (min-width: $screen-md-min) {
+      height: 60vh;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      height: 80vh;
+    }
+  }
+}
+
+.main-slider {
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 120px;
+  }
+  .swiper-container {
+    padding: 70px 0 90px;
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 70px 0;
+    }
+    .swiper-slide {
+      img {
+        border-radius: 0px 60px;
+      }
+    }
+  }
+  .text--center {
+    padding: 0 20px;
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 0 80px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      padding: 0 200px;
+    }
+  }
+  h1 {
+    font-size: 18px;
+    position: relative;
+    display: inline;
+    border-bottom: 1px solid $black;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 47px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      font-size: 55px;
+    }
+  }
+}
+
+.textLiner {
+  width: 100%;
+  height: 25px;
+  margin: 50px 0 60px;
+  background: url("../images/textliner.svg") no-repeat center / auto 100%;
+  @media screen and (min-width: $screen-md-min) {
+    margin: 50px 0 120px;
+    height: 50px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    height: 85px;
+  }
+  @media screen and (min-width: $screen-xl-min) {
+    background: url("../images/textliner.svg") no-repeat center;
+    height: 115px;
+  }
+}
+
+.main-carousel {
+  position: relative;
+  margin-left: 10px;
+  @media screen and (min-width: $screen-md-min) {
+    margin-left: 0;
+  }
+  .tab-container {
+    margin-bottom: 60px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 100px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-bottom: 170px;
+    }
+  }
+  .tabs {
+    display: flex;
+    font-size: 12px;
+    line-height: 140%;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    overflow-x: auto;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 28px;
+      margin-left: 40px;
+      margin-bottom: 100px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      margin-left: 300px;
+    }
+    .tab {
+      margin-right: 40px;
+      white-space: nowrap;
+      border-bottom: 1px solid transparent;
+      transition:  border-color .5s;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        border-color: $color-type-2a;
+      }
+    }
+  }
+  .swiper-buttons {
+    top: 0;
+    left: 20px;
+    position: absolute;
+    display: none;
+    @media screen and (min-width: $screen-md-min) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    > * {
+      position: static;
+    }
+    .swiper-button-next {
+      margin-left: 20px;
+      img {
+        //transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.main-about {
+  background: url("../images/index/N.svg") no-repeat left bottom / 80% auto;
+  position: relative;
+  margin-bottom: 60px;
+  @media screen and (min-width: $screen-md-min) {
+    margin-bottom: 80px;
+    background: url("../images/index/N.svg") no-repeat left bottom;
+    margin-bottom: 100px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    margin-bottom: 180px;
+  }
+  &-badge {
+    margin-left: 20px;
+  }
+  &-title {
+    font-size: 60px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    position: relative;
+    z-index: 9;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 90px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-top: -40px;
+      font-size: 140px;
+    }
+    &__top {
+      color: $color-type-2a;
+      font-family: $base-font-family;
+      font-weight: 300;
+      span {
+        font-family: $base-font-family-serif;
+      }
+    }
+    &__bottom {
+      margin-left: 30%;
+      font-family: $base-font-family-serif;
+      font-feature-settings: 'liga' off;
+    }
+  }
+  &-content {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    @media screen and (min-width: $screen-md-min) {
+      padding-bottom: 80px;
+      margin-left: 40px;
+    }
+    @media screen and (min-width: 1450px) {
+      margin-left: 10%;
+    }
+  }
+  &-desc {
+    max-width: 440px;
+    margin-top: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 0;
+    }
+    p {
+      margin-bottom: 45px;
+      &::first-line {
+        text-indent: 100px;
+      }
+    }
+  }
+  &-back {
+    margin-top: 60px;
+    margin-left: auto;
+    display: flex;
+    align-items: flex-start;
+    .visible__sm {
+      width: 70%;
+      img {
+        margin-right: 0;
+        width: auto;
+      }
+    }
+    @media screen and (min-width: $screen-md-min) {
+      display: block;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-top: 0;
+    }
+    img {
+      border-radius: 0px 20px;
+      width: 127px;
+      margin-right: 10px;
+      @media screen and (min-width: $screen-md-min) {
+        width: auto;
+        margin-right: 0;
+      }
+    }
+  }
+  &-author {
+    position: absolute;
+    right: 20px;
+    top: 180px;
+    width: 40%;
+    display: none;
+    @media screen and (min-width: $screen-md-min) {
+      display: block;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      width: auto;
+    }
+    img {
+      border-radius: 0px 60px 0px 0px;
+    }
+  }
+}
+
+.main-events {
+  padding-bottom: 20px;
+  overflow: hidden;
+  @media screen and (min-width: $screen-md-min) {
+    padding-bottom: 160px;
+  }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 60px;
+    }
+  }
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .events-list {
+    margin-top: 40px;
+    @media screen and (min-width: $screen-lg-min) {
+      margin-top: auto;
+    }
+  }
+}

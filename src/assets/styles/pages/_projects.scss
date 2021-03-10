@@ -1,0 +1,122 @@
+.page-project {
+  padding-top: 160px;
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+  h2 {
+    font-family: $base-font-family;
+    margin-top: 0;
+  }
+
+}
+
+.projectList {
+  li {
+    font-size: 20px;
+    line-height: 120%;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    svg {
+      margin-right: 10px;
+      path {
+        transition: fill .5s;
+      }
+    }
+    a {
+      text-decoration: none;
+    }
+    &:hover,
+    &.active {
+      svg path {
+        fill: $color-type-2a;
+      }
+      a {
+        color: $color-type-2a;
+      }
+    }
+  }
+}
+
+.project {
+  &-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 0;
+    padding-right: 160px;
+    &__item {
+      flex-grow: 2;
+      img {
+        max-width: 160px;
+      }
+      &:nth-child(2) {
+        flex-grow: 4;
+      }
+      > * {
+        margin-bottom: 8px;
+      }
+      a {
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid black;
+        &:hover {
+          color: $color-type-2a;
+        }
+      }
+    }
+  }
+  &-desc {
+    h3 {
+      text-transform: initial;
+      font-family: $base-font-family;
+      font-size: 24px;
+      margin-top: 80px;
+      margin-bottom: 40px;
+    }
+    h4 {
+      text-transform: initial;
+      font-family: $base-font-family;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .list--bullet--bl > li {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .slideshow-swiper {
+      margin-top: 80px;
+      .swiper-slide {
+        img {
+          border-radius: 0px 60px;
+        }
+      }
+    }
+    .swiper {
+      &-section {
+        margin-bottom: 20px;
+        padding-right: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      &-buttons {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        height: 60px;
+        > * {
+          position: static;
+          margin-right: 20px;
+        }
+      }
+      &-pagination {
+        position: static;
+      }
+    }
+  }
+}

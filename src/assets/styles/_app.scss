@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
+//@import 'normalize.css';
+
+@font-face {
+  font-family: 'Lighthaus';
+  src: url('../fonts/subset-Lighthaus.eot');
+  src: url('../fonts/subset-Lighthaus.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/subset-Lighthaus.woff2') format('woff2'),
+  url('../fonts/subset-Lighthaus.woff') format('woff'),
+  url('../fonts/subset-Lighthaus.ttf') format('truetype'),
+  url('../fonts/subset-Lighthaus.svg#Lighthaus') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+//
+//sass/
+////
+//– base/
+//   |– _forms.scss        # Forms rules
+//   |– _typography.scss   # Typography rules
+//   |– _buttons.scss      # Buttons
+//   |– _forms.scss        # Forms
+//   …                     # Etc.
+//
+//– modules/
+//   |– _carousel.scss     # Carousel
+//   |– _cover.scss        # Cover
+//   |– _dropdown.scss     # Dropdown
+//   …                     # Etc.
+//
+//– partials/
+//   |– _navigation.scss   # Navigation
+//   |– _grid.scss         # Grid system
+//   |– _header.scss       # Header
+//   |– _footer.scss       # Footer
+//   |– _sidebar.scss      # Sidebar
+//   …                     # Etc.
+//
+//– pages/
+//   |– _home.scss         # Home specific styles
+//   |– _contact.scss      # Contact specific styles
+//   …                     # Etc.
+//
+//– themes/
+//   |– _theme.scss        # Default theme
+//   |– _admin.scss        # Admin theme
+//   …                     # Etc.
+//
+//– helpers/
+//   |– _variables.scss    # Sass Variables
+//   |– _functions.scss    # Sass Functions
+//   |– _mixins.scss       # Sass Mixins
+//   |– _placeholders.scss # Sass Placeholders
+//
+//– vendors/
+//   |– _reset.scss         # Reset
+//   |– _debug.scss         # Debug mode
+//   …                      # Etc.
+//
+//– main.scss              # Main Sass file
+//
+
+
+//*
+// Which objects and abstractions would you like to use?
+//base
+$use-btn-color:                true!default;
+$use-btn-size:                 true!default;
+$use-btn-group:                false!default;
+$use-input-group:              false!default;
+$use-table:                    true!default;
+$use-color-table:              false!default;
+$use-column-table:             false!default;
+$use-color-text:               true!default;
+
+//modules
+$use-accordion:                false!default;
+$use-breadcrumb:               false!default;
+$use-pagination:               true!default;
+$use-pager:                    true!default;
+$use-space:                    false!default;
+$use-split:                    false!default;
+$use-rules:                    false!default;
+$use-this-or-this:             false!default;
+$use-media:                    true!default;
+// grids
+$use-adaptive:                 true!default;
+$use-flexbox:                  true!default;
+$use-bem:                      false!default;
+// plugins
+$use-animations:               false!default;
+$debug-mode:                   false!default;
+
+@import "_sprites";
+
+// Color scheme
+@import "themes/_scheme-default";
+
+// Mixins
+@import "helpers/*.scss";
+
+// Plugins
+@import "vendors/*.scss";
+
+// Base
+@import "base/*.scss";
+
+// Modules
+@import "modules/*.scss";
+
+// Partials
+@import "partials/*.scss";
+
+// Pages
+@import "pages/*.scss";
+
+
+@import "~swiper/swiper-bundle.css";
+@import "~select2/dist/css/select2.css";
+@import "~jbox/dist/jBox.all.css";
+@import "~aos/dist/aos.css";
+@import "~malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css";

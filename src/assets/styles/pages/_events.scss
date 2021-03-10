@@ -1,0 +1,127 @@
+.events {
+  &-list {
+    width: 100%;
+    .swiper-wrapper {
+      @media screen and (min-width: $screen-md-min) {
+        display: block;
+      }
+      .swiper-slide {
+        width: 260px;
+        @media screen and (min-width: $screen-md-min) {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+  &-item {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 60px;
+    @media screen and (min-width: $screen-md-min) {
+      &.visible__xs {
+        display: none;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &-line {
+      left: 0;
+      top: 10px;
+      position: absolute;
+    }
+    &-logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      img {
+        width: 155px;
+      }
+    }
+    &-img {
+      position: relative;
+      > img {
+        width: 100%;
+      }
+    }
+    &-title {
+      font-size: 12px;
+      font-family: $base-font-family-serif;
+      margin: 10px 0;
+      transition: color .5s;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 21px;
+        margin: 20px 0;
+      }
+    }
+    &-date {
+      font-size: 12px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 16px;
+      }
+    }
+    &--main {
+      .events-item-title {
+        font-size: 28px;
+      }
+      .events-item-img {
+        img {
+          border-radius: 0px 0px 60px 0px;
+        }
+      }
+    }
+
+    &:hover {
+      .events-item-title {
+        color: $color-type-2a;
+      }
+    }
+  }
+}
+
+.eventsList {
+  padding: 0 20px;
+  min-height: 60vh;
+  .events-item {
+    margin-bottom: 90px;
+  }
+}
+
+.page-event {
+  overflow: hidden;
+}
+
+.filter-global {
+  display: inline-flex;
+  border: 1px solid #E5E5E5;
+  border-radius: 60px;
+  position: relative;
+  .span {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 74px;
+    border-radius: 60px;
+    background-color: black;
+    transition: all .5s;
+  }
+  li {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    transition: color .5s;
+    cursor: pointer;
+    &.active {
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-event.page-template
+    .with-aside.event
+      aside.sidebar(data-aos='fade-up')
+        .sidebar-inner
+          .template-date 10.12.2020
+      section.section(data-aos='fade-up')
+        h1.select-wrapper Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
+        .event-tag Дегустации
+        ul.event-list(data-aos='fade-up')
+          li
+            .title ресторан
+            +img('index/rest.svg')
+            p Sirena
+          li
+            .title адрес
+            p Большая Спасская, 15
+          li
+            .title время
+            p 19:30 — сбор гостей #[br] 20:00 — начало ужина
+          li
+            .title стоимость
+            p 6 000 ₽
+    .with-aside.event
+      aside.sidebar(data-aos='fade-up')
+        .sidebar-inner
+          .template-question
+            .template-question-title Задать вопрос
+            a.template-question-phone(href='mailto:89850020189') 8 (985) 002 01 89
+            .template-question-info Звонки принимаются до 20:00
+          .template-social
+            .template-social-title поделиться
+            .template-social-list
+              div: a(href='#') Вконтакте
+              div: a(href='#') Facebook
+          +btnLink('Задать вопрос')
+      section.section(data-aos='fade-up')
+        .event-img: +img('event/main.jpg')
+        .event-desc(data-aos='fade-up')
+          p 14 октября в ресторане Sirena состоится эногастрономический ужин Taste Wine by Novikov с презентацией эксклюзивной подборки вин и блюдами от шеф-повара ресторана Алексея Горевого.
+          p Коллегией сомелье ресторанной группы Аркадия Новикова были продегустированы и отобраны одни из лучших образцов винных хозяйств в различных категориях и типах вин. Дегустационный комитет отобрал из более пятисот наименований пока только двадцать лучших экземпляров – именно эти вина представляют собой лучшее соотношение цены и качества. Они идеально подходят к блюдам от шеф-поваров ресторанов Novikov Group, отлично встают в винную карту и будут по достоинству оценены гостями.
+          p На ужине будет представлено пять уникальных вин различных европейских регионов.
+          p Вечер начнется с устриц и Maschio dei Cavalieri Prosecco Valdobbiadene Superiore – нежнейшего премиум-просекко с лучших склонов Вальдоббьядене. Во вкусе – тона цукатов, косточковых фруктов и весеннего букета из акации, подаренного с любовью.
+          p После – первая подача: Riesling Rethink под нежный севиче из морского гребешка. Яркий, но аскетичный немецкий рислинг с тонами персика, яблока и цитруса. Подходит, чтобы освежиться и перезагрузиться – очень актуально в 2020 году.
+        .event-video(data-aos='fade-up')
+          svg#play(width="279" height="279" viewBox="0 0 279 279" fill="none" xmlns="http://www.w3.org/2000/svg")
+            circle(cx="139.5" cy="139.5" r="59.5" fill="black")
+            circle(cx="139.5" cy="139.5" r="81" stroke="black")
+            circle(cx="139.5" cy="139.5" r="139" stroke="black")
+            path(d="M155 140C155 140 148.281 141.49 140.791 146.105C135.235 149.528 130 156 130 156L130 124C130 124 132.779 129.01 140.791 133.895C147.521 137.998 155 140 155 140Z" fill="white")
+          video#video(poster="assets/images/event/video.jpg" muted loop)
+            source(src="assets/images/video/video.mp4")
+        .event-desc
+          p Во второй подаче чудесный новозеландский Совиньон из престижного региона Вайрарапа, не Мальборо, и потому не совсем привычный. В Schubert Sauvignon Blanc Selection солируют ананас и свежескошенные травы, дополненные медовой дыней и цитрусом во вкусе. С ним гости попробуют фирменный салат Нисуаз со свежим тунцом.
+          p Далее – телячий язык с черным трюфелем под пряно-фруктовое Бароло, выдержанное в дубе не менее 36 месяцев. Вино для медитации: слияние фиалки, чернослива, кожи и черного перца в полумраке.
+          p Завершим вечер тортом Опера и вином Lamberti Amarone della Valpolicella Classico 2015. Великая венецианская классика. Для Амароне ягоды заизюмливаются, как при создании сладких апассименто, только перед выдержкой накопленный сахар сбраживают до конца. В итоге получается шелковистое, насыщенное и крепкое сухое вино с тонами фиалки, изюма и специй, с жареным миндалем в послевкусии.
+          p Эксклюзивный партнёр по импорту и дистрибуции вин проекта Taste Wine - Компания Alianta.
+        .event-menu(data-aos='fade-up')
+          h3 Меню вечера
+          .event-desc(data-aos='fade-up')
+            h5 welcome
+            ul.list--bullet
+              li Maschio di Cavalieri Prosecco Valdobbiadene Superiore
+              li Устрицы
+            h5 Первая подача
+            ul.list--bullet
+              li Riesling Rethink
+              li Севиче из морского гребешка
+            h5 вторая подача
+            ul.list--bullet
+              li Schubert Sauvignon Blanc Selection
+              li Нисуаз
+            h5 третья подача
+            ul.list--bullet
+              li BERSANO Barolo Borgo dei Laneri DOCG
+              li Телячий язык с черным трюфелем
+            h5 четвертая подача
+            ul.list--bullet
+              li Lamberti Amarone della Valpolicella Classico 2015
+              li Торт Опера
+        .event-tooltip(data-aos='fade-up') *Дорогие гости, на ужине будут соблюдены все меры безопасности, в том числе установлена дистанция между столами, произведена дезинфекция посадочных мест и предоставлено оборудование для измерения температуры гостям.
+        .ticket(data-aos='fade-up')
+          .ticket-top: h2 Купить билет на событие
+          .ticket-body
+            .name Долгожданная премьера эксклюзивных вин #[br] проекта Taste Wine Selection of Fine Wines
+            .ticket-buy
+              .row
+                .col.col__md-6.col__xs-12
+                  .ticket-buy-title стоимость
+                  .ticket-buy-price.ticket-buy-price--sm 5 000 ₽
+                .col.col__md-6.col__xs-12
+                  .ticket-buy-title количество
+                  .incDec
+                    .cart-id.dec--js -
+                    .cart-count 2
+                    .cart-id.inc--js +
+              .row.bottom__xs
+                .col.col__md-6.col__xs-12
+                  .ticket-buy-title итого
+                  .ticket-buy-price 10 000 ₽
+                .col.col__md-6.col__xs-12
+                  +btnLink('Купить билет')
+    .list-discount(data-aos='fade-up')
+      .list-discount-inner
+        .list-discount-slider
+          .list-discount-title
+            h3 Другие события
+            .swiper-buttons
+              .swiper-button-prev: +img('icons/sw-l.svg')
+              .swiper-button-next: +img('icons/sw-r.svg')
+          .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
+            .swiper-wrapper
+              - for (let x = 2; x < 4; x++)
+                .swiper-slide
+                  a.events-item(href='#')
+                    .events-item-img
+                      .events-item-line: +img('index/line-1.svg')
+                      .events-item-logo: +img('index/logo-1.jpg')
+                      +img('index/event-1.jpg')
+                    .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
+                    .events-item-date 27.03.2021
+                .swiper-slide
+                  a.events-item(href='#')
+                    .events-item-img
+                      .events-item-line: +img('index/line-2.svg')
+                      .events-item-logo: +img('index/logo-2.jpg')
+                      +img('index/event-2.jpg')
+                    .events-item-title Ресторан savva дарит скидку зрителям большого театра
+                    .events-item-date 27.03.2021
+                .swiper-slide
+                  a.events-item(href='#')
+                    .events-item-img
+                      .events-item-line: +img('index/line-3.svg')
+                      +img('index/event-3.jpg')
+                    .events-item-title Согревающие коктейли в ресторанах Novikov Group
+                    .events-item-date 27.03.2021
+
+
+block footer
+  include ../partials/_footer.pug

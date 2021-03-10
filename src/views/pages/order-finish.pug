@@ -1,0 +1,22 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-order.page-order--finish
+    .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
+      h1.select-wrapper Заказ успешно оформлен
+      h3 номер заказа: 1915
+      p На почту #[b ksh@cloudmill.ru] будет отправлен чек
+      .form__group(data-aos='fade-up')
+        +btnLink('Перейти на Главную')
+      .form__group(data-aos='fade-up')
+        +btnLink('Перейти в Рестораны')
+
+
+block footer
+  include ../partials/_footer.pug

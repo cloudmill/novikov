@@ -1,0 +1,79 @@
+//
+// Modules -> Accordion
+// --------------------------------------------------
+
+.accordion {
+
+  &__item {
+    background: white;
+    border-top: 1px solid black;
+    cursor: pointer;
+    transition: all .5s !important;
+    &:last-child {
+      border-bottom: 1px solid black;
+    }
+
+    &:hover {
+      border-color: $color-type-2a;
+    }
+
+    &.active {
+      border-color: $color-type-2a;
+      + .accordion__item {
+        border-color: $color-type-2a;
+      }
+      .accordion-head svg {
+        transform: rotate(180deg);
+        path {
+          fill: $color-type-2a;
+        }
+      }
+    }
+
+  }
+
+
+  &-head {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 40px 0;
+    }
+    &-arr {
+      position: absolute;
+      right: 0;
+    }
+    &-name {
+      width: 50%;
+    }
+    &-type {
+      width: 25%;
+    }
+    &-city {
+      width: 25%;
+    }
+
+    svg {
+      transition: transform .5s;
+      path {
+        transition: fill .5s;
+      }
+    }
+  }
+
+  &-body {
+    display: none;
+
+    > div {
+      padding: 20px 0;
+      @media screen and (min-width: $screen-xl-min) {
+        padding: 20px 0 40px;
+      }
+    }
+  }
+}

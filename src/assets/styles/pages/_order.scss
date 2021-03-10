@@ -1,0 +1,171 @@
+.page-order {
+  padding-top: 100px;
+  padding-bottom: 80px;
+  h1 {
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+  .back-link {
+    position: absolute;
+    left: 20px;
+    top: 160px;
+  }
+
+  &--finish {
+    background: #F6F6F6;
+    min-height: 78vh;
+    h1 {
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 30px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+    p {
+      font-size: 20px;
+      margin-bottom: 100px;
+      b {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+#map {
+  width: 100%;
+  height: 510px;
+}
+
+.select2-container {
+  z-index: 99999;
+}
+
+.order {
+  &-wrapper {
+    max-width: 800px;
+    width: 79%;
+    @media screen and (min-width: $screen-xl-min) {
+      width: auto;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+    &__item {
+      margin-bottom: 80px;
+
+      .tab-content {
+        .control {
+          max-width: 160px;
+        }
+      }
+
+      .tabs {
+        display: flex;
+        align-items: center;
+        .tab {
+          margin-right: 40px;
+          border-bottom: 1px solid transparent;
+          transition: border-color .5s;
+          margin-bottom: 40px;
+          padding-bottom: 5px;
+          cursor: pointer;
+          h3 {
+            margin-bottom: 0;
+          }
+          &:hover,
+          &.active {
+            border-color: $color-type-2a;
+          }
+        }
+      }
+
+      &--date {
+        position: relative;
+        display: none;
+        &.active {
+          display: block;
+        }
+      }
+
+      &--taxi {
+        font-size: 14px;
+        line-height: 160%;
+        padding: 25px;
+        max-width: 440px;
+        border: 1px solid #E5E5E5;
+        display: none;
+        a {
+          font-weight: 600;
+          border-bottom: 1px solid black;
+        }
+
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+  &-payment {
+    position: relative;
+    padding-bottom: 25px;
+    &-not {}
+    &-fill {
+      display: none;
+    }
+    &.active {
+      .order-payment-not {
+        display: none;
+      }
+      .order-payment-fill {
+        display: block;
+      }
+    }
+  }
+
+  &-delivery {
+    position: relative;
+    .btn {
+      height: 50px;
+    }
+    &-adr {
+      display: none;
+      a {
+        border-bottom: 1px solid black;
+      }
+    }
+    &.active {
+      > a {
+        display: none;
+      }
+      .order-delivery-adr {
+        display: block;
+      }
+    }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.error-tool {
+  width: 209px;
+  color: white;
+  background: $color-type-2a;
+  border-radius: 10px 0px;
+  padding: 20px 15px;
+  position: absolute;
+  top: 20px;
+  right: 70px;
+  opacity: 0;
+  z-index: 2;
+  font-size: 13px;
+  transition: opacity .5s;
+  &.active {
+    opacity: 1;
+  }
+}
