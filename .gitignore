@@ -6,6 +6,5 @@ node_modules
 .cache
 */.DS_Store
 */*/.DS_Store
-dist
 .idea
 deploy.js
