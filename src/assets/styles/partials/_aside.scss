@@ -6,31 +6,78 @@
 .with-aside {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 20px;
+  padding: 0 10px;
+  @media screen and (min-width: $screen-md-min) {
+    padding: 0 20px;
+  }
   .sidebar {
-    width: 202px;
+    width: 100%;
+    @media screen and (min-width: $screen-xl-min) {
+      width: 202px;
+    }
+  }
+  &--last {
+    .sidebar {
+      margin-bottom: 80px;
+      order: 1;
+      @media screen and (min-width: $screen-xl-min) {
+        margin-bottom: 0;
+        order: -1;
+      }
+      &-inner {
+        padding-left: 40px;
+        @media screen and (min-width: $screen-md-min) {
+          padding-left: 0;
+        }
+      }
+    }
   }
 
   .section {
-    padding-left: 75px;
+    padding-left: 0;
     max-width: 1090px;
+    @media screen and (min-width: $screen-md-min) {
+      padding-left: 0;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      padding-left: 75px;
+    }
   }
 
   &--line {
     border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    margin: 0 20px 160px;
+    margin: 0 20px 80px;
     padding: 0;
+    @media screen and (min-width: $screen-md-min) {
+      margin: 0 20px 160px;
+      border-bottom: 1px solid black;
+    }
     .sidebar {
       padding-top: 20px;
-      width: 480px;
-      border-right: 1px solid black;
+      width: 100%;
+      @media screen and (min-width: $screen-md-min) {
+        width: 33%;
+        border-right: 1px solid black;
+      }
+      @media screen and (min-width: $screen-xl-min) {
+        width: 480px;
+      }
     }
 
     .section {
-      padding: 20px 0 20px 90px;
+      width: 100%;
+      padding: 0 0 20px;
       max-width: inherit;
-      width: calc(100% - 480px);
+      border-bottom: 1px solid black;
+      @media screen and (min-width: $screen-md-min) {
+        padding: 20px 0 20px 20px;
+        width: 67%;
+        border-bottom: none;
+      }
+      @media screen and (min-width: $screen-xl-min) {
+        padding: 20px 0 20px 90px;
+        width: calc(100% - 480px);
+      }
     }
   }
 }

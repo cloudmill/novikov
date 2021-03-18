@@ -1,4 +1,5 @@
 import Swiper from 'swiper/swiper-bundle.min';
+import AOS from 'aos';
 
 
 if ($('.main-swiper').length) {
@@ -15,7 +16,7 @@ if ($('.main-swiper').length) {
 			el: '.swiper-pagination',
 			type: 'custom',
 			renderCustom: function(sw, current, total) {
-				return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + (total - 1);
+				return `<span>${current}</span> ` + ' <img src="assets/images/icons/line.svg" /> ' + total;
 			}
 		},
 		navigation: {
@@ -32,6 +33,34 @@ if ($('.main-swiper').length) {
 }
 
 
+if ($('.vertical-swiper').length) {
+	$('.vertical-swiper').each(function() {
+		const component = $(this);
+		const prev = component.find('.swiper-button-prev');
+		const next = component.find('.swiper-button-next');
+		const pagin = component.find('.swiper-pagination');
+		// eslint-disable-next-line no-unused-vars
+		const swiper = new Swiper(component[0], {
+			slidesPerView: 1,
+			spaceBetween: 0,
+			direction: 'vertical',
+			simulateTouch: false,
+			pagination: {
+				el: pagin[0],
+				type: 'custom',
+				renderCustom: function(sw, current, total) {
+					return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + total;
+				}
+			},
+			navigation: {
+				nextEl: next[0],
+				prevEl: prev[0],
+			},
+		});
+	});
+}
+
+
 if ($('.slideshow-swiper').length) {
 	// eslint-disable-next-line no-unused-vars
 	const swiper = new Swiper('.slideshow-swiper', {
@@ -40,7 +69,7 @@ if ($('.slideshow-swiper').length) {
 		loop: true,
 		simulateTouch: false,
 		pagination: {
-			el: '.swiper-pagination',
+			el: '.slideshow-swiper .swiper-pagination',
 			type: 'custom',
 			renderCustom: function(sw, current, total) {
 				return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + (total);
@@ -106,6 +135,7 @@ export function initSwiper() {
 			carousel = new Swiper(component[0], {
 				spaceBetween: 20,
 				slidesPerView: 'auto',
+				simulateTouch: false,
 				navigation: {
 					nextEl: next[0],
 					prevEl: prev[0],
@@ -124,7 +154,7 @@ export function initSwiper() {
 					spaceBetween: 10,
 				});
 			} else {
-				carouselM.destroy();
+			  if (carouselM) carouselM.destroy();
 			}
 		});
 	}
@@ -145,6 +175,11 @@ $('.tab').on('click', function(evt) {
 	if (carousel) {
 		carousel.destroy();
 	}
+	setTimeout(() => {
+		AOS.refresh({
+			offset: 50,
+		});
+	}, 500);
 	initSwiper();
 });
 

@@ -68,7 +68,7 @@ input[type="checkbox"]:focus {
   font-weight: 400;
   height: 50px;
   padding: $padding-base-vertical 0;
-  font-size: $base-font-size;
+  font-size: 16px;
   line-height: $base-line-height;
   color: $input-color;
   background-color: $input-bg;
@@ -77,6 +77,9 @@ input[type="checkbox"]:focus {
   border-radius: $input-border-radius;
   border-bottom: 1px solid #E5E5E5;
   @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $base-font-size;
+  }
 
   &:hover {
     border-color: black;
@@ -125,7 +128,10 @@ input[type="search"] {
 
 
 .form__group {
-  margin-bottom: $form-group-margin-bottom;
+  margin-bottom: 20px;
+  @media screen and (min-width: $screen-md-min) {
+    margin-bottom: $form-group-margin-bottom;
+  }
 }
 
 
@@ -141,7 +147,11 @@ input[type="search"] {
     padding-top: 4px;
     cursor: pointer;
     line-height: 1.2;
-    font-size: 14px;
+    font-size: 11px;
+    min-height: 25px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 14px;
+    }
     a {
       text-decoration: underline;
     }
@@ -214,7 +224,7 @@ input[type="search"] {
     text-align: left;
     color: $black;
     width: 100%;
-    font-size: 18px;
+    font-size: 16px;
     pointer-events: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -224,6 +234,9 @@ input[type="search"] {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 18px;
+    }
 
     &-content {
       position: absolute;
@@ -308,9 +321,14 @@ input[type="search"] {
 }
 
 .radio--inline {
-  display: flex;
+  @media screen and (min-width: $screen-lg-min) {
+    display: flex;
+  }
   > .radio {
-    margin: 0 40px 0 0;
+    margin: 0 0 20px 0;
+    @media screen and (min-width: $screen-lg-min) {
+      margin: 0 40px 0 0;
+    }
   }
 }
 

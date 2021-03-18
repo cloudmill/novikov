@@ -2,57 +2,117 @@
   overflow: hidden;
 }
 .main-discount {
-  padding: 160px 90px;
-  margin: 0 20px;
+  padding: 40px 36px 270px;
+  margin: 0 10px;
   color: white;
-  background: url("../images/discount/main.jpg") no-repeat center top / 100% auto;
+  background: url("../images/discount/main-m.jpg") no-repeat center top / auto 100%;
+  @media screen and (min-width: $screen-md-min) {
+    padding: 100px 40px;
+    margin: 0 20px;
+    background: url("../images/discount/main.jpg") no-repeat center top / cover;
+  }
+  @media screen and (min-width: $screen-xl-min) {
+    padding: 160px 90px;
+  }
+  @media screen and (min-width: 1450px) {
+    background: url("../images/discount/main.jpg") no-repeat center top / 100% auto;
+  }
   p {
     max-width: 350px;
     madgin-bottom: 60px;
   }
   h1 {
-    margin-bottom: 80px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 80px;
+    }
   }
   &-info {
     padding-top: 20px;
     border-top: 1px solid white;
   }
   &-title {
-    font-size: 38px;
+    font-size: 28px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 38px;
+    }
   }
   &-desc {
-    font-size: 16px;
+    font-size: 12px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
   }
 }
 
 .discount-liner {
-  height: 150px;
+  height: 30px;
   width: 100%;
   position: relative;
-  top: -60px;
-  background: url("../images/loyalty.svg") no-repeat center;
+  top: -20px;
+  background: url("../images/loyalty.svg") no-repeat center / auto 100%;
+  @media screen and (min-width: $screen-md-min) {
+    top: -30px;
+    height: 60px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    top: -50px;
+    height: 100px;
+  }
+  @media screen and (min-width: $screen-xl-min) {
+    background: url("../images/loyalty.svg") no-repeat center;
+    height: 150px;
+    top: -60px;
+  }
 }
 
 .card-discount {
-  padding-top: 160px;
+  padding-top: 80px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 100px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    padding-top: 160px;
+  }
   &-inner {
     max-width: 1090px;
     margin: auto;
     padding: 0 20px;
     h3 {
-      font-size: 40px;
+      font-size: 20px;
       margin-top: 0;
       margin-bottom: 10px;
       font-family: $base-font-family-serif;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 30px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        font-size: 40px;
+      }
     }
     a:not(.btn-link) {
-      font-size: 40px;
+      font-size: 20px;
       font-weight: 400;
+      margin-bottom: 40px;
       text-decoration: none;
+      display: inline-block;
       border-bottom: 1px solid black;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 30px;
+        margin-bottom: 0;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        font-size: 40px;
+      }
     }
     img {
-      margin-top: 40px;
+      margin-top: 20px;
+      width: 180px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-top: 40px;
+        width: auto;
+      }
     }
   }
   .card {
@@ -123,6 +183,10 @@
       }
     }
     &-price {
+      margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 0;
+      }
       &-sub {
         font-size: 13px;
         font-family: $base-font-family-serif;
@@ -139,28 +203,59 @@
 }
 
 .back-discount {
-  margin: 160px 0;
-  height: 620px;
+  margin: 80px 0;
+  height: 230px;
   width: 100%;
   background: url("../images/discount/cards.jpg") no-repeat center / auto 100%;
+  @media screen and (min-width: $screen-md-min) {
+    margin: 160px 0;
+    height: 620px;
+  }
 }
 
 .list-discount {
   padding-bottom: 1px;
   &-inner {
-    padding-left: 295px;
+    padding-left: 10px;
+    @media screen and (min-width: $screen-md-min) {
+      padding-left: 60px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      padding-left: 100px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      padding-left: 295px;
+    }
   }
   &-slider {
-    margin-bottom: 160px;
+    margin-bottom: 80px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 160px;
+    }
   }
   &-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
     padding-right: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 80px;
+    }
+    .swiper-buttons {
+      display: none;
+      @media screen and (min-width: $screen-md-min) {
+        display: flex;
+      }
+    }
     h3 {
-      font-size: 40px;
+      font-size: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 30px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        font-size: 40px;
+      }
     }
     .swiper-buttons {
       > * {
@@ -182,7 +277,7 @@
 .logoList {
   width: 250px;
   &--right {
-    @media screen and (min-width: $screen-xl-min) {
+    @media screen and (min-width: 1450px) {
       margin-left: 270px;
     }
   }
@@ -191,9 +286,12 @@
       font-family: $base-font-family;
     }
     a {
-      font-size: 16px;
+      font-size: 14px;
       text-decoration: none;
       border-bottom: 1px solid $black;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 16px;
+      }
       &:hover {
         color: $color-type-2a;
       }

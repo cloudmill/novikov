@@ -4,34 +4,79 @@
 
 .certificates {
   &-main {
-    padding: 160px 90px 200px;
-    margin: 0 20px;
     color: white;
-    background: url("../images/certificates/main.jpg") no-repeat center top / 100% auto;
+    margin: 0 10px;
+    padding: 40px 38px 400px;
+    background: url("../images/certificates/main-m.jpg") no-repeat center top / auto 100%;
+    @media screen and (min-width: $screen-md-min) {
+      margin: 0 20px;
+      padding: 60px 40px;
+      background: url("../images/certificates/main.jpg") no-repeat center top / cover;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      background: url("../images/certificates/main.jpg") no-repeat center top / 100% auto;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      padding: 160px 90px 200px;
+    }
     h1 {
-      margin-bottom: 80px;
+      margin-top: 0;
+      margin-bottom: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 40px;
+      }
+      @media screen and (min-width: $screen-xl-min) {
+        margin-bottom: 80px;
+      }
     }
     p {
-      max-width: 440px;
       margin-bottom: 0;
+      @media screen and (min-width: $screen-md-min) {
+        max-width: 50%;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        max-width: 440px;
+      }
     }
   }
   &-liner {
-    height: 150px;
+    height: 30px;
     width: 100%;
     position: relative;
-    top: -60px;
-    background: url("../images/standard.svg") no-repeat center;
+    background: url("../images/standard.svg") no-repeat center / auto 100%;
+    top: -20px;
+    @media screen and (min-width: $screen-md-min) {
+      top: -30px;
+      height: 60px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      top: -50px;
+      height: 100px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      top: -100px;
+      background: url("../images/standard.svg") no-repeat center;
+      height: 150px;
+    }
+    @media screen and (min-width: 1450px) {
+      top: -60px;
+    }
   }
 
   &-desc {
-    padding: 60px 20px;
+    padding: 60px 10px 40px;
     @media screen and (min-width: $screen-md-min) {
+      padding: 100px 20px 100px 10%;
+    }
+    @media screen and (min-width: $screen-xl-min) {
       padding: 160px 0 160px 20%;
     }
     h3 {
       margin-top: 0;
-      font-size: 24px;
+      font-size: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 24px;
+      }
     }
     .col__xl-5 {
       @media screen and (min-width: $screen-lg-min) {
@@ -45,7 +90,10 @@
 
   &-list {
     margin: 0 -20px;
-    padding: 0 20px 140px;
+    padding: 0 20px 80px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0 20px 140px;
+    }
     display: flex;
     flex-wrap: wrap;
     &__item {
@@ -53,10 +101,11 @@
       flex-direction: column;
       padding: 10px;
       background-color: white;
-      margin: 0 10px 20px;
+      margin: 0 10px 10px;
       position: relative;
       width: calc(100% - 20px);
       @media screen and (min-width: $screen-md-min) {
+        margin: 0 10px 20px;
         min-height: 28vw;
         width: calc(100% / 2 - 20px);
       }
@@ -105,7 +154,15 @@
       }
       &-img {
         margin: auto;
-        padding: 50px 0;
+        padding: 30px 0;
+        width: 70vw;
+        @media screen and (min-width: $screen-md-min) {
+          width: 30vw;
+        }
+        @media screen and (min-width: $screen-lg-min) {
+          padding: 50px 0;
+          width: auto;
+        }
         @media screen and (min-width: 1500px) {
           img {
             width: 22vw;
@@ -114,8 +171,11 @@
       }
       &-add {
         position: absolute;
-        top: 55px;
+        top: 45px;
         right: 0;
+        @media screen and (min-width: $screen-md-min) {
+          top: 55px;
+        }
         img {
           background: white;
         }

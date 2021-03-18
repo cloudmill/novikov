@@ -1,0 +1,93 @@
+.tooltip {
+  position: relative;
+  overflow: hidden;
+  &:hover {
+    overflow: visible;
+    .tooltip-desc {
+      opacity: 1;
+    }
+  }
+  &-name {
+    transition:  all .5s;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    &:hover {
+      color: $color-type-2a;
+      border-color: transparent;
+    }
+  }
+  &-desc {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    background: white;
+    border-radius: 10px 0px;
+    width: 330px;
+    opacity: 0;
+    transition: opacity .5s;
+    @media screen and (min-width: $screen-md-min) {
+      right: 0;
+      left: -100px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      right: -50px;
+      left: auto;
+    }
+    @media screen and (min-width: 1450px) {
+      left: -100px;
+    }
+    &:after {
+      content: '';
+      width: 24px;
+      height: 10px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      margin: auto;
+      background: url('../images/icons/triangle.svg') no-repeat bottom center;
+    }
+  }
+}
+
+
+.innerList {
+  &-head {
+    padding: 10px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 20px;
+    }
+  }
+  &-name {
+    font-size: 14px;
+    line-height: 140%;
+    text-transform: uppercase;
+  }
+  &-price {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 180%;
+  }
+  &-body {
+    padding: 10px;
+    border-top: 1px solid #E5E5E5;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 20px;
+    }
+    .innerList-name {
+      margin-bottom: 20px;
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      line-height: 140%;
+      margin-bottom: 10px;
+    }
+  }
+}

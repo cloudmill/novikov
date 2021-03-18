@@ -1,0 +1,163 @@
+[
+  {
+    "img": "menu/menu-1.jpg",
+    "name": "Битые азиатские огурцы",
+    "weight": "256 г",
+    "price": "550 ₽",
+    "big": true
+  },
+  {
+    "img": "menu/menu-2.jpg",
+    "name": "Хрустящий тофу ролл",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-3.jpg",
+    "name": "Спринг ролл с овощами и грибами",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-4.jpg",
+    "name": "Тартар из лосося",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-5.jpg",
+    "name": "Азиатский зеленый салат с киноа",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-6.jpg",
+    "name": "Фо бо вьетнамский суп",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-7.jpg",
+    "name": "Морской ёж",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-8.jpg",
+    "name": "Салат из морских водорослей",
+    "weight": "256 г",
+    "price": "590 ₽",
+    "big": true
+  },
+  {
+    "img": "menu/menu-9.jpg",
+    "name": "Суши лосось",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-10.jpg",
+    "name": "Суши тунец акаме (Япония)",
+    "weight": "256 г",
+    "price": "1290 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-11.jpg",
+    "name": "Креветки мед и лайм",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-12.jpg",
+    "name": "Фо бо вьетнамский суп",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-12.jpg",
+    "name": "Морской ёж",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-2.jpg",
+    "name": "Креветки мед и лайм",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-3.jpg",
+    "name": "Морской ёж",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-4.jpg",
+    "name": "Суши лосось",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-5.jpg",
+    "name": "Фо бо вьетнамский суп",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-6.jpg",
+    "name": "Суши тунец акаме (Япония)",
+    "weight": "256 г",
+    "price": "1 290 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-7.jpg",
+    "name": "Морской ёж",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-8.jpg",
+    "name": "Суши лосось",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-9.jpg",
+    "name": "Фо бо вьетнамский суп",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-10.jpg",
+    "name": "Суши тунец акаме (Япония)",
+    "weight": "256 г",
+    "price": "1 290 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-11.jpg",
+    "name": "Креветки мед и лайм",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  }
+]

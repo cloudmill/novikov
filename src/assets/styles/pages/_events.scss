@@ -17,8 +17,9 @@
   &-item {
     text-decoration: none;
     display: block;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 60px;
       &.visible__xs {
         display: none;
       }
@@ -28,15 +29,20 @@
     }
     &-line {
       left: 0;
-      top: 10px;
       position: absolute;
+      @media screen and (min-width: $screen-md-min) {
+        top: 10px;
+      }
     }
     &-logo {
       position: absolute;
       top: 10px;
       right: 10px;
       img {
-        width: 155px;
+        width: 77px;
+        @media screen and (min-width: $screen-md-min) {
+          width: 155px;
+        }
       }
     }
     &-img {
@@ -51,8 +57,11 @@
       margin: 10px 0;
       transition: color .5s;
       @media screen and (min-width: $screen-md-min) {
-        font-size: 21px;
+        font-size: 16px;
         margin: 20px 0;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        font-size: 21px;
       }
     }
     &-date {
@@ -84,12 +93,50 @@
   padding: 0 20px;
   min-height: 60vh;
   .events-item {
-    margin-bottom: 90px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 90px;
+    }
   }
 }
 
 .page-event {
   overflow: hidden;
+
+  .m-auto {
+    padding: 0 20px;
+
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 0;
+    }
+
+    h1 {
+      margin-left: 30px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.showMore {
+  margin-bottom: 80px;
+  @media screen and (min-width: $screen-md-min) {
+    margin-bottom: 160px;
+  }
+
+  a {
+    svg {
+      path {
+        transition: fill .5s;
+      }
+    }
+    &:hover {
+      path {
+        fill: $color-type-2a;
+      }
+    }
+  }
 }
 
 .filter-global {
@@ -105,21 +152,29 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: 74px;
+    width: 50px;
     border-radius: 60px;
     background-color: black;
     transition: all .5s;
+    @media screen and (min-width: $screen-md-min) {
+      width: 74px;
+    }
   }
   li {
-    height: 60px;
+    height: 40px;
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    padding: 10px 10px;
     text-transform: uppercase;
     position: relative;
     z-index: 1;
     transition: color .5s;
     cursor: pointer;
+    white-space: nowrap;
+    @media screen and (min-width: $screen-md-min) {
+      height: 60px;
+      padding: 15px 20px;
+    }
     &.active {
       color: white;
     }

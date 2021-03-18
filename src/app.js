@@ -6,6 +6,7 @@ import AOS from 'aos';
 import Rellax from 'rellax';
 import 'velocity-animate';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min';
+import 'jquery-mousewheel';
 
 $(document).ready(() => {
 	require('Scripts/header');
@@ -18,12 +19,22 @@ $(document).ready(() => {
 	require('Scripts/select');
 	require('Scripts/sliders');
 	require('Scripts/video');
+	require('Scripts/menuMore');
 
 	require('Scripts/backend');
 
 	$('.scrollContent').mCustomScrollbar();
+	if ($('.card.card-scroller').length) {
+		$('*').mousewheel(function(e, delta) {
+			this.scrollLeft -= (delta);
+			if(e) e.preventDefault();
+		});
+	}
+
 });
 
+
+require('Scripts/scroll');
 
 const screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 if (screenWidth <= 767) {
@@ -38,9 +49,9 @@ $(window).on('load', () => {
 		$('.loading').addClass('hideIt');
 		$('body').css('overflow', 'visible');
 
-		AOS.init({ offset: 50 });
+		AOS.init({offset: 50});
 
-		if(process.env.NODE_ENV === 'production') {
+		if (process.env.NODE_ENV === 'production') {
 			window.scrollTo(0, 0);
 		}
 

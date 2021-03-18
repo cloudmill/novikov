@@ -21,6 +21,10 @@ $('.vacancy-block--js').click(function() {
 	$('.overlay').toggleClass('active');
 	return false;
 });
+$('.page-header__cart').click(function() {
+	$('.cart-block').toggleClass('active');
+	return false;
+});
 
 
 $(document).click(function(e) {

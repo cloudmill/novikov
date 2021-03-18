@@ -6,8 +6,12 @@
 // Main container
 //
 .main {
-  min-height: calc(100vh - 103px);
-  padding-top: 103px;
+  padding-top: 60px;
+  min-height: calc(70vh - 60px);
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 103px;
+    min-height: calc(70vh - 103px);
+  }
 }
 
 

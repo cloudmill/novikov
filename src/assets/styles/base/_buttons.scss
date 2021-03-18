@@ -12,13 +12,18 @@
   cursor: pointer;
   text-decoration: none;
   background-image: none;
-  height: 60px;
+  height: 40px;
   transition: all .5s;
   border: 1px solid transparent;
-  @include button-size($padding-base-vertical, $padding-base-horizontal, 14px, $base-line-height, $btn-border-radius-base);
+  @include button-size($padding-base-vertical, $padding-base-horizontal / 2, 14px, $base-line-height, $btn-border-radius-base);
 
   min-width: 160px;
   text-transform: uppercase;
+
+  @media screen and (min-width: $screen-md-min) {
+    height: 60px;
+    @include button-size($padding-base-vertical, $padding-base-horizontal, 14px, $base-line-height, $btn-border-radius-base);
+  }
 
 
   &:hover,
@@ -32,10 +37,13 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 12px;
     padding: 15px 0;
     border-bottom: 1px solid black;
     transition: all .5s;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
     path {
       transition: fill .5s;
     }
@@ -67,8 +75,22 @@
     border: none;
     //border-image-slice: 1;
     border-radius: 70px;
+    transition: background .5s;
     background: linear-gradient(90deg, #EE3A16 0%, rgba(238, 22, 35, 0.12) 40.02%);
     position: relative;
+    &:before {
+      content: '';
+      background: #EE3A16;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1;
+      border-radius: 70px;
+      transition: opacity .5s;
+    }
     &:after {
       content: '';
       background: white;
@@ -78,11 +100,17 @@
       right: 1px;
       position: absolute;
       border-radius: 70px;
-      z-index: 1;
+      z-index: 2;
     }
     span {
       position: relative;
-      z-index: 2;
+      z-index: 3;
+    }
+    &:hover {
+      .add:before,
+      &:before {
+        opacity: 1 !important;
+      }
     }
   }
 
@@ -90,6 +118,7 @@
   &-icon {
     display: inline-flex;
     align-items: center;
+    .burger + span,
     span + svg,
     span + img,
     svg + span,
@@ -102,12 +131,12 @@
   }
   &--default {
     @include button-variant-tr($btn-default-color, $btn-default-bg, $btn-default-border);
-    line {
-      transition: stroke .5s;
+    .burger span {
+      transition: background-color .5s;
     }
     &:hover {
-      line {
-        stroke: white;
+      .burger span {
+        background-color: white;
       }
     }
   }

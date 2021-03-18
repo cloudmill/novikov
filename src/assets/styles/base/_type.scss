@@ -41,23 +41,38 @@ h6 {
 h1, .alpha {
   text-transform: uppercase;
   font-family: $base-font-family-serif;
-  font-size: $font-size-h1;
+  font-size: 18px;
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-h1 * 0.7;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    font-size: $font-size-h1;
+  }
 }
 h2, .beta {
   font-size: 22px;
   @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-h2 * 0.7;
+  }
+  @media screen and (min-width: $screen-lg-min) {
     font-size: $font-size-h2;
   }
 }
 h3, .gamma   {
   text-transform: uppercase;
-  font-size: $font-size-h3;
+  font-size: 16px;
   font-family: $base-font-family-serif;
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-h3;
+  }
 }
 h4, .delta   {
   text-transform: uppercase;
-  font-size: $font-size-h4;
+  font-size: 14px;
   font-family: $base-font-family-serif;
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-h4;
+  }
 }
 h5, .epsilon {
   font-size: $font-size-h5;
@@ -115,8 +130,18 @@ b { font-weight: 400; }
 
 // Text size
 .text__sm { font-size: $font-size-small; }
-.text__md { font-size: $font-size-medium; }
-.text__lg { font-size: $font-size-large; }
+.text__md {
+  font-size: 12px;
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-medium;
+  }
+}
+.text__lg {
+  font-size: 17px;
+  @media screen and (min-width: $screen-md-min) {
+    font-size: $font-size-large;
+  }
+}
 
 
 @if $use-color-text == true {

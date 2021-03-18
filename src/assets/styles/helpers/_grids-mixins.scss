@@ -4,10 +4,15 @@
 
 @mixin container() {
   margin: 0 auto;
-  padding-left: ($grid-gutter-width / 2);
-  padding-right: ($grid-gutter-width / 2);
   width: 100%;
   max-width: $container-xl;
+  padding-left: ($grid-gutter-width / 2);
+  padding-right: ($grid-gutter-width / 2);
+
+  @media screen and (min-width: $screen-md-min) {
+    padding-left: ($grid-gutter-width-md / -2);
+    padding-right: ($grid-gutter-width-md / -2);
+  }
 }
 
 @mixin make-row($gutter: $grid-gutter-width) {

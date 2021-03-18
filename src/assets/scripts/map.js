@@ -247,9 +247,38 @@ function initMapRest() {
 	moveMarker(map);
 }
 
+function initMap() {
+	const markers = [];
+	const mapOptions = {
+		center: new google.maps.LatLng(59.91916157, 30.3251195),
+		zoom: 10,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeControl: false,
+		zoomControl: true,
+		scrollwheel: false,
+		styles: mapStyle,
+	};
+	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
+	const locations = [
+		[59.91701049, 30.31812429, 'assets/images/icons/bubble-1.svg'],
+	];
+	let marker;
+	locations.forEach((item, i) => {
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(item[0], item[1]),
+			icon: item[2],
+			map: map,
+			id: i
+		});
+		markers.push(marker);
+	});
+}
 
 $(function() {
 	if ($('#pvz_map').length) {
 		initMapRest();
+	}
+	if ($('#oneMap').length) {
+		initMap();
 	}
 });

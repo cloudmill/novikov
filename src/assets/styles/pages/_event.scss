@@ -14,7 +14,32 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    @media screen and (min-width: $screen-md-min) {
+      flex-wrap: nowrap;
+      margin-bottom: 40px;
+    }
+    li {
+      width: 60%;
+      margin-left: 40%;
+      margin-bottom: 30px;
+      @media screen and (min-width: $screen-md-min) {
+        width: auto;
+        margin-left: 0;
+        margin-bottom: 0;
+      }
+      &:first-child {
+        width: 80px;
+        margin-left: 0;
+        position: absolute;
+        left: 0;
+        @media screen and (min-width: $screen-md-min) {
+          width: auto;
+          position: static;
+        }
+      }
+    }
 
     .title {
       font-size: 13px;
@@ -33,15 +58,29 @@
   }
 
   &-img {
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 80px;
+    }
     img {
-      border-radius: 0px 60px;
+      border-radius: 0px 30px;
+      @media screen and (min-width: $screen-md-min) {
+        border-radius: 0px 60px;
+      }
     }
   }
 
   &-desc {
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 80px;
+      margin-bottom: 80px;
+      padding-left: 100px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      padding-left: 200px;
+    }
     @media screen and (min-width: $screen-xl-min) {
       padding-left: 360px;
     }
@@ -51,9 +90,13 @@
   }
 
   &-video {
-    margin-top: 80px;
-    margin-bottom: 80px;
     position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 80px;
+      margin-bottom: 80px;
+    }
     svg {
       position: absolute;
       left: 0;
@@ -63,25 +106,44 @@
       cursor: pointer;
       z-index: 2;
       margin: auto;
+      width: 150px;
+      @media screen and (min-width: $screen-md-min) {
+        width: auto;
+      }
     }
   }
 
   &-menu {
-    margin-top: 160px;
+    margin-top: 80px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 160px;
+    }
     h3 {
-      font-size: 40px;
+      font-size: 20px;
       margin-top: 0;
-      margin-bottom: 80px;
+      margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 80px;
+        font-size: 40px;
+      }
     }
     h5 {
       margin-top: 0;
-      font-size: 13px;
-      margin-bottom: 25px;
+      font-size: 11px;
+      margin-bottom: 20px;
       font-family: $base-font-family-serif;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 13px;
+        margin-bottom: 25px;
+      }
     }
     ul {
-      font-size: 16px;
-      margin-bottom: 60px;
+      font-size: 14px;
+      margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 60px;
+        font-size: 16px;
+      }
       > li {
         text-transform: initial;
         margin-bottom: 5px;
@@ -93,10 +155,19 @@
   }
 
   &-tooltip {
-    margin-top: 160px;
-    font-size: 16px;
-    padding: 40px 0;
+    margin-top: 80px;
+    font-size: 12px;
+    padding: 20px 0;
     border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 80px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 160px;
+      margin-bottom: 0;
+      font-size: 16px;
+      padding: 40px 0;
+      border-bottom: none;
+    }
   }
 }
 
@@ -110,15 +181,21 @@ video {
   background:
     url("../images/event/line-1.svg") no-repeat left center / auto 100%,
     url("../images/event/line-2.svg") no-repeat right center / auto 102%;
-  margin-bottom: 160px;
+  margin-bottom: 80px;
+  @media screen and (min-width: $screen-xl-min) {
+    margin-bottom: 160px;
+  }
   &:before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     left: 12px;
-    right: 10px;
+    right: 9px;
     background: black;
+    @media screen and (min-width: $screen-md-min) {
+      right: 10px;
+    }
   }
   &-top {
     z-index: 9;
@@ -127,26 +204,45 @@ video {
     padding-top: 5px;
     h2 {
       margin: 0;
-      font-size: 67px;
+      font-size: 6vw;
       line-height: 1.1;
       display: inline-block;
       font-family: $base-font-family-serif;
       padding-bottom: 10px;
       border-bottom: 1px solid white;
+      @media screen and (min-width: $screen-xl-min) {
+        font-size: 67px;
+      }
     }
   }
   &-body {
     z-index: 9;
-    padding: 80px 0;
+    padding: 40px 0;
     position: relative;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 80px 0;
+    }
     .name {
-      font-size: 20px;
-      padding: 0 180px 40px;
+      font-size: 16px;
+      padding: 0 50px 40px;
       text-transform: uppercase;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 20px;
+        padding: 0 100px 40px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        padding: 0 180px 40px;
+      }
     }
   }
   &-buy {
-    padding: 0 270px;
+    padding: 0 50px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0 100px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 0 270px;
+    }
     a {
       color: white;
       border-color: white;
@@ -191,9 +287,13 @@ video {
   &-date {
     font-size: 16px;
     margin-top: 10px;
+    margin-bottom: 20px;
   }
   &-question {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 60px;
+    }
     &-phone,
     &-title {
       font-size: 20px;
@@ -213,7 +313,10 @@ video {
     }
   }
   &-social {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 60px;
+    }
     &-title {
       font-size: 20px;
       margin-bottom: 20px;
@@ -231,5 +334,11 @@ video {
 }
 
 .page-template {
-  padding-top: 160px;
+  padding-top: 40px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 100px;
+  }
+  @media screen and (min-width: $screen-xl-min) {
+    padding-top: 160px;
+  }
 }

@@ -35,27 +35,45 @@
 
   &-head {
     font-size: 16px;
-    display: flex;
-    align-items: center;
     position: relative;
-    justify-content: space-between;
     width: 100%;
-    padding: 20px 0;
+    padding: 10px 0;
     @media screen and (min-width: $screen-md-min) {
+      display: flex;
+      align-items: center;
       padding: 40px 0;
+      justify-content: space-between;
     }
     &-arr {
       position: absolute;
       right: 0;
+      top: 0;
+      bottom: 0;
+      height: 22px;
+      margin: auto;
     }
     &-name {
-      width: 50%;
+      margin-bottom: 10px;
+      font-size: 16px;
+      @media screen and (min-width: $screen-md-min) {
+        width: 50%;
+        margin-bottom: 0;
+        font-size: 22px;
+      }
     }
     &-type {
-      width: 25%;
+      font-size: 14px;
+      @media screen and (min-width: $screen-md-min) {
+        width: 25%;
+        font-size: 16px;
+      }
     }
     &-city {
-      width: 25%;
+      font-size: 14px;
+      @media screen and (min-width: $screen-md-min) {
+        width: 25%;
+        font-size: 16px;
+      }
     }
 
     svg {

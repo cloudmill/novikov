@@ -1,0 +1,194 @@
+extends ../layouts/master.pug
+
+block header
+  include ../partials/_header.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  main.page-card
+    .card.card-scroller
+      .card-bottom
+        .card-bottom__left
+          a.btn.btn-icon.btn--primary(href='#')
+            svg(width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+              path(d="M17 1C15.8015 1 14.8205 1.98093 14.8205 3.17949C14.8205 4.37803 15.8015 5.35897 17 5.35897C18.1985 5.35897 19.1795 4.37803 19.1795 3.17949C19.1795 1.98093 18.1985 1 17 1ZM17 5.35897C9.20782 5.35897 2.86169 11.5715 2.62901 19.3077H0.435897C0.320294 19.3077 0.209428 19.3537 0.127684 19.4354C0.0459402 19.5171 1.15586e-05 19.628 0 19.7436V23.2308C1.15586e-05 23.3464 0.0459402 23.4573 0.127684 23.539C0.209428 23.6208 0.320294 23.6667 0.435897 23.6667H33.5641C33.6797 23.6667 33.7906 23.6208 33.8723 23.539C33.9541 23.4573 34 23.3464 34 23.2308V19.7436C34 19.628 33.9541 19.5171 33.8723 19.4354C33.7906 19.3537 33.6797 19.3077 33.5641 19.3077H31.371C31.1383 11.5715 24.7922 5.35897 17 5.35897ZM17 6.23077C24.3216 6.23077 30.2685 12.0426 30.4992 19.3077H3.5008C3.73151 12.0426 9.67838 6.23077 17 6.23077ZM0.871795 20.1795H33.1282V22.7949H0.871795V20.1795Z" fill="white")
+              circle(cx="17" cy="3" r="3" fill="#EE1623")
+            span Меню доставки
+          a.btn.btn-icon.btn--default(href='#')
+            svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+              line(x1="4.5" y1="1" x2="4.5" y2="4" stroke="black")
+              line(x1="9.5" y1="1" x2="9.5" y2="4" stroke="black")
+              line(x1="14.5" y1="1" x2="14.5" y2="4" stroke="black")
+              line(x1="19.5" y1="1" x2="19.5" y2="4" stroke="black")
+              rect(x="0.5" y="0.5" width="23" height="23" stroke="black")
+              rect(x="4.5" y="6.5" width="15" height="14" stroke="black")
+              path(d="M8 13.5L11 16.5L16.5 10" stroke="#EE1623")
+            span забронировать стол
+        .card-bottom__right
+          ul.menu
+            li: a.active(href='#about', data-scroll) о ресторане
+            li: a(href='#chief', data-scroll) шеф–повар
+            li: a(href='#event', data-scroll) события
+            li: a(href='#banket', data-scroll) банкет
+            li: a(href='#maps', data-scroll) на карте
+      section#about.section
+        .section-item
+          h1.select-wrapper Bolshoi
+          .card-info-list
+            .card-info-list__item
+              .card-info-list__item-name кухни
+              .card-info-list__item-desc
+                div Европейская
+                div Русская
+            .card-info-list__item
+              .card-info-list__item-name Средний чек
+              .card-info-list__item-desc 3500 ₽
+            .card-info-list__item
+              .card-info-list__item-name посадочных мест
+              .card-info-list__item-desc 150
+          .card-info-adr
+            div: span Москва, ул. Петровка, 3/6, стр. 2
+            div: a(href='tel:84957898652') 8 495 789 86 52
+            div: a(href='www.sitename.ru', target='_blank') sitename.ru
+          .card-info-type
+            .card-info-type__item
+              a(href='#') 3D– тур
+            .card-info-type__item
+              div: a(href='#') Режим работы
+              div: a(href='#') Меню ресторана
+          .card-info-social
+            div: a(href='#') Instagram
+            div: a(href='#') Facebook
+        .section-item
+          .vertical-swiper.swiper-container.vertical-swiper--left
+            .swiper-buttons
+              .swiper-button-prev: +img('card/up.svg')
+              .swiper-button-next: +img('card/down.svg')
+            .swiper-pagination
+            .swiper-wrapper
+              - for (let x = 2; x < 8; x++)
+                .swiper-slide
+                  .image
+                    .logo: +img('card/logo.jpg')
+                    +img('card/slide.jpg')
+        .section-item
+          .row.card-info-text
+            .col.col__xl-7.col__lg-7.col__md-6.col__xs-12
+              h2 Ресторан BOLSHOI — уникальный проект даже для Европы, где трудно удивить кого-либо нестандартной концепцией.
+            .col.col__xl-5.col__lg-5.col__md-6.col__xs-12
+              p Абсолютное новшество и полноправная гордость ресторана кроется в его художественной составляющей. Здесь собрана эксклюзивная коллекция работ современных художников и скульпторов, таких как Дитрих Клинге, Изабель Муньос, Жорж Пузенков, Хуан Эрнандес Пижуан, Пьер Сулаж, Антони Тапиес. Два просторных зала наполнены роскошной мебелью от Ральфа Лорена, приверженца непринужденной элегантности и выверенной до мелочей естественности.
+              p Выполненный в тонах слоновой кости Большой зал ресторана с колоннами являет собой идеальное место для уединенных бесед, деловых обедов, званых ужинов. Более камерный Малый зал сочетает в себе кожаную мебель лимонно-кремового и насыщенного шоколадного цвета, строгое благородство массивных стен из дерева цвета темного бордо и в меру приглушенный свет.
+        .section-item.section-item--lines
+          .row.card-info-text.align__xs
+            .col.col__xl-6.col__lg-6.col__md-6.col__xs-12
+              p Кухню ресторана BOLSHOI отличает принцип высокой гастрономии. Красотой ресторана и атмосферой искусства можно насладиться и во время знаменитого 5 O'Clock-чаепития с 15:00 до 19:00. Предложение действует ежедневно, кроме праздничных дней. В стоимость входит неограниченное количество роскошных десертов и чай.
+              p Каждый вечер воздушное пространство зала наполняют звуки живой музыки. Пианист Сергей Белов, работающий в технике двух клавиатур, играет современные импровизации и салонный джаз.
+              h3 Удаленность от видов столичной суеты, теплые тона в интерьере и мягкий свет создают обволакивающую атмосферу, которая снимает напряжение.
+            .col.col__xl-6.col__lg-6.col__md-6.col__xs-12
+              h3 В ресторане регулярно проводятся торжественные мероприятия по случаю премьер, открытия и закрытия театральных сезонов.
+              p Кроме того, при предъявлении билета в Большой театр России гостям ресторана предоставляют 10%- скидку на ужин после спектакля в день представления. Скидка не распространяется на банкеты свыше 20-ти человек. Владельцы карт Novikov Group получают дополнительную скидку 5%.
+      section#chief.section
+        .section-item
+          .title-vert шеф–повар
+          .row.card-info-chief.between__xs
+            .col.col__lg-6.col__md-6.col__xs-12
+              +img('card/chief-1.jpg')
+            .col.col__lg-5.col__md-6.col__xs-12
+              h6 шеф–повар
+              h4 Абдукадир Азимуродов
+              p Антон Манишин показал свой профессионализм и потенциал в первом проекте Аркадия Новикова в Новосибирске – «Сыроварня», где он занимал должность Су-Шефа с 2018 года.
+              p В 2018 году прошёл обучение в Москве в первом ресторане «Сыроварня» Novikov Group.
+              p Антон Манишин считает, что блюда в меню идеально подходят для повседневного рациона как веганов, любителей ЗОЖ, так и для горожан, которые следят за гастрономическими трендами, бережно относятся к своему здоровью и при этом любят вкусно поесть.
+        .section-item
+          .row.card-info-chief.between__xs
+            .col.col__lg-6.col__md-6.col__xs-12
+              +img('card/chief-2.jpg')
+            .col.col__lg-5.col__md-6.col__xs-12
+              h6 шеф–повар
+              h4 Антон Манишин
+              p Антон Манишин показал свой профессионализм и потенциал в первом проекте Аркадия Новикова в Новосибирске – «Сыроварня», где он занимал должность Су-Шефа с 2018 года.
+              p В 2018 году прошёл обучение в Москве в первом ресторане «Сыроварня» Novikov Group.
+              p Антон Манишин считает, что блюда в меню идеально подходят для повседневного рациона как веганов, любителей ЗОЖ, так и для горожан, которые следят за гастрономическими трендами, бережно относятся к своему здоровью и при этом любят вкусно поесть.
+      section#event.section
+        .section-item
+          .card-info-menu
+            h2.alpha банкет
+            .row
+              .col.col__xl-7.col__lg-7.col__md-7.col__xs-12.card-info-menu-l
+                .row
+                  .col.col__xl-3.col__lg-5.col__md-6.col__xs-12
+                    .card-info-menu__item
+                      .card-info-menu__item-name Максимальная посадка /&nbsp;банкет
+                      .card-info-menu__item-desc 24 чел
+                  .col.col__xl-3.col__lg-5.col__md-6.col__xs-12
+                    .card-info-menu__item
+                      .card-info-menu__item-name Минимальный депозит
+                      .card-info-menu__item-desc 100 000 ₽
+                .row
+                  .col.col__xl-3.col__lg-5.col__md-6.col__xs-12
+                    .card-info-menu__item
+                      .card-info-menu__item-name Максимальная посадка /&nbsp;фуршет
+                      .card-info-menu__item-desc 50 чел
+                  .col.col__xl-4.col__lg-6.col__md-6.col__xs-12
+                    .card-info-menu__item
+                      .card-info-menu__item-name Меню / банкет на человека в зависимости от количества и дня недели
+                      .card-info-menu__item-desc 5000 ₽
+                .mt-auto
+                  +btnLink('Оставить заявку')
+              .col.col__xl-3.col__lg-4.col__md-4.col__xs-12.card-info-menu-r
+                .card-info-menu__ico
+                  +img('card/ico-1.svg')
+                  p Звуковое оборудование
+                .card-info-menu__ico
+                  +img('card/ico-2.svg')
+                  p Плазменный TV
+                .card-info-menu__ico
+                  +img('card/ico-3.svg')
+                  p Паркинг
+                .mt-auto
+                  a(href='#') Полные условия
+        .section-item
+          .vertical-swiper.swiper-container.vertical-swiper--right
+            .swiper-wrapper
+              - for (let x = 2; x < 8; x++)
+                .swiper-slide
+                  .image
+                    +img('card/slide-2.jpg')
+            .swiper-buttons
+              .swiper-button-prev: +img('card/up.svg')
+              .swiper-button-next: +img('card/down.svg')
+            .swiper-pagination
+      section#banket.section
+        .section-item
+          .card-info-event
+            .card-info-event-t
+              h2.alpha События
+              .swiper-buttons
+                .swiper-button-prev: +img('icons/sw-l.svg')
+                .swiper-button-next: +img('icons/sw-r.svg')
+            .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
+              .swiper-wrapper
+                - for (let x = 2; x < 5; x++)
+                  .swiper-slide
+                    a.events-item(href='#')
+                      .events-item-img
+                        .events-item-logo: +img('index/logo-1.jpg')
+                        +img('index/event-1.jpg')
+                      .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
+                      .events-item-date 27.03.2021
+                  .swiper-slide
+                    a.events-item(href='#')
+                      .events-item-img
+                        +img('index/event-2.jpg')
+                      .events-item-title Ресторан savva дарит скидку зрителям большого театра
+                      .events-item-date 27.03.2021
+      section#maps.section
+        .section-item
+          .card-info-map
+            #oneMap
+        .section-item
+          include ../partials/_footer.pug
+
+block footer

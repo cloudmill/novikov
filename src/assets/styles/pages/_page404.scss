@@ -1,24 +1,49 @@
 .page-page404 {
   text-align: center;
-  padding-top: 80px;
-  padding-bottom: 140px;
+  padding-top: 40px;
+  padding-bottom: 80px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 80px;
+    padding-bottom: 140px;
+  }
   &-head {
-    font-size: 400px;
+    font-size: 150px;
     line-height: 0.8;
     text-transform: uppercase;
     font-family: $base-font-family-serif;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 250px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      font-size: 400px;
+    }
   }
   &-desc {
-    font-size: 28px;
+    font-size: 16px;
     line-height: 160%;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 22px;
+      margin-bottom: 80px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      font-size: 28px;
+    }
   }
   &-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    * + * {
-      margin-left: 60px;
+    flex-direction: column;
+    > * {
+      margin-bottom: 30px;
+    }
+    @media screen and (min-width: $screen-md-min) {
+      justify-content: center;
+      flex-direction: row;
+      * + * {
+        margin-left: 60px;
+      }
     }
   }
 }
+

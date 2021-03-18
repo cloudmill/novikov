@@ -1,22 +1,42 @@
 .page-project {
-  padding-top: 160px;
+  padding-top: 40px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 80px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    padding-top: 160px;
+  }
 
   h1 {
     margin-top: 0;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    margin-left: 50px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 80px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-left: 0;
+    }
   }
   h2 {
     font-family: $base-font-family;
     margin-top: 0;
+    @media screen and (max-width: $screen-sm-max) {
+      font-size: 24px;
+    }
+  }
+
+  .swiper-pagination {
+    order: -1;
+    @media screen and (min-width: $screen-md-min) {
+      order: 1;
+    }
   }
 
 }
 
 .projectList {
-  li {
-    font-size: 20px;
-    line-height: 120%;
-    text-transform: uppercase;
+  > li {
     margin-bottom: 15px;
     svg {
       margin-right: 10px;
@@ -24,15 +44,21 @@
         transition: fill .5s;
       }
     }
-    a {
+    > a {
       text-decoration: none;
+      font-size: 16px;
+      line-height: 120%;
+      text-transform: uppercase;
+      @media screen and (min-width: $screen-lg-min) {
+        font-size: 20px;
+      }
     }
     &:hover,
     &.active {
       svg path {
         fill: $color-type-2a;
       }
-      a {
+      > a {
         color: $color-type-2a;
       }
     }
@@ -42,16 +68,44 @@
 .project {
   &-info {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin: 80px 0;
-    padding-right: 160px;
+    margin: 20px 0 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin: 60px 0;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin: 80px 0;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      padding-right: 160px;
+    }
     &__item {
       flex-grow: 2;
-      img {
-        max-width: 160px;
+      padding-right: 10px;
+      width: 50%;
+      @media screen and (min-width: $screen-md-min) {
+        width: auto;
       }
-      &:nth-child(2) {
-        flex-grow: 4;
+      @media screen and (min-width: $screen-lg-min) {
+        padding-right: 0;
+      }
+      img {
+        max-width: 120px;
+        @media screen and (min-width: $screen-lg-min) {
+          max-width: 160px;
+        }
+      }
+      @media screen and (min-width: $screen-md-min) {
+        &:nth-child(2) {
+          flex-grow: 4;
+        }
+      }
+      &:last-child {
+        width: 100%;
+        @media screen and (min-width: $screen-md-min) {
+          width: auto;
+        }
       }
       > * {
         margin-bottom: 8px;
@@ -70,9 +124,16 @@
     h3 {
       text-transform: initial;
       font-family: $base-font-family;
-      font-size: 24px;
-      margin-top: 80px;
+      font-size: 18px;
+      margin-top: 40px;
       margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-top: 60px;
+        font-size: 24px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        margin-top: 80px;
+      }
     }
     h4 {
       text-transform: initial;
@@ -89,7 +150,13 @@
       margin-bottom: 20px;
     }
     .slideshow-swiper {
-      margin-top: 80px;
+      margin-top: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-top: 60px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        margin-top: 80px;
+      }
       .swiper-slide {
         img {
           border-radius: 0px 60px;
@@ -99,19 +166,32 @@
     .swiper {
       &-section {
         margin-bottom: 20px;
-        padding-right: 160px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @media screen and (min-width: $screen-lg-min) {
+          padding-right: 160px;
+        }
       }
       &-buttons {
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        height: 60px;
+        height: 37px;
+        @media screen and (min-width: $screen-lg-min) {
+          height: 60px;
+        }
+        img {
+          height: 37px;
+          @media screen and (min-width: $screen-lg-min) {
+            height: 60px;
+          }
+        }
+        .swiper-button-prev {
+          margin-right: 20px;
+        }
         > * {
           position: static;
-          margin-right: 20px;
         }
       }
       &-pagination {

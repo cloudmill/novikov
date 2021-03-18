@@ -1,9 +1,25 @@
 .page-search {
-  padding-top: 160px;
-  padding-bottom: 160px;
+  padding: 40px 10px;
+  @media screen and (min-width: $screen-md-min) {
+    padding: 80px 20px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    padding: 160px 0;
+  }
   h1 {
     margin-top: 0;
-    margin-bottom: 80px;
+    margin-left: 30px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-lg-min) {
+      margin-left: 0;
+      margin-bottom: 80px;
+    }
+  }
+  .text__lg {
+    font-size: 14px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 22px;
+    }
   }
 }
 
@@ -14,6 +30,7 @@
     .control {
       text-transform: uppercase;
       font-weight: 400;
+      font-size: 14px;
     }
     button {
       right: 0;
@@ -25,17 +42,32 @@
     }
   }
   &-list {
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 80px;
+      margin-bottom: 80px;
+    }
     &__item {
       display: flex;
-      padding: 20px 0;
+      flex-wrap: wrap;
+      padding: 10px 0;
       border-top: 1px solid #E5E5E5;
+      @media screen and (min-width: $screen-md-min) {
+        padding: 20px 0;
+      }
       &-name {
-        width: calc(100% - 260px);
-        padding-right: 100px;
+        width: 100%;
         display: block;
         transition: color .5s;
+        @media screen and (min-width: $screen-md-min) {
+          width: calc(100% - 200px);
+          padding-right: 50px;
+        }
+        @media screen and (min-width: $screen-lg-min) {
+          width: calc(100% - 260px);
+          padding-right: 100px;
+        }
         &:hover {
           color: $color-type-2a;
         }
@@ -44,15 +76,27 @@
         }
       }
       &-cat {
-        width: 260px;
-        font-size: 13px;
+        width: 100%;
+        font-size: 11px;
+        margin-top: 12px;
         font-family: $base-font-family-serif;
         text-transform: uppercase;
+        @media screen and (min-width: $screen-md-min) {
+          width: 200px;
+          margin-top: 0;
+          font-size: 13px;
+        }
+        @media screen and (min-width: $screen-lg-min) {
+          width: 260px;
+        }
         a {
-          font-size: 14px;
+          font-size: 11px;
           margin-left: 10px;
           font-family: $base-font-family;
           border-bottom: 1px solid black;
+          @media screen and (min-width: $screen-md-min) {
+            font-size: 14px;
+          }
         }
       }
     }

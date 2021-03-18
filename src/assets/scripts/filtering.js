@@ -6,7 +6,7 @@ function filterLogic(value, elem) {
 	let filterList;
 	list.velocity({
 		opacity: 0,
-		translateY: '20px',
+		// translateY: '20px',
 	},
 	{
 		display: 'none'

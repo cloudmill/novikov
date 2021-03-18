@@ -1,30 +1,80 @@
 .page-order {
-  padding-top: 100px;
-  padding-bottom: 80px;
+  padding-top: 40px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
   h1 {
     margin-top: 0;
-    margin-bottom: 80px;
+    margin-left: 50px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 80px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      width: 75%;
+      margin-left: 0;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      width: auto;
+    }
   }
   .back-link {
     position: absolute;
     left: 20px;
     top: 160px;
+    display: none;
+    @media screen and (min-width: $screen-lg-min) {
+      display: block;
+    }
+  }
+  &-menu {
+    background: #F6F6F6;
+    h1 {
+      margin-left: 0;
+    }
+    .back-link {
+      position: static;
+      margin-left: 10px;
+      margin-bottom: 20px;
+      display: block;
+      @media screen and (min-width: $screen-lg-min) {
+        position: absolute;
+        left: 20px;
+        top: 160px;
+      }
+    }
   }
 
   &--finish {
+    min-height: 55vh;
     background: #F6F6F6;
-    min-height: 78vh;
+    padding-bottom: 80px;
+    @media screen and (min-width: $screen-xl-min) {
+      min-height: 78vh;
+    }
     h1 {
+      margin-left: 0;
       margin-bottom: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-left: 50px;
+      }
     }
     h3 {
-      font-size: 30px;
+      font-size: 14px;
       margin-top: 0;
       margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 30px;
+      }
     }
     p {
-      font-size: 20px;
-      margin-bottom: 100px;
+      margin-bottom: 80px;
+      font-size: 14px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 20px;
+        margin-bottom: 100px;
+      }
       b {
         font-weight: 600;
       }
@@ -34,7 +84,10 @@
 
 #map {
   width: 100%;
-  height: 510px;
+  height: 480px;
+  @media screen and (min-width: $screen-md-min) {
+    height: 510px;
+  }
 }
 
 .select2-container {
@@ -44,20 +97,35 @@
 .order {
   &-wrapper {
     max-width: 800px;
-    width: 79%;
+    padding: 0 10px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0 20px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 0;
+      width: 75%;
+    }
     @media screen and (min-width: $screen-xl-min) {
       width: auto;
     }
 
     h3 {
-      font-size: 24px;
+      font-size: 14px;
       margin-top: 0;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 40px;
+        font-size: 24px;
+      }
     }
     &__item {
-      margin-bottom: 80px;
+      margin-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 80px;
+      }
 
       .tab-content {
+        .input,
         .control {
           max-width: 160px;
         }
@@ -67,12 +135,16 @@
         display: flex;
         align-items: center;
         .tab {
-          margin-right: 40px;
           border-bottom: 1px solid transparent;
           transition: border-color .5s;
-          margin-bottom: 40px;
+          margin-right: 20px;
+          margin-bottom: 20px;
           padding-bottom: 5px;
           cursor: pointer;
+          @media screen and (min-width: $screen-md-min) {
+            margin-bottom: 40px;
+            margin-right: 40px;
+          }
           h3 {
             margin-bottom: 0;
           }
@@ -111,7 +183,9 @@
   }
   &-payment {
     position: relative;
-    padding-bottom: 25px;
+    @media screen and (min-width: $screen-md-min) {
+      padding-bottom: 25px;
+    }
     &-not {}
     &-fill {
       display: none;
@@ -167,5 +241,235 @@
   transition: opacity .5s;
   &.active {
     opacity: 1;
+  }
+}
+
+.order-menu {
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  @media screen and (min-width: $screen-md-min) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    padding-right: 300px;
+  }
+
+  &-menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 -10px;
+    &__item {
+      width: 100%;
+      margin: 0 0 30px;
+      padding: 0 10px;
+      @media screen and (min-width: $screen-md-min) {
+        width: calc(100% / 3);
+        margin: 0 0 40px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        margin: 0 0 60px;
+      }
+      @media screen and (min-width: $screen-xl-min) {
+        width: calc(100% / 5);
+        &:nth-child(5),
+        &:nth-child(6),
+        &:nth-child(7),
+        &:nth-child(8) {
+          margin-top: -10vw;
+        }
+        &:nth-child(5),
+        &:nth-child(6),
+        &:nth-child(7) {
+          align-self: flex-end;
+        }
+        &--big {
+          width: calc(100% / 2.5);
+        }
+      }
+      &-desc {
+        @media screen and (min-width: $screen-xl-min) {
+          min-height: 99px;
+        }
+      }
+      &-img {
+        position: relative;
+        img {
+          border-radius: 20px 0px;
+        }
+      }
+      &-name {
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 140%;
+        text-transform: uppercase;
+      }
+      &-weight {
+        font-size: 14px;
+        line-height: 160%;
+        color: #9C9C9C;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+      &-price {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 140%;
+        text-transform: uppercase;
+      }
+      &-add {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        bottom: -10px;
+        transition: all .5s;
+        &:hover {
+          transform: scale(1.2) rotate(180deg);
+        }
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  &-info {
+    margin-bottom: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 40px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-bottom: 60px;
+      margin-top: 70px;
+    }
+    img {
+      max-width: 80px;
+      right: 10px;
+      top: -40px;
+      position: absolute;
+      @media screen and (min-width: $screen-md-min) {
+        max-width: 150px;
+        position: static;
+      }
+    }
+  }
+  &-name {
+    font-size: 11px;
+    line-height: 120%;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: $base-font-family-serif;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+  }
+  &-list {
+    line-height: 160%;
+    font-size: 14px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 20px;
+    }
+  }
+  &-adr {
+    div {
+      font-size: 14px;
+      line-height: 160%;
+      display: inline;
+      border-bottom: 1px solid black;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 20px;
+      }
+    }
+  }
+  &-noti {
+    font-size: 14px;
+    line-height: 160%;
+    display: inline-block;
+    margin-top: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      margin-top: 0;
+    }
+  }
+}
+.order-list {
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid #E5E5E5;
+  @media screen and (min-width: $screen-lg-min) {
+    padding: 30px 0;
+  }
+}
+.auto-nav-more {
+  position: relative;
+  &:hover .auto-nav-more-list {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.auto-nav-more-list {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+  text-align: right;
+  padding: 0;
+  z-index: 99;
+  list-style: none;
+  background: white;
+  padding: 10px;
+  a {
+    color: black !important;
+    &:hover {
+      color: $color-type-2a !important;
+    }
+  }
+}
+
+.order-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  li {
+    margin: 0 10px;
+    font-size: 14px;
+    line-height: 140%;
+    text-transform: uppercase;
+    padding: 10px 0;
+    white-space: nowrap;
+    border-bottom: 1px solid transparent;
+    transition: border-color .5s;
+    @media screen and (min-width: $screen-lg-min) {
+      margin: 0 30px;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover,
+    &.active {
+      border-color: $color-type-2a;
+      a {
+        color: $color-type-2a;
+      }
+    }
+  }
+
+  .more-btn {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-left: 10px;
+    }
   }
 }

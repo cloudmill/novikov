@@ -9,6 +9,7 @@ $baseColor: #0A0A0A;
 //
 .page-footer {
   color: white;
+  overflow: hidden;
   background: $baseColor;
   &-top {
     padding: 20px 0;

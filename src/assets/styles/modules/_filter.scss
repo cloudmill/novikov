@@ -1,8 +1,32 @@
 .filter {
+  overflow-x: auto;
+  @media screen and (min-width: $screen-md-min) {
+    overflow-x: visible;
+  }
   &-item {
-    margin-left: 60px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 0;
+      margin-right: 0;
+      margin-left: 60px;
+    }
     &--main {
       margin-left: auto;
+    }
+    .select2.select2-container {
+      width: 160px !important;
+      margin-left: 20px;
+      &.select2-container--default .select2-selection--single {
+        padding-bottom: 10px;
+        @media screen and (min-width: $screen-md-min) {
+          padding-bottom: 20px;
+        }
+      }
+      @media screen and (min-width: $screen-md-min) {
+        width: 200px !important;
+        margin-left: 0;
+      }
     }
   }
   &-checkbox {
@@ -36,7 +60,26 @@
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 80px;
-  margin-top: 80px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  @media screen and (min-width: $screen-md-min) {
+    margin-bottom: 40px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    flex-wrap: nowrap;
+    margin-bottom: 80px;
+    margin-top: 80px;
+  }
+  .filter {
+    margin-bottom: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      width: 100%;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      width: auto;
+      margin-bottom: 0;
+    }
+  }
 }

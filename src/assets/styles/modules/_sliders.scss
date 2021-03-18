@@ -112,7 +112,7 @@
 .carousel-swiper-img,
 .carousel-swiper {
   .swiper-slide {
-    width: 90%;
+    width: 85%;
     @media screen and (min-width: $screen-md-min) {
       width: 530px;
     }
@@ -120,7 +120,10 @@
 }
 .carousel-swiper-logo {
   .swiper-slide {
-    width: 250px;
+    width: 220px;
+    @media screen and (min-width: $screen-md-min) {
+      width: 250px;
+    }
   }
 }
 
@@ -139,11 +142,17 @@
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 12px;
+    @media screen and (min-width: $screen-md-min) {
+      font-size: 18px;
+    }
     span {
-      font-size: 30px;
-      ont-weight: 400;
+      font-size: 20px;
+      font-weight: 400;
       font-family: $base-font-family-serif;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 30px;
+      }
     }
     img {
       margin: 0 10px;
@@ -155,7 +164,7 @@
   > div {
     width: 58px;
     height: 37px;
-    @media screen and (min-width: $screen-md-min) {
+    @media screen and (min-width: $screen-lg-min) {
       width: 92px;
       height: 60px;
     }
