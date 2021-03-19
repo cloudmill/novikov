@@ -1,6 +1,7 @@
 $(function() {
     restaurantsFilter();
     showMore();
+    selectProject();
 });
 
 function restaurantsFilter() {
@@ -33,7 +34,38 @@ function showMore() {
                     itemsContainer.append(itemsResponse);
                     itemsContainer.after(pagenavResponse);
                 }
-            })
+            });
         }
+    });
+}
+
+function selectProject() {
+    $(document).on('click', '[data-type=select_project]', function (e) {
+        e.preventDefault();
+
+        let container = $(this).parents('[data-type=main_container]'),
+            projectId = $(this).attr('data-id'),
+            projectListContainer = container.find('[data-type=project_list_container]'),
+            projectItemContainer = container.find('[data-type=item_container]'),
+            selectProject = $(this).parents('[data-type=select_project_style]'),
+            url = window.location.href;
+
+        selectProject.addClass('active').siblings().removeClass('active');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'html',
+            data: {
+                projectId: projectId,
+            },
+            success: function (data) {
+                projectItemContainer.remove();
+
+                let projectItemContainerResponse = $(data).find('[data-type=item_container]');
+                
+                projectListContainer.after(projectItemContainerResponse);
+            }
+        });
     });
 }
