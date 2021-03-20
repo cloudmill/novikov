@@ -144,7 +144,8 @@ $('.input__file-close').on('click', function() {
 $('.form--js').on('click', function(e) {
 	e.preventDefault();
 
-	// const path = window.location.pathname.split('/');
+	const path = window.location.pathname.split('/');
+	const container = $(this).parents('[data-type=container_vacancy_form]');
 
 	// валидация каждого поля формы
 	const result = [];
@@ -165,37 +166,52 @@ $('.form--js').on('click', function(e) {
 	const name = form.find('input[name=name]');
 	const email = form.find('input[name=email]');
 	const phone = form.find('input[name=phone]');
-	const message = form.find('textarea[name=content]');
+	const text = form.find('textarea[name=desc]');
 	const type = form.attr('data-type-title');
+	const file = form.find('input[name=file]');
 	const curForm = $(this);
-	const url = '.php';
-	const data = {
-		name: name.val(),
-		email: email.val(),
-		text: message.val(),
-		phone: phone.val(),
-		type: type,
-	};
 
-	// AJAX
-	$.ajax({
-		type: 'POST',
-		url: url,
-		dataType: 'json',
-		data: data,
-		success: function(a) {
-			if (a.success === true) {
-				// открытие формы ответа
-				// контакты
-				const mediaQuery = matchMedia('(min-width: 1024px)');
-				if (mediaQuery.matches) {
-					curForm.closest('.form-inner').css('visibility', 'hidden').css('opacity', 0).next().slideDown(500).css('display', 'flex');
-				} else {
-					curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
+	let url = null,
+		data = null;
+		
+	if (path[1] == 'vacancies') {
+		url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
+		data = new FormData();
+		data.append('UF_NAME', name.val());
+		data.append('UF_MAIL', email.val());
+		data.append('UF_TEXT', text.val());
+		data.append('UF_PHONE', phone.val());
+		data.append('UF_TYPE', type);
+		data.append('UF_VACANCY_NAME', container.attr('data-vacancy-name'));
+		data.append('UF_VACANCY_RESTAURANT', container.attr('data-vacancy-restaurant'));
+		data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
+		data.append('file', file[0].files[0]);
+
+		console.log(data);
+	}
+
+	if (url !== undefined) {
+		$.ajax({
+			type: 'POST',
+			url: url,
+			dataType: 'json',
+			data: data,
+			contentType: false,
+			processData: false,
+			success: function(a) {
+				if (a.success === true) {
+					// открытие формы ответа
+					// контакты
+					const mediaQuery = matchMedia('(min-width: 1024px)');
+					if (mediaQuery.matches) {
+						curForm.closest('.form-inner').css('visibility', 'hidden').css('opacity', 0).next().slideDown(500).css('display', 'flex');
+					} else {
+						curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
+					}
 				}
 			}
-		}
-	});
+		});
+	}
 });
 
 $('.promo--js').change(function() {
