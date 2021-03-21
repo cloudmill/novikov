@@ -16,7 +16,8 @@ block content
           include ../components/_prev
           span Вернуться
       .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-        h1.select-wrapper оформление заказа
+        h1.select-wrapper
+          +wrapTitle(['оформление', 'заказа'])
         .order-wrapper(data-aos='fade-up')
           .order-wrapper__item
             h3 контактные данные

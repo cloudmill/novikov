@@ -63,18 +63,32 @@
 .textLiner {
   width: 100%;
   height: 25px;
+  img {
+    height: 25px;
+    max-width: inherit;
+  }
   margin: 50px 0 60px;
-  background: url("../images/textliner.svg") no-repeat center / auto 100%;
+  //background: url("../images/textliner.svg") no-repeat center / auto 100%;
   @media screen and (min-width: $screen-md-min) {
     margin: 50px 0 120px;
     height: 50px;
+    img {
+      height: 50px;
+    }
   }
   @media screen and (min-width: $screen-lg-min) {
+    margin: 120px 0;
     height: 85px;
+    img {
+      height: 85px;
+    }
   }
   @media screen and (min-width: $screen-xl-min) {
-    background: url("../images/textliner.svg") no-repeat center;
+    //background: url("../images/textliner.svg") no-repeat center;
     height: 115px;
+    img {
+      height: 115px;
+    }
   }
 }
 
@@ -114,7 +128,7 @@
       margin-right: 40px;
       white-space: nowrap;
       border-bottom: 1px solid transparent;
-      transition:  border-color .5s;
+      @include transitionEase(border-color);
       cursor: pointer;
       &:hover,
       &.active {
@@ -131,6 +145,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      top: -60px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      top: -120px;
     }
     > * {
       position: static;
@@ -145,19 +163,25 @@
 }
 
 .main-about {
-  background: url("../images/index/N.svg") no-repeat left bottom / 80% auto;
+  //background: url("../images/index/N.svg") no-repeat left bottom / 80% auto;
   position: relative;
   margin-bottom: 60px;
   @media screen and (min-width: $screen-md-min) {
     margin-bottom: 80px;
-    background: url("../images/index/N.svg") no-repeat left bottom;
+    //background: url("../images/index/N.svg") no-repeat left bottom;
     margin-bottom: 100px;
   }
   @media screen and (min-width: $screen-lg-min) {
     margin-bottom: 180px;
   }
+  &__back {
+    position: absolute;
+    left: 0;
+  }
   &-badge {
     margin-left: 20px;
+    width: 257px;
+    height: 22px;
   }
   &-title {
     font-size: 60px;
@@ -178,7 +202,7 @@
       color: $color-type-2a;
       font-family: $base-font-family;
       font-weight: 300;
-      span {
+      .span {
         font-family: $base-font-family-serif;
       }
     }

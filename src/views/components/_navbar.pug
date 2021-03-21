@@ -1,5 +1,6 @@
 nav.navbar
-  button.header-menu--js.btn.btn-icon.btn--default
+  button.header-menu--js.btn.btn-icon.btn--default.ui-button-circle-icon
     +img('icons/cross.svg')
-    span Меню
+    span.ui-button-circle-icon__label-wr(data-text='Меню')
+      span.ui-button-circle-icon__label Меню
   +menu(menu)

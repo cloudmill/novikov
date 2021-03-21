@@ -13,7 +13,7 @@
   text-decoration: none;
   background-image: none;
   height: 40px;
-  transition: all .5s;
+  @include transitionEase();
   border: 1px solid transparent;
   @include button-size($padding-base-vertical, $padding-base-horizontal / 2, 14px, $base-line-height, $btn-border-radius-base);
 
@@ -39,17 +39,22 @@
     text-decoration: none;
     font-size: 12px;
     padding: 15px 0;
-    border-bottom: 1px solid black;
-    transition: all .5s;
+    //border-bottom: 1px solid black;
+    //@include transitionEase();
+    &.lead {
+      &:after {
+        bottom: 0;
+      }
+    }
     @media screen and (min-width: $screen-md-min) {
       font-size: 16px;
     }
     path {
-      transition: fill .5s;
+      @include transitionEase(fill);
     }
     &:hover {
       color: $color-type-2a;
-      border-color: $color-type-2a;
+      //border-color: $color-type-2a;
       path.arr {
         fill: $color-type-2a;
       }
@@ -75,7 +80,7 @@
     border: none;
     //border-image-slice: 1;
     border-radius: 70px;
-    transition: background .5s;
+    @include transitionEase(background);
     background: linear-gradient(90deg, #EE3A16 0%, rgba(238, 22, 35, 0.12) 40.02%);
     position: relative;
     &:before {
@@ -89,7 +94,7 @@
       opacity: 0;
       z-index: 1;
       border-radius: 70px;
-      transition: opacity .5s;
+      @include transitionEase(opacity);
     }
     &:after {
       content: '';
@@ -132,7 +137,7 @@
   &--default {
     @include button-variant-tr($btn-default-color, $btn-default-bg, $btn-default-border);
     .burger span {
-      transition: background-color .5s;
+      @include transitionEase(background-color);
     }
     &:hover {
       .burger span {

@@ -1,0 +1,144 @@
+.vacancy-block.vacancy-block--thin.time-block--js
+  .close.vacancy-block--js
+    svg(width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg")
+      rect(width="80" height="80" fill="black")
+      rect(x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white")
+      rect(x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white")
+  .time-block.scrollContent
+    .row
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Время работы
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          .time-block__desc__item
+            p Пн—Пт
+            span с 08:00 до последнего гостя
+          .time-block__desc__item
+            p Сб—Вс
+            span с 12:00 до последнего гостя
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Завтраки
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          .time-block__desc__item
+            p Пн—Пт
+            span с 08:00 до 12:00*
+            span Кроме празничных дней
+          .time-block__desc__item
+            small *Скидочная карта Novikov Group не распространяется на меню завтраков
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name 5 o"clock tea
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          .time-block__desc__item
+            p Ежедневно
+            span с 15:00 до 19:00
+            span Кроме праздничных дней
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Принимаем к оплате
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          +img('card.svg')
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Cкидка 20% на все меню
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          p Пн–Пт
+          span с 15:00 до 19:00
+          span Кроме праздничных дней
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Cкидка 10%
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          p Скидка 10% предъявителю билета в день посещения Большого театра после спектакля.
+          span Не принимаются карты программы лояльности Novikov Group при оплате специальных мероприятий и банкетов от 20 человек
+          span Не принимаются карты Аэрофлот Бонус к оплате баллами и накоплению баллов
+          span Вход гостей с животными не предполагается
+
+
+.vacancy-block.vacancy-block--thin.type-block--js
+  .close.vacancy-block--js
+    svg(width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg")
+      rect(width="80" height="80" fill="black")
+      rect(x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white")
+      rect(x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white")
+  .time-block.scrollContent
+    .row
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Кухня
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          ul.list--bullet.list--bullet--bl
+            li Азербайджанская
+            li Европейская
+            li Японская
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Дополнительные услуги
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          ul.list--bullet.list--bullet--bl
+            li Торт на заказ
+            li Специальное предложение на вина
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__name Вместимость
+      .col.col__md-6.col__xs-12.time-block-item
+        .time-block__desc
+          .time-block__desc__item
+            ul.list--bullet.list--bullet--bl
+              li Веранда — 100 человек
+              li Основной зал — 80–100 человек
+              li Банкетный зал — 30–40 человек
+              li Шатер (только в летний период) — 100–150 человек
+
+.vacancy-block.reserve-block--js
+  .close.vacancy-block--js
+    svg(width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg")
+      rect(width="80" height="80" fill="black")
+      rect(x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white")
+      rect(x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white")
+  .form-main
+    h3 Забронировать
+    .tab-container.order-wrapper__item(data-aos='fade-up')
+      .tabs
+        .tab.active(data-toggle-target=".tab-content-1") стол
+        .tab(data-toggle-target=".tab-content-2") банкет
+      .tab-content.tab-content-1.active
+        form(method='POST', action='')
+          .form__group: +fieldInput('text', 'name', 'name-r', '', 'Имя*', true)
+          .form__group: +fieldInput('text', 'phone', 'phone-r', '', 'Номер телефона', false)
+          .form__group: +fieldInput('email', 'email', 'email-r', '', 'E–mail*', true)
+          .form__group: +fieldInput('text', 'count', 'count-r', '', 'Количество человек*', true)
+          .order-date.row.form__group
+            .col.col__xs-6
+              +fieldInput('text', 'date', 'date-r', '', 'Дата', true)
+            .col.select-wrapper.col__xs-6
+              select.select-template(style='width: 100%')
+                option(value='11') 11:00
+                option(value='12') 12:00
+                option(value='13') 13:00
+          .form__group: +fieldInput('text', 'text', 'text-r', '', 'Пожелания к броне', false)
+          .mt-auto
+            .form__group.checkbox
+              input(type="checkbox", id='signIt-r', required)
+              label(for='signIt-r')
+                | Даю согласание на обработку #[a(href='#') персональных данных]
+                .control-error
+            .form--js: +btnLink('Отправить')
+      .tab-content.tab-content-2
+        form(method='POST', action='')
+          .form__group: +fieldInput('text', 'name', 'name-r2', '', 'Имя*', true)
+          .form__group: +fieldInput('text', 'phone', 'phone-r2', '', 'Номер телефона', false)
+          .form__group: +fieldInput('email', 'email', 'email-r2', '', 'E–mail*', true)
+          .form__group: +fieldInput('text', 'dates', 'dates-r2', '', 'Желаемые даты банкета', false)
+          .mt-auto
+            .form__group.checkbox
+              input(type="checkbox", id='signIt-r2', required)
+              label(for='signIt-r2')
+                | Даю согласание на обработку #[a(href='#') персональных данных]
+                .control-error
+            a.btn-link.btn-icon.form--js.lead(href='#')
+              span Отправить
+              include ../components/_next
+  .form-back
+    h3 заявка отправлена
+    p.text__md Мы получили вашу заявку. Наш специалист свяжется с вами в ближайшее время.

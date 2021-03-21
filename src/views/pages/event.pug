@@ -13,7 +13,8 @@ block content
         .sidebar-inner
           .template-date 10.12.2020
       section.section(data-aos='fade-up')
-        h1.select-wrapper Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
+        h1.select-wrapper
+          +wrapTitle(['Долгожданная', 'премьера', 'эксклюзивных', 'вин', 'проекта', 'Taste', 'Wine', 'Selection', 'of', 'Fine', 'Wines'])
         .event-tag Дегустации
         ul.event-list(data-aos='fade-up')
           li
@@ -30,18 +31,19 @@ block content
             .title стоимость
             p 6 000 ₽
     .with-aside.event.with-aside--last
-      aside.sidebar.text__xl--left.text__md--center(data-aos='fade-up')
-        .sidebar-inner
-          .template-question
-            .template-question-title Задать вопрос
-            a.template-question-phone(href='mailto:89850020189') 8 (985) 002 01 89
-            .template-question-info Звонки принимаются до 20:00
-          .template-social
-            .template-social-title поделиться
-            .template-social-list
-              div: a(href='#') Вконтакте
-              div: a(href='#') Facebook
-          +btnLink('Задать вопрос')
+      aside.sidebar.text__xl--left.text__md--center(data-sticky-container)
+        .sticky(data-margin-top="100")
+          .sidebar-inner(data-aos='fade-up')
+            .template-question
+              .template-question-title Задать вопрос
+              a.template-question-phone(href='mailto:89850020189') 8 (985) 002 01 89
+              .template-question-info Звонки принимаются до 20:00
+            .template-social
+              .template-social-title поделиться
+              .template-social-list
+                div: a(href='#') Вконтакте
+                div: a(href='#') Facebook
+            +btnLink('Задать вопрос')
       section.section(data-aos='fade-up')
         .event-img: +img('event/main.jpg')
         .event-desc(data-aos='fade-up')
@@ -105,7 +107,7 @@ block content
               .row.bottom__xs
                 .col.col__md-6.col__xs-12
                   .ticket-buy-title итого
-                  .ticket-buy-price 10 000 ₽
+                  .ticket-buy-price.summ--js(data-pr='5000') #[span 10 000] ₽
                 .col.col__md-6.col__xs-12
                   +btnLink('Купить билет')
     .list-discount(data-aos='fade-up')

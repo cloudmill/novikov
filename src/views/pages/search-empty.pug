@@ -9,7 +9,7 @@ block pageName
 block content
   main.page-search
     .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-      h1.select-wrapper Результаты поиска
+      h1.select-wrapper: +wrapTitle(['Результаты', 'поиска'])
       form(action='', method='POST')
         .search-input
           input.control(type='text', value='ресторан')

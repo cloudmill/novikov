@@ -5,7 +5,6 @@ document.addEventListener(
 	() => {
 		// eslint-disable-next-line no-unused-vars
 		const scroller = new SweetScroll({
-			// vertical: true,
 			horizontal: true,
 			before: (e, nav) => {
 			  $('.menu a').removeClass('active');
@@ -15,3 +14,4 @@ document.addEventListener(
 	},
 	false,
 );
+

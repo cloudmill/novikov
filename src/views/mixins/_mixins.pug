@@ -6,12 +6,21 @@ mixin menu(items)
   ul.main-nav
     each item in items
       li.main-nav__item
-        a.main-nav__link(href=item.href, title=item.title)= item.title
+        a.main-nav__link.wrapTitle(href=item.href, title=item.title)
+          span.word-wrap
+            span= item.title
 
 mixin btnLink(text)
-  a.btn-link.btn-icon(href='#')
+  a.btn-link.btn-icon.lead(href='#')
     span= text
     include ../components/_next
+
+mixin wrapTitle(text)
+  .wrapTitle(data-aos)
+    each item in text
+      span.word-wrap
+        span=item
+          |&nbsp;
 
 //- form-input
 mixin fieldInput(type, name, id, placeholder, label, required, className)

@@ -1,0 +1,172 @@
+.ui-button-circle-icon {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  border-radius: 27px;
+  transition: border-color .3s
+}
+
+@media (min-width: 80em) {
+  .ui-button-circle-icon {
+    font-size: 16px
+  }
+}
+
+
+
+.ui-button-circle-icon.-on-bg-light {
+  border: 1px solid rgba(0, 0, 0, .2);
+  background-color: #fff
+}
+
+.ui-button-circle-icon.-on-bg-dark {
+  border: 1px solid hsla(0, 0%, 100%, .2);
+  background-color: #000
+}
+
+.ui-button-circle-icon.-on-bg-light:hover, .ui-button-circle-icon.-on-bg-light.is-active {
+  border: 1px solid rgba(0, 0, 0, .5)
+}
+
+.ui-button-circle-icon.-on-bg-dark:hover, .ui-button-circle-icon.-on-bg-dark.is-active {
+  border: 1px solid hsla(0, 0%, 100%, .5)
+}
+
+.ui-button-circle-icon__label-wr {
+  display: inline-block;
+  position: relative
+}
+
+.ui-button-circle-icon__label-wr:after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  line-height: 40px;
+  padding-left: calc(26px - .5em);
+  padding-right: calc(25px - .5em);
+  opacity: 0;
+  color: #000;
+  transform: translateY(25%)
+}
+.btn--default {
+  .ui-button-circle-icon__label-wr:after {
+    color: #fff;
+  }
+}
+
+@media (min-width: 80em) {
+  .ui-button-circle-icon__label-wr:after {
+    line-height: 50px;
+    padding-left: calc(35px - .5em);
+    padding-right: calc(25px - .5em)
+  }
+}
+
+.ui-button-circle-icon.-on-bg-light {
+  color: #000
+}
+
+.ui-button-circle-icon.-on-bg-dark {
+  color: #fff
+}
+
+.ui-button-circle-icon:hover .ui-button-circle-icon__label-wr:after, .ui-button-circle-icon.is-active .ui-button-circle-icon__label-wr:after {
+  transition: transform .6s, opacity .6s;
+  opacity: 1;
+  transform: translateY(0)
+}
+
+.ui-button-circle-icon__label {
+  display: inline-block;
+  position: relative;
+  padding-left: calc(26px - .5em);
+  padding-right: calc(25px - .5em);
+  height: 40px;
+  line-height: 40px
+}
+
+@media (min-width: 80em) {
+  .ui-button-circle-icon__label {
+    padding-left: calc(35px - .5em);
+    padding-right: calc(25px - .5em);
+    height: 50px;
+    line-height: 50px
+  }
+}
+
+.ui-button-circle-icon:hover .ui-button-circle-icon__label, .ui-button-circle-icon.is-active .ui-button-circle-icon__label {
+  transition: transform .6s, opacity .6s;
+  opacity: 0;
+  transform: translateY(-25%)
+}
+
+.ui-button-circle-icon__label-wr {
+  overflow: hidden;
+  transition: max-width .6s
+}
+
+.ui-button-circle-icon.-shrinked:not(.-secondary-state) .ui-button-circle-icon__label-wr {
+  max-width: 0
+}
+
+.ui-button-circle-icon.-shrinked:hover .ui-button-circle-icon__label-wr {
+  max-width: 150px
+}
+
+.ui-button-circle-icon__icons-wr {
+  position: relative;
+  width: 40px;
+  height: 40px
+}
+
+@media (min-width: 80em) {
+  .ui-button-circle-icon__icons-wr {
+    width: 50px;
+    height: 50px
+  }
+}
+
+.ui-button-circle-icon__icon-wr {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.ui-button-circle-icon__icon-wr svg {
+  fill: #fff;
+  width: 20px;
+  height: 20px
+}
+
+@media (min-width: 80em) {
+  .ui-button-circle-icon__icon-wr svg {
+    width: 24px;
+    height: 24px
+  }
+}
+
+.ui-btn-circle-icon-transition-enter-active, .ui-btn-circle-icon-transition-leave-active {
+  transition: all .6s
+}
+
+.ui-btn-circle-icon-transition-enter, .ui-btn-circle-icon-transition-leave-active {
+  opacity: 0
+}
+
+.ui-btn-circle-icon-transition-enter {
+  transform: translateY(10px)
+}
+
+.ui-btn-circle-icon-transition-leave-active {
+  transform: translateY(-10px)
+}

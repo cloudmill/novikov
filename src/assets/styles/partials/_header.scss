@@ -39,7 +39,7 @@
       margin: 0 10px;
       padding: 0 0 10px;
       border-bottom: 1px solid transparent;
-      transition: border-color .5s;
+      @include transitionEase(border-color);
       &:hover,
       &.active {
         border-color: $black;
@@ -76,7 +76,7 @@
         display: block;
         background-color: black;
         &:nth-child(2) {
-          transition: all .5s;
+          @include transitionEase();
           margin-top: 8px;
           margin-bottom: 8px;
         }
@@ -105,7 +105,7 @@
     border-radius: 70px;
     border: 1px solid $gray-lighten;
     text-decoration: none;
-    transition: all .5s;
+    @include transitionEase();
     @media screen and (min-width: $screen-md-min) {
       width: 60px;
       height: 60px;
@@ -126,7 +126,7 @@
   &__search {
     svg circle,
     svg line {
-      transition: stroke .5s;
+      @include transitionEase(stroke);
     }
     &:hover {
       border-color: black;
@@ -140,7 +140,7 @@
   &__cart {
     position: relative;
     background-color: white;
-    transition: background-color .5s;
+    @include transitionEase(background-color);
     span {
       height: 12px;
       width: 12px;
@@ -154,7 +154,7 @@
       right: 0;
       text-align: center;
       transform: matrix(-1, 0, 0, 1, 0, 0);
-      transition: background-color .5s;
+      @include transitionEase(background-color);
       @media screen and (min-width: $screen-md-min) {
         height: 18px;
         width: 18px;
@@ -162,7 +162,7 @@
       }
     }
     svg path {
-      transition: fill .5s;
+      @include transitionEase(fill);
     }
     &:hover,
     &.active {
@@ -206,7 +206,7 @@
         opacity: 0;
         z-index: 1;
         border-radius: 70px;
-        transition: opacity .5s;
+        @include transitionEase(opacity);
       }
       &:after {
         content: '';
@@ -233,19 +233,43 @@
 
 .navbar {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: -600px;
+  height: 0;
+  bottom: -300px;
+  left: 0;
   z-index: 101;
-  overflow-y: auto;
+  overflow: hidden;
   width: 85%;
   padding: 110px 40px 30px 40px;
-  background: url("../images/N.svg") no-repeat right bottom / 85% auto, $black;
-  transition: left .5s;
+  //background: url("../images/N.svg") no-repeat right bottom / 85% auto;
+  //@include transitionEase(left);
   @media screen and (min-width: $screen-md-min) {
     width: auto;
     padding: 160px 150px 30px 90px;
-    background: url("../images/N.svg") no-repeat right bottom, $black;
+    //background: url("../images/N.svg") no-repeat right bottom;
+  }
+  > * {
+    position: relative;
+    z-index: 9;
+  }
+  > .btn.ui-button-circle-icon {
+    position: absolute;
+    top: -200px;
+    @include transitionEase(top, .5s, .8s);
+  }
+  &:after {
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    //background-color: $black;
+    @include transitionEase(height);
+    background: url("../images/N.svg") no-repeat right bottom / 85% auto, $black;
+    @media screen and (min-width: $screen-md-min) {
+      background: url("../images/N.svg") no-repeat right bottom, $black;
+    }
   }
 
   @media screen and (max-width: $screen-sm-max) {
@@ -259,7 +283,30 @@
     }
   }
   &.active {
-    left: 0;
+    height: 100%;
+    bottom: 0;
+    overflow-y: auto;
+    //left: 0;
+    &:after {
+      height: 100%;
+    }
+
+    .ui-button-circle-icon {
+      top: 20px;
+    }
+  }
+  &.hideIt {
+    height: 100%;
+    bottom: 0;
+    overflow-y: auto;
+    .ui-button-circle-icon {
+      top: -200px;
+      @include transitionEase(top);
+    }
+    &:after {
+      @include transitionEase(bottom, .5s, .8s);
+      bottom: 120%;
+    }
   }
 
   .btn--default {
@@ -280,7 +327,7 @@
   top: -300px;
   padding: 20px 0;
   z-index: 99;
-  transition: top .5s;
+  @include transitionEase(top);
 
   @media screen and (min-width: $screen-md-min) {
     padding: 40px;
@@ -334,7 +381,7 @@
   right: -285px;
   width: 285px;
   z-index: 99;
-  transition: right .5s;
+  @include transitionEase(right);
   display: flex;
   flex-direction: column;
   @media screen and (min-width: $screen-lg-min) {
@@ -457,8 +504,8 @@
   left: -650px;
   padding: 20px 10px;
   max-width: 85%;
-  z-index: 99;
-  transition: left .5s;
+  z-index: 106;
+  @include transitionEase(left);
 
   @media screen and (min-width: $screen-md-min) {
     padding: 60px;
@@ -473,6 +520,25 @@
       padding: 0 15px 0 30px;
     }
   }
+
+  .order-wrapper__item {
+    height: 100%;
+    margin-bottom: 0;
+    .tab-content {
+      height: 100%;
+    }
+    .tabs {
+      text-align: center;
+      font-size: 18px;
+      line-height: 120%;
+      text-transform: uppercase;
+      font-family: $base-font-family-serif;
+      justify-content: center;
+    }
+  }
+  .order-wrapper__item .tab-content .input, .order-wrapper__item .tab-content .control {
+    max-width: 100%;
+  }
   h3 {
     margin-top: 0;
     margin-bottom: 40px;
@@ -480,6 +546,14 @@
     @media screen and (min-width: $screen-md-min) {
       margin-bottom: 60px;
       text-align: left;
+    }
+  }
+  &--thin {
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0;
+      .row {
+        padding: 60px 40px 0 20px;
+      }
     }
   }
 
@@ -512,13 +586,13 @@
   top: 0;
   bottom: 0;
   width: 0;
-  z-index: 98;
+  z-index: 105;
   opacity: 0;
-  transition: opacity .5s, width 0s .5s;
+  transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1), width 0s cubic-bezier(0.65, 0, 0.35, 1) .5s;
   &.active {
     width: 100%;
     opacity: 1;
-    transition: opacity .5s .5s, width 0s;
+    transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1) .5s, width 0s cubic-bezier(0.65, 0, 0.35, 1);
   }
 }
 

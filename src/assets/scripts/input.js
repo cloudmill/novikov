@@ -90,8 +90,8 @@ export function validateField(element, event) {
 
 	// radio
 	if (radio) {
-	  if('.tab-content.active') {
-			if (!$(".tab-content.active input[type='radio']:checked").val()) {
+		if ('.tab-content.active') {
+			if (!$('.tab-content.active input[type=\'radio\']:checked').val()) {
 				console.log('ss');
 				element.closest('.radio--inline').next().text('Не указан способ оплаты');
 				result = false;
@@ -246,6 +246,12 @@ $('.inc--js').click(function() {
 		summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 	});
 	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	if ($('.summ--js').length) {
+		const price = $('.summ--js').data('pr');
+		let summ1 = 0;
+		summ1 += price * a;
+		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+	}
 });
 
 $('.dec--js').click(function() {
@@ -262,5 +268,11 @@ $('.dec--js').click(function() {
 			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 		});
 		$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+		if ($('.summ--js').length) {
+			const price = $('.summ--js').data('pr');
+			let summ1 = 0;
+			summ1 += price * b;
+			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+		}
 	}
 });

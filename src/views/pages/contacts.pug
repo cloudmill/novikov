@@ -9,31 +9,32 @@ block pageName
 block content
   main.page-contacts
     .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-      h1.select-wrapper Контакты
+      h1.select-wrapper
+        +wrapTitle(['Контакты'])
     .contacts-list(data-aos='fade-up')
       .contacts-list__item
         .contacts-list__item-name Информационный центр
         .contacts-list__item-desc
           div 123056, Россия, г. Москва, ул. Красина, 21
-          div: a(href='tel:84957395765') 8 495 739 57 65
-          div: a(href='mailto:info@novikovgroup.ru') info@novikovgroup.ru
+          div: a.lead(href='tel:84957395765') 8 495 739 57 65
+          div: a.lead(href='mailto:info@novikovgroup.ru') info@novikovgroup.ru
       .contacts-list__item
         .contacts-list__item-name Подбор персонала
         .contacts-list__item-desc
-          div: a(href='mailto:info@novikovgroup.ru') rabota@novikovgroup.ru
+          div: a.lead(href='mailto:info@novikovgroup.ru') rabota@novikovgroup.ru
       .contacts-list__item
         .contacts-list__item-name Отдел маркетинга и pr
         .contacts-list__item-desc
-          div: a(href='mailto:pr@novikovgroup.ru') pr@novikovgroup.ru
+          div: a.lead(href='mailto:pr@novikovgroup.ru') pr@novikovgroup.ru
       .contacts-list__item
         .contacts-list__item-name Подарочные сертификаты
         .contacts-list__item-desc
-          div: a(href='tel:84956461834') 8 495 646 18 34
+          div: a.lead(href='tel:84956461834') 8 495 646 18 34
       .contacts-list__item
         .contacts-list__item-name Отдел по работе с horeca партнерами: винная карта
         .contacts-list__item-desc
           .text__lg Семен Орехов
-          div: a(href='mailto:s.orekhov@novikovgroup.ru') s.orekhov@novikovgroup.ru
+          div: a.lead(href='mailto:s.orekhov@novikovgroup.ru') s.orekhov@novikovgroup.ru
     form.m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
       h2 Задать вопрос или #[br] оставить пожелание
       .row.between__xs.middle__xs

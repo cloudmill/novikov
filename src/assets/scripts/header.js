@@ -9,7 +9,15 @@ $('.header-search--js').click(function() {
 	return false;
 });
 $('.header-menu--js').click(function() {
-	$('.navbar').toggleClass('active');
+	if($('.navbar').hasClass('active')) {
+		$('.navbar').addClass('hideIt');
+		setTimeout(() => {
+			$('.navbar').removeClass('active');
+			$('.navbar').removeClass('hideIt');
+		}, 1800);
+	} else {
+		$('.navbar').addClass('active');
+	}
 	return false;
 });
 $('.search-block--js').click(function() {
@@ -17,17 +25,22 @@ $('.search-block--js').click(function() {
 	return false;
 });
 $('.vacancy-block--js').click(function() {
+	$(this).parent().toggleClass('active');
 	let vacancyName = $(this).attr('data-vacancy-name'),
 		vacancyRestaurant = $(this).attr('data-vacancy-restaurant'),
 		vacancyRegion = $(this).attr('data-vacancy-region');
-
-	$('.vacancy-block').toggleClass('active');
 	$('.overlay').toggleClass('active');
 
 	$('.vacancy-block').attr('data-vacancy-name', vacancyName);
 	$('.vacancy-block').attr('data-vacancy-restaurant', vacancyRestaurant);
 	$('.vacancy-block').attr('data-vacancy-region', vacancyRegion);
 	
+	return false;
+});
+$('.box--js').click(function() {
+	const className = $(this).data('href');
+	$('.' + className).toggleClass('active');
+	$('.overlay').toggleClass('active');
 	return false;
 });
 $('.page-header__cart').click(function() {

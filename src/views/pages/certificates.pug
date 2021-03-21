@@ -9,9 +9,15 @@ block pageName
 block content
   main.page-certificates
     .certificates-main(data-aos='fade-up')
-      h1 Подарочные сертификаты
+      h1
+        +wrapTitle(['Подарочные', 'сертификаты'])
       p Подарочный сертификат Novikov Group дает право на посещение любого из ресторанов–участников программы лояльности. Сертификат является единоразовым и, если счет превысит номинал карты, возможно просто доплатить разницу.
+      .certificates-main__back.rellax: +img('certificates/main1.jpg')
     .certificates-liner(data-aos='fade-up')
+      .marquee
+        .track
+          .content
+            +img('standard.svg')
     .certificates-desc(data-aos='fade-up')
       .row
         .col.col__xl-5.col__lg-5.col__md-6.col__xs-12

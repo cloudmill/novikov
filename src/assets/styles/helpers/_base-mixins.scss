@@ -266,6 +266,12 @@
 }
 
 // transition
+@mixin transitionEase($property: all, $sec: .5s, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $sec;
+  transition-delay: $delay;
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
 @mixin transition($transition...) {
   @if length($transition) == 0 {
     $transition: all 0.3s ease;

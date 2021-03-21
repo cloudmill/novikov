@@ -58,6 +58,7 @@
   }
 
   &-img {
+    overflow: hidden;
     margin-bottom: 40px;
     @media screen and (min-width: $screen-md-min) {
       margin-bottom: 80px;

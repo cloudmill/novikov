@@ -136,7 +136,7 @@
         align-items: center;
         .tab {
           border-bottom: 1px solid transparent;
-          transition: border-color .5s;
+          @include transitionEase(border-color);
           margin-right: 20px;
           margin-bottom: 20px;
           padding-bottom: 5px;
@@ -238,7 +238,7 @@
   opacity: 0;
   z-index: 2;
   font-size: 13px;
-  transition: opacity .5s;
+  @include transitionEase(opacity);
   &.active {
     opacity: 1;
   }
@@ -324,7 +324,7 @@
         position: absolute;
         right: 10px;
         bottom: -10px;
-        transition: all .5s;
+        @include transitionEase();
         &:hover {
           transform: scale(1.2) rotate(180deg);
         }
@@ -418,7 +418,7 @@
   right: 0;
   opacity: 0;
   visibility: hidden;
-  transition: 0.2s;
+  @include transitionEase(all .2s);
   text-align: right;
   padding: 0;
   z-index: 99;
@@ -446,7 +446,7 @@
     padding: 10px 0;
     white-space: nowrap;
     border-bottom: 1px solid transparent;
-    transition: border-color .5s;
+    @include transitionEase(border-color);
     @media screen and (min-width: $screen-lg-min) {
       margin: 0 30px;
     }

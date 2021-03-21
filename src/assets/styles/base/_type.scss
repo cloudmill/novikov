@@ -247,7 +247,9 @@ ol {
         text-transform: initial;
         margin-bottom: 10px;
         font-weight: 400;
+        align-items: flex-start;
         &::before {
+          margin-top: 7px;
           border-width: 3px 0 3px 6px;
           border-color: transparent transparent transparent black;
         }

@@ -31,7 +31,7 @@
       }
     }
 
-    span {
+    .span {
       font-family: $base-font-family;
     }
     a {
@@ -131,11 +131,12 @@
       font-size: 35px;
       border-top: 1px solid white;
       font-family: $base-font-family-serif;
+      text-transform: uppercase;
       @media screen and (min-width: $screen-md-min) {
         margin-bottom: 40px;
         font-size: 60px;
       }
-      span {
+      .span {
         font-family: $base-font-family;
         font-weight: 400;
       }
@@ -215,7 +216,7 @@
     font-size: 24px;
     color: #9C9C9C;
     line-height: 130%;
-    transition: all .5s;
+    @include transitionEase();
     font-family: $base-font-family-serif;
     @media screen and (min-width: $screen-lg-min) {
       margin-bottom: 100px;
@@ -226,7 +227,7 @@
     line-height: 160%;
     color: #9C9C9C;
     opacity: 0;
-    transition: opacity .5s .3s;
+    @include transitionEase(opacity, .5s, .3s);
     max-width: 350px;
   }
   &-slider {
@@ -252,7 +253,7 @@
     .swiper-slide {
       width: 20%;
       height: 200px;
-      transition: all .5s;
+      @include transitionEase();
       @media screen and (min-width: $screen-md-min) {
         height: 300px;
       }

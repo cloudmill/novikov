@@ -58,6 +58,7 @@ body {
   @media screen and (min-width: $screen-md-min) {
     font-size: $base-font-size;
   }
+  scroll-behavior: smooth;
 }
 
 section {
@@ -69,7 +70,7 @@ section {
 //
 a {
   color: $link-color;
-  @include transition;
+  @include transitionEase(all);
   text-decoration: none;
 
   &:hover,

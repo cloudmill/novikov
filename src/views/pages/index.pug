@@ -1,4 +1,4 @@
-extends ../layouts/master.pug
+extends ../layouts/masterMain.pug
 
 block header
   include ../partials/_header.pug
@@ -7,7 +7,16 @@ block content
   main.page-main
     .main-slider
       .text--center(data-aos='fade-up')
-        h1 Самый грандиозный перезапуск года: легендарный ресторан Savva открыт
+        h1
+          .wrapTitle.wrapTitle-lead(data-aos)
+            span.word-wrap: span Самый&nbsp;
+            span.word-wrap: span  грандиозный&nbsp;
+            span.word-wrap: span  перезапуск&nbsp;
+            span.word-wrap: span  года:&nbsp;
+            span.word-wrap: span легендарный&nbsp;
+            span.word-wrap: span  ресторан&nbsp;
+            span.word-wrap: span  Savva&nbsp;
+            span.word-wrap: span  открыт&nbsp;
       .main-swiper.swiper-container(data-aos='fade-up')
         .swiper-pagination
         .swiper-wrapper
@@ -17,6 +26,12 @@ block content
           .swiper-button-prev: +img('icons/sw-l.svg')
           .swiper-button-next: +img('icons/sw-r.svg')
     .textLiner(data-aos='fade-up')
+      .marquee
+        .track
+          .content
+            +img('textliner.svg')
+            +img('textliner.svg')
+            +img('textliner.svg')
     .main-carousel
       .tab-container
         .tabs(data-aos='fade-up')
@@ -35,8 +50,12 @@ block content
                 .swiper-slide.restaurant
                   .restaurant-img
                     .badge
-                      +img('icons/new-badge.svg')
-                      +img('icons/soon-badge.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/new-badge1.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/soon-badge1.svg')
                     +img('index/slide-1.jpg')
                     .logo: +img('index/logo-1.jpg')
                   .restaurant-desc
@@ -52,8 +71,12 @@ block content
                 .swiper-slide.restaurant
                   .restaurant-img
                     .badge
-                      +img('icons/new-badge.svg')
-                      +img('icons/soon-badge.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/new-badge1.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/soon-badge1.svg')
                     +img('index/slide-2.jpg')
                     .logo: +img('index/logo-2.jpg')
                   .restaurant-desc
@@ -69,7 +92,9 @@ block content
                 .swiper-slide.restaurant
                   .restaurant-img
                     .badge
-                      +img('icons/new-badge.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/new-badge1.svg')
                     +img('index/slide-3.jpg')
                   .restaurant-desc
                     h3 aqua
@@ -83,7 +108,9 @@ block content
                 .swiper-slide.restaurant
                   .restaurant-img
                     .badge
-                      +img('icons/soon-badge.svg')
+                      .marquee
+                        .track
+                          .content: +img('icons/soon-badge1.svg')
                     +img('index/slide-4.jpg')
                   .restaurant-desc
                     h3 КЛЁВО НА УСАЧЕВСКОМ
@@ -107,8 +134,12 @@ block content
                   .swiper-slide.restaurant
                     .restaurant-img
                       .badge
-                        +img('icons/new-badge.svg')
-                        +img('icons/soon-badge.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/new-badge1.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/soon-badge1.svg')
                       +img('index/slide-1.jpg')
                       .logo: +img('index/logo-1.jpg')
                     .restaurant-desc
@@ -124,8 +155,12 @@ block content
                   .swiper-slide.restaurant
                     .restaurant-img
                       .badge
-                        +img('icons/new-badge.svg')
-                        +img('icons/soon-badge.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/new-badge1.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/soon-badge1.svg')
                       +img('index/slide-2.jpg')
                       .logo: +img('index/logo-2.jpg')
                     .restaurant-desc
@@ -141,7 +176,9 @@ block content
                   .swiper-slide.restaurant
                     .restaurant-img
                       .badge
-                        +img('icons/new-badge.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/new-badge1.svg')
                       +img('index/slide-3.jpg')
                     .restaurant-desc
                       h3 aqua
@@ -155,7 +192,9 @@ block content
                   .swiper-slide.restaurant
                     .restaurant-img
                       .badge
-                        +img('icons/soon-badge.svg')
+                        .marquee
+                          .track
+                            .content: +img('icons/soon-badge1.svg')
                       +img('index/slide-4.jpg')
                     .restaurant-desc
                       h3 КЛЁВО НА УСАЧЕВСКОМ
@@ -169,11 +208,25 @@ block content
                             div тайская
                             div Американская
     .main-about(data-aos='fade-up')
-      .main-about-badge: +img('index/since.svg')
+      .main-about-badge
+        .marquee
+          .track
+            .content: +img('icons/since1.svg')
       .container
-        .main-about-title(data-aos='fade-up')
-          .main-about-title__top N#[span o]vik#[span o]v
-          .main-about-title__bottom GROUP
+        .main-about-title
+          .main-about-title__top
+            .wrapTitle(data-aos)
+              span.word-wrap: span
+                | N
+                span.span o
+                | vik
+                span.span o
+                | v
+          .main-about-title__bottom
+            .wrapTitle(data-aos)
+              span.word-wrap: span GROUP
+        .main-about__back
+          .rellax(data-rellax-speed="1"): +img('index/N.svg')
         .col__md-6.main-about-content(data-aos='fade-up')
           .main-about-desc
             p История Novikov Group берет свое начало в 1991 году. Именно в этом году Аркадий Новиков открыл свой первый ресторан — Sirena, который стал первым рыбным рестораном столицы с качественно новым подходом к кухне, обслуживанию, интерьеру и атмосфере.

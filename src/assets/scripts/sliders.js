@@ -43,7 +43,6 @@ if ($('.vertical-swiper').length) {
 		const swiper = new Swiper(component[0], {
 			slidesPerView: 1,
 			spaceBetween: 0,
-			direction: 'vertical',
 			simulateTouch: false,
 			pagination: {
 				el: pagin[0],
@@ -56,6 +55,11 @@ if ($('.vertical-swiper').length) {
 				nextEl: next[0],
 				prevEl: prev[0],
 			},
+			breakpoints: {
+				768: {
+					direction: 'vertical',
+				}
+			}
 		});
 	});
 }
@@ -140,6 +144,28 @@ export function initSwiper() {
 					nextEl: next[0],
 					prevEl: prev[0],
 				},
+			});
+		});
+	}
+	if ($('.carousel-swiper-two').length) {
+		$('.carousel-swiper-two').each(function() {
+			const component = $(this);
+			const prev = component.parent().find('.swiper-button-prev');
+			const next = component.parent().find('.swiper-button-next');
+
+			carousel = new Swiper(component[0], {
+				slidesPerView: 'auto',
+				spaceBetween: 20,
+				simulateTouch: false,
+				navigation: {
+					nextEl: next[0],
+					prevEl: prev[0],
+				},
+				breakpoints: {
+					768: {
+						slidesPerView: 2,
+					}
+				}
 			});
 		});
 	}

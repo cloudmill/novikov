@@ -38,6 +38,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
+      z-index: 99;
       img {
         width: 77px;
         @media screen and (min-width: $screen-md-min) {
@@ -47,15 +48,22 @@
     }
     &-img {
       position: relative;
+      overflow: hidden;
       > img {
+        transition: transform 1s;
         width: 100%;
+      }
+      &:hover {
+        > img {
+          transform: scale(1.1);
+        }
       }
     }
     &-title {
       font-size: 12px;
       font-family: $base-font-family-serif;
       margin: 10px 0;
-      transition: color .5s;
+      @include transitionEase(color);
       @media screen and (min-width: $screen-md-min) {
         font-size: 16px;
         margin: 20px 0;
@@ -75,6 +83,7 @@
         font-size: 28px;
       }
       .events-item-img {
+        border-radius: 0px 0px 60px 0px;
         img {
           border-radius: 0px 0px 60px 0px;
         }
@@ -128,7 +137,7 @@
   a {
     svg {
       path {
-        transition: fill .5s;
+        @include transitionEase(fill);
       }
     }
     &:hover {
@@ -155,7 +164,7 @@
     width: 50px;
     border-radius: 60px;
     background-color: black;
-    transition: all .5s;
+    @include transitionEase();
     @media screen and (min-width: $screen-md-min) {
       width: 74px;
     }
@@ -168,7 +177,7 @@
     text-transform: uppercase;
     position: relative;
     z-index: 1;
-    transition: color .5s;
+    @include transitionEase(color);
     cursor: pointer;
     white-space: nowrap;
     @media screen and (min-width: $screen-md-min) {

@@ -9,7 +9,8 @@ block pageName
 block content
   main.page-event
     .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-      h1.select-wrapper события
+      h1.select-wrapper
+        +wrapTitle(['события'])
       .filters(data-aos='fade-up')
         .tab-container.filter
           .filter-global

@@ -40,9 +40,9 @@
 		<!--[if lt IE 9]><p class="browsehappy">Данный сайт построен на передовых, современных технологиях и не поддерживает Ваш браузер. Настоятельно рекомендуем выбрать и установить любой из &nbsp;<a href="http://browsehappy.com/" target="_blank">современных браузеров.</a> Это бесплатно и займет всего несколько минут.</p><![endif]-->
 		<div class="loading"></div>
 		<header class="page-header" data-aos="fade-down">
-			<div class="page-header__menu col__xl-4 col__lg-6 col__md-4 col__xs-4"><button class="header-menu--js btn btn-icon btn--default">
-					<div class="burger"><span></span><span></span><span></span></div><span>Меню</span>
-				</button><button class="btn btn-border"><span class="add"><img src="assets/images/header.png" alt="" /></span><span>Заказать цветы</span></button></div>
+			<div class="page-header__menu col__xl-4 col__lg-6 col__md-4 col__xs-4"><button class="header-menu--js btn btn-icon btn--default ui-button-circle-icon">
+					<div class="burger"><span></span><span></span><span></span></div><span class="ui-button-circle-icon__label-wr" data-text="Меню"><span class="ui-button-circle-icon__label">Меню</span></span>
+				</button><a class="btn btn-border ui-button-circle-icon" href="#"><span class="add"><img src="assets/images/header.png" alt="" /></span><span class="ui-button-circle-icon__label-wr" data-text="Заказать цветы"><span class="ui-button-circle-icon__label">Заказать цветы</span></span></a></div>
 			<div class="page-header__logo col__xl-4 col__lg-3 col__md-4 col__xs-4"><a href="/"><img src="assets/images/logo.svg" alt="Novikov"></a></div>
 			<div class="page-header__info col__xl-4 col__lg-5 col__md-5 col__xs-4">
 				<ul class="page-header__lang hidden__sm hidden__xs">
@@ -59,16 +59,16 @@
 					</svg><span>8</span></a>
 			</div>
 		</header>
-		<nav class="navbar"><button class="header-menu--js btn btn-icon btn--default"><img src="assets/images/icons/cross.svg" alt="" /><span>Меню</span></button>
+		<nav class="navbar"><button class="header-menu--js btn btn-icon btn--default ui-button-circle-icon"><img src="assets/images/icons/cross.svg" alt="" /><span class="ui-button-circle-icon__label-wr" data-text="Меню"><span class="ui-button-circle-icon__label">Меню</span></span></button>
 			<ul class="main-nav">
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Рестораны">Рестораны</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Проекты">Проекты</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Партнеры">Партнеры</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Дисконтные карты">Дисконтные карты</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Сертификаты">Сертификаты</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="О компании">О компании</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Вакансии">Вакансии</a></li>
-				<li class="main-nav__item"><a class="main-nav__link" href="#" title="Контакты">Контакты</a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Рестораны"><span class="word-wrap"><span>Рестораны</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Проекты"><span class="word-wrap"><span>Проекты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Партнеры"><span class="word-wrap"><span>Партнеры</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Дисконтные карты"><span class="word-wrap"><span>Дисконтные карты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Сертификаты"><span class="word-wrap"><span>Сертификаты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="О компании"><span class="word-wrap"><span>О компании</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Вакансии"><span class="word-wrap"><span>Вакансии</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="#" title="Контакты"><span class="word-wrap"><span>Контакты</span></span></a></li>
 			</ul>
 		</nav>
 		<div class="search-block">
@@ -79,10 +79,14 @@
 		<div class="main">
 			<main class="page-restaurant">
 				<div class="m-auto col__xl-9" data-aos="fade-up">
-					<h1 class="select-wrapper">Рестораны в<select class="select-template" style="width: 220px">
-							<option value="sochi" selected>Сочи</option>
-							<option value="sochi1">Сочи</option>
-						</select></h1>
+					<h1 class="select-wrapper">
+						<div class="wrapTitle" data-aos><span class="word-wrap"><span>Рестораны&nbsp;</span></span><span class="word-wrap"><span>в&nbsp;</span></span><span class="word-wrap">
+								<div><select class="select-template" style="width: 220px">
+										<option value="sochi" selected>Сочи</option>
+										<option value="sochi1">Сочи</option>
+									</select></div>
+							</span></div>
+					</h1>
 					<div class="filters" data-aos="fade-up">
 						<div class="tab-container filter">
 							<div class="tabs">

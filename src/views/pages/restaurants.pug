@@ -9,10 +9,15 @@ block pageName
 block content
   main.page-restaurant
     .m-auto.col__xl-9(data-aos='fade-up')
-      h1.select-wrapper Рестораны в
-        select.select-template(style='width: 220px')
-          option(value='sochi', selected) Сочи
-          option(value='sochi1') Сочи
+      h1.select-wrapper
+        .wrapTitle(data-aos)
+          span.word-wrap: span Рестораны&nbsp;
+          span.word-wrap: span в&nbsp;
+          span.word-wrap
+            div
+              select.select-template(style='width: 220px')
+                option(value='sochi', selected) Сочи
+                option(value='sochi1') Сочи
       .filters(data-aos='fade-up')
         .tab-container.filter
           .tabs

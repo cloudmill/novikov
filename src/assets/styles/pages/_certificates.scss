@@ -8,16 +8,37 @@
     margin: 0 10px;
     padding: 40px 38px 400px;
     background: url("../images/certificates/main-m.jpg") no-repeat center top / auto 100%;
+    overflow: hidden;
     @media screen and (min-width: $screen-md-min) {
       margin: 0 20px;
       padding: 60px 40px;
       background: url("../images/certificates/main.jpg") no-repeat center top / cover;
     }
     @media screen and (min-width: $screen-lg-min) {
+      padding: 60px 44% 60px 40px;
+      height: 730px;
       background: url("../images/certificates/main.jpg") no-repeat center top / 100% auto;
     }
     @media screen and (min-width: $screen-xl-min) {
-      padding: 160px 90px 200px;
+      padding: 160px 44% 200px 90px;
+    }
+    > * {
+      position: relative;
+      z-index: 9;
+    }
+    &__back {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 4;
+      img {
+        object-fit: cover;
+        @media screen and (min-width: $screen-md-min) {
+          height: 100%;
+        }
+      }
     }
     h1 {
       margin-top: 0;
@@ -41,22 +62,34 @@
   }
   &-liner {
     height: 30px;
+    img {
+      height: 30px;
+    }
     width: 100%;
     position: relative;
-    background: url("../images/standard.svg") no-repeat center / auto 100%;
+    //background: url("../images/standard.svg") no-repeat center / auto 100%;
     top: -20px;
     @media screen and (min-width: $screen-md-min) {
       top: -30px;
       height: 60px;
+      img {
+        height: 60px;
+      }
     }
     @media screen and (min-width: $screen-lg-min) {
       top: -50px;
       height: 100px;
+      img {
+        height: 100px;
+      }
     }
     @media screen and (min-width: $screen-xl-min) {
       top: -100px;
-      background: url("../images/standard.svg") no-repeat center;
+      //background: url("../images/standard.svg") no-repeat center;
       height: 150px;
+      img {
+        height: 150px;
+      }
     }
     @media screen and (min-width: 1450px) {
       top: -60px;
@@ -163,6 +196,9 @@
           padding: 50px 0;
           width: auto;
         }
+        img {
+          transition: transform 1s;
+        }
         @media screen and (min-width: 1500px) {
           img {
             width: 22vw;
@@ -178,6 +214,13 @@
         }
         img {
           background: white;
+        }
+      }
+      &:hover {
+        .certificates-list__item-img {
+          img {
+            transform: scale(1.1);
+          }
         }
       }
     }

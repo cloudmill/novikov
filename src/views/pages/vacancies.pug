@@ -12,7 +12,7 @@ block pageName
 block content
   main.page-vacancy
     .m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-      h1.select-wrapper Вакансии
+      h1.select-wrapper: +wrapTitle(['Вакансии'])
       .accordion
         -
           let items = [
@@ -99,7 +99,7 @@ block content
                           br
                           a(href='mailto:4aristova@gmail.com') 4aristova@gmail.com
                         .col
-                          a.btn-link.btn-icon.vacancy-block--js(href='#')
+                          a.btn-link.btn-icon.vacancy-block--js.lead(href='#')
                             span Откликнуться
                             include ../components/_next
       .vacancy-empty(data-aos='fade-up')

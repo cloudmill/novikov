@@ -41,7 +41,7 @@
     svg {
       margin-right: 10px;
       path {
-        transition: fill .5s;
+        @include transitionEase(fill);
       }
     }
     > a {

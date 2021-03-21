@@ -234,11 +234,11 @@ module.exports = env => {
 				'window.jQuery': 'jquery'
 			}),
 
-			new PurgeCssPlugin({
-				paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),
-				only: ['app'],
-				whitelistPatterns: [/select2/, /my-mfp/, /swiper/], // add plugin's classes to exclude from purge
-			}),
+			// new PurgeCssPlugin({
+			// 	paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),
+			// 	only: ['app'],
+			// 	whitelistPatterns: [/select2/, /my-mfp/, /swiper/], // add plugin's classes to exclude from purge
+			// }),
 
 			new WebpackNotifierPlugin({
 				title: 'Noob__ui',

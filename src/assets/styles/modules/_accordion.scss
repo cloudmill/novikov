@@ -8,7 +8,7 @@
     background: white;
     border-top: 1px solid black;
     cursor: pointer;
-    transition: all .5s !important;
+    transition: all .5s cubic-bezier(0.65, 0, 0.35, 1) !important;
     &:last-child {
       border-bottom: 1px solid black;
     }
@@ -77,9 +77,9 @@
     }
 
     svg {
-      transition: transform .5s;
+      @include transitionEase(transform);
       path {
-        transition: fill .5s;
+        @include transitionEase(fill);
       }
     }
   }

@@ -59,7 +59,7 @@
       &-name {
         width: 100%;
         display: block;
-        transition: color .5s;
+        @include transitionEase(color);
         @media screen and (min-width: $screen-md-min) {
           width: calc(100% - 200px);
           padding-right: 50px;
