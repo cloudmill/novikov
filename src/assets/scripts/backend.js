@@ -6,7 +6,28 @@ $(function() {
 
 function restaurantsFilter() {
     $('[data-type=filter-restaurants]').on('click', function () {
-        console.log('click');
+        $(this).addClass('active').siblings().removeClass('active');
+        
+        let container = $(this).parents('[data-type=main-carousel]'),
+            kitchenId = $(this).attr('data-id'),
+            kitchens = container.find('[data-type=kitchens'),
+            itemsCont = container.find('[data-type=items_container]');
+
+        $.ajax({
+            type: 'POST',
+            url: '/',
+            dataType: 'html',
+            data: {
+                kitchenId: kitchenId,
+            },
+            success: function (data) {
+                itemsCont.remove();
+
+                let itemsContResponse = $(data).find('[data-type=items_container]');
+                
+                kitchens.after(itemsContResponse);
+            }
+        });
     });
 }
 
