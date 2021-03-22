@@ -40,16 +40,24 @@ function showMore() {
         let container = $(this).parents('[data-type=main_container]'),
             itemsContainer = container.find('[data-type=items_container]'),
             url = $(this).attr('data-url'),
-            pageNavBlock = container.find('[data-type=page_nav_block');
+            pageNavBlock = container.find('[data-type=page_nav_block'),
+            data = null,
+            path = window.location.pathname.split('/');
+
+        if (path[1] == 'events') {
+            data = JSON.parse(container.find('[data-type=show_more_click]').attr('data-filter'));
+        } else {
+            data = {
+                ajax: true,
+            }
+        }
 
         if (url !== undefined) {
             $.ajax({
                 type: 'POST',
                 url: url,
                 dataType: 'html',
-                data: {
-                    ajax: true,
-                },
+                data: data,
                 success: function (data) {
                     pageNavBlock.remove();
 
