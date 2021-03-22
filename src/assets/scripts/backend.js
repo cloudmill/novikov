@@ -4,6 +4,7 @@ $(function() {
     restaurantsFilter();
     showMore();
     selectProject();
+    eventsFilter();
 });
 
 function restaurantsFilter() {
@@ -89,6 +90,37 @@ function selectProject() {
                 let projectItemContainerResponse = $(data).find('[data-type=item_container]');
                 
                 projectListContainer.after(projectItemContainerResponse);
+            }
+        });
+    });
+}
+
+function eventsFilter() {
+    $('[data-type=filter_events]').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        
+        let container = $(this).parents('[data-type=main_container]'),
+            sectionId = $(this).attr('data-sect-id'),
+            sectContainer = container.find('[data-type=sections_events_container'),
+            itemsCont = container.find('[data-type=items_container]'),
+            pageNav = container.find('[data-type=page_nav_block]');
+
+        $.ajax({
+            type: 'POST',
+            url: '/events/',
+            dataType: 'html',
+            data: {
+                sectionId: sectionId,
+            },
+            success: function (data) {
+                itemsCont.remove();
+                pageNav.remove();
+
+                let itemsContResponse = $(data).find('[data-type=items_container]'),
+                    pageNavResponse = $(data).find('[data-type=page_nav_block]');
+                
+                sectContainer.after(itemsContResponse);
+                itemsContResponse.after(pageNavResponse);
             }
         });
     });
