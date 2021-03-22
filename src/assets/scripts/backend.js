@@ -1,3 +1,5 @@
+import { initSwiper } from './sliders.js'
+
 $(function() {
     restaurantsFilter();
     showMore();
@@ -26,6 +28,7 @@ function restaurantsFilter() {
                 let itemsContResponse = $(data).find('[data-type=items_container]');
                 
                 kitchens.after(itemsContResponse);
+                initSwiper();
             }
         });
     });
