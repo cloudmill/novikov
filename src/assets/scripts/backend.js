@@ -6,6 +6,7 @@ $(function() {
     selectProject();
     eventsFilter();
     mainRestFilterRegion();
+    mainRestFilterKitchen();
 });
 
 function restaurantsFilter() {
@@ -138,9 +139,10 @@ function eventsFilter() {
 function mainRestFilterRegion() {
     $('[data-type=restaurants-region-filter-select]').on('select2:select', function () {
         let container = $(this).parents('[data-type=main_container]'),
-            itemsCont = container.find('[data-type=items_container]'),
-            otherCont = container.find('[data-type=other_container]'),
             kitchensSelect = container.find('[data-type=restaurants-kitchens-filter-select]'),
+            itemsContainer = container.find('[data-type=items_container]'),
+            otherContainer = container.find('[data-type=other_container]'),
+            regionId = $(this).val(),
             kitchensOption = container.find('[data-type=restaurants-kitchens-filter-select] option');
 
         $.ajax({
@@ -148,21 +150,67 @@ function mainRestFilterRegion() {
             url: '/restaurants/',
             dataType: 'html',
             data: {
-                regionId: $(this).val(),
+                regionId: regionId,
             },
             success: function (data) {
                 kitchensOption.remove();
-                itemsCont.remove();
 
-                let itemsContResponse = $(data).find('[data-type=items_container]'),
-                    kitchensOptionResponse = $(data).find('[data-type=restaurants-kitchens-filter-select] option');
-                
-                otherCont.after(itemsContResponse);
+                let kitchensOptionResponse = $(data).find('[data-type=restaurants-kitchens-filter-select] option');
+
                 kitchensSelect.append(kitchensOptionResponse);
 
                 kitchensSelect.each(function () {
                     $(this).val($(this).find('[selected]').val()).trigger('change');
                 });
+
+                let dataFilter = {
+                    regionId: regionId,
+                    kitchenId: kitchensSelect.val(),
+                };
+
+                ajaxFilterRestaurantsItems(dataFilter, itemsContainer, otherContainer);
+            }
+        });
+    });
+}
+
+function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer) {
+    $.ajax({
+        type: 'POST',
+        url: '/restaurants/',
+        dataType: 'html',
+        data: data,
+        success: function (data) {
+            itemsContainer.remove();
+
+            let itemsContainerResponse = $(data).find('[data-type=items_container]');
+
+            otherContainer.after(itemsContainerResponse);
+        }
+    });
+}
+
+function mainRestFilterKitchen() {
+    $('[data-type=restaurants-kitchens-filter-select]').on('select2:select', function () {
+        let container = $(this).parents('[data-type=main_container]'),
+            itemsCont = container.find('[data-type=items_container]'),
+            otherCont = container.find('[data-type=other_container]'),
+            regionId = container.find('[data-type=restaurants-region-filter-select]').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/restaurants/',
+            dataType: 'html',
+            data: {
+                regionId: regionId,
+                kitchenId: $(this).val(),
+            },
+            success: function (data) {
+                itemsCont.remove();
+
+                let itemsContResponse = $(data).find('[data-type=items_container]');
+                
+                otherCont.after(itemsContResponse);
             }
         });
     });
