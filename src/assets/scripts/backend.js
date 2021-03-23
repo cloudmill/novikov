@@ -5,6 +5,7 @@ $(function() {
     showMore();
     selectProject();
     eventsFilter();
+    mainRestFilterRegion();
 });
 
 function restaurantsFilter() {
@@ -129,6 +130,39 @@ function eventsFilter() {
                 
                 sectContainer.after(itemsContResponse);
                 itemsContResponse.after(pageNavResponse);
+            }
+        });
+    });
+}
+
+function mainRestFilterRegion() {
+    $('[data-type=restaurants-region-filter-select]').on('select2:select', function () {
+        let container = $(this).parents('[data-type=main_container]'),
+            itemsCont = container.find('[data-type=items_container]'),
+            otherCont = container.find('[data-type=other_container]'),
+            kitchensSelect = container.find('[data-type=restaurants-kitchens-filter-select]'),
+            kitchensOption = container.find('[data-type=restaurants-kitchens-filter-select] option');
+
+        $.ajax({
+            type: 'POST',
+            url: '/restaurants/',
+            dataType: 'html',
+            data: {
+                regionId: $(this).val(),
+            },
+            success: function (data) {
+                kitchensOption.remove();
+                itemsCont.remove();
+
+                let itemsContResponse = $(data).find('[data-type=items_container]'),
+                    kitchensOptionResponse = $(data).find('[data-type=restaurants-kitchens-filter-select] option');
+                
+                otherCont.after(itemsContResponse);
+                kitchensSelect.append(kitchensOptionResponse);
+
+                kitchensSelect.each(function () {
+                    $(this).val($(this).find('[selected]').val()).trigger('change');
+                });
             }
         });
     });
