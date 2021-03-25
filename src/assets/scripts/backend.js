@@ -8,6 +8,7 @@ $(function() {
     mainRestFilterRegion();
     mainRestFilterKitchen();
     menuRestaurantSections();
+    scrollShowMore();
 });
 
 function restaurantsFilter() {
@@ -245,4 +246,46 @@ function menuRestaurantSections() {
             }
         });
     });
+}
+
+function scrollShowMore() {
+    // $(document).scroll(function () {
+    //     let container = $(this).parents('[data-type=main_container]'),
+    //         scroll =  $(window).scrollTop() + $(window).height(),
+    //         footer = $('.page-footer'),
+    //         offset = footer.offset().top,
+    //         itemsContainer = container.find('[data-type=items_container]'),
+    //         item = container.find('[data-type=item]'),
+    //         loadMore = false,
+    //         counter = 0,
+    //         url = null;
+        
+    //     if (scroll > offset && counter == 0) {
+    //         counter = 1;
+    //         console.log('load');
+    //         url = container.find('[dat-type=url-page-nav]');
+    //         offset = item.offset();
+
+    //         console.log(offset);
+
+    //         if ($(this).scrollTop() >= offset - $(window).height()) {
+    //             loadMore = true;
+
+    //             $.ajax({
+    //                 url: url,
+    //                 type: 'POST',
+    //                 data: {
+    //                     ajax: true,
+    //                 },
+    //                 success: function(data) {
+    //                     let itemsResponse = $(data).find('[data-type=item]');
+
+    //                     itemsContainer.append(itemsResponse);
+
+    //                     loadMore = false;
+    //                 }
+    //             });
+    //         }
+    //     }
+    // });
 }
