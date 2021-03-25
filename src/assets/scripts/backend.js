@@ -7,6 +7,7 @@ $(function() {
     eventsFilter();
     mainRestFilterRegion();
     mainRestFilterKitchen();
+    menuRestaurantSections();
 });
 
 function restaurantsFilter() {
@@ -211,6 +212,36 @@ function mainRestFilterKitchen() {
                 let itemsContResponse = $(data).find('[data-type=items_container]');
                 
                 otherCont.after(itemsContResponse);
+            }
+        });
+    });
+}
+
+function menuRestaurantSections() {
+    $('[data-type=select-menu-sections]').on('click', function (e) {
+        e.preventDefault();
+
+        let container = $(this).parents('[data-type=main_container]'),
+            selectSection = $(this).parents('[data-type=select-section]'),
+            sectId = $(this).attr('data-id'),
+            itemsContainer = container.find('[data-type=items_container'),
+            sectionsContainer = container.find('[data-type=sections_container');
+
+        selectSection.addClass('active').siblings().removeClass('active');
+       
+        $.ajax({
+            type: 'POST',
+            url: window.location.href,
+            dataType: 'html',
+            data: {
+                sectId: sectId,
+            },
+            success: function (data) {
+                itemsContainer.remove();
+
+                let itemsContainerResponse = $(data).find('[data-type=items_container]');
+                
+                sectionsContainer.after(itemsContainerResponse);
             }
         });
     });
