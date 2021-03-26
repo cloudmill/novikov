@@ -9,6 +9,7 @@ $(function() {
     mainRestFilterKitchen();
     menuRestaurantSections();
     scrollShowMore();
+    addProduct();
 });
 
 function restaurantsFilter() {
@@ -243,6 +244,26 @@ function menuRestaurantSections() {
                 let itemsContainerResponse = $(data).find('[data-type=items_container]');
                 
                 sectionsContainer.after(itemsContainerResponse);
+            }
+        });
+    });
+}
+
+function addProduct () {
+    $('[data-type=add-product]').on('click', function (e) {
+        let productId = $(this).attr('data-priduct-id');
+
+        $.ajax({
+            type: 'POST',
+            url: '/local/templates/main/include/ajax/add_product.php',
+            dataType: 'json',
+            data: {
+                productId: productId,
+            },
+            success: function (data) {
+                if (data.success === true) {
+                    alert('Товар успешно добавлен в корзину');
+                }
             }
         });
     });
