@@ -63,7 +63,7 @@
   .ui-button-circle-icon__label-wr:after {
     line-height: 50px;
     padding-left: calc(35px - .5em);
-    padding-right: calc(25px - .5em)
+    padding-right: calc(25px - .5em);
   }
 }
 
@@ -82,12 +82,14 @@
 }
 
 .ui-button-circle-icon__label {
-  display: inline-block;
-  position: relative;
-  padding-left: calc(26px - .5em);
-  padding-right: calc(25px - .5em);
   height: 40px;
-  line-height: 40px
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding-right: calc(25px - .5em);
+  padding-left: calc(26px - .5em);
+  //display: inline-block;
+  //line-height: 40px
 }
 
 @media (min-width: 80em) {
@@ -95,7 +97,8 @@
     padding-left: calc(35px - .5em);
     padding-right: calc(25px - .5em);
     height: 50px;
-    line-height: 50px
+    line-height: 50px;
+    white-space: nowrap;
   }
 }
 

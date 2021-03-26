@@ -171,9 +171,9 @@ $('.form--js').on('click', function(e) {
 	const file = form.find('input[name=file]');
 	const curForm = $(this);
 
-	let url = null,
-		data = null;
-		
+	let url = null;
+	let data = null;
+
 	if (path[1] == 'vacancies') {
 		url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
 		data = new FormData();
@@ -243,7 +243,9 @@ $('.inc--js').click(function() {
 	pr.find('span').text((prData * a).toString().replace(regexp, ' '));
 	let summ = 0;
 	$('.cart-block-item').each((index, item) => {
-		summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+	  if($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+		}
 	});
 	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 	if ($('.summ--js').length) {
@@ -265,7 +267,9 @@ $('.dec--js').click(function() {
 		pr.find('span').text((prData * b).toString().replace(regexp, ' '));
 		let summ = 0;
 		$('.cart-block-item').each((index, item) => {
-			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			if($(item).find('.cart-pr span').length) {
+				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			}
 		});
 		$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 		if ($('.summ--js').length) {

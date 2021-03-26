@@ -8,6 +8,7 @@ import 'velocity-animate';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min';
 import 'jquery-mousewheel';
 import Sticky from 'sticky-js';
+import skrollr from 'skrollr';
 
 $.fn.isInViewport = function() {
 	const elementStart = $(this).offset().left;
@@ -43,6 +44,11 @@ $(document).ready(() => {
 		// eslint-disable-next-line no-unused-vars
 		const sticky = new Sticky('.sticky');
 	}
+
+	// const s = skrollr.init({
+		// smoothScrolling: true,
+		// smoothScrollingDuration: 1800
+	// });
 
 });
 
