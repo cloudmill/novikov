@@ -251,19 +251,24 @@ function menuRestaurantSections() {
 
 function addProduct () {
     $('[data-type=add-product]').on('click', function (e) {
-        let productId = $(this).attr('data-priduct-id');
+        let productId = $(this).attr('data-priduct-id'),
+            body = $(this).parents('[data-type=body]'),
+            productsCount = body.find('[data-type=products_count]'),
+            headerCart = body.find('[data-type=page-header-cart]');
 
         $.ajax({
             type: 'POST',
-            url: '/local/templates/main/include/ajax/add_product.php',
-            dataType: 'json',
+            url: window.location.href,
+            dataType: 'html',
             data: {
                 productId: productId,
             },
             success: function (data) {
-                if (data.success === true) {
-                    alert('Товар успешно добавлен в корзину');
-                }
+                productsCount.remove();
+
+                let productsCountResponse = $(data).find('[data-type=products_count]');
+
+                headerCart.append(productsCountResponse);
             }
         });
     });
