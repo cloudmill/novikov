@@ -115,9 +115,7 @@ block content
         .list-discount-slider
           .list-discount-title
             h3 Другие события
-            .swiper-buttons
-              .swiper-button-prev: +img('icons/sw-l.svg')
-              .swiper-button-next: +img('icons/sw-r.svg')
+            include ../components/_sw-arrows
           .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)

@@ -94,7 +94,7 @@ input[type="checkbox"]:focus {
     line-height: 160%;
     color: $color-type-2a;
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
   }
 
 }
@@ -261,7 +261,7 @@ input[type="search"] {
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;
       transform: translate3d(0, 0, 0);
-      @include transitionEase(transform, .3s);
+      @include transitionEase(all, .3s);
     }
     &:after,
     &::before {
@@ -289,6 +289,7 @@ input[type="search"] {
 
 .input__field:focus + .input__label .input__label-content,
 .input--filled .input__label-content {
+  color: #9C9C9C;
   transform: translate3d(0, -5px, 0) scale3d(0.7, 0.7, 1);
 }
 

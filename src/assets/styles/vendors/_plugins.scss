@@ -30,6 +30,41 @@ percent_icon;
   }
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+  svg {
+    rect,
+    path,
+    circle {
+      @include transitionEase(all);
+    }
+    &:hover {
+      rect {
+        width: 30px;
+        fill: white;
+      }
+      path {
+        fill: white;
+        transform: matrix(0.9, 0, 0, 0.9, 4, 4);
+        //transform: scale(.9);
+      }
+      .circ {
+        r: 35;
+      }
+    }
+  }
+}
+
+.swiper-button-next {
+  svg {
+    &:hover {
+      rect {
+        x: 38;
+      }
+    }
+  }
+}
+
 //svg-icons
 
 //select

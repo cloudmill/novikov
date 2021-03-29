@@ -228,7 +228,9 @@ $('.cart-rm--js').click(function() {
 	$(this).closest('.cart-block-item').addClass('hide').slideUp(300);
 	let summ = 0;
 	$('.cart-block-item:not(.hide)').each((index, item) => {
-		summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+		if($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+		}
 	});
 	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 });

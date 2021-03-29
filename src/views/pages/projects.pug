@@ -63,9 +63,7 @@ block content
                           li Школа ресторанного менеджмента, тренинги по сервису для отелей и ресторанов
                       .slideshow-swiper.swiper-container
                         .swiper-section
-                          .swiper-buttons
-                            .swiper-button-prev: +img('icons/sw-l.svg')
-                            .swiper-button-next: +img('icons/sw-r.svg')
+                          include ../components/_sw-arrows
                           .swiper-pagination
                         .swiper-wrapper
                           - for (let x = 1; x < 7; x++)
@@ -92,9 +90,7 @@ block content
               li Школа ресторанного менеджмента, тренинги по сервису для отелей и ресторанов
           .slideshow-swiper.swiper-container(data-aos='fade-up')
             .swiper-section
-              .swiper-buttons
-                .swiper-button-prev: +img('icons/sw-l.svg')
-                .swiper-button-next: +img('icons/sw-r.svg')
+              include ../components/_sw-arrows
               .swiper-pagination
             .swiper-wrapper
               - for (let x = 1; x < 7; x++)

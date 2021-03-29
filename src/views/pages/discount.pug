@@ -28,7 +28,6 @@ block content
           .content
             +img('loyalty.svg')
             +img('loyalty.svg')
-            +img('loyalty.svg')
     .card-discount(data-aos='fade-up')
       .card-discount-inner
         .card
@@ -53,9 +52,7 @@ block content
         .list-discount-slider
           .list-discount-title
             h3 Рестораны–участники программы
-            .swiper-buttons
-              .swiper-button-prev: +img('icons/sw-l.svg')
-              .swiper-button-next: +img('icons/sw-r.svg')
+            include ../components/_sw-arrows
           .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)
@@ -84,9 +81,7 @@ block content
         .list-discount-slider(data-aos='fade-up')
           .list-discount-title
             h3 Партнеры–участники программы
-            .swiper-buttons
-              .swiper-button-prev: +img('icons/sw-l.svg')
-              .swiper-button-next: +img('icons/sw-r.svg')
+            include ../components/_sw-arrows
           .carousel-swiper-l.swiper-container.carousel-swiper-logo(data-aos='fade-up')
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)

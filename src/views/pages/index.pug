@@ -24,9 +24,7 @@ block content
             .swiper-slide: span: +img('slider-1.jpg')
             .swiper-slide: span: +img('slider-2.jpg')
             .swiper-slide: span: +img('slider-3.jpg')
-        .swiper-buttons
-          .swiper-button-prev: +img('icons/sw-l.svg')
-          .swiper-button-next: +img('icons/sw-r.svg')
+        include ../components/_sw-arrows
     .textLiner(data-aos='fade-up')
       .marquee
         .track
@@ -43,9 +41,7 @@ block content
           .tab(data-toggle-target=".tab-content-4") грузинская кухня
           .tab(data-toggle-target=".tab-content-5") азиатская кухня
         .tab-content.tab-content-1.active(data-aos='fade-up')
-          .swiper-buttons
-            .swiper-button-prev: +img('icons/sw-l.svg')
-            .swiper-button-next: +img('icons/sw-r.svg')
+          include ../components/_sw-arrows
           .carousel-swiper.swiper-container
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)
@@ -127,9 +123,7 @@ block content
                           div Американская
         - for (let y = 2; y < 6; y++)
           .tab-content(class='tab-content-'+y)
-            .swiper-buttons
-              .swiper-button-prev: +img('icons/sw-l.svg')
-              .swiper-button-next: +img('icons/sw-r.svg')
+            include ../components/_sw-arrows
             .carousel-swiper.swiper-container(data-aos='fade-up')
               .swiper-wrapper
                 - for (let x = 2; x < 4; x++)

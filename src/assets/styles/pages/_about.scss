@@ -53,11 +53,14 @@
       background: url("../images/about/N.svg") no-repeat left top 400px;
     }
     @media screen and (min-width: $screen-lg-min) {
+      background: url("../images/about/N.svg") no-repeat left top 250px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
       padding: 0 100px;
     }
     h1 {
       @media screen and (min-width: $screen-xl-min) {
-        padding-left: 170px;
+        padding-left: 220px;
       }
     }
     &__dev {
@@ -69,6 +72,8 @@
         @media screen and (min-width: $screen-md-min) {
           margin-bottom: 110px;
           margin-top: 0;
+          position: relative;
+          right: -80px;
         }
       }
       img {
@@ -146,6 +151,7 @@
     }
     .event-video {
       margin-bottom: 80px;
+      margin-top: 0;
       @media screen and (min-width: $screen-md-min) {
         margin-bottom: 160px;
       }

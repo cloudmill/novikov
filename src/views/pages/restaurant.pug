@@ -190,9 +190,7 @@ block content
           .card-info-event
             .card-info-event-t(data-aos='fade-up')
               h2.alpha События
-              .swiper-buttons
-                .swiper-button-prev: +img('icons/sw-l.svg')
-                .swiper-button-next: +img('icons/sw-r.svg')
+              include ../components/_sw-arrows
             .carousel-swiper-two.swiper-container.carousel-swiper-img(data-aos='fade-up')
               .swiper-wrapper
                 - for (let x = 2; x < 5; x++)

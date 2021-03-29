@@ -8,7 +8,7 @@ import 'velocity-animate';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min';
 import 'jquery-mousewheel';
 import Sticky from 'sticky-js';
-import skrollr from 'skrollr';
+// import skrollr from 'skrollr';
 
 $.fn.isInViewport = function() {
 	if ($(this).offset()) {
@@ -37,6 +37,7 @@ $(document).ready(() => {
 	require('Scripts/sliders');
 	require('Scripts/video');
 	require('Scripts/menuMore');
+	require('Scripts/cart');
 
 	require('Scripts/backend');
 
@@ -47,6 +48,12 @@ $(document).ready(() => {
 		// eslint-disable-next-line no-unused-vars
 		const sticky = new Sticky('.sticky');
 	}
+
+	$('.swiper-button-prev').mouseover(function() {
+		for (let i = 101; i > 55; i--) {
+			$(this).find('line')[0].x1.baseVal.value = i;
+		}
+	});
 
 	// const s = skrollr.init({
 	// 	smoothScrolling: true,
@@ -63,7 +70,7 @@ $(document).ready(() => {
 		const el = document.querySelector('.section-item--vert');
 		const widthPure = document.body.scrollWidth - document.body.offsetWidth;
 		if (
-		  !$('.vacancy-block').hasClass('active') &&
+			!$('.vacancy-block').hasClass('active') &&
       (window.pageXOffset < widthPure || (window.pageXOffset === widthPure && delta > 0 && el.scrollTop < 10))
 		) {
 			if ($('#about').isInViewport() && !$('.menu a[href=\'#about\']').hasClass('active')) {
@@ -160,7 +167,7 @@ $(window).on('load', () => {
 	if ($('main.page-main').length) {
 		$('.main-loader').addClass('hideIt');
 		setTimeout(() => {
-		  $('body').css('overflow', 'visible');
+			$('body').css('overflow', 'visible');
 			AOS.init({offset: 50});
 
 			if (process.env.NODE_ENV === 'production') {

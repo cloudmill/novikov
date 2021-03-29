@@ -188,7 +188,9 @@
 
   &[disabled],
   &.disabled {
-    opacity: 0.3;
+    //opacity: 0.3;
+    background-color: #ccc;
+    border-color: #ccc;
     cursor: inherit;
   }
 }

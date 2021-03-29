@@ -79,9 +79,7 @@ block content
                         p В октябре 2019 Семена Орехова посвятили в Рыцари Португальского ордена «Confraria do Vinho do Portu» за вклад в развитие португальских вин.
                       .slideshow-swiper.swiper-container
                         .swiper-section
-                          .swiper-buttons
-                            .swiper-button-prev: +img('icons/sw-l.svg')
-                            .swiper-button-next: +img('icons/sw-r.svg')
+                          include ../components/_sw-arrows
                           .swiper-pagination
                         .swiper-wrapper
                           - for (let x = 1; x < 7; x++)
@@ -124,9 +122,7 @@ block content
             p В октябре 2019 Семена Орехова посвятили в Рыцари Португальского ордена «Confraria do Vinho do Portu» за вклад в развитие португальских вин.
           .slideshow-swiper.swiper-container(data-aos='fade-up')
             .swiper-section
-              .swiper-buttons
-                .swiper-button-prev: +img('icons/sw-l.svg')
-                .swiper-button-next: +img('icons/sw-r.svg')
+              include ../components/_sw-arrows
               .swiper-pagination
             .swiper-wrapper
               - for (let x = 1; x < 7; x++)

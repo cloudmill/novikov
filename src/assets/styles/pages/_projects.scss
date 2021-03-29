@@ -179,12 +179,12 @@
         justify-content: space-between;
         height: 37px;
         @media screen and (min-width: $screen-lg-min) {
-          height: 60px;
+          height: 77px;
         }
-        img {
+        svg {
           height: 37px;
           @media screen and (min-width: $screen-lg-min) {
-            height: 60px;
+            height: 77px;
           }
         }
         .swiper-button-prev {

@@ -42,6 +42,9 @@ h1, .alpha {
   text-transform: uppercase;
   font-family: $base-font-family-serif;
   font-size: 18px;
+
+  font-feature-settings: 'liga' off;
+
   @media screen and (min-width: $screen-md-min) {
     font-size: $font-size-h1 * 0.7;
   }
@@ -62,6 +65,7 @@ h3, .gamma   {
   text-transform: uppercase;
   font-size: 16px;
   font-family: $base-font-family-serif;
+  font-feature-settings: 'liga' off;
   @media screen and (min-width: $screen-md-min) {
     font-size: $font-size-h3;
   }
@@ -70,6 +74,7 @@ h4, .delta   {
   text-transform: uppercase;
   font-size: 14px;
   font-family: $base-font-family-serif;
+  font-feature-settings: 'liga' off;
   @media screen and (min-width: $screen-md-min) {
     font-size: $font-size-h4;
   }

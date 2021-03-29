@@ -1,5 +1,12 @@
 .page-certificates {
   overflow: hidden;
+  padding-right: 10px;
+  @media screen and (min-width: $screen-md-min) {
+    padding-right: 20px;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    padding-right: 284px;
+  }
 }
 
 .certificates {
@@ -33,10 +40,16 @@
       top: 0;
       bottom: 0;
       z-index: 4;
+      @media screen and (min-width: $screen-lg-min) {
+        top: -15px;
+      }
       img {
         object-fit: cover;
         @media screen and (min-width: $screen-md-min) {
           height: 100%;
+        }
+        @media screen and (min-width: $screen-lg-min) {
+          height: auto;
         }
       }
     }
@@ -107,6 +120,7 @@
     h3 {
       margin-top: 0;
       font-size: 20px;
+      font-feature-settings: 'liga' off;
       @media screen and (min-width: $screen-md-min) {
         font-size: 24px;
       }
@@ -183,6 +197,14 @@
         justify-content: space-between;
         .add {
           cursor: pointer;
+          @include transitionEase();
+          &:hover {
+            transform: scale(1.2) rotate(180deg);
+          }
+          svg {
+            width: 40px;
+            height: 40px;
+          }
         }
       }
       &-img {

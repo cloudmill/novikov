@@ -8,47 +8,12 @@
         path(fill-rule="evenodd" clip-rule="evenodd" d="M20.7981 18.1568L22.4845 11.0747L21.5117 10.8431L19.8253 17.9252L20.7981 18.1568Z" fill="black")
         path(fill-rule="evenodd" clip-rule="evenodd" d="M14.5 18V11H15.5V18H14.5Z" fill="black")
       .count
-        span 8
-        span 9
+        span 0
+        span 1
   .cart-block-body
-    .cart-block-item
-      .cart-block-item-size
-        div Дисконтная карта
-        .incDec
-          .cart-id.dec--js: +img('icons/cart-inc.svg')
-          .cart-count 1
-          .cart-id.inc--js: +img('icons/cart-dec.svg')
-      .cart-block-item-price
-        .cart-pr(data-pr='10000') #[span 10 000] ₽
-        .cart-wr 256 г
-        .cart-rm.cart-rm--js: +img('icons/cart-close.svg')
-    .cart-block-item
-      .cart-block-item-size
-        div Light
-        .incDec
-          .cart-id.dec--js: +img('icons/cart-inc.svg')
-          .cart-count 1
-          .cart-id.inc--js: +img('icons/cart-dec.svg')
-      .cart-block-item-price
-        .cart-pr(data-pr='3000') #[span 3 000] ₽
-        .cart-rm.cart-rm--js: +img('icons/cart-close.svg')
-    .cart-block-item.cart-block-item--long
-      .cart-block-promo
-        div Карта лояльности #[br] или&nbsp;промокод
-        .input-group
-          input.control.promo--js(type='text', name='promo')
-          .input-group--btn
-            button.disabled(disabled)
-              svg(width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg")
-                rect(y="0.930664" width="40" height="40" fill="#000")
-                path(d="M12 21.3153L17.3333 25.9307L28 15.9307" stroke="#fff")
-    .cart-block-summ
-      div Сумма  заказа
-      .card-summ: b #[span 10 000] ₽
+    .cart-block-body-null: +img('icons/null.svg')
   .cart-block-bottom
-    .cart-block-count
+    .cart-block-count.cart-block-count--null
       div Итого
-      .card-summ: b #[span 10 000] ₽
-    a.btn.btn--full.btn--primary.form--js(href='#') Заказать
-    // кнопка при минимальном заказе, удалить style='display: none'
-    a.btn.btn--full.btn--primary.form--js.disabled(href='#', disabled, style='display: none') 200 ₽ до минимальной суммы заказа
+      .card-summ: b #[span 0] ₽
+    a.btn.btn--full.btn--primary.disabled(href='#', disabled) оформить заказ
