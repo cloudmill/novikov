@@ -116,8 +116,11 @@ body.page-horizontal {
     @media screen and (min-width: 1680px) and (min-width: 1899px) {
       padding: 0 0 20px 20px;
     }
-    @media screen and (min-width: 1900px) {
+    @media screen and (min-width: 1900px) and (min-height: 1000px)  {
       padding: 110px 0 110px 20px !important;
+    }
+    @media screen and (min-width: 1900px) and (max-height: 999px) {
+      padding: 5vh 0 5vh 20px !important;
     }
     @media screen and (min-width: $screen-md-min) {
       &:not(:nth-child(2)):after {
@@ -763,6 +766,9 @@ body.page-horizontal {
       writing-mode: vertical-lr;
       transform: rotate(-180deg);
     }
+    @media screen and (min-width: 1366px) {
+      left: -11vw;
+    }
   }
 
   .vertical-swiper {
@@ -977,6 +983,85 @@ body.page-horizontal {
   &.active {
     z-index: 3;
     opacity: 1;
+  }
+}
+
+
+@media screen and (min-width: 1900px) and (min-height: 1000px)  {
+  .card-info-list {
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+  .card #about .section-item:nth-child(4) {
+    width: 1040px;
+    min-width: 1040px;
+  }
+  .card .section:not(:nth-child(2)):after {
+    top: 110px;
+    bottom: 110px;
+  }
+  .card #chief .section-item:first-child {
+    margin-left: 100px;
+  }
+  .card .title-vert {
+    left: -11vh;
+    font-size: calc(9vh - 7px);
+  }
+  .card #banket .section-item:first-child {
+    width: 750px;
+  }
+  .card-info-menu__ico {
+    margin-bottom: 44px;
+  }
+  .events-item-title {
+    max-height: 54px;
+    overflow: hidden;
+  }
+  .card-info-event-t {
+    margin-bottom: 30px;
+  }
+  .card-info-text h3 {
+    font-size: 22px;
+  }
+}
+@media screen and (min-width: 1900px) and (max-height: 999px) {
+  .card-info-list {
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+  .card #about .section-item:nth-child(4) {
+    width: 1040px;
+    min-width: 1040px;
+  }
+  .card .section:not(:nth-child(2)):after {
+    top: 5vh;
+    bottom: 5vh;
+  }
+  .card #chief .section-item:first-child {
+    margin-left: 100px;
+  }
+  .card .title-vert {
+    left: -11vh;
+    font-size: calc(10.7vh - 7px);
+  }
+  .card #banket .section-item:first-child {
+    width: 750px;
+  }
+  .card-info-menu__ico {
+    margin-bottom: 44px;
+  }
+  #oneMap {
+    height: 67vh;
+  }
+  .events-item-title {
+    max-height: 54px;
+    overflow: hidden;
+  }
+  .card-info-event-t {
+    margin-bottom: 30px;
+  }
+  .card-info-text h3 {
+    font-size: 22px;
   }
 }
 
@@ -1352,6 +1437,32 @@ body.page-horizontal {
   }
 }
 
+@media screen and (min-width: 768px) and (max-width: 1279px) and (min-height: 800px) {
+  .card .section {
+    height: 600px;
+    margin: auto !important;
+  }
+  .card #about .section-item:nth-child(2) {
+    width: 800px;
+  }
+  .card #banket .section-item:last-child {
+    width: 800px;
+  }
+  .card {
+    align-items: center;
+    height: calc(100vh - 190px);
+  }
+  .card .title-vert {
+    left: -12vw;
+    font-size: 82px;
+  }
+  #oneMap {
+    height: 600px;
+  }
+  .card-info-event {
+    max-width: 860px;
+  }
+}
 
 .sticky {
   top: 0;

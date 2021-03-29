@@ -45,10 +45,10 @@ $(document).ready(() => {
 		const sticky = new Sticky('.sticky');
 	}
 
-	// const s = skrollr.init({
-		// smoothScrolling: true,
-		// smoothScrollingDuration: 1800
-	// });
+	const s = skrollr.init({
+		smoothScrolling: true,
+		smoothScrollingDuration: 1800
+	});
 
 });
 
