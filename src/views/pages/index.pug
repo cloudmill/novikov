@@ -20,8 +20,10 @@ block content
       .main-swiper.swiper-container(data-aos='fade-up')
         .swiper-pagination
         .swiper-wrapper
-          - for (let x = 2; x < 8; x++)
-            .swiper-slide: span: +img('slider.jpg')
+          - for (let x = 2; x < 4; x++)
+            .swiper-slide: span: +img('slider-1.jpg')
+            .swiper-slide: span: +img('slider-2.jpg')
+            .swiper-slide: span: +img('slider-3.jpg')
         .swiper-buttons
           .swiper-button-prev: +img('icons/sw-l.svg')
           .swiper-button-next: +img('icons/sw-r.svg')
@@ -47,15 +49,15 @@ block content
           .carousel-swiper.swiper-container
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     .badge
                       .marquee
                         .track
-                          .content: +img('icons/new-badge1.svg')
+                          .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                       .marquee
                         .track
-                          .content: +img('icons/soon-badge1.svg')
+                          .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                     +img('index/slide-1.jpg')
                     .logo: +img('index/logo-1.jpg')
                   .restaurant-desc
@@ -68,15 +70,15 @@ block content
                         .title кухни
                         .text
                             div грузинская
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     .badge
                       .marquee
                         .track
-                          .content: +img('icons/new-badge1.svg')
+                          .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                       .marquee
                         .track
-                          .content: +img('icons/soon-badge1.svg')
+                          .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                     +img('index/slide-2.jpg')
                     .logo: +img('index/logo-2.jpg')
                   .restaurant-desc
@@ -89,12 +91,12 @@ block content
                         .text
                           div Адыгейская
                           div Американская
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     .badge
                       .marquee
                         .track
-                          .content: +img('icons/new-badge1.svg')
+                          .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                     +img('index/slide-3.jpg')
                   .restaurant-desc
                     h3 aqua
@@ -105,12 +107,12 @@ block content
                         .text
                           div азиатская
                           div европейская
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     .badge
                       .marquee
                         .track
-                          .content: +img('icons/soon-badge1.svg')
+                          .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                     +img('index/slide-4.jpg')
                   .restaurant-desc
                     h3 КЛЁВО НА УСАЧЕВСКОМ
@@ -131,15 +133,15 @@ block content
             .carousel-swiper.swiper-container(data-aos='fade-up')
               .swiper-wrapper
                 - for (let x = 2; x < 4; x++)
-                  .swiper-slide.restaurant
+                  a.swiper-slide.restaurant(href='#')
                     .restaurant-img
                       .badge
                         .marquee
                           .track
-                            .content: +img('icons/new-badge1.svg')
+                            .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                         .marquee
                           .track
-                            .content: +img('icons/soon-badge1.svg')
+                            .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                       +img('index/slide-1.jpg')
                       .logo: +img('index/logo-1.jpg')
                     .restaurant-desc
@@ -152,15 +154,15 @@ block content
                           .title кухни
                           .text
                             div грузинская
-                  .swiper-slide.restaurant
+                  a.swiper-slide.restaurant(href='#')
                     .restaurant-img
                       .badge
                         .marquee
                           .track
-                            .content: +img('icons/new-badge1.svg')
+                            .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                         .marquee
                           .track
-                            .content: +img('icons/soon-badge1.svg')
+                            .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                       +img('index/slide-2.jpg')
                       .logo: +img('index/logo-2.jpg')
                     .restaurant-desc
@@ -173,12 +175,12 @@ block content
                           .text
                             div Адыгейская
                             div Американская
-                  .swiper-slide.restaurant
+                  a.swiper-slide.restaurant(href='#')
                     .restaurant-img
                       .badge
                         .marquee
                           .track
-                            .content: +img('icons/new-badge1.svg')
+                            .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                       +img('index/slide-3.jpg')
                     .restaurant-desc
                       h3 aqua
@@ -189,12 +191,12 @@ block content
                           .text
                             div азиатская
                             div европейская
-                  .swiper-slide.restaurant
+                  a.swiper-slide.restaurant(href='#')
                     .restaurant-img
                       .badge
                         .marquee
                           .track
-                            .content: +img('icons/soon-badge1.svg')
+                            .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                       +img('index/slide-4.jpg')
                     .restaurant-desc
                       h3 КЛЁВО НА УСАЧЕВСКОМ
@@ -211,7 +213,7 @@ block content
       .main-about-badge
         .marquee
           .track
-            .content: +img('icons/since1.svg')
+            .content since 1991 — since 1991 — since 1991  — since 1991 — since 1991 — since 1991  — since 1991
       .container
         .main-about-title
           .main-about-title__top
@@ -226,7 +228,7 @@ block content
             .wrapTitle(data-aos)
               span.word-wrap: span GROUP
         .main-about__back
-          .rellax(data-rellax-speed="1"): +img('index/N.svg')
+          .rellax(data-rellax-speed="2"): +img('index/N.svg')
         .col__md-6.main-about-content(data-aos='fade-up')
           .main-about-desc
             p История Novikov Group берет свое начало в 1991 году. Именно в этом году Аркадий Новиков открыл свой первый ресторан — Sirena, который стал первым рыбным рестораном столицы с качественно новым подходом к кухне, обслуживанию, интерьеру и атмосфере.
@@ -234,7 +236,7 @@ block content
           .main-about-back
             +img('index/author-0.jpg')
             .visible__sm.visible__xs: +img('index/author-1.jpg')
-      .main-about-author: +img('index/author-1.jpg')
+      .main-about-author: .rellax(data-rellax-speed="1"): +img('index/author-1.jpg')
     .main-events
       .container(data-aos='fade-up')
         h2 События

@@ -19,6 +19,10 @@
       height: 22px;
       width: 92px;
       z-index: 99;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 140%;
+      text-transform: uppercase;
       > * {
         display: block;
         margin-bottom: 10px;
@@ -44,6 +48,7 @@
     h3 {
       margin-top: 20px;
       margin-bottom: 20px;
+      @include transitionEase(color);
     }
     .inner {
       display: flex;

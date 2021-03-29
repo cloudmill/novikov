@@ -18,18 +18,70 @@
 
 
 section, article, aside, footer, header, nav, hgroup, main {
-  display:block;
+  display: block;
+}
+
+html::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+  -webkit-appearance: none !important;
+  -webkit-overflow-scrolling: touch
+}
+
+html::-webkit-scrollbar:horizontal {
+  height: 6px !important
+}
+
+html::-webkit-scrollbar:vertical {
+  width: 6px !important
+}
+
+html::-webkit-scrollbar-track-piece {
+  background: #eff7fd !important
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #000 !important
+}
+
+html::-webkit-scrollbar-thumb:window-inactive {
+  background: #000 !important
+}
+
+html::-webkit-scrollbar-button, html::-webkit-scrollbar-track {
+  background-color: transparent
+}
+
+html::-webkit-resizer, html::-webkit-scrollbar-corner {
+  background-color: transparent
 }
 
 //
 // Delete focus border
 //
-a:active, a:focus {outline: none;}
-input, textarea {outline:none;}
-input:active, textarea:active {outline:none;}
-button:active, button:focus {outline: none;}
-:focus {outline:none;}
-button::-moz-focus-inner {border: 0;}
+a:active, a:focus {
+  outline: none;
+}
+
+input, textarea {
+  outline: none;
+}
+
+input:active, textarea:active {
+  outline: none;
+}
+
+button:active, button:focus {
+  outline: none;
+}
+
+:focus {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
 
 //
 // Clearfix
@@ -42,7 +94,7 @@ button::-moz-focus-inner {border: 0;}
 // HTML
 //
 html {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 //
@@ -88,27 +140,31 @@ img {
   height: auto;
   vertical-align: middle;
 }
-.img--right{
-  float:right;
-  margin-bottom:  $line-height-computed;
+
+.img--right {
+  float: right;
+  margin-bottom: $line-height-computed;
   margin-left: $line-height-computed;
 }
-.img--left{
-  float:left;
+
+.img--left {
+  float: left;
   margin-right: $line-height-computed;
   margin-bottom: $line-height-computed;
 }
-.img--center{
-  display:block;
-  margin-right:auto;
+
+.img--center {
+  display: block;
+  margin-right: auto;
   margin-bottom: $line-height-computed;
-  margin-left:auto;
+  margin-left: auto;
 }
 
 
 .m-auto {
   margin: 0 auto;
 }
+
 .mt-auto {
   margin-top: auto;
 }
@@ -124,6 +180,6 @@ img {
   margin: -1px;
   padding: 0;
   border: 0;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   overflow: hidden;
 }

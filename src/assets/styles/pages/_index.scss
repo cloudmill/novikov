@@ -124,6 +124,13 @@
     @media screen and (min-width: $screen-xl-min) {
       margin-left: 300px;
     }
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      -webkit-appearance: none !important;
+      -webkit-overflow-scrolling: touch;
+      background-color: transparent !important;
+    }
     .tab {
       margin-right: 40px;
       white-space: nowrap;
@@ -172,16 +179,23 @@
     margin-bottom: 100px;
   }
   @media screen and (min-width: $screen-lg-min) {
-    margin-bottom: 180px;
+    margin-bottom: 100px;
   }
   &__back {
     position: absolute;
     left: 0;
+    @media screen and (min-width: $screen-lg-min) {
+      top: 20%;
+    }
   }
   &-badge {
     margin-left: 20px;
     width: 257px;
     height: 22px;
+    font-size: 16px;
+    line-height: 120%;
+    text-transform: uppercase;
+    font-family: $base-font-family-serif;
   }
   &-title {
     font-size: 60px;
@@ -260,7 +274,7 @@
       width: 127px;
       margin-right: 10px;
       @media screen and (min-width: $screen-md-min) {
-        width: auto;
+        width: 257px;
         margin-right: 0;
       }
     }
@@ -275,7 +289,7 @@
       display: block;
     }
     @media screen and (min-width: $screen-xl-min) {
-      width: auto;
+      width: 530px;
     }
     img {
       border-radius: 0px 60px 0px 0px;
@@ -300,6 +314,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    .events-item:not(.events-item--main):last-child {
+      @media screen and (min-width: $screen-xl-min) {
+        padding-bottom: 20px;
+      }
+    }
   }
   .events-list {
     margin-top: 40px;

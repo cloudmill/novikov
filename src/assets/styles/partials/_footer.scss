@@ -85,12 +85,13 @@ $baseColor: #0A0A0A;
             color: $color-type-2a;
           }
         }
+        &:before,
         &:after {
           border-color: $input-bg;
           background-color: $baseColor;
         }
       }
-      input[type="checkbox"]:checked + label:after {
+      input[type="checkbox"] + label:before {
         background: url('../images/icons/chk.svg') center center no-repeat, $baseColor;
       }
     }

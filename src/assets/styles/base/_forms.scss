@@ -168,6 +168,20 @@ input[type="search"] {
       background: $input-bg;
       @include transitionEase(background);
     }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 25px;
+      height: 25px;
+      opacity: 0;
+      z-index: 9;
+      border: 1px solid $black;
+      @include transitionEase(opacity);
+      background: url('../images/icons/chk-b.svg') center center no-repeat, $input-bg;
+    }
   }
 
   .control-error {
@@ -183,8 +197,8 @@ input[type="search"] {
   input[type="radio"] {display: none;}
 }
 
-.checkbox input[type="checkbox"]:checked + label:after {
-  background: url('../images/icons/chk-b.svg') center center no-repeat, $input-bg;
+.checkbox input[type="checkbox"]:checked + label:before {
+  opacity: 1;
 }
 .radio input[type="radio"]:checked + label:after {
   background: url('../images/icons/radio.svg') center center no-repeat, $input-bg;

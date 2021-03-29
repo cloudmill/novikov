@@ -117,6 +117,7 @@ export function initSwiper() {
 				spaceBetween: 10,
 				slidesPerView: 'auto',
 				loop: true,
+				centeredSlides: true,
 				navigation: {
 					nextEl: next[0],
 					prevEl: prev[0],

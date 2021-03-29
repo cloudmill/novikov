@@ -11,13 +11,16 @@ import Sticky from 'sticky-js';
 import skrollr from 'skrollr';
 
 $.fn.isInViewport = function() {
-	const elementStart = $(this).offset().left;
-	const elementEnd = elementStart + $(this).outerWidth();
+	if ($(this).offset()) {
+		const elementStart = $(this).offset().left;
+		const elementEnd = elementStart + $(this).outerWidth();
 
-	const viewportStart = $(document).scrollLeft();
-	const viewportEnd = viewportStart + document.body.offsetWidth;
+		const viewportStart = $(document).scrollLeft();
+		const viewportEnd = viewportStart + document.body.offsetWidth;
 
-	return elementEnd > viewportStart && elementStart < viewportEnd;
+		return elementEnd > viewportStart && elementStart < viewportEnd;
+	}
+	return true;
 };
 
 const screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -45,10 +48,10 @@ $(document).ready(() => {
 		const sticky = new Sticky('.sticky');
 	}
 
-	const s = skrollr.init({
-		smoothScrolling: true,
-		smoothScrollingDuration: 1800
-	});
+	// const s = skrollr.init({
+	// 	smoothScrolling: true,
+	// 	smoothScrollingDuration: 1800
+	// });
 
 });
 
@@ -107,7 +110,7 @@ $(document).ready(() => {
 })();
 
 
-if ('ontouchstart' in document.documentElement) {
+if ('ontouchstart' in document.documentElement && $('#about').length) {
 	document.querySelectorAll('ul.menu a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function(e) {
 			e.preventDefault();

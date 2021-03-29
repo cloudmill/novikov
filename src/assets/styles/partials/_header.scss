@@ -32,7 +32,7 @@
   }
   &__lang {
     font-size: 18px;
-    margin: 0;
+    margin: 0 20px 0 0;
     padding: 0;
     li {
       display: inline-block;
@@ -67,6 +67,21 @@
           }
         }
       }
+    }
+    .ui-button-circle-icon__label-wr:after,
+    .ui-button-circle-icon__label {
+      padding-left: 20px;
+      padding-right: 0;
+    }
+    .btn-icon .burger + span {
+      margin-left: 0;
+    }
+    .btn-border .ui-button-circle-icon__label-wr:after,
+    .btn-border .ui-button-circle-icon__label {
+      padding-left: 15px;
+    }
+    .btn {
+      min-width: inherit;
     }
     .burger {
       width: 40px;
@@ -112,7 +127,7 @@
       margin-left: 15px;
     }
     @media screen and (min-width: $screen-lg-min) {
-      margin-left: 33px;
+      margin-left: 20px;
     }
     @media screen and (max-width: $screen-sm-max) {
       img {
@@ -224,9 +239,6 @@
         position: relative;
         z-index: 2;
       }
-      + span {
-        margin-left: 14px;
-      }
     }
   }
 }
@@ -258,14 +270,14 @@
   }
   &:after {
     content: '';
+    top: 0;
     left: 0;
-    right: 0;
+    width: 0;
     bottom: 0;
-    height: 0;
     overflow: hidden;
     position: absolute;
     //background-color: $black;
-    @include transitionEase(height);
+    @include transitionEase(width);
     background: url("../images/N.svg") no-repeat right bottom / 85% auto, $black;
     @media screen and (min-width: $screen-md-min) {
       background: url("../images/N.svg") no-repeat right bottom, $black;
@@ -288,7 +300,7 @@
     overflow-y: auto;
     //left: 0;
     &:after {
-      height: 100%;
+      width: 100%;
     }
 
     .ui-button-circle-icon {
@@ -304,8 +316,8 @@
       @include transitionEase(top);
     }
     &:after {
-      @include transitionEase(bottom, .5s, .8s);
-      bottom: 120%;
+      @include transitionEase(left, .5s, .8s);
+      left: -120%;
     }
   }
 
