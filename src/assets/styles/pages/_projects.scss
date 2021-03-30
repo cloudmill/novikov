@@ -149,18 +149,17 @@
       font-size: 16px;
       margin-bottom: 20px;
     }
-    .slideshow-swiper {
+    .shape {
+      border-radius: 0px 60px;
+      overflow: hidden;
+    }
+    .sw-content {
       margin-top: 40px;
       @media screen and (min-width: $screen-md-min) {
         margin-top: 60px;
       }
       @media screen and (min-width: $screen-lg-min) {
         margin-top: 80px;
-      }
-      .swiper-slide {
-        img {
-          border-radius: 0px 60px;
-        }
       }
     }
     .swiper {

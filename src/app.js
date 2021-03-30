@@ -8,7 +8,6 @@ import 'velocity-animate';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min';
 import 'jquery-mousewheel';
 import Sticky from 'sticky-js';
-// import skrollr from 'skrollr';
 
 $.fn.isInViewport = function() {
 	if ($(this).offset()) {
@@ -41,7 +40,33 @@ $(document).ready(() => {
 
 	require('Scripts/backend');
 
-	$('.scrollContent').mCustomScrollbar();
+	const rellax = new Rellax('.rellax', {
+		center: true
+	});
+	$('.scrollContent').mCustomScrollbar({
+		callbacks: {
+			whileScrolling: function() {
+				AOS.refresh();
+				if ($('.rellax').length) {
+					rellax.refresh();
+				}
+			},
+		}
+	});
+
+	$('.scrollContentX').mCustomScrollbar({
+		axis: 'x',
+		callbacks: {
+			whileScrolling: function() {
+				console.log(this.mcs);
+				AOS.refresh();
+				if (this.mcs.draggerLeft > 1400) {
+					console.log('stop');
+				}
+				// AOS.refresh();
+			},
+		}
+	});
 
 
 	if (screenWidth > 1150 && $('.sticky').length) {
@@ -49,15 +74,16 @@ $(document).ready(() => {
 		const sticky = new Sticky('.sticky');
 	}
 
-	$('.swiper-button-prev').mouseover(function() {
-		for (let i = 101; i > 55; i--) {
-			$(this).find('line')[0].x1.baseVal.value = i;
-		}
-	});
-
-	// const s = skrollr.init({
-	// 	smoothScrolling: true,
-	// 	smoothScrollingDuration: 1800
+	$('.tooltip-name')
+		.hover(function() {
+			$('.tooltip-desc').fadeIn(500);
+		}, function() {
+			$('.tooltip-desc').fadeOut(500);
+		});
+	// $('.swiper-button-prev').mouseover(function() {
+	// 	for (let i = 101; i > 55; i--) {
+	// 		$(this).find('line')[0].x1.baseVal.value = i;
+	// 	}
 	// });
 
 });
@@ -102,8 +128,8 @@ $(document).ready(() => {
 	}
 
 	if (screenWidth > 767 && $('.card.card-scroller').length) {
-		window.addEventListener('mousewheel', scrollHorizontally, false);
-		window.addEventListener('DOMMouseScroll', scrollHorizontally, false);
+		// window.addEventListener('mousewheel', scrollHorizontally, false);
+		// window.addEventListener('DOMMouseScroll', scrollHorizontally, false);
 	}
 	if (screenWidth > 767 && !$('.card.card-scroller').length) {
 		// $(document).mousewheel(function(e, delta) {
@@ -173,12 +199,13 @@ $(window).on('load', () => {
 			if (process.env.NODE_ENV === 'production') {
 				window.scrollTo(0, 0);
 			}
-			if ($('.rellax').length) {
-				// eslint-disable-next-line no-new
-				new Rellax('.rellax', {
-					center: true
-				});
-			}
+			// if ($('.rellax').length) {
+			// 	// eslint-disable-next-line no-new
+			// 	new Rellax('.rellax', {
+			// 		wrapper: '.mCustomScrollBox',
+			// 		center: true
+			// 	});
+			// }
 		}, 3000);
 	} else {
 		setTimeout(() => {
@@ -191,12 +218,13 @@ $(window).on('load', () => {
 				window.scrollTo(0, 0);
 			}
 
-			if ($('.rellax').length) {
-				// eslint-disable-next-line no-new
-				new Rellax('.rellax', {
-					center: true
-				});
-			}
+			// if ($('.rellax').length) {
+			// 	// eslint-disable-next-line no-new
+			// 	new Rellax('.rellax', {
+			// 		wrapper: '.mCustomScrollBox',
+			// 		center: true
+			// 	});
+			// }
 		}, 800);
 	}
 });

@@ -74,16 +74,17 @@
   &-desc {
     margin-top: 40px;
     margin-bottom: 40px;
+    margin-left: auto;
+    font-size: 14px;
     @media screen and (min-width: $screen-md-min) {
       margin-top: 80px;
       margin-bottom: 80px;
       padding-left: 100px;
+      font-size: 16px;
     }
     @media screen and (min-width: $screen-lg-min) {
-      padding-left: 200px;
-    }
-    @media screen and (min-width: $screen-xl-min) {
-      padding-left: 360px;
+      padding-left: 0;
+      max-width: 720px;
     }
     p {
       margin-bottom: 30px;
@@ -108,8 +109,26 @@
       z-index: 2;
       margin: auto;
       width: 150px;
+      @include transitionEase(transform);
       @media screen and (min-width: $screen-md-min) {
         width: auto;
+      }
+      circle {
+        &:first-of-type {
+          @include transitionEase(fill);
+        }
+        @include transitionEase(stroke);
+      }
+    }
+    &:hover {
+      svg {
+        transform: scale(1.2);
+        circle {
+          &:first-of-type {
+            fill: $color-type-2a;
+          }
+          stroke: $color-type-2a;
+        }
       }
     }
   }
@@ -183,8 +202,10 @@ video {
     url("../images/event/line-1.svg") no-repeat left center / auto 100%,
     url("../images/event/line-2.svg") no-repeat right center / auto 102%;
   margin-bottom: 80px;
+  padding: 0 10px;
   @media screen and (min-width: $screen-xl-min) {
     margin-bottom: 160px;
+    padding: 0 40px;
   }
   &:before {
     content: '';
@@ -212,7 +233,7 @@ video {
       padding-bottom: 10px;
       border-bottom: 1px solid white;
       @media screen and (min-width: $screen-xl-min) {
-        font-size: 67px;
+        font-size: 63px;
       }
     }
   }
@@ -232,7 +253,7 @@ video {
         padding: 0 100px 40px;
       }
       @media screen and (min-width: $screen-lg-min) {
-        padding: 0 180px 40px;
+        padding: 0 140px 40px;
       }
     }
   }
@@ -242,11 +263,13 @@ video {
       padding: 0 100px;
     }
     @media screen and (min-width: $screen-lg-min) {
-      padding: 0 270px;
+      padding: 0 230px;
     }
     a {
       color: white;
-      border-color: white;
+      &:after {
+        border-color: white;
+      }
 
       path.arr {
         fill: white;
@@ -262,6 +285,7 @@ video {
       color: #9C9C9C;
       font-size: 13px;
       text-transform: uppercase;
+      margin-bottom: 10px;
       font-family: $base-font-family-serif;
     }
     .incDec {
@@ -326,8 +350,11 @@ video {
     &-list {
       a {
         text-decoration: none;
+        border-bottom: 1px solid transparent;
+        @include transitionEase();
         &:hover {
           color: $color-type-2a;
+          border-color: $color-type-2a;
         }
       }
     }

@@ -49,25 +49,26 @@ block content
                         +img('event/logo-1.svg')
                       .project-info__item
                         div Москва, ул. Петровка, 3/6, стр. 2
-                        div: a(href='tel:84957898652') 8 495 789 86 52
-                        div: a(href='http://www.novikovschool.ru', target="_blank") novikovschool.ru
+                        div: a.lead(href='tel:84957898652') 8 495 789 86 52
+                        div: a.lead(href='http://www.novikovschool.ru', target="_blank") novikovschool.ru
                       .project-info__item
-                        div: a(href='#', target="_blank") Instagram
-                        div: a(href='#', target="_blank") Facebook
-                        div: a(href='#', target="_blank") Telegram
+                        div: a.lead(href='#', target="_blank") Instagram
+                        div: a.lead(href='#', target="_blank") Facebook
+                        div: a.lead(href='#', target="_blank") Telegram
                     .project-desc
                       .col__xl-8.col__lg-10
                         ul.list--bullet.list--bullet--bl
                           li Кулинарные курсы для любителей и профессионалов
                           li Мастер-классы для взрослых, детей и подростков по разным темам и кухням мира
                           li Школа ресторанного менеджмента, тренинги по сервису для отелей и ресторанов
-                      .slideshow-swiper.swiper-container
+                      .sw-content
                         .swiper-section
                           include ../components/_sw-arrows
                           .swiper-pagination
-                        .swiper-wrapper
-                          - for (let x = 1; x < 7; x++)
-                            .swiper-slide: span: +img('slider.jpg')
+                        .slideshow-swiper.swiper-container
+                          .swiper-wrapper
+                            - for (let x = 1; x < 7; x++)
+                              .swiper-slide: span: +img('slider.jpg')
 
       section.section.hidden__sm.hidden__xs(data-aos='fade-up')
         h2.alpha Novikov School
@@ -76,25 +77,26 @@ block content
             +img('event/logo-1.svg')
           .project-info__item
             div Москва, ул. Петровка, 3/6, стр. 2
-            div: a(href='tel:84957898652') 8 495 789 86 52
-            div: a(href='http://www.novikovschool.ru', target="_blank") novikovschool.ru
+            div: a.lead(href='tel:84957898652') 8 495 789 86 52
+            div: a.lead(href='http://www.novikovschool.ru', target="_blank") novikovschool.ru
           .project-info__item
-            div: a(href='#', target="_blank") Instagram
-            div: a(href='#', target="_blank") Facebook
-            div: a(href='#', target="_blank") Telegram
+            div: a.lead(href='#', target="_blank") Instagram
+            div: a.lead(href='#', target="_blank") Facebook
+            div: a.lead(href='#', target="_blank") Telegram
         .project-desc(data-aos='fade-up')
           .col__xl-8.col__lg-10
             ul.list--bullet.list--bullet--bl
               li Кулинарные курсы для любителей и профессионалов
               li Мастер-классы для взрослых, детей и подростков по разным темам и кухням мира
               li Школа ресторанного менеджмента, тренинги по сервису для отелей и ресторанов
-          .slideshow-swiper.swiper-container(data-aos='fade-up')
+          .sw-content
             .swiper-section
               include ../components/_sw-arrows
               .swiper-pagination
-            .swiper-wrapper
-              - for (let x = 1; x < 7; x++)
-                .swiper-slide: span: +img('slider.jpg')
+            .slideshow-swiper.swiper-container.shape(data-aos='fade-up')
+              .swiper-wrapper
+                - for (let x = 1; x < 7; x++)
+                  .swiper-slide: span: +img('slider.jpg')
 
 
 block footer

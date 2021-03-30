@@ -20,40 +20,51 @@ block content
             li(data-toggle-target="dish") Премьера блюд
             li(data-toggle-target="news") Новости
             li.span
-    .row.eventsList(data-aos='fade-up')
+    .row.eventsList
       - for (let y = 1; y < 5; y++)
-        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='deg')
+        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='deg', data-aos='fade-up')
           a.events-item(href='#')
             .events-item-img
-              .events-item-line: +img('index/line-1.svg')
+              .events-item-line
+                .marquee
+                  .track
+                    .content премьера блюд — премьера блюд — премьера блюд — премьера блюд — премьера блюд — премьера блюд —
               .events-item-logo: +img('index/logo-1.jpg')
               +img('index/event-1.jpg')
             .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
             .events-item-date 27.03.2021
-        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='master')
+        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='master', data-aos='fade-up')
           a.events-item(href='#')
             .events-item-img
-              .events-item-line: +img('index/line-2.svg')
+              .events-item-line
+                .marquee
+                  .track
+                    .content дегустацуии — дегустацуии — дегустацуии — дегустацуии — дегустацуии — дегустацуии — дегустацуии —
               .events-item-logo: +img('index/logo-2.jpg')
               +img('index/event-2.jpg')
             .events-item-title Ресторан savva дарит скидку зрителям большого театра
             .events-item-date 27.03.2021
-        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='dish')
+        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='dish', data-aos='fade-up')
           a.events-item(href='#')
             .events-item-img
-              .events-item-line: +img('index/line-3.svg')
+              .events-item-line
+                .marquee
+                  .track
+                    .content новости — новости — новости — новости — новости — новости — новости — новости — новости —
               +img('index/event-3.jpg')
             .events-item-title Согревающие коктейли в ресторанах Novikov Group
             .events-item-date 27.03.2021
-        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='news')
+        .col.col__lg-4.col__md-6.col__xs-12.filter__item--js(data-text='news', data-aos='fade-up')
           a.events-item(href='#')
             .events-item-img
-              .events-item-line: +img('index/line-1.svg')
+              .events-item-line
+                .marquee
+                  .track
+                    .content премьера блюд — премьера блюд — премьера блюд — премьера блюд — премьера блюд — премьера блюд —
               .events-item-logo: +img('index/logo-1.jpg')
               +img('index/event-1.jpg')
             .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
             .events-item-date 27.03.2021
-
     .text--center.showMore(data-aos='fade-up')
       a.btn-icon.text--uppercase(href='#')
         span показать еще

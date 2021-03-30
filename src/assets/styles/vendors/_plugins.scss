@@ -30,6 +30,10 @@ percent_icon;
   }
 }
 
+.mCSB_scrollTools {
+  z-index: 9999;
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   svg {
@@ -72,16 +76,18 @@ percent_icon;
   text-transform: uppercase;
   border: none;
   padding-top: 0;
+  font-weight: normal;
   height: auto;
   padding-bottom: 20px;
   border-radius: 0;
   border-bottom: 1px solid #000000;
+  @include transitionEase();
 
   .select2-selection__arrow {
     top: 0;
     height: 75%;
-    @include transitionEase(transform);
     background: url('../images/icons/select.svg') center right no-repeat;
+    @include transitionEase();
 
     b {
       display: none;
@@ -91,6 +97,17 @@ percent_icon;
   .select2-selection__rendered {
     padding: 0;
     color: black;
+    @include transitionEase();
+  }
+
+  &:hover {
+    border-color: $color-type-2a;
+    .select2-selection__rendered {
+      color: $color-type-2a;
+    }
+    .select2-selection__arrow {
+      background: url('../images/icons/selectr.svg') center right no-repeat;
+    }
   }
 }
 
@@ -191,9 +208,18 @@ percent_icon;
   svg {
     width: 45px;
     height: 45px;
+    cursor: pointer;
     @media screen and (min-width: $screen-md-min) {
       width: 80px;
       height: 80px;
+    }
+    rect {
+      @include transitionEase(fill);
+    }
+    &:hover {
+      rect:first-of-type {
+        fill: $color-type-2a;
+      }
     }
   }
 }
@@ -203,7 +229,7 @@ percent_icon;
 .jBox-container {
   width: 100%;
   @media screen and (min-width: $screen-lg-min) {
-    width: 1086px;
+    width: 1086px + 160px;
   }
 
   .popup {

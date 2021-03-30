@@ -25,7 +25,8 @@ $('.search-block--js').click(function() {
 	return false;
 });
 $('.vacancy-block--js').click(function() {
-	$(this).parent().toggleClass('active');
+	// $(this).parent().toggleClass('active');
+	$('.vacancy-block').toggleClass('active');
 	let vacancyName = $(this).attr('data-vacancy-name'),
 		vacancyRestaurant = $(this).attr('data-vacancy-restaurant'),
 		vacancyRegion = $(this).attr('data-vacancy-region');
@@ -34,7 +35,7 @@ $('.vacancy-block--js').click(function() {
 	$('.vacancy-block').attr('data-vacancy-name', vacancyName);
 	$('.vacancy-block').attr('data-vacancy-restaurant', vacancyRestaurant);
 	$('.vacancy-block').attr('data-vacancy-region', vacancyRegion);
-	
+
 	return false;
 });
 $('.box--js').click(function() {

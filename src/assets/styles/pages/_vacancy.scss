@@ -116,7 +116,11 @@
         line-height: 2;
       }
       a {
-        border-bottom: 1px solid $black;
+        margin-top: 5px;
+        font-size: 16px;
+        line-height: 1;
+        display: inline-block;
+        //border-bottom: 1px solid $black;
       }
     }
   }

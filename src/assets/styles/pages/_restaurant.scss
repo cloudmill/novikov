@@ -133,7 +133,16 @@
         }
         @media screen and (min-width: $screen-lg-min) {
           font-size: 60px;
-          padding-bottom: 10px;
+          padding-bottom: 5px;
+        }
+
+        &:hover {
+          .select2-selection__arrow {
+            background: url('../images/icons/selectr-arr.svg') no-repeat center right / 100% auto;
+            @media screen and (min-width: $screen-lg-min) {
+              background: url('../images/icons/selectr-arr.svg') center right no-repeat;
+            }
+          }
         }
       }
       .select2-selection__rendered {

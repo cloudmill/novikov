@@ -1,4 +1,4 @@
-extends ../layouts/master.pug
+extends ../layouts/masterX.pug
 
 block header
   include ../partials/_header.pug
@@ -10,7 +10,7 @@ block pageName
 
 block content
   main.page-card
-    .card.card-scroller
+    .card.card-scroller.scrollContentX
       .card-bottom
         .card-bottom__left.hidden__sm.hidden__xs
           a.btn.btn-icon.btn--primary.ui-button-circle-icon(href='#')
@@ -212,5 +212,3 @@ block content
           .card-info-map(data-aos='fade-up')
             #oneMap
           include ../partials/_footer.pug
-
-block footer

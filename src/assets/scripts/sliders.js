@@ -1,5 +1,5 @@
 import Swiper from 'swiper/swiper-bundle.min';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 
 if ($('.main-swiper').length) {
@@ -16,7 +16,7 @@ if ($('.main-swiper').length) {
 			el: '.swiper-pagination',
 			type: 'custom',
 			renderCustom: function(sw, current, total) {
-				return `<span>${current}</span> ` + ' <img src="assets/images/icons/line.svg" /> ' + total;
+				return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + total;
 			}
 		},
 		navigation: {
@@ -67,22 +67,28 @@ if ($('.vertical-swiper').length) {
 
 if ($('.slideshow-swiper').length) {
 	// eslint-disable-next-line no-unused-vars
-	const swiper = new Swiper('.slideshow-swiper', {
-		slidesPerView: 1,
-		spaceBetween: 0,
-		loop: true,
-		simulateTouch: false,
-		pagination: {
-			el: '.slideshow-swiper .swiper-pagination',
-			type: 'custom',
-			renderCustom: function(sw, current, total) {
-				return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + (total);
-			}
-		},
-		navigation: {
-			nextEl: '.slideshow-swiper .swiper-button-next',
-			prevEl: '.slideshow-swiper .swiper-button-prev',
-		},
+	$('.slideshow-swiper').each(function() {
+		const component = $(this);
+		const prev = component.parent().find('.swiper-button-prev');
+		const next = component.parent().find('.swiper-button-next');
+		const pagin = component.parent().find('.swiper-pagination');
+		const swiper = new Swiper(component[0], {
+			slidesPerView: 1,
+			spaceBetween: 0,
+			loop: true,
+			simulateTouch: false,
+			pagination: {
+				el: pagin[0],
+				type: 'custom',
+				renderCustom: function(sw, current, total) {
+					return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + (total);
+				}
+			},
+			navigation: {
+				nextEl: next[0],
+				prevEl: prev[0],
+			},
+		});
 	});
 }
 

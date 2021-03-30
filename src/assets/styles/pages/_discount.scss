@@ -116,12 +116,13 @@
   &-inner {
     max-width: 1090px;
     margin: auto;
-    padding: 0 20px;
+    //padding: 0 20px;
     h3 {
       font-size: 20px;
       margin-top: 0;
       margin-bottom: 10px;
       font-family: $base-font-family-serif;
+      line-height: 120%;
       @media screen and (min-width: $screen-md-min) {
         font-size: 30px;
       }
@@ -130,6 +131,7 @@
       }
     }
     a:not(.btn-link) {
+      line-height: 120%;
       font-size: 20px;
       font-weight: 400;
       margin-bottom: 40px;
@@ -148,8 +150,8 @@
       margin-top: 20px;
       width: 180px;
       @media screen and (min-width: $screen-md-min) {
-        margin-top: 40px;
-        width: auto;
+        margin-top: 30px;
+        //width: auto;
       }
     }
   }
@@ -161,6 +163,7 @@
     height: 325px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     @media screen and (min-width: $screen-md-min) {
       max-height: 540px;
       height: 52vw;
@@ -218,6 +221,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+      }
+      .lead:after {
+        border-color: white;
       }
     }
     &-price {
@@ -328,7 +334,7 @@
   width: 250px;
   &--right {
     @media screen and (min-width: 1450px) {
-      margin-left: 270px;
+      margin-left: calc(100% / 6);
     }
   }
   &-desc {
@@ -337,8 +343,8 @@
     }
     a {
       font-size: 14px;
+      line-height: 1.7;
       text-decoration: none;
-      border-bottom: 1px solid $black;
       @media screen and (min-width: $screen-md-min) {
         font-size: 16px;
       }

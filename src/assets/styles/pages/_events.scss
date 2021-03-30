@@ -30,6 +30,15 @@
     &-line {
       left: 0;
       position: absolute;
+      z-index: 9;
+      overflow: hidden;
+      background: white;
+      height: 22px;
+      width: 165px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 140%;
+      text-transform: uppercase;
       @media screen and (min-width: $screen-md-min) {
         top: 10px;
       }
@@ -123,6 +132,7 @@
       margin-left: 30px;
       @media screen and (min-width: $screen-md-min) {
         margin-left: 0;
+        margin-top: 130px;
       }
     }
   }

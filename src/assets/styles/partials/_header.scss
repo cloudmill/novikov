@@ -547,6 +547,23 @@
         align-items: center;
         .cart-id {
           cursor: pointer;
+          height: 24px;
+          path {
+            @include transitionEase(fill);
+          }
+          circle {
+            fill: white;
+            @include transitionEase();
+          }
+          &:hover {
+            path {
+              fill: white;
+            }
+            circle {
+              stroke: $color-type-2a;
+              fill: $color-type-2a;
+            }
+          }
         }
         .cart-count {
           margin: 0 10px;
@@ -569,6 +586,19 @@
       }
       .cart-rm {
         cursor: pointer;
+        height: 24px;
+        .circle,
+        path {
+          @include transitionEase(fill);
+        }
+        &:hover {
+          path {
+            fill: white;
+          }
+          .circle {
+            fill: $color-type-2a;
+          }
+        }
       }
     }
   }
@@ -646,9 +676,19 @@
     svg {
       width: 45px;
       height: 45px;
+      cursor: pointer;
       @media screen and (min-width: $screen-md-min) {
         width: 80px;
         height: 80px;
+      }
+
+      rect {
+        @include transitionEase(fill);
+      }
+      &:hover {
+        rect:first-of-type {
+          fill: $color-type-2a;
+        }
       }
     }
     @media screen and (min-width: $screen-md-min) {

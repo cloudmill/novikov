@@ -2,13 +2,13 @@ body,
 html {
   //overscroll-behavior-y: none;
 }
-body.page-horizontal {
-  width: 100%;
-  @media screen and (min-width: $screen-md-min) {
-    overflow-y: hidden !important;
-    overflow-x: scroll !important;
-  }
-}
+//body.page-horizontal {
+//  width: 100%;
+//  @media screen and (min-width: $screen-md-min) {
+//    overflow-y: hidden !important;
+//    overflow-x: scroll !important;
+//  }
+//}
 
 .time-block {
   @media screen and (min-width: $screen-md-min) {
@@ -46,9 +46,19 @@ body.page-horizontal {
 }
 
 .page-card {
-  .card {
+  .mCSB_scrollTools .mCSB_draggerContainer {
+    border: 0;
+  }
+  .mCSB_container {
     @media screen and (min-width: $screen-md-min) {
       display: flex;
+    }
+  }
+  .card {
+    padding-top: 103px;
+    @media screen and (min-width: $screen-md-min) {
+      //display: flex;
+      width: 100vw;
     }
     @media screen and (hover: none) and (min-width: $screen-md-min) {
       overflow-x: auto;
@@ -581,6 +591,7 @@ body.page-horizontal {
           line-height: 120%;
           font-family: $base-font-family-serif;
           margin-bottom: 40px;
+          margin-top: 0;
           @media screen and (min-width: $screen-md-min) {
             font-size: 40px;
           }
@@ -835,6 +846,9 @@ body.page-horizontal {
       }
       @media screen and (min-width: 1366px) {
         left: -11vw;
+      }
+      @media screen and (min-width: 1680px) {
+        left: -8vw;
       }
     }
 

@@ -11,7 +11,7 @@ block content
     .m-auto.col__xl-8.col__xs-10(data-aos='fade-up')
       h1.select-wrapper
         +wrapTitle(['Заказ', 'успешно', 'оформлен'])
-      h3 номер заказа: 1915
+      h3 номер заказа: #[span 1915]
       p На почту #[b ksh@cloudmill.ru] будет отправлен чек
       .form__group(data-aos='fade-up')
         +btnLink('Перейти на Главную')
@@ -20,4 +20,3 @@ block content
 
 
 block footer
-  include ../partials/_footer.pug

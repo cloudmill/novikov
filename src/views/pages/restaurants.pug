@@ -17,7 +17,11 @@ block content
             div
               select.select-template(style='width: 220px')
                 option(value='sochi', selected) Сочи
-                option(value='sochi1') Сочи
+                option(value='mosk') москве
+                option(value='spb') санкт-петербурге
+                option(value='novo') новосибирске
+                option(value='kras') краснодаре
+                option(value='eka') екатеринбурге
       .filters(data-aos='fade-up')
         .tab-container.filter
           .tabs
@@ -50,8 +54,12 @@ block content
             a.restaurant(href='#')
               .restaurant-img
                 .badge
-                  +img('icons/new-badge.svg')
-                  +img('icons/soon-badge.svg')
+                  .marquee
+                    .track
+                      .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
+                  .marquee
+                    .track
+                      .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                 +img('index/slide-1.jpg')
                 .logo: +img('index/logo-1.jpg')
               .restaurant-desc
@@ -68,8 +76,12 @@ block content
             a.restaurant(href='#')
               .restaurant-img
                 .badge
-                  +img('icons/new-badge.svg')
-                  +img('icons/soon-badge.svg')
+                  .marquee
+                    .track
+                      .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
+                  .marquee
+                    .track
+                      .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                 +img('index/slide-2.jpg')
                 .logo: +img('index/logo-2.jpg')
               .restaurant-desc
@@ -86,7 +98,9 @@ block content
             a.restaurant(href='#')
               .restaurant-img
                 .badge
-                  +img('icons/new-badge.svg')
+                  .marquee
+                    .track
+                      .content NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW — NEW
                 +img('index/slide-3.jpg')
               .restaurant-desc
                 h3 aqua
@@ -101,7 +115,9 @@ block content
             a.restaurant(href='#')
               .restaurant-img
                 .badge
-                  +img('icons/soon-badge.svg')
+                  .marquee
+                    .track
+                      .content SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON — SOON
                 +img('index/slide-4.jpg')
               .restaurant-desc
                 h3 КЛЁВО НА УСАЧЕВСКОМ

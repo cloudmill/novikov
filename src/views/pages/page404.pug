@@ -8,7 +8,10 @@ block pageName
 
 block content
   main.page-page404
-    .page-page404-head(data-aos='fade-up'): +wrapTitle(['404'])
+    .page-page404-head(data-aos='fade-up')
+      .wrapTitle(data-aos)
+        span.word-wrap
+          span 404
     .page-page404-desc(data-aos='fade-up') Страница не найдена
     .page-page404-btn(data-aos='fade-up')
       +btnLink('Перейти на Главную')

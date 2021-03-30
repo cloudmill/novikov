@@ -124,7 +124,7 @@
     -webkit-transition-timing-function: cubic-bezier(.25,.46,.45,.94);
     transition-timing-function: cubic-bezier(.25,.46,.45,.94);
   }
-  .active &,
+  .active > &,
   &.active,
   &:hover {
     &:after {

@@ -1,30 +1,35 @@
 .tooltip {
   position: relative;
-  overflow: hidden;
+  padding-bottom: 5px;
   &:hover {
-    overflow: visible;
-    .tooltip-desc {
-      opacity: 1;
-    }
+    //overflow: visible;
+    //.tooltip-desc {
+    //  opacity: 1;
+    //}
   }
   &-name {
     @include transitionEase();
-    border-bottom: 1px solid black;
+    //border-bottom: 1px solid black;
     cursor: pointer;
+    display: block;
     &:hover {
       color: $color-type-2a;
-      border-color: transparent;
+      //border-color: transparent;
     }
   }
+  &-inner {
+    overflow: hidden;
+  }
   &-desc {
+    left: 0;
     position: absolute;
     bottom: calc(100% + 10px);
-    left: 0;
     background: white;
     border-radius: 10px 0px;
     width: 330px;
-    opacity: 0;
-    @include transitionEase(opacity);
+    //opacity: 0;
+    display: none;
+    //@include transitionEase(opacity);
     @media screen and (min-width: $screen-md-min) {
       right: 0;
       left: -100px;

@@ -24,7 +24,7 @@
 
 .partners {
   @media screen and (min-width: $screen-md-min) {
-    padding: 0 20px;
+    padding: 0 10px;
   }
   .logoList {
     padding-right: 10px;
@@ -36,11 +36,12 @@
       margin-bottom: 80px;
     }
     @media screen and (min-width: $screen-lg-min) {
-      max-width: 250px;
-      width: 25%;
+      //max-width: 250px;
+      width: 20%;
     }
     @media screen and (min-width: 1450px) {
-      width: calc(100% / 6 - 10px);
+      //max-width: inherit;
+      width: calc(100% / 6);
     }
     &--list {
       margin: 0 -10px;
