@@ -250,10 +250,12 @@ function menuRestaurantSections() {
 }
 
 function addProduct () {
-    $('[data-type=add-product]').on('click', function (e) {
+    $(document).on('click', '[data-type=add-product]', function (e) {
         let productId = $(this).attr('data-priduct-id'),
+            productName = $(this).attr('data-name'),
             body = $(this).parents('[data-type=body]'),
             productsCount = body.find('[data-type=products_count]'),
+            itemBlock = body.find('[data-type=item-block]'),
             headerCart = body.find('[data-type=page-header-cart]');
 
         $.ajax({
@@ -266,9 +268,13 @@ function addProduct () {
             success: function (data) {
                 productsCount.remove();
 
-                let productsCountResponse = $(data).find('[data-type=products_count]');
+                let productsCountResponse = $(data).find('[data-type=products_count]'),
+                    itemBlockResponse = $(data).find('[data-name=' + productName + ']');
 
                 headerCart.append(productsCountResponse);
+
+                $('[data-type=item-block]').filter('[data-name=' + productName + ']').remove();
+                itemBlock.after(itemBlockResponse);
             }
         });
     });
