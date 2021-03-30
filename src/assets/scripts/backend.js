@@ -250,31 +250,70 @@ function menuRestaurantSections() {
 }
 
 function addProduct () {
-    $(document).on('click', '[data-type=add-product]', function (e) {
-        let productId = $(this).attr('data-priduct-id'),
-            productName = $(this).attr('data-name'),
+    $(document).on('click', '[data-type=add-product], [data-type=update-product]', function () {
+        let productId = $(this).attr('data-product-id'),
+            type = $(this).attr('data-type'),
+            productSidebarId = null,
+            productName = null,
             body = $(this).parents('[data-type=body]'),
             productsCount = body.find('[data-type=products_count]'),
-            itemBlock = body.find('[data-type=item-block]'),
+            productsList = null,
+            data = null,
+            typeFunction = null,
+            quantity = null,
+            item = null,
+            orderPrice = body.find('[data-type=order-price]'),
+            total = body.find('[data-type=total]'),
             headerCart = body.find('[data-type=page-header-cart]');
 
+        if (type == 'add-product') {
+            productName = $(this).attr('data-name');
+            item = $('[data-type=item-block]').filter('[data-name=' + productName + ']');
+            productsList = body.find('[data-type=products_list]');
+
+            data = {
+                productId: productId,
+            };
+        } else {
+            productSidebarId = $(this).parents('[data-type=item-block]').attr('data-product-sidebar-id'),
+            item = $(this).parents('[data-type=item-block], [data-name=' + productName + ']');
+            quantity = $(this).attr('data-quantity');
+            typeFunction = $(this).attr('data-type-function');
+
+            data = {
+                updateProductId: productId,
+                quantity: quantity,
+            }
+        }
         $.ajax({
             type: 'POST',
             url: window.location.href,
             dataType: 'html',
-            data: {
-                productId: productId,
-            },
+            data: data,
             success: function (data) {
                 productsCount.remove();
 
                 let productsCountResponse = $(data).find('[data-type=products_count]'),
+                    orderPriceResponse = $(data).find('[data-type=order-price]'),
+                    totalResponse = $(data).find('[data-type=total]'),
                     itemBlockResponse = $(data).find('[data-name=' + productName + ']');
 
                 headerCart.append(productsCountResponse);
 
-                $('[data-type=item-block]').filter('[data-name=' + productName + ']').remove();
-                itemBlock.after(itemBlockResponse);
+                if (type == 'add-product') {
+                    item.remove();
+                    productsList.prepend(itemBlockResponse);
+                } else {
+                    let dataItemResponse = $(data).find('[data-product-sidebar-id=' + productSidebarId + ']').children();
+
+                    item.children().remove();
+                    item.append(dataItemResponse);
+                }
+                orderPrice.children().remove();
+                orderPrice.append(orderPriceResponse);
+
+                total.children().remove();
+                total.append(totalResponse);
             }
         });
     });
