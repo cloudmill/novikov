@@ -37,12 +37,14 @@ percent_icon;
 .swiper-button-next,
 .swiper-button-prev {
   svg {
+    @include transitionEase(transform);
     rect,
     path,
     circle {
       @include transitionEase(all);
     }
     &:hover {
+      transform: translateX(20px);
       rect {
         width: 30px;
         fill: white;
@@ -62,6 +64,7 @@ percent_icon;
 .swiper-button-next {
   svg {
     &:hover {
+      transform: translateX(-20px);
       rect {
         x: 38;
       }

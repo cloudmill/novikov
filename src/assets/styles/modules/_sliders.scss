@@ -15,7 +15,10 @@
     margin-top: auto;
     width: 74%;
     @media screen and (min-width: $screen-lg-min) {
-      width: 70%;
+      width: 850px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      width: 1086px;
     }
     @media screen and (min-width: 1921px) {
       width: auto;

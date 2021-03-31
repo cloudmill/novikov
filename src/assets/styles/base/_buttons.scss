@@ -140,6 +140,12 @@
       @include transitionEase(background-color);
     }
     &:hover {
+      border-color: $color-type-2a;
+      background-color: $color-type-2a;
+      .ui-button-circle-icon__label-wr,
+      .ui-button-circle-icon__label-wr:after {
+        color: white;
+      }
       .burger span {
         background-color: white;
       }
@@ -155,6 +161,10 @@
       &:hover {
         border-color: $color-type-2a;
         background-color: $color-type-2a;
+        .ui-button-circle-icon__label-wr,
+        .ui-button-circle-icon__label-wr:after {
+          color: white;
+        }
       }
     }
     &--success {

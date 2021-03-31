@@ -58,14 +58,15 @@ $(document).ready(() => {
 		axis: 'x',
 		callbacks: {
 			whileScrolling: function() {
-				console.log(this.mcs);
-				AOS.refresh();
-				if (this.mcs.draggerLeft > 1400) {
-					console.log('stop');
-				}
+				// console.log(this.mcs);
 				// AOS.refresh();
 			},
 		}
+	});
+
+	$('.scroll-to--js a').click(function() {
+	  const id = $(this).attr('href');
+		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
 	});
 
 

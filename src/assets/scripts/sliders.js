@@ -4,6 +4,7 @@ import Swiper from 'swiper/swiper-bundle.min';
 
 if ($('.main-swiper').length) {
 	// eslint-disable-next-line no-unused-vars
+	const interleaveOffset = 0.5;
 	const swiper = new Swiper('.main-swiper', {
 		slidesPerView: 'auto',
 		spaceBetween: 0,
@@ -24,9 +25,66 @@ if ($('.main-swiper').length) {
 			prevEl: '.main-swiper .swiper-button-prev',
 		},
 		breakpoints: {
+			1024: {
+				spaceBetween: 50,
+			},
+			1366: {
+				spaceBetween: 150,
+			},
 			1921: {
 				// width: 1000,
 				spaceBetween: 150,
+			}
+		},
+		on: {
+			init: function() {
+			  setTimeout(() => {
+					$('.swiper-title').addClass('show');
+				}, 500);
+			},
+			slideChangeTransitionStart: function() {
+				$('.swiper-title').addClass('hideIt');
+				setTimeout(() => {
+					const activeSlide = this.slides[this.activeIndex];
+					const titles = JSON.parse(activeSlide.dataset.title);
+					let template = '';
+					titles.forEach(item => {
+						template += `<span class="word-wrap"><span>${item}&nbsp;</span></span>`;
+					});
+					$('.swiper-title .wrapTitle').html(template);
+					$('.swiper-title').removeClass('show');
+					$('.swiper-title').removeClass('hideIt');
+				}, 500);
+			},
+			slideChangeTransitionEnd: function() {
+				$('.swiper-title').addClass('show');
+			},
+			progress: function() {
+				for (let i = 0; i < this.slides.length; i++) {
+					const slideProgress = this.slides[i].progress;
+					const innerOffset = this.width * interleaveOffset;
+					const innerTranslate = slideProgress * innerOffset;
+					const el = this.slides[i].querySelectorAll('.slide-bgimg--js');
+					for (let j = 0; j < el.length; j++) {
+						el[j].style.transform =
+              'translateX(' + innerTranslate + 'px)';
+					}
+				}
+			},
+			touchStart: function() {
+				for (let i = 0; i < this.slides.length; i++) {
+					this.slides[i].style.transition = '';
+				}
+			},
+			setTransition: function(speed) {
+				for (let i = 0; i < this.slides.length; i++) {
+					this.slides[i].style.transition = speed + 'ms';
+
+					const el = this.slides[i].querySelectorAll('.slide-bgimg--js');
+					for (let j = 0; j < el.length; j++) {
+						el[j].style.transition = 'all ' + speed + 'ms ease 0s';
+					}
+				}
 			}
 		}
 	});
@@ -44,6 +102,7 @@ if ($('.vertical-swiper').length) {
 			slidesPerView: 1,
 			spaceBetween: 0,
 			simulateTouch: false,
+			loop: true,
 			pagination: {
 				el: pagin[0],
 				type: 'custom',

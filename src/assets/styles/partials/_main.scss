@@ -18,6 +18,11 @@
       padding-top: 103px;
     }
   }
+  .page-card .mCSB_container {
+    @media screen and (min-width: $screen-md-min) {
+      padding-top: 0;
+    }
+  }
 }
 
 
