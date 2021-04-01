@@ -227,7 +227,6 @@ function menuRestaurantSections() {
 		const selectSection = $(this).parents('[data-type=select-section]');
 		const sectId = $(this).attr('data-id');
 		const itemsContainer = container.find('[data-type=items_container');
-		const sectionsContainer = container.find('[data-type=sections_container');
 
 		selectSection.addClass('active').siblings().removeClass('active');
 
@@ -239,11 +238,11 @@ function menuRestaurantSections() {
 				sectId: sectId,
 			},
 			success: function(data) {
-				itemsContainer.remove();
+				itemsContainer.children().remove();
 
-				const itemsContainerResponse = $(data).find('[data-type=items_container]');
+				const itemsContainerResponse = $(data).find('[data-type=items_container]').children();
 
-				sectionsContainer.after(itemsContainerResponse);
+				itemsContainer.append(itemsContainerResponse);
 			}
 		});
 	});
