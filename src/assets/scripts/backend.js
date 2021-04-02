@@ -252,67 +252,57 @@ function addProduct() {
 	$(document).on('click', '[data-type=add-product], [data-type=update-product]', function() {
 		const productId = $(this).attr('data-product-id');
 		const type = $(this).attr('data-type');
-		let productSidebarId = null;
-		let productName = null;
 		const body = $(this).parents('[data-type=body]');
 		const productsCount = body.find('[data-type=products_count]');
-		let productsList = null;
+		const newProductsCount = body.find('[data-type=data-product-count]');
+		let productName = null;
 		let data = null;
-		let typeFunction = null;
 		let quantity = null;
-		let item = null;
-		const orderPrice = body.find('[data-type=order-price]');
-		const total = body.find('[data-type=total]');
-		const headerCart = body.find('[data-type=page-header-cart]');
+		let typeFunction = null;
+		let newProductsCountVal = null;
 
 		if (type == 'add-product') {
+			console.log(newProductsCount.text());
 			productName = $(this).attr('data-name');
-			item = $('[data-type=item-block]').filter('[data-name=' + productName + ']');
-			productsList = body.find('[data-type=products_list]');
+			newProductsCountVal = Number(newProductsCount.text()) + 1;
 
 			data = {
 				productId: productId,
+				productName: productName,
 			};
 		} else {
-			productSidebarId = $(this).parents('[data-type=item-block]').attr('data-product-sidebar-id'),
-			item = $(this).parents('[data-type=item-block], [data-name=' + productName + ']');
+			let valOperation = null;
+
 			quantity = $(this).attr('data-quantity');
 			typeFunction = $(this).attr('data-type-function');
+			
+			if (typeFunction == 'plus') {
+				valOperation = '+';
+			} else if (typeFunction == 'minus') {
+				valOperation = '-';
+			}
+
+			newProductsCountVal = Number(newProductsCount) + valOperation + 1;
 
 			data = {
 				updateProductId: productId,
 				quantity: quantity,
 			};
 		}
+		
 		$.ajax({
 			type: 'POST',
-			url: window.location.href,
-			dataType: 'html',
+			url: '/local/templates/main/include/ajax/add_product.php',
+			dataType: 'json',
 			data: data,
 			success: function(data) {
-				productsCount.remove();
-
-				const productsCountResponse = $(data).find('[data-type=products_count]');
-				const orderPriceResponse = $(data).find('[data-type=order-price]');
-				const totalResponse = $(data).find('[data-type=total]');
-				const itemBlockResponse = $(data).find('[data-name=' + productName + ']');
-
-				headerCart.append(productsCountResponse);
-
-				if (type == 'add-product') {
-					item.remove();
-					productsList.prepend(itemBlockResponse);
+				if (data.success === true) {
+					console.log(newProductsCountVal);
+					productsCount.empty();
+					productsCount.text(newProductsCountVal);
 				} else {
-					const dataItemResponse = $(data).find('[data-product-sidebar-id=' + productSidebarId + ']').children();
-
-					item.children().remove();
-					item.append(dataItemResponse);
+					console.log(data);
 				}
-				orderPrice.children().remove();
-				orderPrice.append(orderPriceResponse);
-
-				total.children().remove();
-				total.append(totalResponse);
 			}
 		});
 	});
