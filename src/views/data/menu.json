@@ -1,34 +1,34 @@
 [
   {
     "title": "Рестораны",
-    "href": "#"
+    "href": "/restaurants.html"
   },
   {
     "title": "Проекты",
-    "href": "#"
+    "href": "/projects.html"
   },
   {
     "title": "Партнеры",
-    "href": "#"
+    "href": "/partners.html"
   },
   {
     "title": "Дисконтные карты",
-    "href": "#"
+    "href": "/discount.html"
   },
   {
     "title": "Сертификаты",
-    "href": "#"
+    "href": "/certificates.html"
   },
   {
     "title": "О компании",
-    "href": "#"
+    "href": "/about.html"
   },
   {
     "title": "Вакансии",
-    "href": "#"
+    "href": "/vacancies.html"
   },
   {
     "title": "Контакты",
-    "href": "#"
+    "href": "/contacts.html"
   }
 ]

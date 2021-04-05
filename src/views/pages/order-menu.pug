@@ -8,6 +8,7 @@ block pageName
   - pageName = "custom"
 
 block content
+  include ../components/_cartPopup
   form(action='', method='POST')
     include ../components/_cart-block
     main.page-order.page-order-menu
@@ -87,6 +88,7 @@ block content
             .order-menu-menu__item(class=parent, data-aos='fade-up')
               .order-menu-menu__item-img
                 +img(item.img)
+                // .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"
                 .order-menu-menu__item-add.cd-add-to-cart: +img('icons/add.svg')
               .order-menu-menu__item-desc
                 .order-menu-menu__item-name= item.name
