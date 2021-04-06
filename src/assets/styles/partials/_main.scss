@@ -13,7 +13,7 @@
     height: 100vh;
     padding-top: 0;
   }
-  .mCSB_container {
+  > .mCustomScrollBox > .mCSB_container {
     @media screen and (min-width: $screen-md-min) {
       padding-top: 103px;
     }

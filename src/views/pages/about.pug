@@ -75,27 +75,30 @@ block content
             path(d="M155 140C155 140 148.281 141.49 140.791 146.105C135.235 149.528 130 156 130 156L130 124C130 124 132.779 129.01 140.791 133.895C147.521 137.998 155 140 155 140Z" fill="white")
           video#video(poster="assets/images/event/video.jpg" muted loop)
             source(src="assets/images/video/video.mp4")
-        .history-slider.swiper-container(data-aos='fade-up')
+        .relative
           .swiper-scrollbar
-          .swiper-wrapper
-            .swiper-slide
-              .history-year 2002
-              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
-            .swiper-slide
-              .history-year 2005
-              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
-            .swiper-slide
-              .history-year 2011
-              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
-            .swiper-slide
-              .history-year 2013
-              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
-            .swiper-slide
-              .history-year 2020
-              .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
-          .swiper-buttons
-            .swiper-button-prev: +img('icons/sw-l-w.svg')
-            .swiper-button-next: +img('icons/sw-r-w.svg')
+            svg(width="1680" height="1" viewBox="0 0 1680 1" fill="none" xmlns="http://www.w3.org/2000/svg")
+              line(y1="0.5" x2="1680" y2="0.5" stroke="white" stroke-dasharray="4 12")
+          .history-slider.swiper-container(data-aos='fade-up')
+            .swiper-wrapper
+              .swiper-slide
+                .history-year 2002
+                .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+              .swiper-slide
+                .history-year 2005
+                .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+              .swiper-slide
+                .history-year 2011
+                .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+              .swiper-slide
+                .history-year 2013
+                .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+              .swiper-slide
+                .history-year 2020
+                .history-desc А. Новиков организовал собственное тепличное хозяйство «Агроном».
+            .swiper-buttons
+              .swiper-button-prev: +img('icons/sw-l-w.svg')
+              .swiper-button-next: +img('icons/sw-r-w.svg')
     .about-story(data-aos='fade-up')
       .alpha.select-wrapper
         .wrapTitle(data-aos)

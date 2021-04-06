@@ -9,7 +9,7 @@ if ($('.main-swiper').length) {
 		slidesPerView: 'auto',
 		spaceBetween: 0,
 		loop: true,
-		loopedSlides: 13,
+		// loopedSlides: 13,
 		// autoplay: true,
 		centeredSlides: true,
 		simulateTouch: false,
@@ -46,14 +46,16 @@ if ($('.main-swiper').length) {
 				$('.swiper-title').addClass('hideIt');
 				setTimeout(() => {
 					const activeSlide = this.slides[this.activeIndex];
-					const titles = JSON.parse(activeSlide.dataset.title);
-					let template = '';
-					titles.forEach(item => {
-						template += `<span class="word-wrap"><span>${item}&nbsp;</span></span>`;
-					});
-					$('.swiper-title .wrapTitle').html(template);
-					$('.swiper-title').removeClass('show');
-					$('.swiper-title').removeClass('hideIt');
+					if(activeSlide.dataset.title) {
+						const titles = JSON.parse(activeSlide.dataset.title);
+						let template = '';
+						titles.forEach(item => {
+							template += `<span class="word-wrap"><span>${item}&nbsp;</span></span>`;
+						});
+						$('.swiper-title .wrapTitle').html(template);
+						$('.swiper-title').removeClass('show');
+						$('.swiper-title').removeClass('hideIt');
+					}
 				}, 500);
 			},
 			slideChangeTransitionEnd: function() {
@@ -151,23 +153,42 @@ if ($('.slideshow-swiper').length) {
 	});
 }
 
+let history;
 if ($('.history-slider').length) {
-	// eslint-disable-next-line no-unused-vars
-	const swiper = new Swiper('.history-slider', {
+	history = new Swiper('.history-slider', {
+		effect: 'coverflow',
 		slidesPerView: 'auto',
+		// slidesPerView: 1.2,
+		// centeredSlides: true,
 		spaceBetween: 0,
 		loop: true,
 		simulateTouch: false,
 		scrollbar: {
-			el: '.history-slider .swiper-scrollbar',
+			el: '.swiper-scrollbar',
 			hide: false,
 		},
 		navigation: {
 			nextEl: '.history-slider .swiper-button-next',
 			prevEl: '.history-slider .swiper-button-prev',
 		},
+		coverflow: {
+			rotate: 0,
+			stretch: 0,
+			depth: 250,
+			modifier: 1,
+			slideShadows: false,
+		},
+		breakpoints: {
+			768: {
+				direction: 'horizontal',
+			}
+		}
 	});
 }
+
+$(window).resize(function() {
+	if(history) history.update();
+});
 
 let carousel;
 

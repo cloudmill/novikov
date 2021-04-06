@@ -21,9 +21,12 @@ block content
         .swiper-pagination
         .swiper-wrapper
           - for (let x = 2; x < 4; x++)
-            .swiper-slide(data-title=['ARTEST —', 'новый', 'fine', 'dining', 'ресторан', 'Аркадия', 'Новикова']): span: +img('slider-1.jpg')
-            .swiper-slide(data-title=['Постное', 'меню в', 'ресторанах', 'Novikov', 'Group']): span: +img('slider-2.jpg')
-            .swiper-slide(data-title=['Novikov', 'Group', 'Catering —', 'кейтеринг из', '14', 'ресторанов', 'Novikov', 'Group']): span: +img('slider-3.jpg')
+            .swiper-slide(data-title=['ARTEST —', 'новый', 'fine', 'dining', 'ресторан', 'Аркадия', 'Новикова'])
+              span.slide-bgimg--js: +img('slider-1.jpg')
+            .swiper-slide(data-title=['Постное', 'меню в', 'ресторанах', 'Novikov', 'Group'])
+              span.slide-bgimg--js: +img('slider-2.jpg')
+            .swiper-slide(data-title=['Novikov', 'Group', 'Catering —', 'кейтеринг из', '14', 'ресторанов', 'Novikov', 'Group'])
+              span.slide-bgimg--js: +img('slider-3.jpg')
         include ../components/_sw-arrows
     .textLiner(data-aos='fade-up')
       .marquee

@@ -156,6 +156,21 @@
         margin-bottom: 160px;
       }
     }
+
+
+    .swiper-scrollbar {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      z-index: 50;
+      height: 35px;
+      width: 100%;
+      svg {
+        position: absolute;
+        left: -30%;
+        right: 50%;
+      }
+    }
   }
 
   &-story {
@@ -221,20 +236,26 @@
   &-year {
     font-size: 24px;
     color: #9C9C9C;
-    line-height: 130%;
-    @include transitionEase();
+    line-height: 130px;
+    //@include transitionEase(font-size, 2s);
+    transition: font-size .5s;
     font-family: $base-font-family-serif;
+    //margin-top: auto;
     @media screen and (min-width: $screen-lg-min) {
-      margin-bottom: 100px;
+      //margin-bottom: 100px;
     }
   }
 
   &-desc {
-    line-height: 160%;
-    color: #9C9C9C;
     opacity: 0;
-    @include transitionEase(opacity, .5s, .3s);
+    width: 100%;
+    color: #9C9C9C;
+    line-height: 160%;
+    margin-top: auto;
+    transition: opacity .3s;
     max-width: 350px;
+    margin-left: 4px;
+    //@include transitionEase(opacity, 1s, .3s);
   }
   &-slider {
     position: relative;
@@ -252,31 +273,54 @@
       }
     }
 
-    &.swiper-container-horizontal > .swiper-scrollbar {
-      border-top: 1px dashed #FFFFFF;
+    .swiper-wrapper {
+      transition: all .5s;
     }
 
     .swiper-slide {
       width: 20%;
       height: 200px;
-      @include transitionEase();
+      display: flex;
+      flex-direction: column;
+      //@include transitionEase(all, 1s);
+      transition: width .5s;
+      transform: none !important;
       @media screen and (min-width: $screen-md-min) {
         height: 300px;
       }
 
       &.swiper-slide-active {
-        width: 40%;
+        width: 50%;
+        transition: width .5s;
         .history-year {
           color: white;
+          //margin-top: 0;
           font-size: 60px;
+          transition: width .5s;
           @media screen and (min-width: $screen-md-min) {
             font-size: 100px;
           }
         }
         .history-desc {
           opacity: 1;
+          margin-top: 100px;
+          transition: opacity .5s .5s;
+        }
+      }
+
+      &.swiper-slide-prev {
+        transition: width 1s;
+        .history-year {
+          transition: font-size 0s .3s;
+        }
+        .history-desc {
+          transition: opacity 0s .5s;
         }
       }
     }
   }
+}
+
+.swiper-container-3d .swiper-slide-shadow-left, .swiper-container-3d .swiper-slide-shadow-right, .swiper-container-3d .swiper-slide-shadow-top, .swiper-container-3d .swiper-slide-shadow-bottom {
+  background: none !important;
 }

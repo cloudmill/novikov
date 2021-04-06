@@ -59,6 +59,18 @@ html {
   .mCSB_container {
     @media screen and (min-width: $screen-md-min) {
       display: flex;
+      height: calc(100% - 90px);
+      margin-bottom: 0 !important;
+    }
+  }
+  .page-footer-top {
+    @media screen and (min-width: $screen-md-min) {
+      padding: 40px 0;
+    }
+  }
+  .page-footer-bottom {
+    @media screen and (min-width: $screen-md-min) {
+      padding-top: 40px;
     }
   }
   .card {
@@ -177,10 +189,12 @@ html {
       position: fixed;
       top: 55px;
       left: 0;
-      right: 0;
+      //right: 0;
       z-index: 99;
       overflow-x: auto;
       background-color: white;
+      //transition: all 1s;
+      width: 100vw;
 
       &:after {
         content: '';
@@ -508,6 +522,8 @@ html {
       .section-item {
         @media screen and (min-width: $screen-md-min) {
           width: 100vw;
+          height: 100vh;
+          background-color: $baseColor;
         }
       }
     }
@@ -899,6 +915,9 @@ html {
       }
       @media screen and (min-width: 1680px) {
         left: -8vw;
+      }
+      @media screen and (min-width: $screen-md-min) and (max-height: 880px) {
+        font-size: 10.3vh;
       }
     }
 
@@ -1606,7 +1625,7 @@ html {
     }
     .card {
       align-items: center;
-      height: calc(100vh - 190px);
+      //height: calc(100vh - 190px);
     }
     .card .title-vert {
       left: -12vw;
@@ -1632,7 +1651,7 @@ html {
     }
     .card {
       align-items: center;
-      height: calc(100vh - 190px);
+      //height: calc(100vh - 190px);
     }
     .card .title-vert {
       font-size: 72px;

@@ -118,19 +118,21 @@
       display: inline-block;
       margin-left: 12px;
       font-weight: 400;
-      width: 70px !important;
-      @media screen and (min-width: $screen-md-min) {
-        width: 170px !important;
-      }
-      @media screen and (min-width: $screen-lg-min) {
-        width: 220px !important;
-      }
+      width: auto !important;
+      //@media screen and (min-width: $screen-md-min) {
+      //  width: auto !important;
+      //}
+      //@media screen and (min-width: $screen-lg-min) {
+      //  width: auto !important;
+      //}
       .select2-selection--single {
         font-size: 18px;
         padding-bottom: 3px;
+        padding-right: 20px;
         @media screen and (min-width: $screen-md-min) {
           font-size: 42px;
           padding-bottom: 7px;
+          padding-right: 35px;
         }
         @media screen and (min-width: $screen-lg-min) {
           font-size: 60px;

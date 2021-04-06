@@ -32,6 +32,10 @@ $(() => {
 
 				clearTimeout(timeout);
 			}, 0);
+			$('.select2-results__options').mCustomScrollbar('destroy');
+			setTimeout(function() {
+				$('.select2-results__options').mCustomScrollbar();
+			}, 0);
 		});
 
 		select.on('select2:closing', event => {
