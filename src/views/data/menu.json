@@ -1,34 +1,34 @@
 [
   {
     "title": "Рестораны",
-    "href": "/dist/restaurants.html"
+    "href": "/novikov/dist/restaurants.html"
   },
   {
     "title": "Проекты",
-    "href": "/dist/projects.html"
+    "href": "/novikov/dist/projects.html"
   },
   {
     "title": "Партнеры",
-    "href": "/dist/partners.html"
+    "href": "/novikov/dist/partners.html"
   },
   {
     "title": "Дисконтные карты",
-    "href": "/dist/discount.html"
+    "href": "/novikov/dist/discount.html"
   },
   {
     "title": "Сертификаты",
-    "href": "/dist/certificates.html"
+    "href": "/novikov/dist/certificates.html"
   },
   {
     "title": "О компании",
-    "href": "/dist/about.html"
+    "href": "/novikov/dist/about.html"
   },
   {
     "title": "Вакансии",
-    "href": "/dist/vacancies.html"
+    "href": "/novikov/dist/vacancies.html"
   },
   {
     "title": "Контакты",
-    "href": "/dist/contacts.html"
+    "href": "/novikov/dist/contacts.html"
   }
 ]
