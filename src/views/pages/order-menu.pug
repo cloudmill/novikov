@@ -9,8 +9,9 @@ block pageName
 
 block content
   include ../components/_cartPopup
-  form(action='', method='POST')
-    include ../components/_cart-block
+  form(action='', method='POST', data-sticky-container)
+    .sticky(data-margin-top="100")
+      include ../components/_cart-block
     main.page-order.page-order-menu
       .back-link(data-aos='fade-up')
         a.btn-icon(href='#')
@@ -97,4 +98,5 @@ block content
 
 
 block footer
+  include ../partials/_footer.pug
 

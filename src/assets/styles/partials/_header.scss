@@ -451,6 +451,14 @@
   }
 }
 
+.sticky {
+  z-index: 999;
+  .cart-block {
+    position: absolute;
+    height: 100vh;
+    top: -100px;
+  }
+}
 .cart-block {
   background: white;
   border-left: 1px solid #E5E5E5;
