@@ -1,7 +1,13 @@
 .main-swiper {
   .swiper-wrapper {
-    @include transitionEase(all, 0s, 0.6s);
-    @media screen and (min-width: $screen-xl-min) {
+    //@include transitionEase(all, 1s);
+    //transition-property: all;
+    transition-duration: 1s !important;
+    height: 140px;
+    @media screen and (min-width: $screen-md-min) {
+      height: 260px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
       height: 360px;
     }
     @media screen and (min-width: $screen-xl-min) {
@@ -14,11 +20,14 @@
     justify-content: center;
     margin-top: auto;
     width: 74%;
+    overflow: hidden;
+    border-radius: 0px 20px;
     @media screen and (min-width: $screen-lg-min) {
       width: 850px;
+      border-radius: 0px 60px;
     }
     @media screen and (min-width: $screen-xl-min) {
-      width: 1000px;
+      width: 1090px;
     }
     @media screen and (min-width: 1921px) {
       width: auto;
@@ -26,38 +35,42 @@
     span {
       position: relative;
       display: block;
-      top: 20px;
+      //top: 20px;
       @include transitionEase(top, .2s, .1s);
       @media screen and (min-width: $screen-md-min) {
-        top: 62px;
+        //top: 62px;
       }
     }
 
     img {
-      border-radius: 0px 60px;
-      transform: scale(0.77);
       @include transitionEase(transform);
-      @media screen and (min-width: $screen-xl-min) {
-        height: 360px;
+      height: 190px;
+      max-width: inherit;
+      object-fit: cover;
+      @media screen and (min-width: $screen-md-min) {
+        height: 340px;
+      }
+      @media screen and (min-width: $screen-lg-min) {
+        height: 460px;
       }
       @media screen and (min-width: $screen-xl-min) {
-        height: 540px;
+        height: 640px;
       }
     }
     &.swiper-slide-prev {
-      align-items: flex-end;
+      //align-items: flex-end;
       span {
         @include transitionEase(top, .2s, .7s);
       }
     }
     &.swiper-slide-next + div,
     &.swiper-slide-next {
-      align-items: flex-start;
+      //align-items: flex-start;
       span {
-        top: -20px;
+        //top: -20px;
         @include transitionEase(top, .2s, .1s);
         @media screen and (min-width: $screen-md-min) {
-          top: -62px;
+          //top: -62px;
         }
       }
     }
@@ -94,7 +107,7 @@
     position: static;
     @media screen and (min-width: $screen-lg-min) {
       position: absolute;
-      right: 8%;
+      right: 10%;
     }
     @media screen and (min-width: 1921px) {
       right: 14%;
@@ -107,7 +120,7 @@
     position: static;
     @media screen and (min-width: $screen-lg-min) {
       position: absolute;
-      left: 8%;
+      left: 10%;
     }
     @media screen and (min-width: 1921px) {
       left: 14%;
@@ -141,7 +154,7 @@
   bottom: 0;
   @media screen and (min-width: $screen-lg-min) {
     bottom: auto;
-    top: 70px;
+    top: 10px;
   }
 
   &-custom {
@@ -169,7 +182,7 @@
 .swiper-buttons {
   > div {
     width: 58px;
-    height: 37px;
+    height: 43px;
     @media screen and (min-width: $screen-lg-min) {
       width: 101px;
       height: 77px;

@@ -18,8 +18,10 @@
 
 
 body {
-  overflow: hidden !important;
-  height: 100vh !important;
+  @media screen and (min-width: $screen-md-min) {
+    overflow: hidden !important;
+    height: 100vh !important;
+  }
 
   &.page-horizontal {
     overflow: visible !important;

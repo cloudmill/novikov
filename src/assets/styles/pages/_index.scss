@@ -27,13 +27,15 @@
     padding-top: 120px;
   }
   .swiper-container {
-    padding: 70px 0 90px;
+    padding: 40px 0 90px;
     @media screen and (min-width: $screen-lg-min) {
       padding: 70px 0;
     }
     .swiper-slide {
       img {
-        border-radius: 0px 60px;
+        @media screen and (min-width: $screen-lg-min) {
+          border-radius: 0px 60px;
+        }
       }
     }
   }
@@ -295,7 +297,10 @@
       width: 530px;
     }
     img {
-      border-radius: 0px 60px 0px 0px;
+      border-radius: 0px 20px 0px 0px;
+      @media screen and (min-width: $screen-lg-min) {
+        border-radius: 0px 60px 0px 0px;
+      }
     }
   }
 }
