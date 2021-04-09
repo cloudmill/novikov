@@ -150,7 +150,7 @@ function mainRestFilterRegion() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/restaurants/',
+			url: window.location.href,
 			dataType: 'html',
 			data: {
 				regionId: regionId,
@@ -180,7 +180,7 @@ function mainRestFilterRegion() {
 function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer) {
 	$.ajax({
 		type: 'POST',
-		url: '/restaurants/',
+		url: window.location.href,
 		dataType: 'html',
 		data: data,
 		success: function(data) {
@@ -202,7 +202,7 @@ function mainRestFilterKitchen() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/restaurants/',
+			url: window.location.href,
 			dataType: 'html',
 			data: {
 				regionId: regionId,
