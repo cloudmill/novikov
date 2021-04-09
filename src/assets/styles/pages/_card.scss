@@ -142,7 +142,7 @@ html {
           margin-left: 40px;
         }
         &#maps .section-item:first-child {
-          width: 100vw;
+          width: 98vw;
         }
       }
       @media screen and (min-width: 1680px) and (min-width: 1899px) {
@@ -1100,9 +1100,9 @@ html {
 
   #oneMap {
     width: 100%;
-    height: calc(100vh - 220px);
+    height: calc(100vh - 230px);
     @media screen and (min-width: 1800px) {
-      height: calc(100vh - 420px);
+      height: calc(100vh - 410px);
     }
   }
 
@@ -1224,7 +1224,7 @@ html {
       margin-bottom: 44px;
     }
     #oneMap {
-      height: 67vh;
+      height: calc(100vh - 285px);
     }
     .events-item-title {
       max-height: 54px;
@@ -1454,7 +1454,7 @@ html {
       }
     }
     &#maps .section-item:first-child {
-      width: 100vw;
+      width: 98vw;
     }
   }
 

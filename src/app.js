@@ -84,7 +84,19 @@ $(document).ready(() => {
 	$('.scrollContent').mCustomScrollbar({
 		callbacks: {
 			whileScrolling: function() {
-				AOS.refresh();
+				// AOS.refresh();
+				const x = this.mcs.content.find('.aos-init');
+				const d = -this.mcs.top;
+				x.each(function() {
+					const g = $(this).position().top;
+					// const topOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
+
+					if(d > Math.round(g) - window.innerHeight) {
+						$(this).addClass('aos-animate');
+					} else {
+						$(this).removeClass('aos-animate');
+					}
+				});
 				if ($('.rellax').length) {
 					rellax.refresh();
 				}

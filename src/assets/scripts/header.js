@@ -59,6 +59,10 @@ $('.cart-popup-close__js').click(function() {
 	$('.cart-popup').removeClass('active');
 	return false;
 });
+$('.search-block--js').click(function() {
+	$('.search-block').removeClass('active');
+	return false;
+});
 
 
 $(document).click(function(e) {
