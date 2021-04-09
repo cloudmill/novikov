@@ -34,7 +34,7 @@ function scrollX() {
 				whileScrolling: function() {
 					// console.log(this.mcs);
 					const getL = this.mcs.leftPct > 82;
-					const containerPos = $('#mCSB_3_container').width() - window.innerWidth - window.innerWidth;
+					const containerPos = $('.mCSB_container').width() - window.innerWidth - window.innerWidth;
 					if (getL) {
 						$('.page-card .card-bottom').css('left', `${this.mcs.left + containerPos}px`);
 						$('.page-card .mCSB_container').css('overflow', 'visible');
@@ -47,7 +47,7 @@ function scrollX() {
 					const d = -this.mcs.left;
 
 					x.each(function() {
-						const leftOffset = $(this).offset().left - $('#mCSB_3_container').offset().left + $('#mCSB_3_container').scrollLeft();
+						const leftOffset = $(this).offset().left - $('.mCSB_container').offset().left + $('.mCSB_container').scrollLeft();
 						if (d > Math.round(leftOffset) - window.innerWidth) {
 							$(this).addClass('aos-animate');
 						} else {
