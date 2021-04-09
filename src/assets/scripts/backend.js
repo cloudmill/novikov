@@ -120,7 +120,7 @@ function eventsFilter() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/events/',
+			url: window.location.href,
 			dataType: 'html',
 			data: {
 				sectionId: sectionId,
