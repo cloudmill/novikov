@@ -244,7 +244,7 @@ $('.inc--js').click(function() {
 	$rooms.text(a);
 	pr.find('span').text((prData * a).toString().replace(regexp, ' '));
 	let summ = 0;
-	$('.cart-block-item').each((index, item) => {
+	$('.cart-block-item:not(.hide)').each((index, item) => {
 	  if($(item).find('.cart-pr span').length) {
 			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 		}
@@ -268,7 +268,7 @@ $('.dec--js').click(function() {
 		$rooms.text(b);
 		pr.find('span').text((prData * b).toString().replace(regexp, ' '));
 		let summ = 0;
-		$('.cart-block-item').each((index, item) => {
+		$('.cart-block-item:not(.hide)').each((index, item) => {
 			if($(item).find('.cart-pr span').length) {
 				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 			}

@@ -759,7 +759,7 @@
 .cart-popup {
   background: rgba(black, .15);
   position: fixed;
-  left: 0;
+  left: -50%;
   top: 0;
   bottom: 0;
   width: 0;
@@ -768,7 +768,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1), width 0s cubic-bezier(0.65, 0, 0.35, 1) .4s;
+  transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1), width 0s cubic-bezier(0.65, 0, 0.35, 1) .4s, left 0s cubic-bezier(0.65, 0, 0.35, 1) .4s;
   &__inner {
     width: 540px;
     background-color: white;
@@ -781,7 +781,8 @@
   &.active {
     width: 100%;
     opacity: 1;
-    transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1) .4s, width 0s cubic-bezier(0.65, 0, 0.35, 1);
+    left: 0;
+    transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1) .4s, width 0s cubic-bezier(0.65, 0, 0.35, 1), left 0s cubic-bezier(0.65, 0, 0.35, 1);
   }
 }
 
