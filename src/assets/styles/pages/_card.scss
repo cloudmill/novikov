@@ -1116,49 +1116,6 @@ html {
   }
 
 
-  .form-main {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2;
-
-    h3 {
-      text-align: center;
-    }
-
-    form {
-      padding: 0 !important;
-    }
-  }
-
-  .form-back {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 90px;
-    z-index: 0;
-    text-align: center;
-    background-color: white;
-    @include transitionEase(opacity, .5s, 1s);
-
-    h3 {
-      margin-bottom: 20px;
-    }
-
-    &.active {
-      z-index: 3;
-      opacity: 1;
-    }
-  }
-
 
   @media screen and (min-width: 1900px) and (min-height: 1000px) {
     .card-info-list {
@@ -1664,6 +1621,50 @@ html {
     .card-info-event {
       max-width: 760px;
     }
+  }
+}
+
+
+.form-main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+
+  h3 {
+    text-align: center;
+  }
+
+  form {
+    padding: 0 !important;
+  }
+}
+
+.form-back {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 90px;
+  z-index: 0;
+  text-align: center;
+  background-color: white;
+  @include transitionEase(opacity, .5s, 1s);
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  &.active {
+    z-index: 3;
+    opacity: 1;
   }
 }
 

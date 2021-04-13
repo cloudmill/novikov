@@ -19,7 +19,7 @@ block content
               circle(cx="17" cy="3" r="3" fill="#EE1623")
             span.ui-button-circle-icon__label-wr(data-text='Меню доставки')
               span.ui-button-circle-icon__label Меню доставки
-          a.btn.btn-icon.btn--default.box--js.ui-button-circle-icon(href='#' data-href='reserve-block--js')
+          a.btn.btn-icon.btn--default.box--js.ui-button-circle-icon(href='#' data-href='reserve-block--js' data-tab='tab-content-1')
             svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
               line(x1="4.5" y1="1" x2="4.5" y2="4" stroke="black")
               line(x1="9.5" y1="1" x2="9.5" y2="4" stroke="black")
@@ -72,7 +72,7 @@ block content
             div: a.lead(href='#') Instagram
             div: a.lead(href='#') Facebook
           .visible__sm.visible__xs.mobile-btn
-            a.btn.btn-icon.btn--default.box--js(href='#' data-href='reserve-block--js')
+            a.btn.btn-icon.btn--default.box--js(href='#' data-href='reserve-block--js' data-tab='tab-content-1')
               svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
                 line(x1="4.5" y1="1" x2="4.5" y2="4" stroke="black")
                 line(x1="9.5" y1="1" x2="9.5" y2="4" stroke="black")
@@ -157,7 +157,9 @@ block content
                       .card-info-menu__item-name Меню / банкет на человека в зависимости от количества и дня недели
                       .card-info-menu__item-desc 5000 ₽
                 .mt-auto.hidden__xs.hidden__sm
-                  +btnLink('Оставить заявку')
+                  a.btn-link.btn-icon.lead.box--js(href='#' data-href='reserve-block--js' data-tab='tab-content-2')
+                    span Оставить заявку
+                    include ../components/_next
               .col.col__lg-4.col__md-3.col__xs-12.card-info-menu-r.aos-init-left
                 .card-info-menu__ico
                   +img('card/ico-1.svg')

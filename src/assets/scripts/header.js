@@ -22,9 +22,9 @@ $('.header-menu--js').click(function() {
 });
 $('.vacancy-block--js').click(function() {
 	$(this).parent().toggleClass('active');
-	let vacancyName = $(this).attr('data-vacancy-name'),
-		vacancyRestaurant = $(this).attr('data-vacancy-restaurant'),
-		vacancyRegion = $(this).attr('data-vacancy-region');
+	const vacancyName = $(this).attr('data-vacancy-name');
+	const vacancyRestaurant = $(this).attr('data-vacancy-restaurant');
+	const vacancyRegion = $(this).attr('data-vacancy-region');
 	$('.overlay').toggleClass('active');
 
 	$('.vacancy-block').attr('data-vacancy-name', vacancyName);
@@ -39,8 +39,16 @@ $('.hr-block--js').click(function() {
 });
 $('.box--js').click(function() {
 	const className = $(this).data('href');
+	const tab = $(this).data('tab');
 	$('.' + className).toggleClass('active');
 	$('.overlay').toggleClass('active');
+	console.log(tab);
+	if(tab) {
+	  $('.tab-container .tab-content').removeClass('active');
+	  $('.tab-container .tabs .tab').removeClass('active');
+	  $('.tab-container').find('.' + tab).addClass('active');
+	  $('.tab-container .tabs .tab[data-toggle-target=".' + tab + '"]').addClass('active');
+	}
 	return false;
 });
 $('.page-header__close--js').click(function() {
