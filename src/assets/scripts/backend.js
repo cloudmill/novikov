@@ -23,7 +23,7 @@ function restaurantsFilter() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/',
+			url: window.location.href,
 			dataType: 'html',
 			data: {
 				kitchenId: kitchenId,
