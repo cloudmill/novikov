@@ -10,8 +10,9 @@
   padding-right: ($grid-gutter-width / 2);
 
   @media screen and (min-width: $screen-md-min) {
-    padding-left: ($grid-gutter-width-md / -2);
-    padding-right: ($grid-gutter-width-md / -2);
+    width: 96%;
+    padding-left: ($grid-gutter-width-md / 2);
+    padding-right: ($grid-gutter-width-md / 2);
   }
 }
 

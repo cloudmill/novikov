@@ -33,8 +33,6 @@ block content
         .track
           .content
             +img('textliner.svg')
-            +img('textliner.svg')
-            +img('textliner.svg')
     .main-carousel
       .tab-container
         .tabs(data-aos='fade-up')
@@ -206,12 +204,12 @@ block content
                           .text
                             div тайская
                             div Американская
-    .main-about(data-aos='fade-up')
-      .main-about-badge
+    .main-about
+      .main-about-badge(data-aos='fade-up')
         .marquee
           .track
             .content since 1991 — since 1991 — since 1991  — since 1991 — since 1991 — since 1991  — since 1991
-      .container
+      .container.relative
         .main-about-title
           .main-about-title__top
             .wrapTitle(data-aos)
@@ -224,16 +222,16 @@ block content
           .main-about-title__bottom
             .wrapTitle(data-aos)
               span.word-wrap: span GROUP
-        .main-about__back
-          .rellax(data-rellax-speed="2"): +img('index/N.svg')
+        .main-about__back: .rellax(data-rellax-speed="2"): +img('index/N.svg')
         .col__md-6.main-about-content(data-aos='fade-up')
           .main-about-desc
             p История Novikov Group берет свое начало в 1991 году. Именно в этом году Аркадий Новиков открыл свой первый ресторан — Sirena, который стал первым рыбным рестораном столицы с качественно новым подходом к кухне, обслуживанию, интерьеру и атмосфере.
             +btnLink('Подробнее о нас')
-          .main-about-back
-            +img('index/author-0.jpg')
+          .main-about-back.show-anim(data-aos='fade-up')
+            .rellax(data-rellax-speed="1")
+              +img('index/author-0.jpg')
             .visible__sm.visible__xs: +img('index/author-1.jpg')
-      .main-about-author: .rellax(data-rellax-speed="1"): +img('index/author-1.jpg')
+        .main-about-author.show-anim(data-aos='fade-up'): .rellax(data-rellax-speed="1"): +img('index/author-1.jpg')
     .main-events
       .container(data-aos='fade-up')
         h2 События

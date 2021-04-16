@@ -84,6 +84,12 @@
       flex-grow: 2;
       padding-right: 10px;
       width: 50%;
+      &:first-child {
+        width: 110px;
+        @media screen and (min-width: $screen-md-min) {
+          width: auto;
+        }
+      }
       @media screen and (min-width: $screen-md-min) {
         width: auto;
       }
@@ -103,8 +109,10 @@
       }
       &:last-child {
         width: 100%;
+        margin-top: 10px;
         @media screen and (min-width: $screen-md-min) {
           width: auto;
+          margin-top: 0;
         }
       }
       > * {

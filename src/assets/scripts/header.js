@@ -35,6 +35,7 @@ $('.vacancy-block--js').click(function() {
 });
 $('.hr-block--js').click(function() {
 	$('.vacancy-block').toggleClass('active');
+	$('.overlay').toggleClass('active');
 	return false;
 });
 $('.box--js').click(function() {

@@ -104,7 +104,10 @@
     }
   }
   .tab-content.list {
-    padding: 0 20px 80px;
+    padding: 0 10px 80px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0 20px 80px;
+    }
   }
   h1 {
     display: flex;
@@ -116,9 +119,19 @@
     }
     .select2 {
       display: inline-block;
-      margin-left: 12px;
       font-weight: 400;
       width: auto !important;
+      padding: 1px 10px 0 5px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-left: 12px;
+        padding: 10px 10px 0 10px;
+      }
+      .select2-selection__arrow {
+        top: 0;
+        @media screen and (min-width: $screen-md-min) {
+          top: 5px;
+        }
+      }
       //@media screen and (min-width: $screen-md-min) {
       //  width: auto !important;
       //}

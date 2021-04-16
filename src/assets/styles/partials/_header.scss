@@ -17,7 +17,7 @@
   left: 0;
   right: 0;
   top: 0;
-  z-index: 98;
+  z-index: 121;
   @media screen and (min-width: $screen-md-min) {
     padding: 20px;
   }
@@ -291,7 +291,7 @@
   height: 0;
   bottom: -300px;
   left: 0;
-  z-index: 101;
+  z-index: 201;
   overflow: hidden;
   width: 85%;
   padding: 110px 40px 30px 40px;
@@ -301,6 +301,13 @@
     width: auto;
     padding: 160px 150px 30px 90px;
     //background: url("../images/N.svg") no-repeat right bottom;
+  }
+  .btn-icon {
+    min-width: inherit;
+    padding-right: 10px;
+    img + span {
+      margin-left: 0;
+    }
   }
   > * {
     position: relative;
@@ -381,7 +388,7 @@
   right: 0;
   top: -300px;
   padding: 20px 0;
-  z-index: 99;
+  z-index: 123;
   @include transitionEase(top);
 
   @media screen and (min-width: $screen-md-min) {
@@ -455,7 +462,7 @@
   z-index: 120;
   .cart-block {
     position: absolute;
-    height: 100vh;
+    height: 99vh;
     top: -100px;
   }
 }
@@ -467,7 +474,7 @@
   bottom: 0;
   right: -285px;
   width: 285px;
-  z-index: 99;
+  z-index: 123;
   @include transitionEase(right);
   display: flex;
   flex-direction: column;
@@ -649,7 +656,7 @@
   left: -650px;
   padding: 20px 10px;
   max-width: 85%;
-  z-index: 106;
+  z-index: 123;
   @include transitionEase(left);
 
   @media screen and (min-width: $screen-md-min) {
@@ -741,7 +748,7 @@
   top: 0;
   bottom: 0;
   width: 0;
-  z-index: 105;
+  z-index: 122;
   opacity: 0;
   transition: opacity .5s cubic-bezier(0.65, 0, 0.35, 1), width 0s cubic-bezier(0.65, 0, 0.35, 1) .5s;
   &.active {
@@ -764,7 +771,7 @@
   bottom: 0;
   width: 0;
   opacity: 0;
-  z-index: 105;
+  z-index: 123;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -109,6 +109,9 @@
 .lead {
   position: relative;
   border-bottom: none !important;
+  &:not(.btn-link) {
+    display: inline-block;
+  }
   &:after {
     content: ' ';
     left: 0;

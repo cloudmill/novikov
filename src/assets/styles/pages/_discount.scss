@@ -6,7 +6,7 @@
   margin: 0 10px;
   color: white;
   overflow: hidden;
-  background: url("../images/discount/main-m.jpg") no-repeat center top / auto 100%;
+  background: url("../images/discount/main-m.jpg") no-repeat center bottom / cover;
   @media screen and (min-width: $screen-md-min) {
     padding: 100px 40px;
     margin: 0 20px;
@@ -46,7 +46,10 @@
   }
   p {
     max-width: 350px;
-    madgin-bottom: 60px;
+    margin-bottom: 20px;
+    @media screen and (min-width: $screen-md-min) {
+      margin-bottom: 60px;
+    }
   }
   h1 {
     margin-top: 0;

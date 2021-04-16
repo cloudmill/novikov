@@ -442,6 +442,9 @@ html {
         border-top: none;
         padding-top: 0;
       }
+      &.section:not(:nth-child(2)):after {
+        top: 0;
+      }
 
       .section-item {
         &:first-child {
@@ -486,6 +489,10 @@ html {
       @media screen and (min-width: $screen-md-min) {
         padding-top: 0;
         border-top: none;
+      }
+
+      &.section:not(:nth-child(2)):after {
+        top: 0;
       }
 
       .section-item {

@@ -101,13 +101,19 @@
       width: auto;
       position: static;
     }
+    > * {
+      top: 25%;
+    }
   }
 
   .swiper-button-next {
     position: static;
     @media screen and (min-width: $screen-lg-min) {
       position: absolute;
-      right: 10%;
+      right: 1%;
+    }
+    @media screen and (min-width: 1400px) {
+      right: 11%;
     }
     @media screen and (min-width: 1921px) {
       right: 14%;
@@ -120,7 +126,10 @@
     position: static;
     @media screen and (min-width: $screen-lg-min) {
       position: absolute;
-      left: 10%;
+      left: 1%;
+    }
+    @media screen and (min-width: 1400px) {
+      left: 11%;
     }
     @media screen and (min-width: 1921px) {
       left: 14%;
@@ -155,6 +164,10 @@
   @media screen and (min-width: $screen-lg-min) {
     bottom: auto;
     top: 10px;
+    left: 12%;
+  }
+  @media screen and (min-width: 1921px) {
+    left: 15%;
   }
 
   &-custom {

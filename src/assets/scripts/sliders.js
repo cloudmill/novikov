@@ -12,7 +12,6 @@ if ($('.main-swiper').length) {
 		spaceBetween: 10,
 		loop: true,
 		// loopedSlides: 13,
-		// autoplay: true,
 		centeredSlides: true,
 		simulateTouch: false,
 		pagination: {

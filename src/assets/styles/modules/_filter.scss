@@ -15,13 +15,22 @@
       padding-top: 10px;
     }
     &--main {
-      margin-left: auto;
+      @media screen and (min-width: $screen-md-min) {
+        margin-left: auto;
+      }
     }
     .select2.select2-container {
       width: 180px !important;
       margin-left: 20px;
+      padding: 0 10px 0 10px;
+      @media screen and (min-width: $screen-md-min) {
+        padding: 10px 10px 0 10px;
+      }
       &.select2-container--default .select2-selection--single {
-        padding-bottom: 10px;
+        padding-bottom: 3px;
+        @media screen and (min-width: $screen-md-min) {
+          padding-bottom: 10px;
+        }
         //@media screen and (min-width: $screen-md-min) {
         //  padding-bottom: 20px;
         //}

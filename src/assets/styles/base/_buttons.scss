@@ -52,12 +52,35 @@
     path {
       @include transitionEase(fill);
     }
+    svg {
+      @include transitionEase(transform);
+      rect,
+      path,
+      circle {
+        @include transitionEase(all);
+      }
+    }
     &:hover {
       color: $color-type-2a;
-      //border-color: $color-type-2a;
-      path.arr {
-        fill: $color-type-2a;
+      svg {
+        transform: translateX(-20px);
+        rect {
+          width: 15px;
+          x: 20;
+          fill: white;
+        }
+        path {
+          fill: white;
+          transform: translateX(3px);
+          //transform: matrix(0.9, 0, 0, 0.9, 4, 4);
+        }
+        .circ {
+          r: 14;
+        }
       }
+      //path.arr {
+      //  fill: $color-type-2a;
+      //}
     }
   }
 
