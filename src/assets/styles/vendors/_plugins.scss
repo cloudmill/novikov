@@ -61,6 +61,48 @@ percent_icon;
   }
 }
 
+.swiper-buttons--tb {
+  .swiper-button-next,
+  .swiper-button-prev {
+    svg {
+      @include transitionEase(transform);
+      rect,
+      path,
+      circle {
+        @include transitionEase(all);
+      }
+      &:hover {
+        transform: translateX(0);
+        transform: translateY(-20px);
+        rect {
+          x: 30;
+          width: 1px;
+          height: 25px;
+          fill: white;
+        }
+        path {
+          fill: white;
+          transform: translateY(3px);
+          //transform: scale(.9);
+        }
+        .circ {
+          r: 35;
+        }
+      }
+    }
+  }
+  .swiper-button-prev {
+    svg {
+      &:hover {
+        transform: translateY(20px);
+        rect {
+          x: 29;
+        }
+      }
+    }
+  }
+}
+
 .swiper-button-next {
   svg {
     &:hover {

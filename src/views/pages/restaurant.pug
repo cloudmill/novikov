@@ -84,9 +84,7 @@ block content
               span забронировать стол
         .section-item
           .vertical-swiper.swiper-container.vertical-swiper--left(data-aos='fade-up')
-            .swiper-buttons
-              .swiper-button-prev: +img('card/up.svg')
-              .swiper-button-next: +img('card/down.svg')
+            include ../components/_sw-arrows-tb
             .swiper-pagination
             .swiper-wrapper
               - for (let x = 2; x < 8; x++)
@@ -183,9 +181,7 @@ block content
                 .swiper-slide
                   .image
                     +img('card/slide-2.jpg')
-            .swiper-buttons
-              .swiper-button-prev: +img('card/up.svg')
-              .swiper-button-next: +img('card/down.svg')
+            include ../components/_sw-arrows-tb
             .swiper-pagination
       section#event.section
         .section-item

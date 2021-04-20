@@ -11,6 +11,8 @@ $baseColor: #0A0A0A;
   color: white;
   overflow: hidden;
   background: $baseColor;
+  position: relative;
+  z-index: 195;
   &-top {
     padding: 20px 0;
     border-bottom: 1px solid rgba(white, .2);

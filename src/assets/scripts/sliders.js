@@ -3,8 +3,6 @@ import Swiper from 'swiper/swiper-bundle.min';
 
 
 if ($('.main-swiper').length) {
-	// const interleaveOffset = 0.5;
-	// let pr;
 	let handle;
 	// eslint-disable-next-line no-unused-vars
 	const sw = new Swiper('.main-swiper', {
@@ -125,7 +123,9 @@ if ($('.vertical-swiper').length) {
 		const swiper = new Swiper(component[0], {
 			slidesPerView: 1,
 			spaceBetween: 0,
+			speed: 1000,
 			simulateTouch: false,
+			watchSlidesProgress: true,
 			loop: true,
 			pagination: {
 				el: pagin[0],
@@ -150,20 +150,25 @@ if ($('.vertical-swiper').length) {
 
 if ($('.slideshow-swiper').length) {
 	// eslint-disable-next-line no-unused-vars
+	let handle;
 	$('.slideshow-swiper').each(function() {
 		const component = $(this);
 		const prev = component.parent().find('.swiper-button-prev');
 		const next = component.parent().find('.swiper-button-next');
 		const pagin = component.parent().find('.swiper-pagination');
-		const swiper = new Swiper(component[0], {
+		// eslint-disable-next-line no-unused-vars
+		const sw = new Swiper(component[0], {
 			slidesPerView: 1,
 			spaceBetween: 0,
 			loop: true,
+			speed: 1000,
 			simulateTouch: false,
+			watchSlidesProgress: true,
+			grabCursor: true,
 			pagination: {
 				el: pagin[0],
 				type: 'custom',
-				renderCustom: function(sw, current, total) {
+				renderCustom: function(swiper, current, total) {
 					return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + (total);
 				}
 			},
@@ -171,6 +176,32 @@ if ($('.slideshow-swiper').length) {
 				nextEl: next[0],
 				prevEl: prev[0],
 			},
+			on: {
+				progress: function() {
+					const swiper = this;
+					for (let i = 0; i < swiper.slides.length; i++) {
+						const slideProgress = swiper.slides[i].progress;
+						const innerOffset = swiper.width * 0.5;
+						const innerTranslate = slideProgress * innerOffset;
+						swiper.slides[i].querySelector('.slide-bgimg').style.transform =
+              'translateX(' + innerTranslate + 'px)';
+					}
+				},
+				touchStart: function() {
+					const swiper = this;
+					for (let i = 0; i < swiper.slides.length; i++) {
+						swiper.slides[i].style.transition = '';
+					}
+				},
+				setTransition: function(slide, speed) {
+					const swiper = this;
+					for (let i = 0; i < swiper.slides.length; i++) {
+						swiper.slides[i].style.transition = speed + 'ms';
+						swiper.slides[i].querySelector('.slide-bgimg').style.transition =
+              speed + 'ms';
+					}
+				}
+			}
 		});
 	});
 }

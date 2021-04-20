@@ -34,7 +34,7 @@
     z-index: 99;
     height: 100%;
     background: #F6F6F6;
-    @include transitionEase(bottom, 1s, .5s);
+    transition: bottom 1.3s .4s;
   }
   &.aos-animate {
     .rellax:after {
@@ -132,6 +132,9 @@
     @media screen and (min-width: $screen-lg-min) {
       margin-bottom: 170px;
     }
+  }
+  .tab-content {
+    padding: 0 20px;
   }
   .tabs {
     display: flex;

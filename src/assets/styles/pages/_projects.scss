@@ -38,7 +38,8 @@
 .projectList {
   > li {
     margin-bottom: 15px;
-    svg {
+    list-style-type: none;
+    > svg {
       margin-right: 10px;
       path {
         @include transitionEase(fill);
@@ -55,7 +56,7 @@
     }
     &:hover,
     &.active {
-      svg path {
+      > svg path {
         fill: $color-type-2a;
       }
       > a {
@@ -158,8 +159,11 @@
       margin-bottom: 20px;
     }
     .shape {
-      border-radius: 0px 60px;
+      border-radius: 0px 20px;
       overflow: hidden;
+      @media screen and (min-width: $screen-md-min) {
+        border-radius: 0px 60px;
+      }
     }
     .sw-content {
       margin-top: 40px;
@@ -171,6 +175,38 @@
       }
     }
     .swiper {
+      &-container {
+        transition:opacity .6s ease, transform .3s ease;
+      }
+      &-wrapper {
+        height: 200px;
+        @media screen and (min-width: $screen-md-min) {
+          height: 300px;
+        }
+        @media screen and (min-width: $screen-lg-min) {
+          height: 400px;
+        }
+        @media screen and (min-width: $screen-xl-min) {
+          height: 33vw;
+        }
+        .swiper-slide {
+          overflow: hidden;
+          backface-visibility:hidden;
+          -webkit-backface-visibility:hidden;
+        }
+        .slide-bgimg{
+          position:absolute;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          background-position:center;
+          background-size:cover;
+          img {
+            display: none;
+          }
+        }
+      }
       &-section {
         margin-bottom: 20px;
         display: flex;
