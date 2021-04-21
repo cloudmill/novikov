@@ -44,7 +44,7 @@
 
     img {
       @include transitionEase(transform);
-      height: 190px;
+      height: 225px;
       max-width: inherit;
       object-fit: cover;
       @media screen and (min-width: $screen-md-min) {
@@ -93,7 +93,7 @@
     width: 127px;
     position: absolute;
     bottom: 0;
-    right: 20px;
+    right: 60px;
     @media screen and (min-width: $screen-md-min) {
       width: 200px;
     }
@@ -174,7 +174,7 @@
   right: auto;
   width: auto;
   bottom: auto;
-  left: 20px;
+  left: 60px;
   bottom: 0;
   @media screen and (min-width: $screen-lg-min) {
     bottom: auto;

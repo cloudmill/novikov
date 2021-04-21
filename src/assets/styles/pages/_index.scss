@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 32vh;
+    height: 26vh;
     @media screen and (min-width: $screen-md-min) {
       height: 60vh;
     }
@@ -44,11 +44,15 @@
 }
 
 .main-slider {
+  padding-top: 50px;
   @media screen and (min-width: $screen-md-min) {
     padding-top: 120px;
   }
   .swiper-container {
-    padding: 40px 0 90px;
+    padding: 40px 0 60px;
+    @media screen and (min-width: $screen-lg-min) {
+      padding: 40px 0 90px;
+    }
     @media screen and (min-width: $screen-lg-min) {
       padding: 70px 0;
     }
@@ -120,7 +124,7 @@
 
 .main-carousel {
   position: relative;
-  margin-left: 10px;
+  //margin-left: 10px;
   @media screen and (min-width: $screen-md-min) {
     margin-left: 0;
   }
@@ -134,7 +138,9 @@
     }
   }
   .tab-content {
-    padding: 0 20px;
+    @media screen and (min-width: $screen-md-min) {
+      padding: 0 20px;
+    }
   }
   .tabs {
     display: flex;
@@ -161,11 +167,14 @@
       background-color: transparent !important;
     }
     .tab {
-      margin-right: 40px;
+      margin-right: 10px;
       white-space: nowrap;
       border-bottom: 1px solid transparent;
       @include transitionEase(border-color);
       cursor: pointer;
+      @media screen and (min-width: $screen-md-min) {
+        margin-right: 40px;
+      }
       &:hover,
       &.active {
         border-color: $color-type-2a;
@@ -269,22 +278,37 @@
   }
   &-desc {
     max-width: 440px;
-    margin-top: 20px;
+    margin-top: 30px;
     @media screen and (min-width: $screen-md-min) {
       margin-top: 0;
     }
     p {
-      margin-bottom: 45px;
+      margin-bottom: 20px;
+      @media screen and (min-width: $screen-md-min) {
+        margin-bottom: 45px;
+      }
       &:first-letter {
         padding-left: 100px;
       }
     }
   }
   &-back {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-left: auto;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
+    @media screen and (min-width: $screen-md-min) {
+      margin-top: 60px;
+    }
+    > div:first-child {
+      padding-bottom: 40px;
+      @media screen and (min-width: $screen-md-min) {
+        padding-bottom: 0;
+      }
+    }
+    @media screen and (min-width: $screen-md-min) {
+      align-items: flex-start;
+    }
     .visible__sm {
       width: 70%;
       img {
@@ -301,10 +325,10 @@
     img {
       border-radius: 0px 20px;
       width: 127px;
-      margin-right: 10px;
+      padding-right: 10px;
       @media screen and (min-width: $screen-md-min) {
         width: 257px;
-        margin-right: 0;
+        padding-right: 0;
       }
     }
   }

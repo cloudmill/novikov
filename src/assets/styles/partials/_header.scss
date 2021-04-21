@@ -88,8 +88,11 @@
     }
     .ui-button-circle-icon__label-wr:after,
     .ui-button-circle-icon__label {
-      padding-left: 20px;
+      padding-left: 10px;
       padding-right: 0;
+      @media screen and (min-width: $screen-md-min) {
+        padding-left: 20px;
+      }
     }
     .btn-icon .burger + span {
       margin-left: 0;
@@ -110,8 +113,12 @@
         background-color: black;
         &:nth-child(2) {
           @include transitionEase();
-          margin-top: 8px;
-          margin-bottom: 8px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          @media screen and (min-width: $screen-md-min) {
+            margin-top: 8px;
+            margin-bottom: 8px;
+          }
         }
       }
       :hover > & {
