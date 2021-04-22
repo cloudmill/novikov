@@ -27,11 +27,13 @@ if ($('.main-swiper').length) {
 			768: {
 				spaceBetween: 50,
 			},
+			1000: {
+				spaceBetween: 160,
+			},
 			1366: {
 				spaceBetween: 200,
 			},
 			1921: {
-				// width: 1000,
 				spaceBetween: 200,
 			}
 		},
@@ -254,18 +256,27 @@ export function initSwiper() {
 
 			carousel = new Swiper(component[0], {
 				spaceBetween: 10,
-				slidesPerView: 'auto',
+				slidesPerView: 1,
 				loop: true,
-				centeredSlides: true,
+				centeredSlides: false,
 				navigation: {
 					nextEl: next[0],
 					prevEl: prev[0],
 				},
 				breakpoints: {
+					500: {
+						slidesPerView: 2,
+						centeredSlides: false,
+					},
 					767: {
+						slidesPerView: 2,
+						centeredSlides: false,
 						spaceBetween: 20,
+					},
+					1280: {
 						centeredSlides: true,
-					}
+						slidesPerView: 3,
+					},
 				}
 			});
 		});

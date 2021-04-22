@@ -55,7 +55,50 @@ percent_icon;
         //transform: scale(.9);
       }
       .circ {
-        r: 35;
+        r: 35 !important;
+      }
+    }
+  }
+}
+
+
+body:not(.safari) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    svg {
+      .circ {
+        r: 0;
+      }
+    }
+  }
+}
+
+
+.safari {
+  .swiper-button-next,
+  .swiper-button-prev {
+    svg {
+      .circ {
+        opacity: 0;
+      }
+      &:hover {
+        .circ {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .btn-link {
+    svg {
+      .circ {
+        opacity: 0;
+      }
+    }
+    &:hover {
+      svg {
+        .circ {
+          opacity: 1;
+        }
       }
     }
   }
@@ -86,7 +129,7 @@ percent_icon;
           //transform: scale(.9);
         }
         .circ {
-          r: 35;
+          r: 35 !important;
         }
       }
     }

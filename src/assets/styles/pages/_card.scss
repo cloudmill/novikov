@@ -10,6 +10,12 @@ html {
 //  }
 //}
 
+.cart-form {
+  .sticky {
+    z-index: 121;
+  }
+}
+
 .time-block {
   @media screen and (min-width: $screen-md-min) {
     height: 100vh;

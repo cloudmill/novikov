@@ -14,9 +14,18 @@
     top: 0;
     height: 26vh;
     @media screen and (min-width: $screen-md-min) {
-      height: 60vh;
+      height: 54vh;
     }
-    @media screen and (min-width: $screen-lg-min) {
+    @media screen and (min-width: 1200px) {
+      height: 54vh;
+    }
+    @media screen and (min-width: 1300px) {
+      height: 63vh;
+    }
+    @media screen and (min-width: 1400px) {
+      height: 63vh;
+    }
+    @media screen and (min-width: 1500px) {
       height: 80vh;
     }
   }
@@ -124,9 +133,11 @@
 
 .main-carousel {
   position: relative;
+  padding: 0 10px;
   //margin-left: 10px;
   @media screen and (min-width: $screen-md-min) {
     margin-left: 0;
+    padding: 0;
   }
   .tab-container {
     margin-bottom: 60px;
@@ -353,6 +364,12 @@
         border-radius: 0px 60px 0px 0px;
       }
     }
+  }
+}
+
+.safari {
+  .main-slider .swiper-container .swiper-slide img {
+    transform: none !important;
   }
 }
 

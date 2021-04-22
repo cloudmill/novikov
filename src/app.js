@@ -8,6 +8,9 @@ import 'velocity-animate';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min';
 import 'jquery-mousewheel';
 import Sticky from 'sticky-js';
+import browser from 'browser-detect';
+
+const result = browser();
 
 $.fn.isInViewport = function() {
 	if ($(this).offset()) {
@@ -114,6 +117,7 @@ $(document).ready(() => {
 	  const id = $(this).attr('href');
 		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
 	});
+	document.body.classList.add(result.name);
 
 
 	if (screenWidth > 1150 && $('.sticky').length) {

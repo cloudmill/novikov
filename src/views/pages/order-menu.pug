@@ -9,7 +9,7 @@ block pageName
 
 block content
   include ../components/_cartPopup
-  form(action='', method='POST', data-sticky-container)
+  form.cart-form(action='', method='POST', data-sticky-container)
     .sticky(data-margin-top="100")
       include ../components/_cart-block
     main.page-order.page-order-menu

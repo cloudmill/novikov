@@ -26,7 +26,16 @@
       width: 850px;
       border-radius: 0px 60px;
     }
+    @media screen and (min-width: 1200px) {
+      width: 820px;
+    }
     @media screen and (min-width: $screen-xl-min) {
+      width: 890px;
+    }
+    @media screen and (min-width: 1400px) {
+      width: 930px;
+    }
+    @media screen and (min-width: 1600px) {
       width: 1090px;
     }
     @media screen and (min-width: 1921px) {
@@ -115,7 +124,16 @@
       position: absolute;
       right: 1%;
     }
+    @media screen and (min-width: 1200px) {
+      right: 7%;
+    }
+    @media screen and (min-width: 1300px) {
+      right: 6%;
+    }
     @media screen and (min-width: 1400px) {
+      right: 7%;
+    }
+    @media screen and (min-width: 1500px) {
       right: 11%;
     }
     @media screen and (min-width: 1600px) {
@@ -137,7 +155,16 @@
       position: absolute;
       left: 1%;
     }
+    @media screen and (min-width: 1200px) {
+      left: 7%;
+    }
+    @media screen and (min-width: 1300px) {
+      left: 6%;
+    }
     @media screen and (min-width: 1400px) {
+      left: 7%;
+    }
+    @media screen and (min-width: 1500px) {
       left: 11%;
     }
     @media screen and (min-width: 1600px) {
@@ -173,22 +200,32 @@
 .swiper-pagination {
   right: auto;
   width: auto;
-  bottom: auto;
   left: 60px;
   bottom: 0;
   @media screen and (min-width: $screen-lg-min) {
     bottom: auto;
-    top: 10px;
-    left: 12%;
+    left: 1.5%;
+  }
+  @media screen and (min-width: 1200px) {
+    left: 7.5%;
+  }
+  @media screen and (min-width: 1300px) {
+    left: 6.5%;
+  }
+  @media screen and (min-width: 1400px) {
+    left: 7.5%;
+  }
+  @media screen and (min-width: 1500px) {
+    left: 11.5%;
   }
   @media screen and (min-width: 1600px) {
-    left: 9%;
+    left: 8.5%;
   }
   @media screen and (min-width: 1760px) {
-    left: 12%;
+    left: 11.5%;
   }
   @media screen and (min-width: 1920px) {
-    left: 15%;
+    left: 14.5%;
   }
 
   &-custom {
