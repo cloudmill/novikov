@@ -258,8 +258,8 @@ function basket() {
     if (calculate) {
       data = {
         productId: productId,
+        productNameEn: productNameEn,
         calculate: calculate,
-        productName: productNameEn,
       };
     } else {
       data = {
