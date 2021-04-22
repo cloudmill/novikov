@@ -10,6 +10,7 @@ $(function() {
 	menuRestaurantSections();
 	scrollShowMore();
 	basket();
+  restaurantsTabs();
 });
 
 function restaurantsFilter() {
@@ -302,6 +303,16 @@ function basket() {
         }
       }
     });
+  });
+}
+
+function restaurantsTabs() {
+  $('[data-type=restaurant-select-tab]').on('click', function () {
+    let container = $(this).parents('[data-type=main_container]'),
+      selector = $(this).attr('data-toggle-target'),
+      tab = container.find(selector);
+
+    tab.addClass('active').siblings().removeClass('active');
   });
 }
 
