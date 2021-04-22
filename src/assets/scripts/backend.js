@@ -249,8 +249,9 @@ function menuRestaurantSections() {
 }
 
 function basket() {
-  $(document).on('click', '[data-type=add-product]', function() {
+  $(document).on('click', '[data-type=cart]', function() {
     const productId = $(this).attr('data-product-id');
+    let productXmlId = $(this).attr('data-product-xml-id');
     let productNameEn = $(this).attr('data-product-name-en');
     let data = null;
     let calculate = $(this).attr('data-calculate');
@@ -258,14 +259,19 @@ function basket() {
     if (calculate) {
       data = {
         productId: productId,
+        productXmlId: productXmlId,
         productNameEn: productNameEn,
         calculate: calculate,
+      };
+    } else if (!calculate && !productNameEn) {
+      data = {
+        productId: productId,
       };
     } else {
       data = {
         productId: productId,
         productNameEn: productNameEn,
-      }
+      };
     }
 
     $.ajax({
@@ -292,7 +298,7 @@ function basket() {
             }, 230);
           }
         } else {
-          console.log(data);
+          console.log('Ошибка добавление товара');
         }
       }
     });
