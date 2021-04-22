@@ -9,7 +9,7 @@ $(function() {
 	mainRestFilterKitchen();
 	menuRestaurantSections();
 	scrollShowMore();
-	addProduct();
+	basket();
 });
 
 function restaurantsFilter() {
@@ -248,64 +248,55 @@ function menuRestaurantSections() {
 	});
 }
 
-function addProduct() {
-	$(document).on('click', '[data-type=add-product], [data-type=update-product]', function() {
-		const productId = $(this).attr('data-product-id');
-		const type = $(this).attr('data-type');
-		const body = $(this).parents('[data-type=body]');
-		const productsCount = body.find('[data-type=products_count]');
-		const newProductsCount = body.find('[data-type=data-product-count]');
-		let productName = null;
-		let data = null;
-		let quantity = null;
-		let typeFunction = null;
-		let newProductsCountVal = null;
+function basket() {
+  $(document).on('click', '[data-type=add-product]', function() {
+    const productId = $(this).attr('data-product-id');
+    let productNameEn = $(this).attr('data-product-name-en');
+    let data = null;
+    let calculate = $(this).attr('data-calculate');
 
-		if (type == 'add-product') {
-			console.log(newProductsCount.text());
-			productName = $(this).attr('data-name');
-			newProductsCountVal = Number(newProductsCount.text()) + 1;
+    if (calculate) {
+      data = {
+        productId: productId,
+        calculate: calculate,
+        productName: productNameEn,
+      };
+    } else {
+      data = {
+        productId: productId,
+        productNameEn: productNameEn,
+      }
+    }
 
-			data = {
-				productId: productId,
-				productName: productName,
-			};
-		} else {
-			let valOperation = null;
+    $.ajax({
+      type: 'POST',
+      url: '/local/templates/main/include/ajax/basket.php',
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+        if (data.success === true) {
+          const cartCount = $('.page-header__cart').find('.count');
+          cartCount.addClass('update-count');
+          setTimeout(function() {
+            cartCount.removeClass('update-count');
+          }, 200);
 
-			quantity = $(this).attr('data-quantity');
-			typeFunction = $(this).attr('data-type-function');
-			
-			if (typeFunction == 'plus') {
-				valOperation = '+';
-			} else if (typeFunction == 'minus') {
-				valOperation = '-';
-			}
-
-			newProductsCountVal = Number(newProductsCount) + valOperation + 1;
-
-			data = {
-				updateProductId: productId,
-				quantity: quantity,
-			};
-		}
-		
-		$.ajax({
-			type: 'POST',
-			url: '/local/templates/main/include/ajax/add_product.php',
-			dataType: 'json',
-			data: data,
-			success: function(data) {
-				if (data.success === true) {
-					console.log(newProductsCountVal);
-					productsCount.empty();
-					productsCount.text(newProductsCountVal);
-				} else {
-					console.log(data);
-				}
-			}
-		});
-	});
+          for (let i = 0; i < cartCount.length; i++) {
+            const actual = Number($(cartCount[i]).find('span').eq(0).text()) + 1;
+            const next = actual + 1;
+            setTimeout(function() {
+              $(cartCount[i]).find('span').eq(0).text(actual);
+            }, 150);
+            setTimeout(function() {
+              $(cartCount[i]).find('span').eq(1).text(next);
+            }, 230);
+          }
+        } else {
+          console.log(data);
+        }
+      }
+    });
+  });
 }
 
 function scrollShowMore() {
