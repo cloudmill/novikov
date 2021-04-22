@@ -23,6 +23,6 @@ function updateCartCount() {
 
 addToCartBtn.on('click', function(event) {
 	event.preventDefault();
-	updateCartCount();
+	// updateCartCount();
 });
 
