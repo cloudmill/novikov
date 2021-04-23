@@ -24,10 +24,10 @@
       font-size: 40px;
       margin-bottom: 100px;
     }
-    &::first-line {
-      text-indent: 40px;
+    span:first-child > span::first-letter {
+      padding-left: 40px;
       @media screen and (min-width: $screen-md-min) {
-        text-indent: 200px;
+        padding-left: 100px;
       }
     }
 
@@ -100,10 +100,10 @@
     }
     p {
       max-width: 440px;
-      &::first-line {
-        text-indent: 40px;
+      &:first-letter {
+        padding-left: 40px;
         @media screen and (min-width: $screen-md-min) {
-          text-indent: 100px;
+          padding-left: 100px;
         }
       }
     }
@@ -184,10 +184,10 @@
     }
     p {
       line-height: 1.5;
-      &::first-line {
-        text-indent: 40px;
+      &:first-letter {
+        padding-left: 40px;
         @media screen and (min-width: $screen-md-min) {
-          text-indent: 100px;
+          padding-left: 100px;
         }
       }
     }

@@ -230,6 +230,12 @@
       .lead:after {
         border-color: white;
       }
+      svg {
+        path,
+        rect {
+          fill: white;
+        }
+      }
     }
     &-price {
       margin-bottom: 40px;

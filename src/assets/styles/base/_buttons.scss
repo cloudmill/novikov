@@ -232,3 +232,14 @@
     cursor: inherit;
   }
 }
+
+
+body:not(.safari) {
+  .btn-link {
+    svg {
+      .circ {
+        r: 0;
+      }
+    }
+  }
+}
