@@ -124,7 +124,7 @@ export const mapStyle = [
 ];
 const mcOptions = {
 	styles: [{
-	  url: 'assets/images/icons/bubble.svg',
+	  url: '/local/templates/main/assets/images/icons/bubble.svg',
 		width: 60,
 		height: 60,
 		fontFamily: 'Manrope',
