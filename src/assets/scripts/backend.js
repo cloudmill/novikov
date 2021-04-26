@@ -254,24 +254,28 @@ function basket() {
     const productId = $(this).attr('data-product-id');
     let productXmlId = $(this).attr('data-product-xml-id');
     let productNameEn = $(this).attr('data-product-name-en');
+    let type = $(this).attr('data-func-type');
     let data = null;
     let calculate = $(this).attr('data-calculate');
 
-    if (calculate) {
+    if (type == 'update') {
       data = {
         productId: productId,
         productXmlId: productXmlId,
         productNameEn: productNameEn,
         calculate: calculate,
+        type: type,
       };
-    } else if (!calculate && !productNameEn) {
+    } else if (type == 'delete') {
       data = {
         productId: productId,
+        type: type,
       };
     } else {
       data = {
         productId: productId,
         productNameEn: productNameEn,
+        type: type,
       };
     }
 
