@@ -255,6 +255,7 @@ function basket() {
     let productXmlId = $(this).attr('data-product-xml-id');
     let productNameEn = $(this).attr('data-product-name-en');
     let type = $(this).attr('data-func-type');
+    let restCode = $(this).attr('data-rest-code');
     let data = null;
     let calculate = $(this).attr('data-calculate');
 
@@ -276,6 +277,7 @@ function basket() {
         productId: productId,
         productNameEn: productNameEn,
         type: type,
+        restCode: restCode,
       };
     }
 
