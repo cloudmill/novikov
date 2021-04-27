@@ -266,6 +266,7 @@ function basket() {
         productNameEn: productNameEn,
         calculate: calculate,
         type: type,
+        restCode: restCode,
       };
     } else if (type == 'delete') {
       data = {
