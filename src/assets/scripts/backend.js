@@ -241,7 +241,7 @@ function menuRestaurantSections() {
 			success: function(data) {
 				itemsContainer.children().remove();
 
-				const itemsContainerResponse = $(data).find('[data-type=items_container]').children();
+				const itemsContainerResponse = $(data).children();
 
 				itemsContainer.append(itemsContainerResponse);
 			}
