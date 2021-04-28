@@ -7,6 +7,7 @@ $(function() {
 	eventsFilter();
 	mainRestFilterRegion();
 	mainRestFilterKitchen();
+  mainRestFilterFeature();
 	menuRestaurantSections();
 	scrollShowMore();
 	basket();
@@ -218,6 +219,35 @@ function mainRestFilterKitchen() {
 			}
 		});
 	});
+}
+
+function mainRestFilterFeature() {
+  $('[data-type=filter-feature]').on('click', function() {
+    console.log('click');
+    const container = $(this).parents('[data-type=main_container]');
+    const itemsCont = container.find('[data-type=items_container]');
+    const feautureId = $(this).attr('data-id');
+    const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
+    const kitchenId = container.find('[data-type=restaurants-kitchens-filter-select]').val();
+
+    itemsCont.empty();
+
+    $.ajax({
+      type: 'POST',
+      url: window.location.href,
+      dataType: 'html',
+      data: {
+        regionId: regionId,
+        kitchenId: kitchenId,
+        feautureId: feautureId,
+      },
+      success: function(data) {
+        const itemsContResponse = $(data).find('[data-type=items_container]').children();
+
+        itemsCont.append(itemsContResponse);
+      }
+    });
+  });
 }
 
 function menuRestaurantSections() {
