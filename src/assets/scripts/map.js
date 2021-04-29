@@ -146,6 +146,7 @@ function moveMarker(map) {
 }
 
 export function initMapRest() {
+  const bounds = new google.maps.LatLngBounds();
 	const markers = [];
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
@@ -210,6 +211,8 @@ export function initMapRest() {
 		});
 		marker.set('data-href', item[3]);
 
+    bounds.extend(marker.position);
+
 		markers.push(marker);
 
 		google.maps.event.addListener(marker, 'click', (function() {
@@ -224,12 +227,7 @@ export function initMapRest() {
 
 	const markerCluster = new MarkerClusterer(map, markers, mcOptions);
 
-	if (locations.length) {
-		map.setCenter({
-			lat: locations['0']['0'],
-			lng: locations['0']['1']
-		});
-	}
+  map.fitBounds(bounds);
 
 	if (parseFloat(list.attr('data-zoom')) > 0) {
 		map.setZoom(parseFloat(list.attr('data-zoom')));
