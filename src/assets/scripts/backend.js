@@ -1,5 +1,4 @@
 import { initSwiper } from './sliders.js';
-import { initMap } from './map.js';
 import { initMapRest } from './map.js';
 
 $(function() {
@@ -202,7 +201,6 @@ function ajaxFilterRestaurantsItems(data, itemsContainer, itemsContainerMap, kit
       itemsContainerMap.append(itemsContainerMapResponse);
       kitchensFiltBlock.after(propFeatureBlockResponse);
 
-      initMap();
       initMapRest();
 		}
 	});
@@ -239,7 +237,6 @@ function mainRestFilterKitchen() {
         itemsCont.append(itemsContResponse);
         itemsContMap.append(itemsContMapResponse);
 
-        initMap();
         initMapRest();
 			}
 		});
@@ -277,7 +274,6 @@ function mainRestFilterFeature() {
         itemsCont.append(itemsContResponse);
         itemsContMap.append(itemsContMapResponse);
 
-        initMap();
         initMapRest();
       }
     });

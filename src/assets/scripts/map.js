@@ -145,7 +145,7 @@ function moveMarker(map) {
 	});
 }
 
-function initMapRest() {
+export function initMapRest() {
 	const markers = [];
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
