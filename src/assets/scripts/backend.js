@@ -1,4 +1,6 @@
 import { initSwiper } from './sliders.js';
+import { initMap } from './map.js';
+import { initMapRest } from './map.js';
 
 $(function() {
 	restaurantsFilter();
@@ -146,7 +148,7 @@ function mainRestFilterRegion() {
 		const container = $(this).parents('[data-type=main_container]');
 		const kitchensSelect = container.find('[data-type=restaurants-kitchens-filter-select]');
 		const itemsContainer = container.find('[data-type=items_container]');
-		const otherContainer = container.find('[data-type=other_container]');
+    const itemsContainerMap = container.find('[data-type=items-container-map]');
 		const regionId = $(this).val();
 		const kitchensOption = container.find('[data-type=restaurants-kitchens-filter-select] option');
     const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
@@ -175,27 +177,33 @@ function mainRestFilterRegion() {
 					kitchenId: kitchensSelect.val(),
 				};
 
-				ajaxFilterRestaurantsItems(dataFilter, itemsContainer, otherContainer, kitchensFiltBlock, propFeatureBlock);
+				ajaxFilterRestaurantsItems(dataFilter, itemsContainer, itemsContainerMap, kitchensFiltBlock, propFeatureBlock);
 			}
 		});
 	});
 }
 
-function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer, kitchensFiltBlock, propFeatureBlock) {
+function ajaxFilterRestaurantsItems(data, itemsContainer, itemsContainerMap, kitchensFiltBlock, propFeatureBlock) {
 	$.ajax({
 		type: 'POST',
 		url: window.location.href,
 		dataType: 'html',
 		data: data,
 		success: function(data) {
-			itemsContainer.remove();
+			itemsContainer.empty();
+      itemsContainerMap.empty();
       propFeatureBlock.remove();
 
-			const itemsContainerResponse = $(data).find('[data-type=items_container]');
+			const itemsContainerResponse = $(data).find('[data-type=items_container]').children();
+      const itemsContainerMapResponse = $(data).find('[data-type=items-container-map]').children();
 			const propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
 
-			otherContainer.after(itemsContainerResponse);
+      itemsContainer.append(itemsContainerResponse);
+      itemsContainerMap.append(itemsContainerMapResponse);
       kitchensFiltBlock.after(propFeatureBlockResponse);
+
+      initMap();
+      initMapRest();
 		}
 	});
 }
@@ -204,7 +212,7 @@ function mainRestFilterKitchen() {
 	$('[data-type=restaurants-kitchens-filter-select]').on('select2:select', function() {
 		const container = $(this).parents('[data-type=main_container]');
 		const itemsCont = container.find('[data-type=items_container]');
-		const otherCont = container.find('[data-type=other_container]');
+    const itemsContMap = container.find('[data-type=items-container-map]');
 		const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
     const propFeatureBlock = container.find('[data-type=filter-feature]');
@@ -219,13 +227,20 @@ function mainRestFilterKitchen() {
 			},
 			success: function(data) {
         const propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
-        const itemsContResponse = $(data).find('[data-type=items_container]');
+        const itemsContResponse = $(data).find('[data-type=items_container]').children();
+        const itemsContMapResponse = $(data).find('[data-type=items-container-map]').children();
+
 
         propFeatureBlock.remove();
-        itemsCont.remove();
+        itemsCont.empty();
+        itemsContMap.empty();
 
         kitchensFiltBlock.after(propFeatureBlockResponse);
-				otherCont.after(itemsContResponse);
+        itemsCont.append(itemsContResponse);
+        itemsContMap.append(itemsContMapResponse);
+
+        initMap();
+        initMapRest();
 			}
 		});
 	});
@@ -236,13 +251,12 @@ function mainRestFilterFeature() {
     const container = $(this).parents('[data-type=main_container]');
     const parentsButton = $(this).parents('[data-type=filter-feature]');
     const itemsCont = container.find('[data-type=items_container]');
+    const itemsContMap = container.find('[data-type=items-container-map]');
     const feautureId = $(this).attr('data-id');
     const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchenId = container.find('[data-type=restaurants-kitchens-filter-select]').val();
 
     console.log(parentsButton.find('input:checkbox'));
-
-    itemsCont.empty();
 
     $.ajax({
       type: 'POST',
@@ -255,8 +269,16 @@ function mainRestFilterFeature() {
       },
       success: function(data) {
         const itemsContResponse = $(data).find('[data-type=items_container]').children();
+        const itemsContMapResponse = $(data).find('[data-type=items-container-map]').children();
+
+        itemsCont.empty();
+        itemsContMap.empty();
 
         itemsCont.append(itemsContResponse);
+        itemsContMap.append(itemsContMapResponse);
+
+        initMap();
+        initMapRest();
       }
     });
   });
