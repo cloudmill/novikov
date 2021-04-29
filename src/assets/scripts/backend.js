@@ -232,13 +232,15 @@ function mainRestFilterKitchen() {
 }
 
 function mainRestFilterFeature() {
-  $('[data-type=filter-feature]').on('click', function() {
-    console.log('click');
+  $(document).on('click', '[data-type=filter-feature-select]', function() {
     const container = $(this).parents('[data-type=main_container]');
+    const parentsButton = $(this).parents('[data-type=filter-feature]');
     const itemsCont = container.find('[data-type=items_container]');
     const feautureId = $(this).attr('data-id');
     const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchenId = container.find('[data-type=restaurants-kitchens-filter-select]').val();
+
+    console.log(parentsButton.find('input:checkbox'));
 
     itemsCont.empty();
 
