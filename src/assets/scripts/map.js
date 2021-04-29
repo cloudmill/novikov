@@ -159,18 +159,20 @@ export function initMapRest() {
 	const map = new google.maps.Map(document.getElementById('pvz_map'), mapOptions);
 
 	const content = [];
-	const locations = [
-		[59.91701049, 30.31812429, 'assets/images/icons/bubble-1.svg'],
-		[59.91916157, 30.3251195, 'assets/images/icons/bubble-2.svg'],
-		[59.91756978, 30.31812429, 'assets/images/icons/bubble-3.svg'],
-		[59.92049517, 30.33250093, 'assets/images/icons/bubble-1.svg'],
-		[59.91701049, 30.3276515, 'assets/images/icons/bubble-2.svg'],
-		[59.91831049, 30.31812429, 'assets/images/icons/bubble-3.svg'],
-		[59.91836157, 30.3251195, 'assets/images/icons/bubble-1.svg'],
-		[59.91836978, 30.31812429, 'assets/images/icons/bubble-2.svg'],
-		[59.92839517, 30.33250093, 'assets/images/icons/bubble-3.svg'],
-		[59.91831049, 30.3276515, 'assets/images/icons/bubble-1.svg'],
-	];
+  const locations = [];
+	const mapItems = $('[data-type=map-item]');
+
+	mapItems.each(function () {
+	  let dataItem = [],
+      coordItem = $(this).attr('data-adr').split(',');
+
+    dataItem.push(Number(coordItem[0]));
+    dataItem.push(Number(coordItem[1]));
+    dataItem.push($(this).attr('data-map-icon'));
+
+    locations.push(dataItem);
+  });
+
 	const hrefId = [
 		'section11',
 		'section21',
