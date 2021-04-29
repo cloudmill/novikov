@@ -149,6 +149,8 @@ function mainRestFilterRegion() {
 		const otherContainer = container.find('[data-type=other_container]');
 		const regionId = $(this).val();
 		const kitchensOption = container.find('[data-type=restaurants-kitchens-filter-select] option');
+    const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
+    const propFeatureBlock = container.find('[data-type=filter-feature]');
 
 		$.ajax({
 			type: 'POST',
@@ -173,13 +175,13 @@ function mainRestFilterRegion() {
 					kitchenId: kitchensSelect.val(),
 				};
 
-				ajaxFilterRestaurantsItems(dataFilter, itemsContainer, otherContainer);
+				ajaxFilterRestaurantsItems(dataFilter, itemsContainer, otherContainer, kitchensFiltBlock, propFeatureBlock);
 			}
 		});
 	});
 }
 
-function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer) {
+function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer, kitchensFiltBlock, propFeatureBlock) {
 	$.ajax({
 		type: 'POST',
 		url: window.location.href,
@@ -187,10 +189,13 @@ function ajaxFilterRestaurantsItems(data, itemsContainer, otherContainer) {
 		data: data,
 		success: function(data) {
 			itemsContainer.remove();
+      propFeatureBlock.remove();
 
 			const itemsContainerResponse = $(data).find('[data-type=items_container]');
+			const propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
 
 			otherContainer.after(itemsContainerResponse);
+      kitchensFiltBlock.after(propFeatureBlockResponse);
 		}
 	});
 }
@@ -201,6 +206,8 @@ function mainRestFilterKitchen() {
 		const itemsCont = container.find('[data-type=items_container]');
 		const otherCont = container.find('[data-type=other_container]');
 		const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
+    const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
+    const propFeatureBlock = container.find('[data-type=filter-feature]');
 
 		$.ajax({
 			type: 'POST',
@@ -211,10 +218,13 @@ function mainRestFilterKitchen() {
 				kitchenId: $(this).val(),
 			},
 			success: function(data) {
-				itemsCont.remove();
+        const propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
+        const itemsContResponse = $(data).find('[data-type=items_container]');
 
-				const itemsContResponse = $(data).find('[data-type=items_container]');
+        propFeatureBlock.remove();
+        itemsCont.remove();
 
+        kitchensFiltBlock.after(propFeatureBlockResponse);
 				otherCont.after(itemsContResponse);
 			}
 		});
