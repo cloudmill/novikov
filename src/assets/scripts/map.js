@@ -169,9 +169,12 @@ export function initMapRest() {
     dataItem.push(Number(coordItem[0]));
     dataItem.push(Number(coordItem[1]));
     dataItem.push($(this).attr('data-map-icon'));
+    dataItem.push($(this).attr('id'));
 
     locations.push(dataItem);
   });
+
+  console.log(locations);
 
 	const hrefId = [
 		'section11',
@@ -220,14 +223,15 @@ export function initMapRest() {
 			map: map,
 			id: i
 		});
-		marker.set('data-href', hrefId[i]);
+		marker.set('data-href', item[3]);
+
 		markers.push(marker);
 
 		google.maps.event.addListener(marker, 'click', (function() {
 			return function() {
 			  $('.mapList-item').removeClass('active');
-			  $('#' + hrefId[i]).addClass('active');
-				$('.scrollContent').mCustomScrollbar('scrollTo', '#' + hrefId[i]);
+			  $('#' + item[3]).addClass('active');
+				$('.scrollContent').mCustomScrollbar('scrollTo', '#' + item[3]);
 				return false;
 			};
 		})(marker));
