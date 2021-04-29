@@ -174,21 +174,6 @@ export function initMapRest() {
     locations.push(dataItem);
   });
 
-  console.log(locations);
-
-	const hrefId = [
-		'section11',
-		'section21',
-		'section31',
-		'section41',
-		'section51',
-		'section12',
-		'section22',
-		'section32',
-		'section42',
-		'section52',
-	];
-
 	const list = $('.pvz_list');
 	const items = list.find('span');
 	// const pvz_price = $('input[name=pvz_price]').val();
