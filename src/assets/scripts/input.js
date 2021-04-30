@@ -222,6 +222,17 @@ $('.promo--js').change(function() {
 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
 	}
 });
+$('.num--js').change(function() {
+	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+	if(
+		$('input[name=number]') && $(this).val().length > 0 &&
+    $('input[name=phone]') && phone.test($(this).val())
+	) {
+		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
+	} else {
+		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
+	}
+});
 
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
 $('.cart-rm--js').click(function() {

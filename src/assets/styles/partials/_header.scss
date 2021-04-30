@@ -531,6 +531,65 @@
     > div {
       margin-bottom: 10px;
     }
+    .tab-content {
+      position: relative;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      font-family: Lighthaus;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 120%;
+      text-transform: uppercase;
+      font-feature-settings: 'liga' off;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+      .tab {
+        border-bottom: 1px solid transparent;
+        transition: border-color .5s;
+      }
+      .active {
+        border-color: #EE1623;
+      }
+    }
+
+    .error {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 35px;
+      z-index: 9;
+      color: white;
+      display: flex;
+      align-items: center;
+      transition: height .5s, padding .3s .2s;
+      background: #EE1623;
+      overflow: hidden;
+      height: 0;
+      border-radius: 10px 0px;
+      &.active {
+        padding: 15px;
+        min-height: 61px;
+        height: calc(100% - 35px);
+        transition: height .5s;
+      }
+    }
+
+    .control {
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 140%;
+      height: 40px;
+      padding: 10px 20px;
+      border: 1px solid #E5E5E5;
+      margin-bottom: 10px;
+    }
+    .btn {
+      height: 25px;
+      font-size: 11px;
+      line-height: 140%;
+    }
   }
   &-summ {
     margin-top: 30px;

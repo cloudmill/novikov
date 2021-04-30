@@ -89,6 +89,11 @@ input[type="checkbox"]:focus {
 
   @include placeholder;
 
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &-error {
     font-size: 11px;
     line-height: 160%;

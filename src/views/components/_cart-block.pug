@@ -52,14 +52,21 @@
             path(d="M9.74145 14.1991L10.3651 14.8228L12.3153 12.8726L14.2655 14.8228L14.8892 14.1991L12.939 12.2489L14.8793 10.3086L14.2556 9.68494L12.3153 11.6252L10.3651 9.67504L9.74145 10.2987L11.6917 12.2489L9.74145 14.1991Z" fill="black")
     .cart-block-item.cart-block-item--long
       .cart-block-promo
-        div Карта лояльности #[br] или&nbsp;промокод
-        .input-group
-          input.control.promo--js(type='text', name='promo')
-          .input-group--btn
-            button.disabled(disabled)
-              svg(width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg")
-                rect(y="0.930664" width="40" height="40" fill="#000")
-                path(d="M12 21.3153L17.3333 25.9307L28 15.9307" stroke="#fff")
+        .tab-container
+          .tabs
+            .tab.active(data-toggle-target=".tab-content-1") карта лояльности
+            .tab(data-toggle-target=".tab-content-2") промокод
+          .tab-content.tab-content-1.active
+            // для появления добавить класс .active, текст можно удалить
+            .error Карта не привязана к указанному телефону
+            input.control.num--js(type='text', name='number', placeholder='Номер карты')
+            input.control.num--js(type='text', name='phone', placeholder='Номер телефона')
+            button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
+          .tab-content.tab-content-2
+            // для появления добавить класс .active, текст можно удалить
+            .error Промокод недействителен
+            input.control.promo--js(type='text', name='promo', placeholder='Промокод')
+            button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
     .cart-block-summ
       div Сумма  заказа
       .card-summ: b #[span 10 000] ₽
