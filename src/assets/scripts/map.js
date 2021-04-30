@@ -248,19 +248,25 @@ function initMap() {
 		styles: mapStyle,
 	};
 	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
-	const locations = [
-		[59.91701049, 30.31812429, 'assets/images/icons/bubble-1.svg'],
-	];
-	let marker;
-	locations.forEach((item, i) => {
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(item[0], item[1]),
-			icon: item[2],
-			map: map,
-			id: i
-		});
-		markers.push(marker);
-	});
+
+	let marker,
+    itemId = $('input[name=item-id]').val(),
+    coord = $('input[name=coordinates-val]').val().split(','),
+    itemIcon = $('input[name=map-icon]').val();
+
+  marker = new google.maps.Marker({
+    position: new google.maps.LatLng(coord[0], coord[1]),
+    icon: itemIcon,
+    map: map,
+    id: itemId
+  });
+
+  markers.push(marker);
+
+  map.setCenter({
+    lat: coord[0],
+    lng: coord[1]
+  });
 }
 
 $(function() {
