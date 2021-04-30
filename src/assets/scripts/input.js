@@ -145,7 +145,7 @@ $('.form--js').on('click', function(e) {
 	e.preventDefault();
 
 	const path = window.location.pathname.split('/');
-	const container = $(this).parents('[data-type=container_vacancy_form]');
+	const container = $(this).parents('[data-type=container-form]');
 
 	// валидация каждого поля формы
 	const result = [];
@@ -163,12 +163,12 @@ $('.form--js').on('click', function(e) {
 
 	// сбор данных формы
 	const form = $(this).closest('form');
-	const name = form.find('input[name=name]');
-	const email = form.find('input[name=email]');
-	const phone = form.find('input[name=phone]');
-	const text = form.find('textarea[name=desc]');
-	const type = form.attr('data-type-title');
-	const file = form.find('input[name=file]');
+	const name = container.find('input[name=name]');
+	const email = container.find('input[name=email]');
+	const phone = container.find('input[name=phone]');
+	const text = container.find('textarea[name=desc]');
+	const type = container.attr('data-type-title');
+	const file = container.find('input[name=file]');
 	const curForm = $(this);
 
 	let url = null;
@@ -186,9 +186,18 @@ $('.form--js').on('click', function(e) {
 		data.append('UF_VACANCY_RESTAURANT', container.attr('data-vacancy-restaurant'));
 		data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
 		data.append('file', file[0].files[0]);
+	} else if (path[1] == 'contacts') {
+	  url = '/local/templates/main/include/ajax/contact_form.php';
 
-		console.log(data);
-	}
+	  data = {
+      UF_NAME: name.val(),
+      UF_MAIL: email.val(),
+      UF_TEXT: text.val(),
+      UF_TYPE: type,
+    };
+  }
+
+  console.log(data);
 
 	if (url !== undefined) {
 		$.ajax({
