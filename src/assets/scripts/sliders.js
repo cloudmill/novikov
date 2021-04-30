@@ -341,17 +341,17 @@ initSwiper();
 
 $('.cart-block-promo .tab').on('click', function(evt) {
 	evt.preventDefault();
-	$('.tab').removeClass('active');
+	$('.cart-block-promo .tab').removeClass('active');
 	$(this).addClass('active');
 	const sel = this.getAttribute('data-toggle-target');
-	$('.tab-content').removeClass('active').filter(sel).addClass('active');
+	$('.cart-block-promo .tab-content').removeClass('active').filter(sel).addClass('active');
 	$(this).parent().removeClass('active');
 	if (sel === '.map') {
 		$(this).parent().addClass('active');
 	}
-	if (carousel) {
-		carousel.destroy();
-	}
+	// if (carousel) {
+	// 	carousel.destroy();
+	// }
 	// setTimeout(() => {
 	// 	AOS.refresh({
 	// 		offset: 50,

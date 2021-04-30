@@ -54,15 +54,15 @@
       .cart-block-promo
         .tab-container
           .tabs
-            .tab.active(data-toggle-target=".tab-content-1") карта лояльности
-            .tab(data-toggle-target=".tab-content-2") промокод
-          .tab-content.tab-content-1.active
+            .tab.active(data-toggle-target=".card-content") карта лояльности
+            .tab(data-toggle-target=".promo-content") промокод
+          .tab-content.card-content.active
             // для появления добавить класс .active, текст можно удалить
             .error Карта не привязана к указанному телефону
             input.control.num--js(type='text', name='number', placeholder='Номер карты')
             input.control.num--js(type='text', name='phone', placeholder='Номер телефона')
             button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
-          .tab-content.tab-content-2
+          .tab-content.promo-content
             // для появления добавить класс .active, текст можно удалить
             .error Промокод недействителен
             input.control.promo--js(type='text', name='promo', placeholder='Промокод')
