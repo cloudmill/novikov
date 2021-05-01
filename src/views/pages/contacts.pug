@@ -36,22 +36,31 @@ block content
           .text__lg Семен Орехов
           div: a.lead(href='mailto:s.orekhov@novikovgroup.ru') s.orekhov@novikovgroup.ru
     form.m-auto.col__xl-8.col__lg-10(data-aos='fade-up')
-      h2 Задать вопрос или #[br] оставить пожелание
-      .row.between__xs.middle__xs
-        .col.col__md-6.col__xs-12
-          .form__group: +fieldInput('text', 'name', 'name-c', '', 'Имя', false)
-        .col.col__md-6.col__xs-12
-          .form__group: +fieldInput('email', 'email', 'email-c', '', 'E–mail*', true)
-        .col.col__xs-12
-          .form__group: +fieldTextarea('desc', 'desc-v', 'Ваш вопрос или пожелание', '', '5', false)
-        .col.col__md-6.col__xs-12
-          .checkbox
-            input(type="checkbox", id='signIt-c', required)
-            label(for='signIt-c')
-              | Даю согласание на обработку #[a(href='#') персональных данных]
-              .control-error
-        .col
-          +btnLink('Отправить')
+      .form-inner
+        h2 Задать вопрос или #[br] оставить пожелание
+        .row.between__xs.middle__xs
+          .col.col__md-6.col__xs-12
+            .form__group: +fieldInput('text', 'name', 'name-c', '', 'Имя', false)
+          .col.col__md-6.col__xs-12
+            .form__group: +fieldInput('email', 'email', 'email-c', '', 'E–mail*', true)
+          .col.col__xs-12
+            .form__group: +fieldTextarea('desc', 'desc-v', 'Ваш вопрос или пожелание', '', '5', false)
+          .col.col__md-6.col__xs-12
+            .checkbox
+              input(type="checkbox", id='signIt-c', required)
+              label(for='signIt-c')
+                | Даю согласание на обработку #[a(href='#') персональных данных]
+                .control-error
+          .col
+            a.btn-link.btn-icon.lead.form--js(href='#')
+              span Отправить
+              include ../components/_next
+      // добавить класс .shown чтобы показать блок
+      .form-answer
+        h2 ваше сообщение отправлен. Ответим, как только сможем.
+        a.btn-link.btn-icon.lead.back--js(href='#')
+          span Отправить еще
+          include ../components/_next
 
 
 

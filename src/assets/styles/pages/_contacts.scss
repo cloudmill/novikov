@@ -86,3 +86,43 @@
     }
   }
 }
+
+form {
+  position: relative;
+}
+
+.form {
+  &-inner {
+
+  }
+  &-answer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    z-index: 9;
+    max-height: 0;
+    transition: max-height .5s;
+    overflow: hidden;
+    > * {
+      margin-top: 0;
+      position: static !important;
+    }
+    h2 {
+      font-size: 40px;
+      max-width: 540px;
+    }
+    > *:last-child {
+      margin-left: auto;
+    }
+    &.shown {
+      max-height: 700px;
+    }
+  }
+}

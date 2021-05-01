@@ -141,6 +141,11 @@ $('.input__file-close').on('click', function() {
 	$(this).removeClass('show');
 });
 
+$('.back--js').on('click', function(e) {
+	e.preventDefault();
+	$(this).closest('form').find('.form-answer').removeClass('shown');
+});
+
 $('.form--js').on('click', function(e) {
 	e.preventDefault();
 
@@ -190,14 +195,14 @@ $('.form--js').on('click', function(e) {
 	  url = '/local/templates/main/include/ajax/contact_form.php';
 
 	  data = {
-      UF_NAME: name.val(),
-      UF_MAIL: email.val(),
-      UF_TEXT: text.val(),
-      UF_TYPE: type,
-    };
-  }
+			UF_NAME: name.val(),
+			UF_MAIL: email.val(),
+			UF_TEXT: text.val(),
+			UF_TYPE: type,
+		};
+	}
 
-  console.log(data);
+	console.log(data);
 
 	if (url !== undefined) {
 		$.ajax({

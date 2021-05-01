@@ -13,6 +13,10 @@ $baseColor: #0A0A0A;
   background: $baseColor;
   position: relative;
   z-index: 195;
+  .form-answer {
+    color: white;
+    background: $baseColor;
+  }
   &-top {
     padding: 20px 0;
     border-bottom: 1px solid rgba(white, .2);
@@ -45,12 +49,12 @@ $baseColor: #0A0A0A;
         max-width: 440px;
         margin-left: auto;
       }
-    }
-    .form__group {
-      position: relative;
-      margin-top: 20px;
-      @media screen and (min-width: $screen-md-min) {
-        margin-top: 0;
+      .form__group {
+        position: relative;
+        margin-top: 20px;
+        @media screen and (min-width: $screen-md-min) {
+          margin-top: 0;
+        }
       }
       input {
         color: white;
