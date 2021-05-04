@@ -177,10 +177,15 @@ $('.form--js').on('click', function(e) {
 	const curForm = $(this);
 
 	let url = null;
+  let contentType = null;
+  let processData = null;
 	let data = null;
 
 	if (path[1] == 'vacancies') {
 		url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
+		contentType = false;
+    processData = false;
+
 		data = new FormData();
 		data.append('UF_NAME', name.val());
 		data.append('UF_MAIL', email.val());
@@ -193,6 +198,8 @@ $('.form--js').on('click', function(e) {
 		data.append('file', file[0].files[0]);
 	} else if (path[1] == 'contacts') {
 	  url = '/local/templates/main/include/ajax/contact_form.php';
+	  contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+    processData = true;
 
 	  data = {
 			UF_NAME: name.val(),
@@ -202,7 +209,8 @@ $('.form--js').on('click', function(e) {
 		};
 	}
 
-	console.log(data);
+	console.log(contentType);
+  console.log(processData);
 
 	if (url !== undefined) {
 		$.ajax({
@@ -210,8 +218,8 @@ $('.form--js').on('click', function(e) {
 			url: url,
 			dataType: 'json',
 			data: data,
-			contentType: false,
-			processData: false,
+			contentType: contentType,
+			processData: processData,
 			success: function(a) {
 				if (a.success === true) {
 					// открытие формы ответа
