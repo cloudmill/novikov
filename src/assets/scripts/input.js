@@ -296,7 +296,6 @@ export function deleteProduct(curItem) {
 
 export function appendProduct(curItem) {
   let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
-    itemBlock = curItem.parents('[data-type=item-block]'),
     items = itemsContainer.find('[data-type=item-block]');
 
   const $rooms = curItem.parent().find('.cart-count');
@@ -314,8 +313,6 @@ export function appendProduct(curItem) {
       count += parseInt($(item).find('.cart-count').text(), 10);
     }
   });
-
-  console.log(summ);
 
   const cartCount = $('.page-header__cart').find('.count');
   for (let i = 0; i < cartCount.length; i++) {
@@ -341,6 +338,9 @@ export function appendProduct(curItem) {
 }
 
 export function removeProduct(curItem) {
+  let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
+    items = itemsContainer.find('[data-type=item-block]');
+
   const $rooms = curItem.parent().find('.cart-count');
   const pr = curItem.closest('.cart-block-item').find('.cart-pr');
   const prData = pr.data('pr');
@@ -351,7 +351,7 @@ export function removeProduct(curItem) {
     pr.find('span').text((prData * b).toString().replace(regexp, ' '));
     let summ = 0;
     let count = 0;
-    $('.cart-block-item:not(.hide)').each((index, item) => {
+    items.each((index, item) => {
       if($(item).find('.cart-pr span').length) {
         summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
         count += parseInt($(item).find('.cart-count').text(), 10);
