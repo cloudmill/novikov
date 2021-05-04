@@ -294,82 +294,89 @@ export function deleteProduct(curItem) {
   }, 200);
 }
 
-$('.inc--js').click(function() {
-	const $rooms = $(this).parent().find('.cart-count');
-	const pr = $(this).closest('.cart-block-item').find('.cart-pr');
-	const prData = pr.data('pr');
-	let a = $rooms.text();
-	a++;
-	$rooms.text(a);
-	pr.find('span').text((prData * a).toString().replace(regexp, ' '));
-	let summ = 0;
-	let count = 0;
-	$('.cart-block-item:not(.hide)').each((index, item) => {
-	  if($(item).find('.cart-pr span').length) {
-			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-			count += parseInt($(item).find('.cart-count').text(), 10);
-		}
-	});
-	const cartCount = $('.page-header__cart').find('.count');
-	for (let i = 0; i < cartCount.length; i++) {
-		const actual = count;
-		$(cartCount[i]).find('span').eq(1).text(actual);
-		setTimeout(function() {
-			$(cartCount[i]).find('span').eq(0).text(actual);
-		}, 350);
-	}
-	setTimeout(function() {
-		cartCount.addClass('update-count');
-		setTimeout(function() {
-			cartCount.removeClass('update-count');
-		}, 200);
-	}, 200);
-	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-	if ($('.summ--js').length) {
-		const price = $('.summ--js').data('pr');
-		let summ1 = 0;
-		summ1 += price * a;
-		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
-	}
-});
+export function appendProduct(curItem) {
+  let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
+    itemBlock = curItem.parents('[data-type=item-block]'),
+    items = itemsContainer.find('[data-type=item-block]');
 
-$('.dec--js').click(function() {
-	const $rooms = $(this).parent().find('.cart-count');
-	const pr = $(this).closest('.cart-block-item').find('.cart-pr');
-	const prData = pr.data('pr');
-	let b = $rooms.text();
-	if (b > 1) {
-		b--;
-		$rooms.text(b);
-		pr.find('span').text((prData * b).toString().replace(regexp, ' '));
-		let summ = 0;
-		let count = 0;
-		$('.cart-block-item:not(.hide)').each((index, item) => {
-			if($(item).find('.cart-pr span').length) {
-				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-				count += parseInt($(item).find('.cart-count').text(), 10);
-			}
-		});
-		const cartCount = $('.page-header__cart').find('.count');
-		for (let i = 0; i < cartCount.length; i++) {
-			const actual = count;
-			$(cartCount[i]).find('span').eq(1).text(actual);
-			setTimeout(function() {
-				$(cartCount[i]).find('span').eq(0).text(actual);
-			}, 350);
-		}
-		setTimeout(function() {
-			cartCount.addClass('update-count');
-			setTimeout(function() {
-				cartCount.removeClass('update-count');
-			}, 200);
-		}, 200);
-		$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-		if ($('.summ--js').length) {
-			const price = $('.summ--js').data('pr');
-			let summ1 = 0;
-			summ1 += price * b;
-			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
-		}
-	}
-});
+  const $rooms = curItem.parent().find('.cart-count');
+  const pr = curItem.closest('.cart-block-item').find('.cart-pr');
+  const prData = pr.data('pr');
+  let a = $rooms.text();
+  a++;
+  $rooms.text(a);
+  pr.find('span').text((prData * a).toString().replace(regexp, ' '));
+  let summ = 0;
+  let count = 0;
+  items.each((index, item) => {
+    if($(item).find('.cart-pr span').length) {
+      summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+      count += parseInt($(item).find('.cart-count').text(), 10);
+    }
+  });
+
+  console.log(summ);
+
+  const cartCount = $('.page-header__cart').find('.count');
+  for (let i = 0; i < cartCount.length; i++) {
+    const actual = count;
+    $(cartCount[i]).find('span').eq(1).text(actual);
+    setTimeout(function() {
+      $(cartCount[i]).find('span').eq(0).text(actual);
+    }, 350);
+  }
+  setTimeout(function() {
+    cartCount.addClass('update-count');
+    setTimeout(function() {
+      cartCount.removeClass('update-count');
+    }, 200);
+  }, 200);
+  $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+  if ($('.summ--js').length) {
+    const price = $('.summ--js').data('pr');
+    let summ1 = 0;
+    summ1 += price * a;
+    $('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+  }
+}
+
+export function removeProduct(curItem) {
+  const $rooms = curItem.parent().find('.cart-count');
+  const pr = curItem.closest('.cart-block-item').find('.cart-pr');
+  const prData = pr.data('pr');
+  let b = $rooms.text();
+  if (b > 1) {
+    b--;
+    $rooms.text(b);
+    pr.find('span').text((prData * b).toString().replace(regexp, ' '));
+    let summ = 0;
+    let count = 0;
+    $('.cart-block-item:not(.hide)').each((index, item) => {
+      if($(item).find('.cart-pr span').length) {
+        summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+        count += parseInt($(item).find('.cart-count').text(), 10);
+      }
+    });
+    const cartCount = $('.page-header__cart').find('.count');
+    for (let i = 0; i < cartCount.length; i++) {
+      const actual = count;
+      $(cartCount[i]).find('span').eq(1).text(actual);
+      setTimeout(function() {
+        $(cartCount[i]).find('span').eq(0).text(actual);
+      }, 350);
+    }
+    setTimeout(function() {
+      cartCount.addClass('update-count');
+      setTimeout(function() {
+        cartCount.removeClass('update-count');
+      }, 200);
+    }, 200);
+    $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+    if ($('.summ--js').length) {
+      const price = $('.summ--js').data('pr');
+      let summ1 = 0;
+      summ1 += price * b;
+      $('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+    }
+  }
+}

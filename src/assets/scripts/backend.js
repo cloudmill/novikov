@@ -2,6 +2,8 @@ import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
 import { updateCartCount } from './cart.js';
 import { deleteProduct } from './input.js';
+import { appendProduct } from './input.js';
+import { removeProduct } from './input.js';
 
 $(function() {
 	restaurantsFilter();
@@ -356,6 +358,12 @@ function basket() {
             updateCartCount();
           } else if (type == 'delete') {
             deleteProduct(curItem);
+          } else {
+            if (calculate == '+') {
+              appendProduct(curItem);
+            } else {
+              removeProduct(curItem);
+            }
           }
         } else {
           console.log('Ошибка добавление товара');
