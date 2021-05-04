@@ -1,5 +1,7 @@
 import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
+import { updateCartCount } from './cart.js';
+import { deleteProduct } from './input.js';
 
 $(function() {
 	restaurantsFilter();
@@ -311,6 +313,7 @@ function menuRestaurantSections() {
 
 function basket() {
   $(document).on('click', '[data-type=cart]', function() {
+    const curItem = $(this);
     const productId = $(this).attr('data-product-id');
     let productXmlId = $(this).attr('data-product-xml-id');
     let productNameEn = $(this).attr('data-product-name-en');
@@ -349,21 +352,10 @@ function basket() {
       data: data,
       success: function(data) {
         if (data.success === true) {
-          const cartCount = $('.page-header__cart').find('.count');
-          cartCount.addClass('update-count');
-          setTimeout(function() {
-            cartCount.removeClass('update-count');
-          }, 200);
-
-          for (let i = 0; i < cartCount.length; i++) {
-            const actual = Number($(cartCount[i]).find('span').eq(0).text()) + 1;
-            const next = actual + 1;
-            setTimeout(function() {
-              $(cartCount[i]).find('span').eq(0).text(actual);
-            }, 150);
-            setTimeout(function() {
-              $(cartCount[i]).find('span').eq(1).text(next);
-            }, 230);
+          if (type == 'add') {
+            updateCartCount();
+          } else if (type == 'delete') {
+            deleteProduct(curItem);
           }
         } else {
           console.log('Ошибка добавление товара');
