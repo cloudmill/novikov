@@ -241,6 +241,7 @@ $('.form--js').on('click', function(e) {
 			processData: processData,
 			success: function(a) {
 				if (a.success === true) {
+				  let classActiveVal = null;
 					// открытие формы ответа
 					// контакты
 					const mediaQuery = matchMedia('(min-width: 1024px)');
@@ -250,7 +251,13 @@ $('.form--js').on('click', function(e) {
 						curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
 					}
 
-          container.find('[data-type=response-form]').addClass('active');
+					if (path[1] == 'vacancies') {
+            classActiveVal = 'active';
+          } else if (path[1] == 'contacts') {
+            classActiveVal = 'shown';
+          }
+
+          container.find('[data-type=response-form]').addClass(classActiveVal);
 				}
 			}
 		});
