@@ -58,7 +58,8 @@ $baseColor: #0A0A0A;
       }
       input {
         color: white;
-        background-color: $baseColor;
+        background-color: $baseColor !important;
+        border-color: white !important;
         @include placeholder(white);
       }
       button {
@@ -72,6 +73,7 @@ $baseColor: #0A0A0A;
         outline: none;
       }
       .control:hover {
+        background-color: $baseColor;
         border-color: white;
       }
     }
