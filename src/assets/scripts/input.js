@@ -46,7 +46,7 @@ export function validateField(element, event) {
 	let radioError;
 	if (lang === 'en') {
 		inputError = 'Wrong field';
-		chkError = 'Wrong checkbox';
+		chkError = 'Incorrect checkbox';
 		radioError = 'Wrong radio';
 		emptyError = 'Empty field';
 	} else {
