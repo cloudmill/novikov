@@ -315,6 +315,7 @@ function menuRestaurantSections() {
 
 function basket() {
   $(document).on('click', '[data-type=cart]', function() {
+    let container = $(this).parents('[data-type=main_container]');
     const curItem = $(this);
     const productId = $(this).attr('data-product-id');
     let productXmlId = $(this).attr('data-product-xml-id');
@@ -365,9 +366,33 @@ function basket() {
               removeProduct(curItem);
             }
           }
+        } else if (data.success == 'another restaurant') {
+          container.find('[data-type=another-rest]').addClass('active');
+
+          anotherRestaurant(container, productId, productNameEn, restCode);
         } else {
           console.log('Ошибка добавление товара');
         }
+      }
+    });
+  });
+}
+
+function anotherRestaurant(container, productId, productNameEn, restCode) {
+  $('[data-type=add-product-another-rest]').click(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: '/local/templates/main/include/ajax/basket_delete_all.php',
+      dataType: 'json',
+      data: {
+        productId: productId,
+        productNameEn: productNameEn,
+        restCode: restCode,
+      },
+      success: function(data) {
+        console.log('success another restaurant');
       }
     });
   });
