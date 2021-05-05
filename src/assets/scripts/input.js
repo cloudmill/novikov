@@ -156,8 +156,6 @@ $('.form--js').on('click', function(e) {
     path.splice(1,1);
   }
 
-  console.log(path);
-
 	// валидация каждого поля формы
 	const result = [];
 	$(this).closest('form').find('input, textarea').each(function() {
