@@ -320,7 +320,7 @@ function basket() {
     let productXmlId = $(this).attr('data-product-xml-id');
     let productNameEn = $(this).attr('data-product-name-en');
     let type = $(this).attr('data-func-type');
-    let restId = $(this).attr('data-rest-id');
+    let restCode = $(this).attr('data-rest-code');
     let data = null;
     let calculate = $(this).attr('data-calculate');
 
@@ -331,7 +331,7 @@ function basket() {
         productNameEn: productNameEn,
         calculate: calculate,
         type: type,
-        restId: restId,
+        restCode: restCode,
       };
     } else if (type == 'delete') {
       data = {
@@ -343,7 +343,7 @@ function basket() {
         productId: productId,
         productNameEn: productNameEn,
         type: type,
-        restId: restId,
+        restCode: restCode,
       };
     }
 

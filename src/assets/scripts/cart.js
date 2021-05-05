@@ -1,7 +1,7 @@
 const addToCartBtn = $('.cd-add-to-cart');
 
 
-function updateCartCount() {
+export function updateCartCount() {
 	const cartCount = $('.page-header__cart').find('.count');
 	cartCount.addClass('update-count');
 	setTimeout(function() {
