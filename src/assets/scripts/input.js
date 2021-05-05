@@ -152,6 +152,12 @@ $('.form--js').on('click', function(e) {
 	const path = window.location.pathname.split('/');
 	const container = $(this).parents('[data-type=container-form]');
 
+	if (document.documentElement.lang == 'en') {
+    path.splice(1,1);
+  }
+
+  console.log(path);
+
 	// валидация каждого поля формы
 	const result = [];
 	$(this).closest('form').find('input, textarea').each(function() {
