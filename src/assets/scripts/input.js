@@ -30,6 +30,7 @@ export function validatePhone(phone) {
 	return re.test(phone);
 }
 
+
 export function validateField(element, event) {
 	const isRequired = element.attr('required');
 	const errorBlock = '.control-error';
@@ -37,6 +38,24 @@ export function validateField(element, event) {
 	const radio = element.attr('type') === 'radio';
 	const value = event;
 	const tmpval = element.val();
+	const lang = $('html').attr('lang');
+
+	let inputError;
+	let emptyError;
+	let chkError;
+	let radioError;
+	if (lang === 'en') {
+		inputError = 'Wrong field';
+		chkError = 'Wrong checkbox';
+		radioError = 'Wrong radio';
+		emptyError = 'Empty field';
+	} else {
+		inputError = 'Поле заполнено некорректно';
+		emptyError = 'Поле не заполнено';
+		chkError = 'Остутствует согласие на обработку персональных данных';
+		radioError = 'Не указан способ оплаты';
+	}
+
 
 	let result;
 
@@ -57,7 +76,7 @@ export function validateField(element, event) {
 				result = true;
 			} else {
 				element.closest('.input').addClass('error');
-				element.closest('.input').find(errorBlock).text('Поле заполнено некорректно');
+				element.closest('.input').find(errorBlock).text(inputError);
 				result = false;
 			}
 		} else if (element.prop('name') === 'phone') {
@@ -67,7 +86,7 @@ export function validateField(element, event) {
 				result = true;
 			} else {
 				element.closest('.input').addClass('error');
-				element.closest('.input').find(errorBlock).text('Поле заполнено некорректно');
+				element.closest('.input').find(errorBlock).text(inputError);
 				result = false;
 			}
 		} else {
@@ -83,7 +102,7 @@ export function validateField(element, event) {
 			element.closest('.checkbox').find(errorBlock).text('');
 			result = true;
 		} else {
-			element.closest('.checkbox').find(errorBlock).text('Остутствует согласие на обработку персональных данных');
+			element.closest('.checkbox').find(errorBlock).text(chkError);
 			result = false;
 		}
 	}
@@ -92,8 +111,7 @@ export function validateField(element, event) {
 	if (radio) {
 		if ('.tab-content.active') {
 			if (!$('.tab-content.active input[type=\'radio\']:checked').val()) {
-				console.log('ss');
-				element.closest('.radio--inline').next().text('Не указан способ оплаты');
+				element.closest('.radio--inline').next().text(radioError);
 				result = false;
 			} else {
 				element.closest('.radio--inline').next().text('');
@@ -105,7 +123,7 @@ export function validateField(element, event) {
 	// required input
 	if (!value && isRequired) {
 		element.closest('.input').addClass('error');
-		element.closest('.input').find(errorBlock).text('Поле не заполнено');
+		element.closest('.input').find(errorBlock).text(emptyError);
 		result = false;
 	}
 
@@ -153,8 +171,8 @@ $('.form--js').on('click', function(e) {
 	const container = $(this).parents('[data-type=container-form]');
 
 	if (document.documentElement.lang == 'en') {
-    path.splice(1,1);
-  }
+		path.splice(1, 1);
+	}
 
 	// валидация каждого поля формы
 	const result = [];
@@ -181,14 +199,14 @@ $('.form--js').on('click', function(e) {
 	const curForm = $(this);
 
 	let url = null;
-  let contentType = null;
-  let processData = null;
+	let contentType = null;
+	let processData = null;
 	let data = null;
 
 	if (path[1] == 'vacancies') {
 		url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
 		contentType = false;
-    processData = false;
+		processData = false;
 
 		data = new FormData();
 		data.append('UF_NAME', name.val());
@@ -203,7 +221,7 @@ $('.form--js').on('click', function(e) {
 	} else if (path[1] == 'contacts') {
 	  url = '/local/templates/main/include/ajax/contact_form.php';
 	  contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
-    processData = true;
+		processData = true;
 
 	  data = {
 			UF_NAME: name.val(),
@@ -214,7 +232,7 @@ $('.form--js').on('click', function(e) {
 	}
 
 	console.log(contentType);
-  console.log(processData);
+	console.log(processData);
 
 	if (url !== undefined) {
 		$.ajax({
@@ -263,124 +281,124 @@ $('.num--js').change(function() {
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
 export function deleteProduct(curItem) {
-  let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
-    itemBlock = curItem.parents('[data-type=item-block]');
+	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
+	const itemBlock = curItem.parents('[data-type=item-block]');
 
-  itemBlock.remove().slideUp(300);
+	itemBlock.remove().slideUp(300);
 
-  let items = itemsContainer.find('[data-type=item-block]');
-  let summ = 0;
-  let count = 0;
+	const items = itemsContainer.find('[data-type=item-block]');
+	let summ = 0;
+	let count = 0;
 
-  items.each((index, item) => {
-    if($(item).find('.cart-pr span').length) {
-      summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-      count += parseInt($(item).find('.cart-count').text(), 10);
-    }
-  });
+	items.each((index, item) => {
+		if($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			count += parseInt($(item).find('.cart-count').text(), 10);
+		}
+	});
 
-  $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 
 
-  const cartCount = $('.page-header__cart').find('.count');
-  for (let i = 0; i < cartCount.length; i++) {
-    const actual = count;
-    $(cartCount[i]).find('span').eq(1).text(actual);
-    setTimeout(function() {
-      $(cartCount[i]).find('span').eq(0).text(actual);
-    }, 350);
-  }
-  setTimeout(function() {
-    cartCount.addClass('update-count');
-    setTimeout(function() {
-      cartCount.removeClass('update-count');
-    }, 200);
-  }, 200);
+	const cartCount = $('.page-header__cart').find('.count');
+	for (let i = 0; i < cartCount.length; i++) {
+		const actual = count;
+		$(cartCount[i]).find('span').eq(1).text(actual);
+		setTimeout(function() {
+			$(cartCount[i]).find('span').eq(0).text(actual);
+		}, 350);
+	}
+	setTimeout(function() {
+		cartCount.addClass('update-count');
+		setTimeout(function() {
+			cartCount.removeClass('update-count');
+		}, 200);
+	}, 200);
 }
 
 export function appendProduct(curItem) {
-  let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
-    items = itemsContainer.find('[data-type=item-block]');
+	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
+	const items = itemsContainer.find('[data-type=item-block]');
 
-  const $rooms = curItem.parent().find('.cart-count');
-  const pr = curItem.closest('.cart-block-item').find('.cart-pr');
-  const prData = pr.data('pr');
-  let a = $rooms.text();
-  a++;
-  $rooms.text(a);
-  pr.find('span').text((prData * a).toString().replace(regexp, ' '));
-  let summ = 0;
-  let count = 0;
-  items.each((index, item) => {
-    if($(item).find('.cart-pr span').length) {
-      summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-      count += parseInt($(item).find('.cart-count').text(), 10);
-    }
-  });
+	const $rooms = curItem.parent().find('.cart-count');
+	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
+	const prData = pr.data('pr');
+	let a = $rooms.text();
+	a++;
+	$rooms.text(a);
+	pr.find('span').text((prData * a).toString().replace(regexp, ' '));
+	let summ = 0;
+	let count = 0;
+	items.each((index, item) => {
+		if($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			count += parseInt($(item).find('.cart-count').text(), 10);
+		}
+	});
 
-  const cartCount = $('.page-header__cart').find('.count');
-  for (let i = 0; i < cartCount.length; i++) {
-    const actual = count;
-    $(cartCount[i]).find('span').eq(1).text(actual);
-    setTimeout(function() {
-      $(cartCount[i]).find('span').eq(0).text(actual);
-    }, 350);
-  }
-  setTimeout(function() {
-    cartCount.addClass('update-count');
-    setTimeout(function() {
-      cartCount.removeClass('update-count');
-    }, 200);
-  }, 200);
-  $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-  if ($('.summ--js').length) {
-    const price = $('.summ--js').data('pr');
-    let summ1 = 0;
-    summ1 += price * a;
-    $('.summ--js span').text(summ1.toString().replace(regexp, ' '));
-  }
+	const cartCount = $('.page-header__cart').find('.count');
+	for (let i = 0; i < cartCount.length; i++) {
+		const actual = count;
+		$(cartCount[i]).find('span').eq(1).text(actual);
+		setTimeout(function() {
+			$(cartCount[i]).find('span').eq(0).text(actual);
+		}, 350);
+	}
+	setTimeout(function() {
+		cartCount.addClass('update-count');
+		setTimeout(function() {
+			cartCount.removeClass('update-count');
+		}, 200);
+	}, 200);
+	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	if ($('.summ--js').length) {
+		const price = $('.summ--js').data('pr');
+		let summ1 = 0;
+		summ1 += price * a;
+		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+	}
 }
 
 export function removeProduct(curItem) {
-  let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
-    items = itemsContainer.find('[data-type=item-block]');
+	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
+	const items = itemsContainer.find('[data-type=item-block]');
 
-  const $rooms = curItem.parent().find('.cart-count');
-  const pr = curItem.closest('.cart-block-item').find('.cart-pr');
-  const prData = pr.data('pr');
-  let b = $rooms.text();
-  if (b > 1) {
-    b--;
-    $rooms.text(b);
-    pr.find('span').text((prData * b).toString().replace(regexp, ' '));
-    let summ = 0;
-    let count = 0;
-    items.each((index, item) => {
-      if($(item).find('.cart-pr span').length) {
-        summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-        count += parseInt($(item).find('.cart-count').text(), 10);
-      }
-    });
-    const cartCount = $('.page-header__cart').find('.count');
-    for (let i = 0; i < cartCount.length; i++) {
-      const actual = count;
-      $(cartCount[i]).find('span').eq(1).text(actual);
-      setTimeout(function() {
-        $(cartCount[i]).find('span').eq(0).text(actual);
-      }, 350);
-    }
-    setTimeout(function() {
-      cartCount.addClass('update-count');
-      setTimeout(function() {
-        cartCount.removeClass('update-count');
-      }, 200);
-    }, 200);
-    $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-    if ($('.summ--js').length) {
-      const price = $('.summ--js').data('pr');
-      let summ1 = 0;
-      summ1 += price * b;
-      $('.summ--js span').text(summ1.toString().replace(regexp, ' '));
-    }
-  }
+	const $rooms = curItem.parent().find('.cart-count');
+	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
+	const prData = pr.data('pr');
+	let b = $rooms.text();
+	if (b > 1) {
+		b--;
+		$rooms.text(b);
+		pr.find('span').text((prData * b).toString().replace(regexp, ' '));
+		let summ = 0;
+		let count = 0;
+		items.each((index, item) => {
+			if($(item).find('.cart-pr span').length) {
+				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+				count += parseInt($(item).find('.cart-count').text(), 10);
+			}
+		});
+		const cartCount = $('.page-header__cart').find('.count');
+		for (let i = 0; i < cartCount.length; i++) {
+			const actual = count;
+			$(cartCount[i]).find('span').eq(1).text(actual);
+			setTimeout(function() {
+				$(cartCount[i]).find('span').eq(0).text(actual);
+			}, 350);
+		}
+		setTimeout(function() {
+			cartCount.addClass('update-count');
+			setTimeout(function() {
+				cartCount.removeClass('update-count');
+			}, 200);
+		}, 200);
+		$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+		if ($('.summ--js').length) {
+			const price = $('.summ--js').data('pr');
+			let summ1 = 0;
+			summ1 += price * b;
+			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+		}
+	}
 }
