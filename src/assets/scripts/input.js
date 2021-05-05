@@ -176,7 +176,7 @@ $('.form--js').on('click', function(e) {
 
 	// валидация каждого поля формы
 	const result = [];
-	$(this).closest('form').find('input, textarea').each(function() {
+  container.find('input, textarea').each(function() {
 		const input = $(this)[0];
 		result.push(validateField($(this), input.value));
 	});
@@ -231,9 +231,6 @@ $('.form--js').on('click', function(e) {
 		};
 	}
 
-	console.log(contentType);
-	console.log(processData);
-
 	if (url !== undefined) {
 		$.ajax({
 			type: 'POST',
@@ -252,6 +249,8 @@ $('.form--js').on('click', function(e) {
 					} else {
 						curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
 					}
+
+          container.find('[data-type=response-form]').addClass('active');
 				}
 			}
 		});
