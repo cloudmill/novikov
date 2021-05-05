@@ -191,7 +191,10 @@ input[type="search"] {
 
   .control-error {
     position: absolute;
-    bottom: -19px;
+    bottom: -28px;
+    @media screen and (min-width: $screen-md-min) {
+      bottom: -19px;
+    }
   }
 }
 

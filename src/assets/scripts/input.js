@@ -37,6 +37,24 @@ export function validateField(element, event) {
 	const radio = element.attr('type') === 'radio';
 	const value = event;
 	const tmpval = element.val();
+	const lang = $('html').attr('lang');
+
+	let inputError;
+	let emptyError;
+	let chkError;
+	let radioError;
+	if (lang === 'en') {
+		inputError = 'Wrong field';
+		chkError = 'Wrong checkbox';
+		radioError = 'Wrong radio';
+		emptyError = 'Empty field';
+	} else {
+		inputError = 'Поле заполнено некорректно';
+		emptyError = 'Поле не заполнено';
+		chkError = 'Остутствует согласие на обработку персональных данных';
+		radioError = 'Не указан способ оплаты';
+	}
+
 
 	let result;
 
@@ -57,7 +75,7 @@ export function validateField(element, event) {
 				result = true;
 			} else {
 				element.closest('.input').addClass('error');
-				element.closest('.input').find(errorBlock).text('Поле заполнено некорректно');
+				element.closest('.input').find(errorBlock).text(inputError);
 				result = false;
 			}
 		} else if (element.prop('name') === 'phone') {
@@ -67,7 +85,7 @@ export function validateField(element, event) {
 				result = true;
 			} else {
 				element.closest('.input').addClass('error');
-				element.closest('.input').find(errorBlock).text('Поле заполнено некорректно');
+				element.closest('.input').find(errorBlock).text(inputError);
 				result = false;
 			}
 		} else {
@@ -83,7 +101,7 @@ export function validateField(element, event) {
 			element.closest('.checkbox').find(errorBlock).text('');
 			result = true;
 		} else {
-			element.closest('.checkbox').find(errorBlock).text('Остутствует согласие на обработку персональных данных');
+			element.closest('.checkbox').find(errorBlock).text(chkError);
 			result = false;
 		}
 	}
@@ -92,8 +110,7 @@ export function validateField(element, event) {
 	if (radio) {
 		if ('.tab-content.active') {
 			if (!$('.tab-content.active input[type=\'radio\']:checked').val()) {
-				console.log('ss');
-				element.closest('.radio--inline').next().text('Не указан способ оплаты');
+				element.closest('.radio--inline').next().text(radioError);
 				result = false;
 			} else {
 				element.closest('.radio--inline').next().text('');
@@ -105,7 +122,7 @@ export function validateField(element, event) {
 	// required input
 	if (!value && isRequired) {
 		element.closest('.input').addClass('error');
-		element.closest('.input').find(errorBlock).text('Поле не заполнено');
+		element.closest('.input').find(errorBlock).text(emptyError);
 		result = false;
 	}
 
@@ -201,11 +218,15 @@ $('.form--js').on('click', function(e) {
 		data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
 		data.append('file', file[0].files[0]);
 	} else if (path[1] == 'contacts') {
+<<<<<<< Updated upstream
 	  url = '/local/templates/main/include/ajax/contact_form.php';
 	  contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     processData = true;
+=======
+		url = '/local/templates/main/include/ajax/contact_form.php';
+>>>>>>> Stashed changes
 
-	  data = {
+		data = {
 			UF_NAME: name.val(),
 			UF_MAIL: email.val(),
 			UF_TEXT: text.val(),
@@ -250,7 +271,7 @@ $('.promo--js').change(function() {
 });
 $('.num--js').change(function() {
 	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
-	if(
+	if (
 		$('input[name=number]') && $(this).val().length > 0 &&
     $('input[name=phone]') && phone.test($(this).val())
 	) {
@@ -261,6 +282,21 @@ $('.num--js').change(function() {
 });
 
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
+<<<<<<< Updated upstream
+=======
+$('.cart-rm--js').click(function() {
+	$(this).closest('.cart-block-item').addClass('hide').slideUp(300);
+	let summ = 0;
+	let count = 0;
+	$('.cart-block-item:not(.hide)').each((index, item) => {
+		if ($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			count += parseInt($(item).find('.cart-count').text(), 10);
+		}
+	});
+	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+
+>>>>>>> Stashed changes
 
 export function deleteProduct(curItem) {
   let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
@@ -298,6 +334,7 @@ export function deleteProduct(curItem) {
   }, 200);
 }
 
+<<<<<<< Updated upstream
 export function appendProduct(curItem) {
   let itemsContainer = curItem.parents('[data-type=cart-items-container]'),
     items = itemsContainer.find('[data-type=item-block]');
@@ -384,3 +421,84 @@ export function removeProduct(curItem) {
     }
   }
 }
+=======
+$('.inc--js').click(function() {
+	const $rooms = $(this).parent().find('.cart-count');
+	const pr = $(this).closest('.cart-block-item').find('.cart-pr');
+	const prData = pr.data('pr');
+	let a = $rooms.text();
+	a++;
+	$rooms.text(a);
+	pr.find('span').text((prData * a).toString().replace(regexp, ' '));
+	let summ = 0;
+	let count = 0;
+	$('.cart-block-item:not(.hide)').each((index, item) => {
+		if ($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			count += parseInt($(item).find('.cart-count').text(), 10);
+		}
+	});
+	const cartCount = $('.page-header__cart').find('.count');
+	for (let i = 0; i < cartCount.length; i++) {
+		const actual = count;
+		$(cartCount[i]).find('span').eq(1).text(actual);
+		setTimeout(function() {
+			$(cartCount[i]).find('span').eq(0).text(actual);
+		}, 350);
+	}
+	setTimeout(function() {
+		cartCount.addClass('update-count');
+		setTimeout(function() {
+			cartCount.removeClass('update-count');
+		}, 200);
+	}, 200);
+	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	if ($('.summ--js').length) {
+		const price = $('.summ--js').data('pr');
+		let summ1 = 0;
+		summ1 += price * a;
+		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+	}
+});
+
+$('.dec--js').click(function() {
+	const $rooms = $(this).parent().find('.cart-count');
+	const pr = $(this).closest('.cart-block-item').find('.cart-pr');
+	const prData = pr.data('pr');
+	let b = $rooms.text();
+	if (b > 1) {
+		b--;
+		$rooms.text(b);
+		pr.find('span').text((prData * b).toString().replace(regexp, ' '));
+		let summ = 0;
+		let count = 0;
+		$('.cart-block-item:not(.hide)').each((index, item) => {
+			if ($(item).find('.cart-pr span').length) {
+				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+				count += parseInt($(item).find('.cart-count').text(), 10);
+			}
+		});
+		const cartCount = $('.page-header__cart').find('.count');
+		for (let i = 0; i < cartCount.length; i++) {
+			const actual = count;
+			$(cartCount[i]).find('span').eq(1).text(actual);
+			setTimeout(function() {
+				$(cartCount[i]).find('span').eq(0).text(actual);
+			}, 350);
+		}
+		setTimeout(function() {
+			cartCount.addClass('update-count');
+			setTimeout(function() {
+				cartCount.removeClass('update-count');
+			}, 200);
+		}, 200);
+		$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+		if ($('.summ--js').length) {
+			const price = $('.summ--js').data('pr');
+			let summ1 = 0;
+			summ1 += price * b;
+			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
+		}
+	}
+});
+>>>>>>> Stashed changes
