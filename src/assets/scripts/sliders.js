@@ -339,12 +339,12 @@ export function initSwiper() {
 
 initSwiper();
 
-$('.cart-block-promo .tab').on('click', function(evt) {
+$('.set-tab .tab').on('click', function(evt) {
 	evt.preventDefault();
-	$('.cart-block-promo .tab').removeClass('active');
+	$('.set-tab .tab').removeClass('active');
 	$(this).addClass('active');
 	const sel = this.getAttribute('data-toggle-target');
-	$('.cart-block-promo .tab-content').removeClass('active').filter(sel).addClass('active');
+	$('.set-tab .tab-content').removeClass('active').filter(sel).addClass('active');
 	$(this).parent().removeClass('active');
 	if (sel === '.map') {
 		$(this).parent().addClass('active');
