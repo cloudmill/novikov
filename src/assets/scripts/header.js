@@ -82,9 +82,9 @@ $('.search-block--js').click(function() {
 	return false;
 });
 $(document).click(function(event) {
-	if (!$(event.target).closest('.page-header__cart--js, .show-popup--js, .box--js, .cart-block, .cart-popup, .search-block, .vacancy-block').length) {
+	if (!$(event.target).closest('.page-header__cart--js, .show-popup--js, .box--js, .cart-popup, .search-block, .vacancy-block').length) {
 		$('.overlay').removeClass('active');
-		$('body').find('.cart-block, .cart-popup, .search-block, .vacancy-block').removeClass('active');
+		$('body').find('.cart-popup, .search-block, .vacancy-block').removeClass('active');
 	}
 });
 
