@@ -1,5 +1,5 @@
 import 'devbridge-autocomplete';
-import {mapStyle} from './map';
+// import {mapStyle} from './map';
 import {validateField} from './input';
 import {myModal} from './popup';
 
@@ -25,27 +25,29 @@ let marker = [];
 let map = [];
 
 function initMap() {
-	const mapOptions = {
-		center: new google.maps.LatLng(59.91916157, 30.3251195),
-		zoom: 15,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		mapTypeControl: false,
-		zoomControl: true,
-		scrollwheel: false,
-		styles: mapStyle,
-	};
-	map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	ymaps.ready(function() {
+		map = new ymaps.Map('map', {
+			center: [43.3180145, 45.698291],
+			zoom: 9
+		}, {
+			searchControlProvider: 'yandex#search'
+		});
 
-	marker = new google.maps.Marker({
-		icon: 'assets/images/icons/navi.svg',
-		map: map,
+		marker = new ymaps.Placemark(map.getCenter(), {}, {
+			iconLayout: 'default#image',
+			iconImageHref: 'assets/images/icons/navi.svg',
+			iconImageSize: [30, 42],
+			iconImageOffset: [-5, -38]
+		});
+
+		map.geoObjects.add(marker);
 	});
 
 }
 
 function moveMarker(lat, lng) {
-	marker.setPosition(new google.maps.LatLng(lat, lng));
-	map.panTo(new google.maps.LatLng(lat, lng));
+	map.setCenter([lat, lng], 15);
+	marker.geometry.setCoordinates([lat, lng]);
 }
 
 $('.autocomplete').autocomplete({
