@@ -199,8 +199,8 @@ $('.form--js').on('click', function(e) {
 	const curForm = $(this);
 
 	let url = null;
-	let contentType = null;
-	let processData = null;
+	let contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+	let processData = true;
 	let data = null;
 
 	if (path[1] == 'vacancies') {
@@ -220,8 +220,6 @@ $('.form--js').on('click', function(e) {
 		data.append('file', file[0].files[0]);
 	} else if (path[1] == 'contacts') {
 	  url = '/local/templates/main/include/ajax/contact_form.php';
-	  contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
-		processData = true;
 
 	  data = {
 			UF_NAME: name.val(),
@@ -229,7 +227,19 @@ $('.form--js').on('click', function(e) {
 			UF_TEXT: text.val(),
 			UF_TYPE: type,
 		};
-	}
+	} else if (path[1] == 'restaurants' && type == 'Забронировать стол') {
+    url = '/local/templates/main/include/ajax/booking.php';
+
+    data = {
+      UF_NAME: name.val(),
+      UF_PHONE: phone.val(),
+      UF_EMAIL: email.val(),
+      UF_PERSONS_NUMBER: container.find('input[name=count]').val(),
+      UF_DATE: container.find('input[name=date]').val() + ' ' + container.find('[data-type=select-time').val(),
+      UF_WISHES: container.find('input[name=text]').val(),
+      UF_TYPE: type,
+    }
+  }
 
 	if (url !== undefined) {
 		$.ajax({
