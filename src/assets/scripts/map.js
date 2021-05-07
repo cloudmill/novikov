@@ -146,7 +146,7 @@ function moveMarker(map) {
 }
 
 export function initMapRest() {
-  const bounds = new google.maps.LatLngBounds();
+	const bounds = new google.maps.LatLngBounds();
 	const markers = [];
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
@@ -160,20 +160,20 @@ export function initMapRest() {
 	const map = new google.maps.Map(document.getElementById('pvz_map'), mapOptions);
 
 	const content = [];
-  const locations = [];
+	const locations = [];
 	const mapItems = $('[data-type=map-item]');
 
-	mapItems.each(function () {
-	  let dataItem = [],
-      coordItem = $(this).attr('data-adr').split(',');
+	mapItems.each(function() {
+	  const dataItem = [];
+		const coordItem = $(this).attr('data-adr').split(',');
 
-    dataItem.push(Number(coordItem[0]));
-    dataItem.push(Number(coordItem[1]));
-    dataItem.push($(this).attr('data-map-icon'));
-    dataItem.push($(this).attr('id'));
+		dataItem.push(Number(coordItem[0]));
+		dataItem.push(Number(coordItem[1]));
+		dataItem.push($(this).attr('data-map-icon'));
+		dataItem.push($(this).attr('id'));
 
-    locations.push(dataItem);
-  });
+		locations.push(dataItem);
+	});
 
 	const list = $('.pvz_list');
 	const items = list.find('span');
@@ -211,7 +211,7 @@ export function initMapRest() {
 		});
 		marker.set('data-href', item[3]);
 
-    bounds.extend(marker.position);
+		bounds.extend(marker.position);
 
 		markers.push(marker);
 
@@ -227,7 +227,7 @@ export function initMapRest() {
 
 	const markerCluster = new MarkerClusterer(map, markers, mcOptions);
 
-  map.fitBounds(bounds);
+	map.fitBounds(bounds);
 
 	if (parseFloat(list.attr('data-zoom')) > 0) {
 		map.setZoom(parseFloat(list.attr('data-zoom')));
@@ -249,24 +249,25 @@ function initMap() {
 	};
 	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
 
-	let marker,
-    itemId = $('input[name=item-id]').val(),
-    coord = $('input[name=coordinates-val]').val().split(','),
-    itemIcon = $('input[name=map-icon]').val();
+	const itemId = $('input[name=item-id]').val();
+	const coord = $('input[name=coordinates-val]').val() && $('input[name=coordinates-val]').val().split(',');
+	const itemIcon = $('input[name=map-icon]').val();
 
-  marker = new google.maps.Marker({
-    position: new google.maps.LatLng(coord[0], coord[1]),
-    icon: itemIcon,
-    map: map,
-    id: itemId
-  });
+	const marker = new google.maps.Marker({
+		position: new google.maps.LatLng(coord && coord[0], coord && coord[1]),
+		icon: itemIcon,
+		map: map,
+		id: itemId
+	});
 
-  markers.push(marker);
+	markers.push(marker);
 
-  map.setCenter({
-    lat: coord[0],
-    lng: coord[1]
-  });
+	if(coord) {
+		map.setCenter({
+			lat: coord[0],
+			lng: coord[1]
+		});
+	}
 }
 
 $(function() {

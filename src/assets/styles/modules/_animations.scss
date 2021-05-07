@@ -16,9 +16,20 @@
   animation: marquee 32s linear infinite;
 }
 
+.safari {
+  .track {
+    animation: marqueeSafari 32s linear infinite;
+  }
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+@keyframes marqueeSafari {
+  from { left: 0; }
+  to { left: -100%; }
 }
 
 

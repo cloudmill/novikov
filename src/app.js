@@ -116,6 +116,13 @@ $(document).ready(() => {
 	$('.scroll-to--js a').click(function() {
 	  const id = $(this).attr('href');
 		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
+		return false;
+	});
+	$('.anchor a').click(function() {
+	  const id = $(this).attr('href');
+	  const top = $(id).position().top;
+		$('.scrollContentX').mCustomScrollbar('scrollTo', top + $(id).height() + 100);
+		return false;
 	});
 	document.body.classList.add(result.name);
 

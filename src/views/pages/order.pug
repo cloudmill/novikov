@@ -29,7 +29,7 @@ block content
               label(for='signIt-o')
                 | Даю согласание на обработку #[a(href='#') персональных данных]
                 .control-error
-          .tab-container.order-wrapper__item(data-aos='fade-up')
+          .tab-container.order-wrapper__item.set-tab(data-aos='fade-up')
             .tabs
               .tab.active(data-toggle-target=".tab-content-1"): h3 Доставка
               .tab(data-toggle-target=".tab-content-2"): h3 самовывоз
@@ -41,16 +41,16 @@ block content
                     .order-delivery-adr
                       p
                       a.text__sm.myModal(href='#') Изменить
-                .col.col__xl-4.col__sm-6.col__xs-6
+                .col.col__xl-4.col__sm-6.col__xs-6.short--in
                   +fieldInput('text', 'number', 'number-o', '', 'Номер квартиры', true)
               .control-error
               .order-wrapper__item.order-wrapper__item--date(data-aos='fade-up')
                 h3 дата и время доставки
                 .order-date.row
-                  .col.col__xl-4.col__sm-6.col__xs-6
+                  .col.col__xs-6
                     +fieldInput('text', 'date', 'date-o', '', 'Дата', true)
-                  .col.col__xl-4.select-wrapper.col__sm-6.col__xs-6
-                    select.select-template(style='width: 190px')
+                  .col.select-wrapper.col__xs-6
+                    select.select-template(style='width: 100%')
                       option(value='11') 11:00
                       option(value='12') 12:00
                       option(value='13') 13:00
@@ -74,14 +74,14 @@ block content
               .order-wrapper__item(data-aos='fade-up')
                 h3 дата и время доставки
                 .row.order-date
-                  .col.col__xl-4.col__sm-6.col__xs-6
+                  .col.col__xs-6
                     +fieldInput('text', 'date', 'date-o', '', 'Дата', true)
-                  .col.col__xl-4.select-wrapper.col__sm-6.col__xs-6
+                  .col.select-wrapper.col__xs-6
                     select.select-template(style='width: 180px')
                       option(value='11') 11:00
                       option(value='12') 12:00
                       option(value='13') 13:00
-              .order-wrapper__item(data-aos='fade-up')
+              .order-wrapper__item(data-aos='fade-up', style='z-index: -1')
                 h3 способ оплаты
                 .order-payment
                   .radio--inline

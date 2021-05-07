@@ -43,7 +43,9 @@ block content
               .template-social-list
                 div: a(href='#') Вконтакте
                 div: a(href='#') Facebook
-            +btnLink('Задать вопрос')
+            .anchor: a.btn-link.btn-icon.lead(href='#getTicket')
+              span Купить билет
+              include ../components/_next
       section.section(data-aos='fade-up')
         .event-img: +img('event/main.jpg')
         .event-desc(data-aos='fade-up')
@@ -89,7 +91,7 @@ block content
               li Lamberti Amarone della Valpolicella Classico 2015
               li Торт Опера
         .event-tooltip(data-aos='fade-up') *Дорогие гости, на ужине будут соблюдены все меры безопасности, в том числе установлена дистанция между столами, произведена дезинфекция посадочных мест и предоставлено оборудование для измерения температуры гостям.
-        .ticket(data-aos='fade-up')
+        .ticket#getTicket(data-aos='fade-up')
           .ticket-top: h2 Купить билет на событие
           .ticket-body
             .name Долгожданная премьера эксклюзивных вин #[br] проекта Taste Wine Selection of Fine Wines
@@ -109,7 +111,7 @@ block content
                   .ticket-buy-title итого
                   .ticket-buy-price.summ--js(data-pr='5000') #[span 10 000] ₽
                 .col.col__md-6.col__xs-12
-                  +btnLink('Купить билет')
+                  +btnLinkW('Купить билет')
     .list-discount(data-aos='fade-up')
       .list-discount-inner
         .list-discount-slider

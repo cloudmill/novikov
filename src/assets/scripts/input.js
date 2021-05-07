@@ -300,7 +300,16 @@ export function deleteProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const itemBlock = curItem.parents('[data-type=item-block]');
 
-	itemBlock.remove().slideUp(300);
+	// itemBlock.slideUp(300);
+  itemBlock.velocity(
+    {
+      scale: 0,
+    },
+    {duration: 300}
+  );
+  setTimeout(function() {
+    itemBlock.remove();
+  }, 500);
 
 	const items = itemsContainer.find('[data-type=item-block]');
 	let summ = 0;

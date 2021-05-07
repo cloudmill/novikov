@@ -88,7 +88,10 @@ h6, .zeta    {
 
 
 // Body text
-p { margin: 0 0 $line-height-computed-half; }
+p {
+  font-weight: normal;
+  margin: 0 0 $line-height-computed-half;
+}
 
 b { font-weight: 400; }
 

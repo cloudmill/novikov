@@ -22,7 +22,7 @@
   .back-link {
     position: absolute;
     left: 20px;
-    top: 160px;
+    top: 80px;
     display: none;
     @media screen and (min-width: $screen-lg-min) {
       display: block;
@@ -130,6 +130,9 @@
 }
 
 .order {
+  &-date {
+    max-width: 390px;
+  }
   &-wrapper {
     max-width: 800px;
     padding: 0 10px;
@@ -159,7 +162,7 @@
         margin-bottom: 80px;
       }
 
-      .tab-content {
+      .short--in {
         .input,
         .control {
           max-width: 160px;
@@ -242,8 +245,13 @@
     }
     &-adr {
       display: none;
+      p {
+        margin: 0;
+      }
       a {
-        //border-bottom: 1px solid black;
+        font-size: 14px;
+        line-height: 140%;
+        text-decoration: underline;
       }
     }
     &.active {

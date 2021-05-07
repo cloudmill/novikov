@@ -43,20 +43,20 @@ percent_icon;
     circle {
       @include transitionEase(all);
     }
-    &:hover {
-      transform: translateX(20px);
-      rect {
-        width: 30px;
-        fill: white;
-      }
-      path {
-        fill: white;
-        transform: matrix(0.9, 0, 0, 0.9, 4, 4);
-        //transform: scale(.9);
-      }
-      .circ {
-        r: 35 !important;
-      }
+  }
+  &:hover svg {
+    transform: translateX(20px);
+    rect {
+      width: 30px;
+      fill: white;
+    }
+    path {
+      fill: white;
+      transform: matrix(0.9, 0, 0, 0.9, 4, 4);
+      //transform: scale(.9);
+    }
+    .circ {
+      r: 35 !important;
     }
   }
 }
@@ -81,10 +81,10 @@ body:not(.safari) {
       .circ {
         opacity: 0;
       }
-      &:hover {
-        .circ {
-          opacity: 1;
-        }
+    }
+    &:hover svg {
+      .circ {
+        opacity: 1;
       }
     }
   }
@@ -114,45 +114,41 @@ body:not(.safari) {
       circle {
         @include transitionEase(all);
       }
-      &:hover {
-        transform: translateX(0);
-        transform: translateY(-20px);
-        rect {
-          x: 30;
-          width: 1px;
-          height: 25px;
-          fill: white;
-        }
-        path {
-          fill: white;
-          transform: translateY(3px);
-          //transform: scale(.9);
-        }
-        .circ {
-          r: 35 !important;
-        }
+    }
+    &:hover svg {
+      transform: translateX(0);
+      transform: translateY(-20px);
+      rect {
+        x: 30;
+        width: 1px;
+        height: 25px;
+        fill: white;
+      }
+      path {
+        fill: white;
+        transform: translateY(3px);
+        //transform: scale(.9);
+      }
+      .circ {
+        r: 35 !important;
       }
     }
   }
   .swiper-button-prev {
-    svg {
-      &:hover {
-        transform: translateY(20px);
-        rect {
-          x: 29;
-        }
+    &:hover svg {
+      transform: translateY(20px);
+      rect {
+        x: 29;
       }
     }
   }
 }
 
 .swiper-button-next {
-  svg {
-    &:hover {
-      transform: translateX(-20px);
-      rect {
-        x: 38;
-      }
+  &:hover svg {
+    transform: translateX(-20px);
+    rect {
+      x: 38;
     }
   }
 }
@@ -184,10 +180,10 @@ body:not(.safari) {
   border-radius: 0;
   @include transitionEase();
   background-color: transparent;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #E5E5E5;
 
   .select2-selection__arrow {
-    top: 5px;
+    top: 0;
     right: 5px;
     height: 75%;
     background: url('../images/icons/select.svg') center right no-repeat;
@@ -242,7 +238,8 @@ body:not(.safari) {
 .select2.select2-container {
   display: block;
   background: white;
-  padding: 10px 10px 0 10px;
+  margin-left: -10px;
+  padding: 0 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   transition: all .5s;

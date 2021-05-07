@@ -548,9 +548,11 @@
       .tab {
         border-bottom: 1px solid transparent;
         transition: border-color .5s;
+        cursor: pointer;
       }
       .active {
         border-color: #EE1623;
+        cursor: default;
       }
     }
 

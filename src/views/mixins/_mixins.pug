@@ -15,6 +15,11 @@ mixin btnLink(text)
     span= text
     include ../components/_next
 
+mixin btnLinkW(text)
+  a.btn-link.btn-icon.lead(href='#')
+    span= text
+    include ../components/_next-w
+
 mixin wrapTitle(text)
   .wrapTitle(data-aos)
     each item in text
