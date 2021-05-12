@@ -20,13 +20,20 @@ export function updateCartCount() {
 	}
 }
 
-export function updateCartList(el) {
+export function updateCartList(el, productsList) {
 	const regexp = /\B(?=(\d{3})+(?!\d))/g;
+	const id = el.data('product-id');
 	const name = el.data('product-name');
 	const price = el.data('price');
-	const itemsContainer = $('[data-type=products_list]');
-	itemsContainer
-		.prepend(`
+	const exist = productsList.find('[data-item-id=' + id + ']');
+
+  console.log(exist.length);
+
+  if (exist.length) {
+    console.log('Товар уже в корзине, увеличилось его количество');
+  } else {
+    productsList
+      .prepend(`
 		  <div class="cart-block-item" data-type="item-block">
 		    <div class="cart-block-item-size">
           <div>${name}</div>
@@ -58,20 +65,22 @@ export function updateCartList(el) {
         </div>
       </div>
 		`);
-	const itemFirst = $('[data-type=item-block]:first-child');
-	itemFirst.hide();
-	itemFirst.velocity({
-		scale: 0,
-	},
-	{duration: 0});
-	itemFirst.velocity(
-		{
-			scale: 1,
-		},
-		{
-			display: 'block'
-		}, {duration: 300}
-	);
+
+    const itemFirst = $('[data-type=item-block]:first-child');
+    itemFirst.hide();
+    itemFirst.velocity({
+        scale: 0,
+      },
+      {duration: 0});
+    itemFirst.velocity(
+      {
+        scale: 1,
+      },
+      {
+        display: 'block'
+      }, {duration: 300}
+    );
+  }
 }
 
 

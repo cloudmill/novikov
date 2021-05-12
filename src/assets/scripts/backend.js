@@ -325,6 +325,7 @@ function basket() {
     let restCode = $(this).attr('data-rest-code');
     let data = null;
     let calculate = $(this).attr('data-calculate');
+    let productsList = container.find('[data-type=products_list]');
 
     if (type == 'update') {
       data = {
@@ -358,7 +359,7 @@ function basket() {
         if (data.success === true) {
           if (type == 'add') {
             updateCartCount();
-            updateCartList(curItem);
+            updateCartList(curItem, productsList);
           } else if (type == 'delete') {
             deleteProduct(curItem);
           } else {
