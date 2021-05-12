@@ -88,8 +88,6 @@ export function updateCartList(el, productsList) {
     if (productsList.find('[data-type=item-block]').length == 1) {
       let totalSumm = restMinOrder - price;
 
-      console.log(totalSumm);
-
       productsList.append('<div class="cart-block-item cart-block-item--long"><div class="cart-block-promo set-tab"><div class="tab-container"><div class="tabs"><div class="tab active" data-toggle-target=".card-content">карта лояльности</div><div class="tab" data-toggle-target=".promo-content">промокод</div></div><div class="tab-content card-content active"><div class="error">Карта не привязана к указанному телефону</div><input class="control num--js" type="text" name="number" placeholder="Номер карты"><input class="control num--js" type="text" name="phone" placeholder="Номер телефона"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div><div class="tab-content promo-content"><div class="error">Промокод недействителен</div><input class="control promo--js" type="text" name="promo" placeholder="Промокод"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div></div></div></div>');
       productsList.append('<div class="cart-block-summ"><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div>');
 
@@ -97,7 +95,7 @@ export function updateCartList(el, productsList) {
       containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
 
       if (price <= restMinOrder) {
-        containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" href="#" disabled>'+totalSumm+' ₽ до минимальной суммы заказа</a>');
+        containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
       } else {
         containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
       }
@@ -120,14 +118,12 @@ export function updateCartList(el, productsList) {
 
   containerSidebar.find('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 
-  if (exist.length) {
-    const totalSumm = restMinOrder - summ;
+  const totalSumm = restMinOrder - summ;
 
-    if (summ <= restMinOrder) {
-      containerSidebar.find('[data-type=button-order] span').text(totalSumm);
-    } else {
-      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
-    }
+  if (summ <= restMinOrder) {
+    containerSidebar.find('[data-type=button-order] span').text(totalSumm);
+  } else {
+    containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
   }
 }
 
