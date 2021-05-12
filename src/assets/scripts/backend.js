@@ -372,7 +372,7 @@ function basket() {
         } else if (data.success == 'another restaurant') {
           container.find('[data-type=another-rest]').addClass('active');
 
-          anotherRestaurant(container, productId, productNameEn, restCode);
+          anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList);
         } else {
           console.log('Ошибка добавление товара');
         }
@@ -381,7 +381,7 @@ function basket() {
   });
 }
 
-function anotherRestaurant(container, productId, productNameEn, restCode) {
+function anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList) {
   $('[data-type=add-product-another-rest]').click(function (e) {
     e.preventDefault();
 
@@ -395,7 +395,9 @@ function anotherRestaurant(container, productId, productNameEn, restCode) {
         restCode: restCode,
       },
       success: function(data) {
-        console.log('success another restaurant');
+        if (data.success === true) {
+          updateCartList(curItem, productsList, 'delete');
+        }
       }
     });
   });

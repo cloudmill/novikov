@@ -20,7 +20,7 @@ export function updateCartCount() {
 	}
 }
 
-export function updateCartList(el, productsList) {
+export function updateCartList(el, productsList, type) {
 	const regexp = /\B(?=(\d{3})+(?!\d))/g;
 	const id = el.data('product-id');
 	const name = el.data('product-name');
@@ -30,6 +30,10 @@ export function updateCartList(el, productsList) {
   const containerSidebar = el.parents('[data-type=main_container]');
   const curCount = Number(exist.find('.cart-count').text()) + 1;
   const restMinOrder = $('[data-type=rest-min-order]').val();
+
+  if (type == 'delete') {
+    productsList.find('[data-type=item-block]').remove();
+  }
 
   if (exist.length) {
     exist.find('.cart-count').text(curCount);
