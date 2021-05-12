@@ -22,9 +22,9 @@ export function updateCartCount() {
 
 export function updateCartList(el) {
 	const regexp = /\B(?=(\d{3})+(?!\d))/g;
-	const name = el.data('name');
+	const name = el.data('product-name');
 	const price = el.data('price');
-	const itemsContainer = $('[data-type=cart-items-container]');
+	const itemsContainer = $('[data-type=products_list]');
 	itemsContainer
 		.prepend(`
 		  <div class="cart-block-item" data-type="item-block">
@@ -78,6 +78,6 @@ export function updateCartList(el) {
 addToCartBtn.on('click', function(event) {
 	event.preventDefault();
 	// updateCartCount();
-	updateCartList($(this));
+	// updateCartList($(this));
 });
 

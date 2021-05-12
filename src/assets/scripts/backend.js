@@ -1,6 +1,7 @@
 import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
 import { updateCartCount } from './cart.js';
+import { updateCartList } from './cart.js';
 import { deleteProduct } from './input.js';
 import { appendProduct } from './input.js';
 import { removeProduct } from './input.js';
@@ -357,6 +358,7 @@ function basket() {
         if (data.success === true) {
           if (type == 'add') {
             updateCartCount();
+            updateCartList(curItem);
           } else if (type == 'delete') {
             deleteProduct(curItem);
           } else {
