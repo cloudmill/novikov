@@ -25,16 +25,17 @@ export function updateCartList(el, productsList) {
 	const id = el.data('product-id');
 	const name = el.data('product-name');
 	const price = el.data('price');
+  const weight = el.data('weight');
 	const exist = productsList.find('[data-item-id=' + id + ']');
 
-  console.log(exist.length);
 
   if (exist.length) {
-    console.log('Товар уже в корзине, увеличилось его количество');
+    const curCount = Number(exist.find('.cart-count').text()) + 1;
+    exist.find('.cart-count').text(curCount);
   } else {
     productsList
       .prepend(`
-		  <div class="cart-block-item" data-type="item-block">
+		  <div class="cart-block-item" data-type="item-block" data-item-id="${id}">
 		    <div class="cart-block-item-size">
           <div>${name}</div>
           <div class="incDec">
@@ -55,7 +56,9 @@ export function updateCartList(el, productsList) {
         </div>
         <div class="cart-block-item-price">
           <div class="cart-pr" data-pr=${price}><span>${price.toString().replace(regexp, ' ')}</span> ₽</div>
-          <div class="cart-wr"></div>
+          <div class="cart-wr">
+            ${weight} г
+          </div>
           <div class="cart-rm cart-rm--js">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
