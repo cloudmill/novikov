@@ -32,6 +32,22 @@ export function updateCartList(el, productsList) {
   if (exist.length) {
     const curCount = Number(exist.find('.cart-count').text()) + 1;
     exist.find('.cart-count').text(curCount);
+    const pr = exist.find('.cart-pr');
+    const prData = pr.data('pr');
+    pr.find('span').text((prData * curCount).toString().replace(regexp, ' '));
+    let summ = 0;
+    let count = 0;
+    let items = productsList.find('[data-type=item-block]');
+    let containerSidebar = el.parents('[data-type=main_container]');
+
+    items.each((index, item) => {
+      if($(item).find('.cart-pr span').length) {
+        summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+        count += parseInt($(item).find('.cart-count').text(), 10);
+      }
+    });
+
+    containerSidebar.find('.card-summ b span').text(summ.toString().replace(regexp, ' '));
   } else {
     productsList
       .prepend(`
@@ -83,6 +99,13 @@ export function updateCartList(el, productsList) {
         display: 'block'
       }, {duration: 300}
     );
+
+    if (productsList.find('[data-type=item-block]').length == 1) {
+      productsList
+        .append('<div class="cart-block-item cart-block-item--long"><div class="cart-block-promo set-tab"><div class="tab-container"><div class="tabs"><div class="tab active" data-toggle-target=".card-content">карта лояльности</div><div class="tab" data-toggle-target=".promo-content">промокод</div></div><div class="tab-content card-content active"><div class="error">Карта не привязана к указанному телефону</div><input class="control num--js" type="text" name="number" placeholder="Номер карты"><input class="control num--js" type="text" name="phone" placeholder="Номер телефона"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div><div class="tab-content promo-content"><div class="error">Промокод недействителен</div><input class="control promo--js" type="text" name="promo" placeholder="Промокод"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div></div></div></div>');
+
+      productsList.find('.cart-block-body-null').remove();
+    }
   }
 }
 
