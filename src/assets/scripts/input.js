@@ -387,7 +387,7 @@ export function appendProduct(curItem) {
 
   const totalSumm = restMinOrder - summ;
 
-  if (summ <= restMinOrder) {
+  if (summ < restMinOrder) {
     containerSidebar.find('[data-type=button-order] span').text(totalSumm);
   } else {
     containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
@@ -440,11 +440,8 @@ export function removeProduct(curItem) {
 
     const totalSumm = restMinOrder - summ;
 
-    console.log(totalSumm);
-
-    if (summ <= restMinOrder) {
-      console.log('Сумма меньше минимальной суммы');
-      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" disabled style="display: block" href="#"><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
+    if (summ < restMinOrder) {
+      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" disabled style="display: block" href="#"><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
     }
 	}
 }

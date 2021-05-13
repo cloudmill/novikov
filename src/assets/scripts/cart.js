@@ -44,14 +44,14 @@ export function updateCartList(el, productsList, type) {
 		    <div class="cart-block-item-size">
           <div>${name}</div>
           <div class="incDec">
-            <div class="cart-id dec--js">
+            <div class="cart-id dec--js" data-type="cart" data-product-id="${id}" data-calculate="-" data-func-type="update">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12.0001" cy="12" r="11.5" stroke="#E5E5E5"></circle>
                 <path d="M9.55975 13.031H15.4398V12.149H9.55975V13.031Z" fill="black"></path>
               </svg>
             </div>
             <div class="cart-count">1</div>
-            <div class="cart-id inc--js">
+            <div class="cart-id inc--js" data-type="cart" data-product-id="${id}" data-calculate="+" data-func-type="update">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="11.5" stroke="#E5E5E5"></circle>
                 <path d="M11.9648 15.159H12.8468V12.401H15.5978V11.519H12.8468V8.76099H11.9648V11.519H9.20679V12.401H11.9648V15.159Z" fill="black"></path>
@@ -100,7 +100,7 @@ export function updateCartList(el, productsList, type) {
       productsList.find('.cart-block-body-null').remove();
       containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
 
-      if (price <= restMinOrder) {
+      if (price < restMinOrder) {
         containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
       } else {
         containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
@@ -126,7 +126,7 @@ export function updateCartList(el, productsList, type) {
 
   const totalSumm = restMinOrder - summ;
 
-  if (summ <= restMinOrder) {
+  if (summ < restMinOrder) {
     containerSidebar.find('[data-type=button-order] span').text(totalSumm);
   } else {
     containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
