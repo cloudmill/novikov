@@ -344,6 +344,8 @@ export function deleteProduct(curItem) {
 export function appendProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const items = itemsContainer.find('[data-type=item-block]');
+  const restMinOrder = $('[data-type=rest-min-order]').val();
+  const containerSidebar = curItem.parents('[data-type=main_container]');
 
 	const $rooms = curItem.parent().find('.cart-count');
 	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
@@ -382,11 +384,21 @@ export function appendProduct(curItem) {
 		summ1 += price * a;
 		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
 	}
+
+  const totalSumm = restMinOrder - summ;
+
+  if (summ <= restMinOrder) {
+    containerSidebar.find('[data-type=button-order] span').text(totalSumm);
+  } else {
+    containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
+  }
 }
 
 export function removeProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const items = itemsContainer.find('[data-type=item-block]');
+  const restMinOrder = $('[data-type=rest-min-order]').val();
+  const containerSidebar = curItem.parents('[data-type=main_container]');
 
 	const $rooms = curItem.parent().find('.cart-count');
 	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
@@ -425,5 +437,14 @@ export function removeProduct(curItem) {
 			summ1 += price * b;
 			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
 		}
+
+    const totalSumm = restMinOrder - summ;
+
+    console.log(totalSumm);
+
+    if (summ <= restMinOrder) {
+      console.log('Сумма меньше минимальной суммы');
+      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" disabled style="display: block" href="#"><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
+    }
 	}
 }
