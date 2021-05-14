@@ -316,25 +316,23 @@ function menuRestaurantSections() {
 
 function basket() {
   $(document).on('click', '[data-type=cart]', function() {
-    let container = $(this).parents('[data-type=main_container]');
-    const curItem = $(this);
-    const productId = $(this).attr('data-product-id');
-    let productXmlId = $(this).attr('data-product-xml-id');
-    let productNameEn = $(this).attr('data-product-name-en');
-    let type = $(this).attr('data-func-type');
-    let restCode = $(this).attr('data-rest-code');
-    let data = null;
-    let calculate = $(this).attr('data-calculate');
+    let curItem = $(this);
+    let container = curItem.parents('[data-type=main_container]');
+    let productId = curItem.attr('data-product-id');
+    let productNameEn = curItem.attr('data-product-name-en');
+    let quantity = curItem.parents('.incDec').find('.cart-count').text();
+    let type = curItem.attr('data-func-type');
+    let restCode = curItem.attr('data-rest-code');
+    let calculate = curItem.attr('data-calculate');
     let productsList = container.find('[data-type=products_list]');
+    let data = null;
 
     if (type == 'update') {
       data = {
         productId: productId,
-        productXmlId: productXmlId,
-        productNameEn: productNameEn,
+        quantity: quantity,
         calculate: calculate,
         type: type,
-        restCode: restCode,
       };
     } else if (type == 'delete') {
       data = {
