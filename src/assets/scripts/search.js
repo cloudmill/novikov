@@ -33,9 +33,17 @@ function initMap() {
 			searchControlProvider: 'yandex#search'
 		});
 
+		let polygonDataStr = $('[data-type=data-delivery-zones]').val();
+
+    let polygonData = JSON.parse(`[${polygonDataStr}]`);
+
+    let polygon = new ymaps.Polygon([polygonData]);
+
+    map.geoObjects.add(polygon);
+
 		marker = new ymaps.Placemark(map.getCenter(), {}, {
 			iconLayout: 'default#image',
-			iconImageHref: 'assets/images/icons/navi.svg',
+			iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
 			iconImageSize: [30, 42],
 			iconImageOffset: [-5, -38]
 		});
