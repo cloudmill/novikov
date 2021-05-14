@@ -23,6 +23,7 @@ function fetchDaData(query) {
 
 let marker = [];
 let map = [];
+let polygon = [];
 
 function initMap() {
 	ymaps.ready(function() {
@@ -37,9 +38,12 @@ function initMap() {
 
     let polygonData = JSON.parse(`[${polygonDataStr}]`);
 
-    let polygon = new ymaps.Polygon([polygonData]);
+    polygon = new ymaps.Polygon([polygonData]);
 
     map.geoObjects.add(polygon);
+
+    polygon.options.setParent(map.options);
+    polygon.geometry.setMap(map);
 
 		marker = new ymaps.Placemark(map.getCenter(), {}, {
 			iconLayout: 'default#image',
@@ -56,6 +60,10 @@ function initMap() {
 function moveMarker(lat, lng) {
 	map.setCenter([lat, lng], 15);
 	marker.geometry.setCoordinates([lat, lng]);
+
+	if (!polygon.geometry.contains([lat, lng])) {
+    $('.error-tool').addClass('active');
+  }
 }
 
 $('.autocomplete').autocomplete({
@@ -75,9 +83,9 @@ $('.autocomplete').autocomplete({
 		moveMarker(suggestion.data.geo_lat, suggestion.data.geo_lon);
 
 		// TODO: проверка на доступность адреса. Бэку допилить
-		if (false) {
-			$('.error-tool').addClass('active');
-		}
+		// if (false) {
+		// 	$('.error-tool').addClass('active');
+		// }
 	},
 	minChars: 3,
 	showNoSuggestionNotice: true,
