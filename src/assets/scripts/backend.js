@@ -1,6 +1,7 @@
 import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
 import { updateCartCount } from './cart.js';
+import { updateCartList } from './cart.js';
 import { deleteProduct } from './input.js';
 import { appendProduct } from './input.js';
 import { removeProduct } from './input.js';
@@ -17,6 +18,7 @@ $(function() {
 	scrollShowMore();
 	basket();
   restaurantsTabs();
+  ckeckValidateCard();
 });
 
 function restaurantsFilter() {
@@ -315,24 +317,23 @@ function menuRestaurantSections() {
 
 function basket() {
   $(document).on('click', '[data-type=cart]', function() {
-    let container = $(this).parents('[data-type=main_container]');
-    const curItem = $(this);
-    const productId = $(this).attr('data-product-id');
-    let productXmlId = $(this).attr('data-product-xml-id');
-    let productNameEn = $(this).attr('data-product-name-en');
-    let type = $(this).attr('data-func-type');
-    let restCode = $(this).attr('data-rest-code');
+    let curItem = $(this);
+    let container = curItem.parents('[data-type=main_container]');
+    let productId = curItem.attr('data-product-id');
+    let productNameEn = curItem.attr('data-product-name-en');
+    let quantity = curItem.parents('.incDec').find('.cart-count').text();
+    let type = curItem.attr('data-func-type');
+    let restCode = curItem.attr('data-rest-code');
+    let calculate = curItem.attr('data-calculate');
+    let productsList = container.find('[data-type=products_list]');
     let data = null;
-    let calculate = $(this).attr('data-calculate');
 
     if (type == 'update') {
       data = {
         productId: productId,
-        productXmlId: productXmlId,
-        productNameEn: productNameEn,
+        quantity: quantity,
         calculate: calculate,
         type: type,
-        restCode: restCode,
       };
     } else if (type == 'delete') {
       data = {
@@ -357,6 +358,7 @@ function basket() {
         if (data.success === true) {
           if (type == 'add') {
             updateCartCount();
+            updateCartList(curItem, productsList);
           } else if (type == 'delete') {
             deleteProduct(curItem);
           } else {
@@ -369,7 +371,7 @@ function basket() {
         } else if (data.success == 'another restaurant') {
           container.find('[data-type=another-rest]').addClass('active');
 
-          anotherRestaurant(container, productId, productNameEn, restCode);
+          anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList);
         } else {
           console.log('Ошибка добавление товара');
         }
@@ -378,7 +380,7 @@ function basket() {
   });
 }
 
-function anotherRestaurant(container, productId, productNameEn, restCode) {
+function anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList) {
   $('[data-type=add-product-another-rest]').click(function (e) {
     e.preventDefault();
 
@@ -392,7 +394,9 @@ function anotherRestaurant(container, productId, productNameEn, restCode) {
         restCode: restCode,
       },
       success: function(data) {
-        console.log('success another restaurant');
+        if (data.success === true) {
+          updateCartList(curItem, productsList, 'delete');
+        }
       }
     });
   });
@@ -405,6 +409,41 @@ function restaurantsTabs() {
       tab = container.find(selector);
 
     tab.addClass('active').siblings().removeClass('active');
+  });
+}
+
+function ckeckValidateCard() {
+  $(document).on('click', '[data-type=check-valid-card]', function (e) {
+    e.preventDefault();
+
+    let container = $(this).parents('[data-type=promo-container]').filter('.active'),
+      phone = container.find('input[name=phone_number]').val(),
+      loyaltyCard = container.find('input[name=number]').val(),
+      data = null;
+
+    if (container.hasClass('promo-content')) {
+      let promoCard = container.find('input[name=promo]').val();
+      data = {
+        promoCard: promoCard,
+      };
+    } else {
+      data = {
+        card_number: loyaltyCard,
+        phone: phone,
+      };
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: 'http://209.250.245.217:3000/site/discountcards/check',
+      headers: {
+        Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
+      },
+      data: data,
+      success: function(data) {
+        console.log(data);
+      }
+    });
   });
 }
 
