@@ -300,6 +300,7 @@ $('.num--js').change(function() {
 
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
+
 export function deleteProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const itemBlock = curItem.parents('[data-type=item-block]');
