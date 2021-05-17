@@ -412,23 +412,38 @@ function restaurantsTabs() {
   });
 }
 
-function ckeckValidateCard(e) {
-  e.preventDefault();
+function ckeckValidateCard() {
+  $(document).on('click', '[data-type=check-valid-card]', function (e) {
+    e.preventDefault();
 
-  let container = $(this).parents('.cart-block-promo');
+    let container = $(this).parents('[data-type=promo-container]').filter('.active'),
+      phone = container.find('input[name=phone_number]').val(),
+      loyaltyCard = container.find('input[name=number]').val(),
+      data = null;
 
-  $.ajax({
-    type: 'POST',
-    url: 'http://209.250.245.217:3000/site/discountcards/check',
-    dataType: 'json',
-    data: {
-      phone: 123,
-    },
-    success: function(data) {
-      if (data.success === true) {
-        updateCartList(curItem, productsList, 'delete');
-      }
+    if (container.hasClass('promo-content')) {
+      let promoCard = container.find('input[name=promo]').val();
+      data = {
+        promoCard: promoCard,
+      };
+    } else {
+      data = {
+        card_number: loyaltyCard,
+        phone: phone,
+      };
     }
+
+    $.ajax({
+      type: 'POST',
+      url: 'http://209.250.245.217:3000/site/discountcards/check',
+      headers: {
+        Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
+      },
+      data: data,
+      success: function(data) {
+        console.log(data);
+      }
+    });
   });
 }
 
