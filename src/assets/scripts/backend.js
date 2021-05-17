@@ -420,10 +420,14 @@ function ckeckValidateCard() {
       errorBlock = container.find('[data-type=error-block]'),
       phone = container.find('input[name=phone]').data('phone'),
       loyaltyCard = container.find('input[name=number]').val(),
+      type = 'loyalty',
       data = null;
 
     if (container.hasClass('promo-content')) {
       let promoCard = container.find('input[name=promo]').val();
+
+      type = 'promo';
+
       data = {
         promoCard: promoCard,
       };
@@ -442,14 +446,26 @@ function ckeckValidateCard() {
       },
       dataType: 'json',
       data: data,
-      success: function(data) {
-        if (data.is_valid === false) {
+      success: function(r) {
+        if (r.is_valid === false) {
           errorBlock.addClass('active');
-          errorBlock.text(data.comment);
+          errorBlock.text(r.comment);
 
           setTimeout(function() {
             errorBlock.removeClass('active');
           }, 3000);
+        } else {
+          $.ajax({
+            type: 'POST',
+            url: window.location.href,
+            dataType: 'html',
+            data: {
+              discount: type + '-' + r.discount_percent,
+            },
+            success: function(data) {
+
+            }
+          });
         }
       }
     });
