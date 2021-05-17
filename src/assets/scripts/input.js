@@ -176,7 +176,7 @@ $('.form--js').on('click', function(e) {
 
 	// валидация каждого поля формы
 	const result = [];
-  container.find('input, textarea').each(function() {
+	container.find('input, textarea').each(function() {
 		const input = $(this)[0];
 		result.push(validateField($(this), input.value));
 	});
@@ -219,27 +219,27 @@ $('.form--js').on('click', function(e) {
 		data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
 		data.append('file', file[0].files[0]);
 	} else if (path[1] == 'contacts') {
-	  url = '/local/templates/main/include/ajax/contact_form.php';
+		url = '/local/templates/main/include/ajax/contact_form.php';
 
-	  data = {
+		data = {
 			UF_NAME: name.val(),
 			UF_MAIL: email.val(),
 			UF_TEXT: text.val(),
 			UF_TYPE: type,
 		};
 	} else if (path[1] == 'restaurants' && type == 'Забронировать стол') {
-    url = '/local/templates/main/include/ajax/booking.php';
+		url = '/local/templates/main/include/ajax/booking.php';
 
-    data = {
-      UF_NAME: name.val(),
-      UF_PHONE: phone.val(),
-      UF_EMAIL: email.val(),
-      UF_PERSONS_NUMBER: container.find('input[name=count]').val(),
-      UF_DATE: container.find('input[name=date]').val() + ' ' + container.find('[data-type=select-time').val(),
-      UF_WISHES: container.find('input[name=text]').val(),
-      UF_TYPE: type,
-    }
-  }
+		data = {
+			UF_NAME: name.val(),
+			UF_PHONE: phone.val(),
+			UF_EMAIL: email.val(),
+			UF_PERSONS_NUMBER: container.find('input[name=count]').val(),
+			UF_DATE: container.find('input[name=date]').val() + ' ' + container.find('[data-type=select-time').val(),
+			UF_WISHES: container.find('input[name=text]').val(),
+			UF_TYPE: type,
+		};
+	}
 
 	if (url !== undefined) {
 		$.ajax({
@@ -251,7 +251,7 @@ $('.form--js').on('click', function(e) {
 			processData: processData,
 			success: function(a) {
 				if (a.success === true) {
-				  let classActiveVal = null;
+					let classActiveVal = null;
 					// открытие формы ответа
 					// контакты
 					const mediaQuery = matchMedia('(min-width: 1024px)');
@@ -262,12 +262,12 @@ $('.form--js').on('click', function(e) {
 					}
 
 					if (path[1] == 'vacancies') {
-            classActiveVal = 'active';
-          } else if (path[1] == 'contacts') {
-            classActiveVal = 'shown';
-          }
+						classActiveVal = 'active';
+					} else if (path[1] == 'contacts') {
+						classActiveVal = 'shown';
+					}
 
-          container.find('[data-type=response-form]').addClass(classActiveVal);
+					container.find('[data-type=response-form]').addClass(classActiveVal);
 				}
 			}
 		});
@@ -284,13 +284,17 @@ $('.promo--js').change(function() {
 });
 $('.num--js').change(function() {
 	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
-	if(
+	if (
 		$('input[name=number]') && $(this).val().length > 0 &&
     $('input[name=phone]') && phone.test($(this).val())
 	) {
 		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
 	} else {
 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
+	}
+	if ($('input[name=phone]')) {
+		const data = $(this).val().replace(/[\. ()_-]+/g, '');
+		$(this).attr('data-phone', data);
 	}
 });
 
@@ -301,22 +305,22 @@ export function deleteProduct(curItem) {
 	const itemBlock = curItem.parents('[data-type=item-block]');
 
 	// itemBlock.slideUp(300);
-  itemBlock.velocity(
-    {
-      scale: 0,
-    },
-    {duration: 300}
-  );
-  setTimeout(function() {
-    itemBlock.remove();
-  }, 500);
+	itemBlock.velocity(
+		{
+			scale: 0,
+		},
+		{duration: 300}
+	);
+	setTimeout(function() {
+		itemBlock.remove();
+	}, 500);
 
 	const items = itemsContainer.find('[data-type=item-block]');
 	let summ = 0;
 	let count = 0;
 
 	items.each((index, item) => {
-		if($(item).find('.cart-pr span').length) {
+		if ($(item).find('.cart-pr span').length) {
 			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 			count += parseInt($(item).find('.cart-count').text(), 10);
 		}
@@ -355,7 +359,7 @@ export function appendProduct(curItem) {
 	let summ = 0;
 	let count = 0;
 	items.each((index, item) => {
-		if($(item).find('.cart-pr span').length) {
+		if ($(item).find('.cart-pr span').length) {
 			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 			count += parseInt($(item).find('.cart-count').text(), 10);
 		}
@@ -399,7 +403,7 @@ export function removeProduct(curItem) {
 		let summ = 0;
 		let count = 0;
 		items.each((index, item) => {
-			if($(item).find('.cart-pr span').length) {
+			if ($(item).find('.cart-pr span').length) {
 				summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 				count += parseInt($(item).find('.cart-count').text(), 10);
 			}

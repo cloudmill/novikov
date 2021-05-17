@@ -54,8 +54,9 @@
 
 .main-slider {
   padding-top: 50px;
+  position: relative;
   @media screen and (min-width: $screen-md-min) {
-    padding-top: 120px;
+    padding-top: 250px;
   }
   .swiper-container {
     padding: 40px 0 60px;
@@ -73,8 +74,14 @@
       }
     }
   }
-  .text--center {
+  > .text--center {
     padding: 0 20px;
+    @media screen and (min-width: $screen-md-min) {
+      position: absolute;
+      top: 8%;
+      left: 0;
+      right: 0;
+    }
     @media screen and (min-width: $screen-lg-min) {
       padding: 0 80px;
     }
@@ -89,7 +96,7 @@
     font-size: 18px;
     position: relative;
     display: inline;
-    border-bottom: 1px solid $black;
+    //border-bottom: 1px solid $black;
     @media screen and (min-width: $screen-md-min) {
       font-size: 47px;
     }
