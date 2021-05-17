@@ -416,7 +416,8 @@ function ckeckValidateCard() {
   $(document).on('click', '[data-type=check-valid-card]', function (e) {
     e.preventDefault();
 
-    let container = $(this).parents('[data-type=promo-container]').filter('.active'),
+    let mainContainer = $(this).parents('[data-type=cart-items-container]'),
+      container = $(this).parents('[data-type=promo-container]').filter('.active'),
       errorBlock = container.find('[data-type=error-block]'),
       phone = container.find('input[name=phone]').data('phone'),
       loyaltyCard = container.find('input[name=number]').val(),
@@ -463,7 +464,9 @@ function ckeckValidateCard() {
               discount: type + '-' + r.discount_percent,
             },
             success: function(data) {
+              mainContainer.empty();
 
+              mainContainer.append($(data));
             }
           });
         }
