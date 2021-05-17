@@ -18,6 +18,7 @@ $(function() {
 	scrollShowMore();
 	basket();
   restaurantsTabs();
+  ckeckValidateCard();
 });
 
 function restaurantsFilter() {
@@ -408,6 +409,26 @@ function restaurantsTabs() {
       tab = container.find(selector);
 
     tab.addClass('active').siblings().removeClass('active');
+  });
+}
+
+function ckeckValidateCard(e) {
+  e.preventDefault();
+
+  let container = $(this).parents('.cart-block-promo');
+
+  $.ajax({
+    type: 'POST',
+    url: 'http://209.250.245.217:3000/site/discountcards/check',
+    dataType: 'json',
+    data: {
+      phone: 123,
+    },
+    success: function(data) {
+      if (data.success === true) {
+        updateCartList(curItem, productsList, 'delete');
+      }
+    }
   });
 }
 
