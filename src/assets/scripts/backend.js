@@ -417,7 +417,8 @@ function ckeckValidateCard() {
     e.preventDefault();
 
     let container = $(this).parents('[data-type=promo-container]').filter('.active'),
-      phone = container.find('input[name=phone_number]').val(),
+      errorBlock = container.find('[data-type=error-block]'),
+      phone = container.find('input[name=phone]').data('phone'),
       loyaltyCard = container.find('input[name=number]').val(),
       data = null;
 
@@ -439,9 +440,17 @@ function ckeckValidateCard() {
       headers: {
         Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
       },
+      dataType: 'json',
       data: data,
       success: function(data) {
-        console.log(data);
+        if (data.is_valid === false) {
+          errorBlock.addClass('active');
+          errorBlock.text(data.comment);
+
+          setTimeout(function() {
+            errorBlock.removeClass('active');
+          }, 3000);
+        }
       }
     });
   });
