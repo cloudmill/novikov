@@ -68,8 +68,15 @@
             input.control.promo--js(type='text', name='promo', placeholder='Промокод')
             button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
     .cart-block-summ
-      div Сумма  заказа
-      .card-summ: b #[span 10 000] ₽
+      div
+        div Сумма  заказа
+        .card-summ: b #[span 10 000] ₽
+      div
+        div Скидка
+        .card-summ: b #[span 520] ₽
+      div
+        div Доставка
+        .card-summ: b #[span 500] ₽
   .cart-block-bottom
     .cart-block-count
       div Итого
