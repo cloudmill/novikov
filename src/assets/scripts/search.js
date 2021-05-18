@@ -27,9 +27,16 @@ let polygon = [];
 
 function initMap() {
 	ymaps.ready(function() {
+	  let strRestGeo = $('[data-type=data-rest-geo]').val(),
+      restGeo = [55.753220, 37.622513];
+
+	  if (strRestGeo) {
+      restGeo = strRestGeo.split(',').map(Number);
+    }
+
 		map = new ymaps.Map('map', {
-			center: [43.3180145, 45.698291],
-			zoom: 9
+			center: restGeo,
+			zoom: 14
 		}, {
 			searchControlProvider: 'yandex#search'
 		});
