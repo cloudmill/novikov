@@ -139,7 +139,7 @@ $('.autocomplete').autocomplete({
   noSuggestionNotice: 'Извините, ничего не найдено',
 });
 
-$('.success--js').click(function() {
+$(document).on('click', '.success--js', function() {
   const result = [];
   $(this).closest('.popup-inner').find('input').each(function() {
     const input = $(this)[0];
@@ -160,7 +160,7 @@ $('.success--js').click(function() {
     $('.order-wrapper__item--taxi').addClass('active');
   }
 
-  $('.order-delivery-adr p').text($(this).data('value'));
+  $('.order-delivery-adr p').text($(this).attr('data-value'));
 
   myModal.close();
   return false;
