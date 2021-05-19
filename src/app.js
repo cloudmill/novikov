@@ -113,6 +113,8 @@ $(document).ready(() => {
 	});
 	scrollX();
 
+	$('.cart-block-body').mCustomScrollbar();
+
 	$('.scroll-to--js a').click(function() {
 	  const id = $(this).attr('href');
 		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
