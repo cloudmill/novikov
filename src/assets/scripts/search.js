@@ -28,7 +28,13 @@ let polygon = [];
 function initMap() {
   ymaps.ready(function() {
     let strRestGeo = $('[data-type=data-rest-geo]').val(),
-      restGeo = [55.753220, 37.622513];
+      restGeo = [55.753220, 37.622513],
+      geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address',
+      res = null,
+      errorTool = $('.error-tool'),
+      buttonSuccess = $('.success--js'),
+      buttonDisabled = null,
+      selectAddress = null;
 
     if (strRestGeo) {
       restGeo = strRestGeo.split(',').map(Number);
@@ -62,27 +68,48 @@ function initMap() {
     map.geoObjects.add(marker);
 
     map.events.add('click', function (e) {
-      if (polygon.geometry.contains(e.get('coords'))) {
-        marker.geometry.setCoordinates(e.get('coords'));
+      marker.geometry.setCoordinates(e.get('coords'));
 
-        let geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address';
-        fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log("error", error));
-      }
+      fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
+        .then(response => response.text())
+        .then(result => {
+          res = JSON.parse(result);
+          selectAddress = res.suggestions[0].value;
+
+          if (polygon.geometry.contains(e.get('coords'))) {
+            if (errorTool.hasClass('active')) {
+              errorTool.removeClass('active');
+            }
+            buttonDisabled = false;
+
+            buttonSuccess.attr('data-value', selectAddress);
+          } else {
+            errorTool.addClass('active');
+            buttonDisabled = true;
+          }
+          buttonSuccess.prop('disabled', buttonDisabled);
+
+          $('.autocomplete').val(selectAddress);
+        })
+        .catch(error => console.log("error", error));
     });
   });
-
 }
 
 function moveMarker(lat, lng) {
+  let buttonDisabled = null;
+
   map.setCenter([lat, lng], 15);
   marker.geometry.setCoordinates([lat, lng]);
 
   if (!polygon.geometry.contains([lat, lng])) {
     $('.error-tool').addClass('active');
+    buttonDisabled = true;
+  } else {
+    buttonDisabled = false;
   }
+
+  $('.success--js').prop('disabled', buttonDisabled);
 }
 
 $('.autocomplete').autocomplete({
