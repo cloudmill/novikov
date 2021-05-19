@@ -503,6 +503,12 @@
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
+
+    .page-header__close {
+      @media screen and (min-width: $screen-md-min) {
+        display: none;
+      }
+    }
   }
   &-body {
     padding: 20px;
