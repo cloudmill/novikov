@@ -23,7 +23,6 @@ function fetchDaData(query, url) {
 
 let marker = [];
 let map = [];
-let polygon = [];
 
 function initMap() {
   ymaps.ready(function() {
@@ -36,6 +35,8 @@ function initMap() {
       buttonDisabled = null,
       selectAddress = null;
 
+    const polygons = [];
+
     if (strRestGeo) {
       restGeo = strRestGeo.split(',').map(Number);
     }
@@ -47,16 +48,21 @@ function initMap() {
       searchControlProvider: 'yandex#search'
     });
 
-    let polygonDataStr = $('[data-type=data-delivery-zones]').val();
+    let polygonDataStr = $('[data-type=data-delivery-zones]').val(),
+      polygonDataStrArr = polygonDataStr.split(';'),
+      polygonData = null,
+      counter = 0;
 
-    let polygonData = JSON.parse(`[${polygonDataStr}]`);
+    for (let key in polygonDataStrArr) {
+      polygonData = JSON.parse(`[${polygonDataStrArr[key]}]`);
+      let polygon = new ymaps.Polygon([polygonData]);
+      polygons.push(polygon);
+      map.geoObjects.add(polygons[counter]);
+      polygons[counter].options.setParent(map.options);
+      polygons[counter].geometry.setMap(map);
 
-    polygon = new ymaps.Polygon([polygonData]);
-
-    map.geoObjects.add(polygon);
-
-    polygon.options.setParent(map.options);
-    polygon.geometry.setMap(map);
+      counter++;
+    }
 
     marker = new ymaps.Placemark(map.getCenter(), {}, {
       iconLayout: 'default#image',
@@ -76,7 +82,9 @@ function initMap() {
           res = JSON.parse(result);
           selectAddress = res.suggestions[0].value;
 
-          if (polygon.geometry.contains(e.get('coords'))) {
+          const isContains = polygons.some((polygon) => polygon.geometry.contains(e.get('coords')));
+
+          if (isContains) {
             if (errorTool.hasClass('active')) {
               errorTool.removeClass('active');
             }
