@@ -43,9 +43,10 @@ function initMap() {
 
     map = new ymaps.Map('map', {
       center: restGeo,
-      zoom: 14
+      zoom: 14,
+      controls: ['zoomControl', 'geolocationControl']
     }, {
-      searchControlProvider: 'yandex#search'
+      suppressMapOpenBlock: true,
     });
 
     let polygonDataStr = $('[data-type=data-delivery-zones]').val(),
