@@ -23,6 +23,7 @@ function fetchDaData(query, url) {
 
 let marker = [];
 let map = [];
+const polygons = [];
 
 function initMap() {
   ymaps.ready(function() {
@@ -30,12 +31,7 @@ function initMap() {
       restGeo = [55.753220, 37.622513],
       geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address',
       res = null,
-      errorTool = $('.error-tool'),
-      buttonSuccess = $('.success--js'),
-      buttonDisabled = null,
       selectAddress = null;
-
-    const polygons = [];
 
     if (strRestGeo) {
       restGeo = strRestGeo.split(',').map(Number);
@@ -48,6 +44,12 @@ function initMap() {
     }, {
       suppressMapOpenBlock: true,
     });
+
+    //console debug
+
+    window.debMap = map;
+
+    //console debug
 
     let polygonDataStr = $('[data-type=data-delivery-zones]').val(),
       polygonDataStrArr = polygonDataStr.split(';'),
@@ -77,31 +79,42 @@ function initMap() {
     map.events.add('click', function (e) {
       marker.geometry.setCoordinates(e.get('coords'));
 
+      fetchResult(e, false);
+    });
+
+    map.geoObjects.events.add('click', function (e) {
+      marker.geometry.setCoordinates(e.get('coords'));
+
+      fetchResult(e, true);
+    });
+
+    function fetchResult(e, isPolygonCheck) {
       fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
         .then(response => response.text())
         .then(result => {
           res = JSON.parse(result);
           selectAddress = res.suggestions[0].value;
 
-          const isContains = polygons.some((polygon) => polygon.geometry.contains(e.get('coords')));
+          let buttonDisabled = null;
 
-          if (isContains) {
-            if (errorTool.hasClass('active')) {
-              errorTool.removeClass('active');
+          if (isPolygonCheck) {
+            if ($('.error-tool').hasClass('active')) {
+              $('.error-tool').removeClass('active');
             }
             buttonDisabled = false;
 
-            buttonSuccess.attr('data-value', selectAddress);
+            $('.success--js').attr('data-value', selectAddress);
           } else {
-            errorTool.addClass('active');
+            $('.error-tool').addClass('active');
             buttonDisabled = true;
           }
-          buttonSuccess.prop('disabled', buttonDisabled);
+
+          $('.success--js').prop('disabled', buttonDisabled);
 
           $('.autocomplete').val(selectAddress);
         })
         .catch(error => console.log("error", error));
-    });
+    }
   });
 }
 
@@ -111,7 +124,9 @@ function moveMarker(lat, lng) {
   map.setCenter([lat, lng], 15);
   marker.geometry.setCoordinates([lat, lng]);
 
-  if (!polygon.geometry.contains([lat, lng])) {
+  const isContains = polygons.some((polygon) => polygon.geometry.contains([lat, lng]));
+
+  if (!isContains) {
     $('.error-tool').addClass('active');
     buttonDisabled = true;
   } else {
