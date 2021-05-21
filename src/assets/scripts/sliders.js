@@ -133,7 +133,7 @@ if ($('.vertical-swiper').length) {
 				el: pagin[0],
 				type: 'custom',
 				renderCustom: function(sw, current, total) {
-					return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + total;
+					return `<span>${current}</span> ` + ' <img src="../dist/assets/images/icons/line.svg" /> ' + total;
 				}
 			},
 			navigation: {
