@@ -16,7 +16,7 @@ if ($('.main-swiper').length) {
 			el: '.swiper-pagination',
 			type: 'custom',
 			renderCustom: function(sl, current, total) {
-				return `<span>${current}</span> ` + ' <img src="/local/templates/main/assets/images/icons/line.svg" /> ' + total;
+				return `<span>${current}</span> ` + ' <img src="/assets/images/icons/line.svg" /> ' + total;
 			}
 		},
 		navigation: {
