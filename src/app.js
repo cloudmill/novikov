@@ -35,7 +35,6 @@ function scrollX() {
 			axis: 'x',
 			callbacks: {
 				whileScrolling: function() {
-					// console.log(this.mcs);
 					const getL = this.mcs.leftPct > 82;
 					const containerPos = $('.mCSB_container').width() - window.innerWidth - window.innerWidth;
 					if (getL) {
@@ -46,8 +45,17 @@ function scrollX() {
 						$('.page-card .mCSB_container').css('overflow', 'hidden');
 					}
 
-					const x = this.mcs.content.find('.aos-init-left');
 					const d = -this.mcs.left;
+					const x = this.mcs.content.find('.aos-init-left');
+					const sections = this.mcs.content.find('.section');
+
+					sections.each(function() {
+						const leftOffset = $(this).offset().left - $('.mCSB_container').offset().left + $('.mCSB_container').scrollLeft();
+						if (leftOffset < -100) {
+							$('.menu li a').removeClass('active');
+							$('.menu li a[href="#' + $(this).attr('id') + '"]').addClass('active');
+						}
+					});
 
 					x.each(function() {
 						const leftOffset = $(this).offset().left - $('.mCSB_container').offset().left + $('.mCSB_container').scrollLeft();
@@ -118,14 +126,18 @@ $(document).ready(() => {
 	$('.scroll-to--js a').click(function() {
 	  const id = $(this).attr('href');
 		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
+		setTimeout(() => {
+			$('.scroll-to--js a').removeClass('active');
+			$(this).addClass('active');
+		}, 1000);
 		return false;
 	});
-	$('.anchor a').click(function() {
-	  const id = $(this).attr('href');
-	  const top = $(id).position().top;
-		$('.scrollContentX').mCustomScrollbar('scrollTo', top + $(id).height() + 100);
-		return false;
-	});
+	// $('.anchor a').click(function() {
+	//   const id = $(this).attr('href');
+	//   const top = $(id).position().top;
+	// 	$('.scrollContentX').mCustomScrollbar('scrollTo', top + $(id).height() + 100);
+	// 	return false;
+	// });
 	document.body.classList.add(result.name);
 
 

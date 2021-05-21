@@ -48,8 +48,10 @@ function initMap() {
     });
 
     let polygonDataStr = $('[data-type=data-delivery-zones]').val();
-
-    let polygonData = JSON.parse(`[${polygonDataStr}]`);
+    let polygonData;
+    if (polygonDataStr) {
+      polygonData = JSON.parse(`[${polygonDataStr}]`);
+    }
 
     polygon = new ymaps.Polygon([polygonData]);
 
@@ -161,6 +163,8 @@ $('.success--js').click(function() {
   }
 
   $('.order-delivery-adr p').text($(this).data('value'));
+  $('.order-delivery .input input').val($(this).data('value'));
+  $('.order-delivery .input').removeClass('error').find('.control-error').text('');
 
   myModal.close();
   return false;

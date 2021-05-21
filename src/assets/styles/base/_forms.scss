@@ -104,6 +104,16 @@ input[type="checkbox"]:focus {
 
 }
 
+.input-r {
+  .control-error {
+    position: static;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
 .input {
   position: relative;
 }

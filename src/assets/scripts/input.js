@@ -41,6 +41,7 @@ export function validateField(element, event) {
 	const lang = $('html').attr('lang');
 
 	let inputError;
+	let adrError;
 	let emptyError;
 	let chkError;
 	let radioError;
@@ -49,8 +50,10 @@ export function validateField(element, event) {
 		chkError = 'Incorrect checkbox';
 		radioError = 'Wrong radio';
 		emptyError = 'Empty field';
+		adrError = 'Empty address';
 	} else {
 		inputError = 'Поле заполнено некорректно';
+		adrError = 'Не указан адрес доставки';
 		emptyError = 'Поле не заполнено';
 		chkError = 'Остутствует согласие на обработку персональных данных';
 		radioError = 'Не указан способ оплаты';
@@ -69,7 +72,7 @@ export function validateField(element, event) {
 
 	// email & phone
 	if (value) {
-		if (element.prop('type') === 'email') {
+	  if (element.prop('type') === 'email') {
 			if (validateEmail(value)) {
 				element.closest('.input').removeClass('error');
 				element.closest('.input').find(errorBlock).text('');
@@ -123,7 +126,11 @@ export function validateField(element, event) {
 	// required input
 	if (!value && isRequired) {
 		element.closest('.input').addClass('error');
-		element.closest('.input').find(errorBlock).text(emptyError);
+		if (element.prop('name') === 'adr') {
+			element.closest('.input').find(errorBlock).text(adrError);
+		} else {
+			element.closest('.input').find(errorBlock).text(emptyError);
+		}
 		result = false;
 	}
 
@@ -164,13 +171,45 @@ $('.back--js').on('click', function(e) {
 	$(this).closest('form').find('.form-answer').removeClass('shown');
 });
 
+$('.order--js').on('click', function(e) {
+	e.preventDefault();
+
+	const path = window.location.pathname.split('/');
+	const container = $(this).parents('[data-type=container-form]');
+
+	if (document.documentElement.lang === 'en') {
+		path.splice(1, 1);
+	}
+
+	// валидация каждого поля формы
+	const result = [];
+	container.find('.order-wrapper__item--all').find('input, textarea').each(function() {
+		const input = $(this)[0];
+		result.push(validateField($(this), input.value));
+	});
+
+	container.find('.tab-content.active').find('input, textarea').each(function() {
+		const input = $(this)[0];
+		result.push(validateField($(this), input.value));
+	});
+
+	// результат валидации формы
+	const isNONValid = result.includes(false);
+	if (isNONValid) {
+		return false;
+	}
+
+
+	// AJAX код для запроса после валидации
+});
+
 $('.form--js').on('click', function(e) {
 	e.preventDefault();
 
 	const path = window.location.pathname.split('/');
 	const container = $(this).parents('[data-type=container-form]');
 
-	if (document.documentElement.lang == 'en') {
+	if (document.documentElement.lang === 'en') {
 		path.splice(1, 1);
 	}
 
@@ -189,7 +228,7 @@ $('.form--js').on('click', function(e) {
 	}
 
 	// сбор данных формы
-	const form = $(this).closest('form');
+	// const form = $(this).closest('form');
 	const name = container.find('input[name=name]');
 	const email = container.find('input[name=email]');
 	const phone = container.find('input[name=phone]');
@@ -203,7 +242,7 @@ $('.form--js').on('click', function(e) {
 	let processData = true;
 	let data = null;
 
-	if (path[1] == 'vacancies') {
+	if (path[1] === 'vacancies') {
 		url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
 		contentType = false;
 		processData = false;
@@ -218,7 +257,7 @@ $('.form--js').on('click', function(e) {
 		data.append('UF_VACANCY_RESTAURANT', container.attr('data-vacancy-restaurant'));
 		data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
 		data.append('file', file[0].files[0]);
-	} else if (path[1] == 'contacts') {
+	} else if (path[1] === 'contacts') {
 		url = '/local/templates/main/include/ajax/contact_form.php';
 
 		data = {
@@ -227,7 +266,7 @@ $('.form--js').on('click', function(e) {
 			UF_TEXT: text.val(),
 			UF_TYPE: type,
 		};
-	} else if (path[1] == 'restaurants' && type == 'Забронировать стол') {
+	} else if (path[1] === 'restaurants' && type === 'Забронировать стол') {
 		url = '/local/templates/main/include/ajax/booking.php';
 
 		data = {
@@ -261,9 +300,9 @@ $('.form--js').on('click', function(e) {
 						curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
 					}
 
-					if (path[1] == 'vacancies') {
+					if (path[1] === 'vacancies') {
 						classActiveVal = 'active';
-					} else if (path[1] == 'contacts') {
+					} else if (path[1] === 'contacts') {
 						classActiveVal = 'shown';
 					}
 
@@ -349,8 +388,8 @@ export function deleteProduct(curItem) {
 export function appendProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const items = itemsContainer.find('[data-type=item-block]');
-  const restMinOrder = $('[data-type=rest-min-order]').val();
-  const containerSidebar = curItem.parents('[data-type=main_container]');
+	const restMinOrder = $('[data-type=rest-min-order]').val();
+	const containerSidebar = curItem.parents('[data-type=main_container]');
 
 	const $rooms = curItem.parent().find('.cart-count');
 	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
@@ -390,20 +429,20 @@ export function appendProduct(curItem) {
 		$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
 	}
 
-  const totalSumm = restMinOrder - summ;
+	const totalSumm = restMinOrder - summ;
 
-  if (summ < restMinOrder) {
-    containerSidebar.find('[data-type=button-order] span').text(totalSumm);
-  } else {
-    containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
-  }
+	if (summ < restMinOrder) {
+		containerSidebar.find('[data-type=button-order] span').text(totalSumm);
+	} else {
+		containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
+	}
 }
 
 export function removeProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const items = itemsContainer.find('[data-type=item-block]');
-  const restMinOrder = $('[data-type=rest-min-order]').val();
-  const containerSidebar = curItem.parents('[data-type=main_container]');
+	const restMinOrder = $('[data-type=rest-min-order]').val();
+	const containerSidebar = curItem.parents('[data-type=main_container]');
 
 	const $rooms = curItem.parent().find('.cart-count');
 	const pr = curItem.closest('.cart-block-item').find('.cart-pr');
@@ -443,10 +482,10 @@ export function removeProduct(curItem) {
 			$('.summ--js span').text(summ1.toString().replace(regexp, ' '));
 		}
 
-    const totalSumm = restMinOrder - summ;
+		const totalSumm = restMinOrder - summ;
 
-    if (summ < restMinOrder) {
-      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" disabled style="display: block" href="#"><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
-    }
+		if (summ < restMinOrder) {
+			containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" disabled style="display: block" href="#"><span>' + totalSumm + '</span> ₽ до минимальной суммы заказа</a>');
+		}
 	}
 }

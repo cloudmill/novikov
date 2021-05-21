@@ -8,7 +8,7 @@ block pageName
   - pageName = "custom"
 
 block content
-  form(action='', method='POST')
+  form(action='', method='POST', data-type='container-form')
     include ../components/_cart-block
     main.page-order
       .back-link(data-aos='fade-up')
@@ -19,7 +19,7 @@ block content
         h1.select-wrapper
           +wrapTitle(['оформление', 'заказа'])
         .order-wrapper(data-aos='fade-up')
-          .order-wrapper__item
+          .order-wrapper__item.order-wrapper__item--all
             h3 контактные данные
             .form__group: +fieldInput('text', 'name', 'name-o', '', 'ФИО получателя*', true)
             .form__group: +fieldInput('text', 'phone', 'phone-o', '', 'Номер телефона*', true)
@@ -38,6 +38,9 @@ block content
                 .col.col__xl-4.col__sm-6.col__xs-6
                   .order-delivery
                     a.btn.btn--default.myModal(href='#') выбрать на карте
+                    .input.input-r
+                      input.hidden(type='text', required, name='adr')
+                      .control-error
                     .order-delivery-adr
                       p
                       a.text__sm.myModal(href='#') Изменить
