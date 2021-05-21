@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 	<head>
 		<meta charset="UTF-8">
@@ -134,7 +134,7 @@
 			</div>
 		</div>
 		<div class="scrollContent main">
-			<form action="" method="POST">
+			<form action="" method="POST" data-type="container-form">
 				<div class="cart-block active">
 					<div class="cart-block-head" data-aos="fade-right">
 						<div class="head">ваш заказ</div>
@@ -232,7 +232,7 @@
 						<div class="cart-block-count">
 							<div>Итого</div>
 							<div class="card-summ"><b><span>10 000</span> ₽</b></div>
-						</div><a class="btn btn--full btn--primary form--js" href="#">Заказать</a><!-- кнопка при минимальном заказе, удалить style='display: none'--><a class="btn btn--full btn--primary form--js disabled" href="#" disabled style="display: none">200 ₽ до минимальной суммы заказа</a>
+						</div><a class="btn btn--full btn--primary order--js" href="#">Заказать</a><!-- кнопка при минимальном заказе, удалить style='display: none'--><a class="btn btn--full btn--primary form--js disabled" href="#" disabled style="display: none">200 ₽ до минимальной суммы заказа</a>
 					</div>
 				</div>
 				<main class="page-order">
@@ -247,7 +247,7 @@
 							<div class="wrapTitle" data-aos="data-aos"><span class="word-wrap"><span>оформление&nbsp;</span></span><span class="word-wrap"><span>заказа&nbsp;</span></span></div>
 						</h1>
 						<div class="order-wrapper" data-aos="fade-up">
-							<div class="order-wrapper__item">
+							<div class="order-wrapper__item order-wrapper__item--all">
 								<h3>контактные данные</h3>
 								<div class="form__group">
 									<div class="input"><input class="control input__field" type="text" name="name" id="name-o" placeholder="" required="required" /><label class="input__label" for="name-o"><span class="input__label-content">ФИО получателя*</span></label>
@@ -281,6 +281,9 @@
 									<div class="row order-wrapper__item">
 										<div class="col col__xl-4 col__sm-6 col__xs-6">
 											<div class="order-delivery"><a class="btn btn--default myModal" href="#">выбрать на карте</a>
+												<div class="input input-r"><input class="hidden" type="text" required name="adr">
+													<div class="control-error"></div>
+												</div>
 												<div class="order-delivery-adr">
 													<p></p><a class="text__sm myModal" href="#">Изменить</a>
 												</div>

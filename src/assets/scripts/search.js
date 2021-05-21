@@ -23,7 +23,7 @@ function fetchDaData(query, url) {
 
 let marker = [];
 let map = [];
-let polygon = [];
+const polygons = [];
 
 function initMap() {
   ymaps.ready(function() {
@@ -31,9 +31,6 @@ function initMap() {
       restGeo = [55.753220, 37.622513],
       geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address',
       res = null,
-      errorTool = $('.error-tool'),
-      buttonSuccess = $('.success--js'),
-      buttonDisabled = null,
       selectAddress = null;
 
     if (strRestGeo) {
@@ -42,23 +39,33 @@ function initMap() {
 
     map = new ymaps.Map('map', {
       center: restGeo,
-      zoom: 14
+      zoom: 14,
+      controls: ['zoomControl', 'geolocationControl']
     }, {
-      searchControlProvider: 'yandex#search'
+      suppressMapOpenBlock: true,
     });
+    
+    //console debug
 
-    let polygonDataStr = $('[data-type=data-delivery-zones]').val();
-    let polygonData;
-    if (polygonDataStr) {
-      polygonData = JSON.parse(`[${polygonDataStr}]`);
+    window.debMap = map;
+
+    //console debug
+
+    let polygonDataStr = $('[data-type=data-delivery-zones]').val(),
+      polygonDataStrArr = polygonDataStr.split(';'),
+      polygonData = null,
+      counter = 0;
+
+    for (let key in polygonDataStrArr) {
+      polygonData = JSON.parse(`[${polygonDataStrArr[key]}]`);
+      let polygon = new ymaps.Polygon([polygonData]);
+      polygons.push(polygon);
+      map.geoObjects.add(polygons[counter]);
+      polygons[counter].options.setParent(map.options);
+      polygons[counter].geometry.setMap(map);
+
+      counter++;
     }
-
-    polygon = new ymaps.Polygon([polygonData]);
-
-    map.geoObjects.add(polygon);
-
-    polygon.options.setParent(map.options);
-    polygon.geometry.setMap(map);
 
     marker = new ymaps.Placemark(map.getCenter(), {}, {
       iconLayout: 'default#image',
@@ -72,29 +79,42 @@ function initMap() {
     map.events.add('click', function (e) {
       marker.geometry.setCoordinates(e.get('coords'));
 
+      fetchResult(e, false);
+    });
+
+    map.geoObjects.events.add('click', function (e) {
+      marker.geometry.setCoordinates(e.get('coords'));
+
+      fetchResult(e, true);
+    });
+
+    function fetchResult(e, isPolygonCheck) {
       fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
         .then(response => response.text())
         .then(result => {
           res = JSON.parse(result);
           selectAddress = res.suggestions[0].value;
 
-          if (polygon.geometry.contains(e.get('coords'))) {
-            if (errorTool.hasClass('active')) {
-              errorTool.removeClass('active');
+          let buttonDisabled = null;
+
+          if (isPolygonCheck) {
+            if ($('.error-tool').hasClass('active')) {
+              $('.error-tool').removeClass('active');
             }
             buttonDisabled = false;
 
-            buttonSuccess.attr('data-value', selectAddress);
+            $('.success--js').attr('data-value', selectAddress);
           } else {
-            errorTool.addClass('active');
+            $('.error-tool').addClass('active');
             buttonDisabled = true;
           }
-          buttonSuccess.prop('disabled', buttonDisabled);
+
+          $('.success--js').prop('disabled', buttonDisabled);
 
           $('.autocomplete').val(selectAddress);
         })
         .catch(error => console.log("error", error));
-    });
+    }
   });
 }
 
@@ -104,7 +124,9 @@ function moveMarker(lat, lng) {
   map.setCenter([lat, lng], 15);
   marker.geometry.setCoordinates([lat, lng]);
 
-  if (!polygon.geometry.contains([lat, lng])) {
+  const isContains = polygons.some((polygon) => polygon.geometry.contains([lat, lng]));
+
+  if (!isContains) {
     $('.error-tool').addClass('active');
     buttonDisabled = true;
   } else {
@@ -141,7 +163,7 @@ $('.autocomplete').autocomplete({
   noSuggestionNotice: 'Извините, ничего не найдено',
 });
 
-$('.success--js').click(function() {
+$(document).on('click', '.success--js', function() {
   const result = [];
   $(this).closest('.popup-inner').find('input').each(function() {
     const input = $(this)[0];
@@ -162,8 +184,8 @@ $('.success--js').click(function() {
     $('.order-wrapper__item--taxi').addClass('active');
   }
 
-  $('.order-delivery-adr p').text($(this).data('value'));
-  $('.order-delivery .input input').val($(this).data('value'));
+  $('.order-delivery-adr p').text($(this).attr('data-value'));
+  $('.order-delivery .input input').val($(this).data('data-value'));
   $('.order-delivery .input').removeClass('error').find('.control-error').text('');
 
   myModal.close();
