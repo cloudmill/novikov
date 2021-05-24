@@ -119,7 +119,7 @@ $(document).ready(() => {
 	});
 	scrollX();
 
-	if ($('.cart-block-body').length) {
+	if ($('[data-type=container-form] .cart-block-body').length) {
 		$('.cart-block-body').mCustomScrollbar();
 	}
 
