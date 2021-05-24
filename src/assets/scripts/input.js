@@ -199,8 +199,40 @@ $('.order--js').on('click', function(e) {
 		return false;
 	}
 
+  let name = container.find('input[name=name]').val(),
+    phone = container.find('[data-type=contact-phone]').val(),
+    email = container.find('input[name=email]').val(),
+    containerDataFilter = container.find('.tab-content.active'),
+    address = containerDataFilter.find('[data-type=address]').text(),
+    payment = containerDataFilter.find('input[name=payment]:checked').val(),
+    data = null;
 
-	// AJAX код для запроса после валидации
+  data = {
+    name: name,
+    phone: phone,
+    email: email,
+    address: address,
+    payment: payment,
+  }
+
+  if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
+    data['datetime'] = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/local/templates/main/include/ajax/order.php',
+    dataType: 'json',
+    data: data,
+    success: function(res) {
+      if (res.success === true) {
+        window.location.replace('/order-finish/');
+      } else {
+        console.log('error order');
+      }
+    }
+  });
+
 });
 
 $('.form--js').on('click', function(e) {
