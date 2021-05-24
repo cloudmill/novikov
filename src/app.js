@@ -99,9 +99,7 @@ $(document).ready(() => {
 				const x = this.mcs.content.find('.aos-init');
 				const d = -this.mcs.top;
 				x.each(function() {
-					// const g = $(this).position().top;
 					const topOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
-
 					if(d > Math.round(topOffset) - window.innerHeight) {
 						$(this).addClass('aos-animate');
 					} else {
@@ -121,7 +119,9 @@ $(document).ready(() => {
 	});
 	scrollX();
 
-	$('.cart-block-body').mCustomScrollbar();
+	if ($('.cart-block-body').length) {
+		$('.cart-block-body').mCustomScrollbar();
+	}
 
 	$('.scroll-to--js a').click(function() {
 	  const id = $(this).attr('href');
