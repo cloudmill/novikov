@@ -44,21 +44,27 @@ function initMap() {
     }, {
       suppressMapOpenBlock: true,
     });
-    
+
     //console debug
 
     window.debMap = map;
 
     //console debug
 
-    let polygonDataStr = $('[data-type=data-delivery-zones]').val(),
-      polygonDataStrArr = polygonDataStr.split(';'),
+    let polygonDataStr = JSON.parse($('[data-type=data-delivery-zones]').val()),
       polygonData = null,
       counter = 0;
 
-    for (let key in polygonDataStrArr) {
-      polygonData = JSON.parse(`[${polygonDataStrArr[key]}]`);
-      let polygon = new ymaps.Polygon([polygonData]);
+    for (let key in polygonDataStr) {
+      polygonData = JSON.parse(`[${polygonDataStr[key]['POLYGON']}]`);
+
+      let polygon = new ymaps.Polygon(
+        [polygonData],
+        {
+          hintContent: 'Стоимость доставки составит: ' + polygonDataStr[key]['PRICE'] + ' руб.',
+          deliveryId: key,
+        }
+      );
       polygons.push(polygon);
       map.geoObjects.add(polygons[counter]);
       polygons[counter].options.setParent(map.options);
@@ -104,6 +110,7 @@ function initMap() {
             buttonDisabled = false;
 
             $('.success--js').attr('data-value', selectAddress);
+            $('.success--js').attr('data-delivery-id', e.get('target').properties.get('deliveryId'));
           } else {
             $('.error-tool').addClass('active');
             buttonDisabled = true;
