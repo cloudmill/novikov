@@ -226,7 +226,7 @@ $('.order--js').on('click', function(e) {
     data: data,
     success: function(res) {
       if (res.success === true) {
-        window.location.replace('/order-finish/');
+        window.location.replace('/order-finish/?ORDER_ID=' + res.order_id);
       } else {
         console.log('error order');
       }
