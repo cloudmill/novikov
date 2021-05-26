@@ -199,39 +199,39 @@ $('.order--js').on('click', function(e) {
 		return false;
 	}
 
-	const name = container.find('input[name=name]').val();
-	const phone = container.find('[data-type=contact-phone]').val();
-	const email = container.find('input[name=email]').val();
-	const containerDataFilter = container.find('.tab-content.active');
-	const address = containerDataFilter.find('[data-type=address]').text();
-	const payment = containerDataFilter.find('input[name=payment]:checked').val();
-	let data = null;
+  let name = container.find('input[name=name]').val(),
+    phone = container.find('[data-type=contact-phone]').val(),
+    email = container.find('input[name=email]').val(),
+    containerDataFilter = container.find('.tab-content.active'),
+    address = containerDataFilter.find('[data-type=address]').text(),
+    payment = containerDataFilter.find('input[name=payment]:checked').val(),
+    data = null;
 
-	data = {
-		name: name,
-		phone: phone,
-		email: email,
-		address: address,
-		payment: payment,
-	};
+  data = {
+    name: name,
+    phone: phone,
+    email: email,
+    address: address,
+    payment: payment,
+  }
 
-	if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
-		data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
-	}
+  if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
+    data['datetime'] = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
+  }
 
-	$.ajax({
-		type: 'POST',
-		url: '/local/templates/main/include/ajax/order.php',
-		dataType: 'json',
-		data: data,
-		success: function(res) {
-			if (res.success === true) {
+  $.ajax({
+    type: 'POST',
+    url: '/local/templates/main/include/ajax/order.php',
+    dataType: 'json',
+    data: data,
+    success: function(res) {
+      if (res.success === true) {
         window.location.replace('/order-finish/?ORDER_ID=' + res.order_id);
-			} else {
-				console.log('error order');
-			}
-		}
-	});
+      } else {
+        console.log('error order');
+      }
+    }
+  });
 
 });
 
