@@ -60,6 +60,54 @@
 				<div id="map"></div>
 			</div>
 		</div>
+		<div class="popup popup--md" id="promo" style="display: none">
+			<div class="close-popup close-popup--js"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="80" height="80" fill="black"></rect>
+					<rect x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white"></rect>
+					<rect x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white"></rect>
+				</svg></div>
+			<div class="popup-inner">
+				<div class="cart-block-promo set-tab">
+					<div class="success-block success-block--card">
+						<div>Скидка по карте лояльности <span>10%</span></div>
+					</div>
+					<div class="success-block success-block--promo">
+						<div>Промокод применен. <br> Скидка <span>5%</span></div>
+					</div>
+					<div class="tab-container">
+						<div class="tabs">
+							<div class="tab active" data-toggle-target=".card-content">карта лояльности</div>
+							<div class="tab" data-toggle-target=".promo-content">промокод</div>
+						</div>
+						<div class="tab-content card-content active">
+							<div class="step step--first active">
+								<div class="form__group"><input class="control num--js" type="text" name="number" placeholder="Номер карты"></div>
+							</div>
+							<div class="step step--second">
+								<p>На номер телефона, который привязан к карте, мы отправили код с SMS</p>
+								<div class="form__group"><input class="control num--js" type="text" name="code" placeholder="Введите код из SMS"></div>
+							</div>
+							<div class="form__group checkbox"><input class="num--js" type="checkbox" id="signIt-r" name="chk" required><label for="signIt-r">Даю согласание на обработку <a href="#">персональных данных</a>
+									<div class="control-error"></div>
+								</label></div><button class="disabled btn btn--full btn--primary promo-test--js" disabled>Продолжить</button><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-counter"><a href="#">Отправить код еще раз через&nbsp;</a><span class="countdown"></span></div><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-error">К вашей карте не привязан номер телефона. Сделать это можно <a href="#">по ссылке</a></div><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-card-error">Введенный код больше не действителен</div>
+						</div>
+						<div class="tab-content promo-content">
+							<div class="step step--third active">
+								<div class="form__group"><input class="control promos--js" type="text" name="promo" placeholder="Промокод"></div>
+								<div class="form__group checkbox"><input class="num--js" type="checkbox" id="signIt-l" name="chk" required><label for="signIt-l">Даю согласание на обработку <a href="#">персональных данных</a>
+										<div class="control-error"></div>
+									</label></div>
+							</div><button class="disabled btn btn--full btn--primary promo-test--js" disabled>Продолжить</button><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-error">Промокод больше не действителен</div><!-- второй блок убрать, меняем только текст на бэке-->
+							<div class="promo-error">Подарочный сертификат больше не действителен</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<header class="page-header" data-aos="fade-down">
 			<div class="page-header__menu col__xl-4 col__lg-6 col__md-4 col__xs-4"><button class="header-menu--js btn btn-icon btn--default ui-button-circle-icon">
 					<div class="burger"><span></span><span></span><span></span></div><span class="ui-button-circle-icon__label-wr" data-text="Меню"><span class="ui-button-circle-icon__label">Меню</span></span>
@@ -129,7 +177,7 @@
 			<div class="cart-block-bottom">
 				<div class="cart-block-count cart-block-count--null">
 					<div>Итого</div>
-					<div class="card-summ"><b><span>0</span> ₽</b></div>
+					<div class="card-summ" data-summ="10000"><b><span>0</span> ₽</b></div>
 				</div><a class="btn btn--full btn--primary disabled" href="#" disabled>заказать</a>
 			</div>
 		</div>
@@ -163,6 +211,7 @@
 							</div>
 						</div>
 						<div class="cart-block-body" data-type="cart-items-container">
+							<div class="head">ваш заказ</div>
 							<div class="cart-block-item" data-type="item-block">
 								<div class="cart-block-item-size">
 									<div>Дисконтная карта</div>
@@ -211,42 +260,19 @@
 								</div>
 							</div>
 							<div class="cart-block-item cart-block-item--long">
-								<div class="cart-block-promo set-tab">
-									<div class="tab-container">
-										<div class="tabs">
-											<div class="tab active" data-toggle-target=".card-content">карта лояльности</div>
-											<div class="tab" data-toggle-target=".promo-content">промокод</div>
-										</div>
-										<div class="tab-content card-content active">
-											<!-- для появления добавить класс .active, текст можно удалить-->
-											<div class="error">Карта не привязана к указанному телефону</div><input class="control num--js" type="text" name="number" placeholder="Номер карты"><input class="control num--js" type="text" name="phone" placeholder="Номер телефона" data-phone=""><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button>
-										</div>
-										<div class="tab-content promo-content">
-											<!-- для появления добавить класс .active, текст можно удалить-->
-											<div class="error">Промокод недействителен</div><input class="control promo--js" type="text" name="promo" placeholder="Промокод"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button>
-										</div>
-									</div>
-								</div>
+								<div class="cart-block-img promo--js">Применить карту <br> лояльности или промокод</div>
 							</div>
-							<div class="cart-block-summ">
-								<div>
-									<div>Сумма заказа</div>
-									<div class="card-summ"><b><span>10 000</span> ₽</b></div>
-								</div>
-								<div>
-									<div>Скидка</div>
-									<div class="card-summ"><b><span>520</span> ₽</b></div>
-								</div>
-								<div>
-									<div>Доставка</div>
-									<div class="card-summ"><b><span>500</span> ₽</b></div>
-								</div>
+						</div>
+						<div class="cart-block-summ">
+							<div>
+								<div>Сумма заказа</div>
+								<div class="card-summ"><b><span>10 000</span> ₽</b></div>
 							</div>
 						</div>
 						<div class="cart-block-bottom">
 							<div class="cart-block-count">
 								<div>Итого</div>
-								<div class="card-summ"><b><span>10 000</span> ₽</b></div>
+								<div class="card-summ" data-summ="10000"><b><span>10 000</span> ₽</b></div>
 							</div><a class="btn btn--full btn--primary order--js" href="#">Заказать</a><!-- кнопка при минимальном заказе, удалить style='display: none'--><a class="btn btn--full btn--primary form--js disabled" href="#" disabled style="display: none">200 ₽ до минимальной суммы заказа</a>
 						</div>
 					</div>

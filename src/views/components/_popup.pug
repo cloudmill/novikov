@@ -13,3 +13,57 @@ div#mapMe.popup(style="display: none")
   .relative
     .error-tool Выбранный адрес не входит в зону доставки
     #map
+
+div#promo.popup.popup--md(style="display: none")
+  .close-popup.close-popup--js
+    svg(width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg")
+      rect(width="80" height="80" fill="black")
+      rect(x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white")
+      rect(x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white")
+  .popup-inner
+    .cart-block-promo.set-tab
+      .success-block.success-block--card
+        div Скидка по карте лояльности #[span 10%]
+      .success-block.success-block--promo
+        div Промокод применен. #[br] Скидка #[span 5%]
+      .tab-container
+        .tabs
+          .tab.active(data-toggle-target=".card-content") карта лояльности
+          .tab(data-toggle-target=".promo-content") промокод
+        .tab-content.card-content.active
+          .step.step--first.active
+            .form__group
+              input.control.num--js(type='text', name='number', placeholder='Номер карты')
+          .step.step--second
+            p На номер телефона, который привязан к карте, мы отправили код с SMS
+            .form__group
+              input.control.num--js(type='text', name='code', placeholder='Введите код из SMS')
+          .form__group.checkbox
+            input.num--js(type="checkbox", id='signIt-r', name='chk', required)
+            label(for='signIt-r')
+              | Даю согласание на обработку #[a(href='#') персональных данных]
+              .control-error
+          button.disabled.btn.btn--full.btn--primary.promo-test--js(disabled) Продолжить
+          // для появления добавить класс .active, текст можно удалить
+          .promo-counter
+            a(href='#') Отправить код еще раз через&nbsp;
+            span.countdown
+          // для появления добавить класс .active, текст можно удалить
+          .promo-error К вашей карте не привязан номер телефона. Сделать это можно #[a(href='#') по ссылке]
+          // для появления добавить класс .active, текст можно удалить
+          .promo-card-error Введенный код больше не действителен
+        .tab-content.promo-content
+          .step.step--third.active
+            .form__group
+              input.control.promos--js(type='text', name='promo', placeholder='Промокод')
+            .form__group.checkbox
+              input.num--js(type="checkbox", id='signIt-l', name='chk', required)
+              label(for='signIt-l')
+                | Даю согласание на обработку #[a(href='#') персональных данных]
+                .control-error
+          button.disabled.btn.btn--full.btn--primary.promo-test--js(disabled) Продолжить
+          // для появления добавить класс .active, текст можно удалить
+          .promo-error Промокод больше не действителен
+          // второй блок убрать, меняем только текст на бэке
+          .promo-error Подарочный сертификат больше не действителен
+

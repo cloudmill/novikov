@@ -357,11 +357,24 @@ body:not(.safari) {
   .popup {
     position: relative;
     background: white;
+    margin: auto;
+    &--md {
+      max-width: 720px;
+
+      .popup-inner {
+        padding: 50px 30px 70px;
+        min-height: 400px;
+        @media screen and (min-width: $screen-md-min) {
+          padding: 60px 130px 100px;
+          min-height: 480px;
+        }
+      }
+    }
     .close-popup {
       position: absolute;
       top: 0;
       right: 0;
-      z-index: 99;
+      z-index: 101;
       @media screen and (min-width: $screen-md-min) {
         top: -80px;
         right: -80px;

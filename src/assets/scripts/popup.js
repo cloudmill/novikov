@@ -10,8 +10,15 @@ const myModal = new jBox('Modal', {
 	closeButton: false,
 });
 
+const myModalPromo = new jBox('Modal', {
+	attach: '.promo--js',
+	content: $('#promo'),
+	closeButton: false,
+});
+
 $('.close-popup--js').click(function() {
 	myModal.close();
+	myModalPromo.close();
 });
 
 export { myModal };

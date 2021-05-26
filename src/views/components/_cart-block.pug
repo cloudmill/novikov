@@ -16,6 +16,7 @@
         span 8
         span 9
   .cart-block-body(data-type='cart-items-container')
+    .head ваш заказ
     .cart-block-item(data-type='item-block')
       .cart-block-item-size
         div Дисконтная карта
@@ -56,36 +57,15 @@
             path.circle(d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3")
             path(d="M9.74145 14.1991L10.3651 14.8228L12.3153 12.8726L14.2655 14.8228L14.8892 14.1991L12.939 12.2489L14.8793 10.3086L14.2556 9.68494L12.3153 11.6252L10.3651 9.67504L9.74145 10.2987L11.6917 12.2489L9.74145 14.1991Z" fill="black")
     .cart-block-item.cart-block-item--long
-      .cart-block-promo.set-tab
-        .tab-container
-          .tabs
-            .tab.active(data-toggle-target=".card-content") карта лояльности
-            .tab(data-toggle-target=".promo-content") промокод
-          .tab-content.card-content.active
-            // для появления добавить класс .active, текст можно удалить
-            .error Карта не привязана к указанному телефону
-            input.control.num--js(type='text', name='number', placeholder='Номер карты')
-            input.control.num--js(type='text', name='phone', placeholder='Номер телефона', data-phone='')
-            button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
-          .tab-content.promo-content
-            // для появления добавить класс .active, текст можно удалить
-            .error Промокод недействителен
-            input.control.promo--js(type='text', name='promo', placeholder='Промокод')
-            button.disabled.btn.btn--full.btn--primary.btn__sm(disabled) применить
-    .cart-block-summ
-      div
-        div Сумма  заказа
-        .card-summ: b #[span 10 000] ₽
-      div
-        div Скидка
-        .card-summ: b #[span 520] ₽
-      div
-        div Доставка
-        .card-summ: b #[span 500] ₽
+      .cart-block-img.promo--js Применить карту #[br] лояльности или промокод
+  .cart-block-summ
+    div
+      div Сумма  заказа
+      .card-summ: b #[span 10 000] ₽
   .cart-block-bottom
     .cart-block-count
       div Итого
-      .card-summ: b #[span 10 000] ₽
+      .card-summ(data-summ='10000'): b #[span 10 000] ₽
     a.btn.btn--full.btn--primary.order--js(href='#') Заказать
     // кнопка при минимальном заказе, удалить style='display: none'
     a.btn.btn--full.btn--primary.form--js.disabled(href='#', disabled, style='display: none') 200 ₽ до минимальной суммы заказа

@@ -4,11 +4,11 @@ Inputmask({
 	mask: '+7 (999) 999-99-99',
 	showMaskOnHover: false,
 }).mask('input[name=phone]');
-Inputmask({
-	mask: '9999 9999 9999 9999',
-	greedy: false,
-	placeholder: '',
-}).mask('input[name=promo]');
+// Inputmask({
+// 	mask: '9999 9999 9999 9999',
+// 	greedy: false,
+// 	placeholder: '',
+// }).mask('input[name=promo]');
 Inputmask({
 	inputFormat: 'dd/mm/yyyy',
 	alias: 'datetime',
@@ -72,7 +72,7 @@ export function validateField(element, event) {
 
 	// email & phone
 	if (value) {
-	  if (element.prop('type') === 'email') {
+		if (element.prop('type') === 'email') {
 			if (validateEmail(value)) {
 				element.closest('.input').removeClass('error');
 				element.closest('.input').find(errorBlock).text('');
@@ -199,39 +199,39 @@ $('.order--js').on('click', function(e) {
 		return false;
 	}
 
-  let name = container.find('input[name=name]').val(),
-    phone = container.find('[data-type=contact-phone]').val(),
-    email = container.find('input[name=email]').val(),
-    containerDataFilter = container.find('.tab-content.active'),
-    address = containerDataFilter.find('[data-type=address]').text(),
-    payment = containerDataFilter.find('input[name=payment]:checked').val(),
-    data = null;
+	const name = container.find('input[name=name]').val();
+	const phone = container.find('[data-type=contact-phone]').val();
+	const email = container.find('input[name=email]').val();
+	const containerDataFilter = container.find('.tab-content.active');
+	const address = containerDataFilter.find('[data-type=address]').text();
+	const payment = containerDataFilter.find('input[name=payment]:checked').val();
+	let data = null;
 
-  data = {
-    name: name,
-    phone: phone,
-    email: email,
-    address: address,
-    payment: payment,
-  }
+	data = {
+		name: name,
+		phone: phone,
+		email: email,
+		address: address,
+		payment: payment,
+	};
 
-  if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
-    data['datetime'] = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
-  }
+	if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
+		data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
+	}
 
-  $.ajax({
-    type: 'POST',
-    url: '/local/templates/main/include/ajax/order.php',
-    dataType: 'json',
-    data: data,
-    success: function(res) {
-      if (res.success === true) {
-        window.location.replace('/order-finish/');
-      } else {
-        console.log('error order');
-      }
-    }
-  });
+	$.ajax({
+		type: 'POST',
+		url: '/local/templates/main/include/ajax/order.php',
+		dataType: 'json',
+		data: data,
+		success: function(res) {
+			if (res.success === true) {
+        window.location.replace('/order-finish/?ORDER_ID=' + res.order_id);
+			} else {
+				console.log('error order');
+			}
+		}
+	});
 
 });
 
@@ -345,31 +345,104 @@ $('.form--js').on('click', function(e) {
 	}
 });
 
-$('.promo--js').change(function() {
-	const promo = /^[0-9]{4}[\s ][0-9]{4}[\s ][0-9]{4}[\s ][0-9]{4}$/;
-	if (promo.test($(this).val())) {
-		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
-	} else {
-		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
-	}
-});
-$('.num--js').change(function() {
-	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+$('.promos--js').change(function() {
+	// const promo = /^[0-9]{4}[\s ][0-9]{4}[\s ][0-9]{4}[\s ][0-9]{4}$/;
 	if (
-		$('input[name=number]') && $(this).val().length > 0 &&
-    $('input[name=phone]') && phone.test($(this).val())
+		$('input[name=promo]') && $(this).val().length > 0 &&
+    ($('input[name=chk]') && $(this).prop('checked')) || ($('input[name=chk]').prop('checked'))
 	) {
 		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
 	} else {
 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
 	}
-	if ($('input[name=phone]')) {
-		const data = $(this).val().replace(/[\. ()_-]+/g, '');
-		$(this).attr('data-phone', data);
+});
+// $('.num--js').change(function() {
+// 	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+// 	if (
+// 		$('input[name=number]') && $(this).val().length > 0 &&
+//     $('input[name=phone]') && phone.test($(this).val())
+// 	) {
+// 		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
+// 	} else {
+// 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
+// 	}
+// 	if ($('input[name=phone]')) {
+// 		const data = $(this).val().replace(/[\. ()_-]+/g, '');
+// 		$(this).attr('data-phone', data);
+// 	}
+// });
+$('.num--js').change(function() {
+	if (
+		$('input[name=number]') && $(this).val().length > 0 &&
+    ($('input[name=chk]') && $(this).prop('checked')) || ($('input[name=chk]').prop('checked'))
+	) {
+		$(this).addClass('filled').closest('.tab-content').find('button').removeClass('disabled').attr('disabled', false);
+	} else {
+		$(this).removeClass('filled').closest('.tab-content').find('button').addClass('disabled').attr('disabled', true);
 	}
 });
 
+
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
+
+function discountAccepted(isPromo, disc) {
+	$('.cart-block-img').addClass('accepted');
+
+	if (isPromo) {
+		$('.cart-block-img').text('Промокод применен');
+	} else {
+		$('.cart-block-img').html('Карта лояльности <br /> применена');
+	}
+	const getTotal = $('.cart-block-bottom .card-summ').data('summ');
+	const discount  = getTotal * parseInt(disc, 10) / 100;
+	const actual = getTotal - discount;
+	$('[data-type=container-form] .cart-block-summ').append(`<div>
+    <div>Скидка ${disc}%</div>
+    <div class="card-summ"><b><span>-${discount.toString().replace(regexp, ' ')}</span> ₽</b></div>
+    </div>`
+	);
+	$('[data-type=container-form] .cart-block-count .card-summ span').text(actual.toString().replace(regexp, ' '));
+}
+
+$('.promo-test--js').click(function() {
+	if ($(this).closest('.tab-content').find('.step--third').hasClass('active')) {
+		$('.success-block--promo').addClass('active').find('span').text('10%');
+		discountAccepted(true, 10);
+	}
+	if ($(this).closest('.tab-content').find('.step--second').hasClass('active')) {
+		$(this).closest('.tab-content').find('.step').removeClass('active');
+		$(this).closest('.tab-content').find('.step--first').addClass('active');
+		$(this).closest('.tab-content').find('.promo-counter').removeClass('active');
+		$(this).closest('.tab-content').find('.promo-card-error').removeClass('active');
+		$('.success-block--card').addClass('active').find('span').text('11%');
+		discountAccepted(false, 11);
+	}
+	if ($(this).closest('.tab-content').find('.step--first').hasClass('active')) {
+		$(this).closest('.tab-content').find('.step').removeClass('active');
+		$(this).closest('.tab-content').find('.step--second').addClass('active');
+		$(this).closest('.tab-content').find('.promo-counter').addClass('active');
+
+		let timer2 = '2:00';
+		const interval = setInterval(function() {
+			const timer = timer2.split(':');
+			let minutes = parseInt(timer[0], 10);
+			let seconds = parseInt(timer[1], 10);
+			--seconds;
+			minutes = (seconds < 0) ? --minutes : minutes;
+			seconds = (seconds < 0) ? 59 : seconds;
+			seconds = (seconds < 10) ? '0' + seconds : seconds;
+			$('.countdown').html(minutes + ':' + seconds);
+			if (minutes < 0) clearInterval(interval);
+			if ((seconds <= 0) && (minutes <= 0)) {
+			  clearInterval(interval);
+				$('.promo-card-error').addClass('active');
+			}
+			timer2 = minutes + ':' + seconds;
+		}, 1000);
+	}
+
+	$(this).addClass('disabled').attr('disabled', true);
+});
 
 
 export function deleteProduct(curItem) {

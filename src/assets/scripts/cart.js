@@ -1,5 +1,8 @@
 const addToCartBtn = $('.cd-add-to-cart');
 
+$('.cart-block').click(function() {
+	$(this).toggleClass('show');
+});
 
 export function updateCartCount() {
 	const cartCount = $('.page-header__cart').find('.count');
@@ -25,21 +28,21 @@ export function updateCartList(el, productsList, type) {
 	const id = el.data('product-id');
 	const name = el.data('product-name');
 	const price = el.data('price');
-  const weight = el.data('weight');
+	const weight = el.data('weight');
 	const exist = productsList.find('[data-item-id=' + id + ']');
-  const containerSidebar = el.parents('[data-type=main_container]');
-  const curCount = Number(exist.find('.cart-count').text()) + 1;
-  const restMinOrder = $('[data-type=rest-min-order]').val();
+	const containerSidebar = el.parents('[data-type=main_container]');
+	const curCount = Number(exist.find('.cart-count').text()) + 1;
+	const restMinOrder = $('[data-type=rest-min-order]').val();
 
-  if (type == 'delete') {
-    productsList.find('[data-type=item-block]').remove();
-  }
+	if (type == 'delete') {
+		productsList.find('[data-type=item-block]').remove();
+	}
 
-  if (exist.length) {
-    exist.find('.cart-count').text(curCount);
-  } else {
-    productsList
-      .prepend(`
+	if (exist.length) {
+		exist.find('.cart-count').text(curCount);
+	} else {
+		productsList
+			.prepend(`
 		  <div class="cart-block-item" data-type="item-block" data-item-id="${id}">
 		    <div class="cart-block-item-size">
           <div>${name}</div>
@@ -74,63 +77,63 @@ export function updateCartList(el, productsList, type) {
       </div>
 		`);
 
-    const itemFirst = $('[data-type=item-block]:first-child');
-    itemFirst.hide();
-    itemFirst.velocity({
-        scale: 0,
-      },
-      {duration: 0});
-    itemFirst.velocity(
-      {
-        scale: 1,
-      },
-      {
-        display: 'block'
-      }, {duration: 300}
-    );
+		const itemFirst = $('[data-type=item-block]:first-child');
+		itemFirst.hide();
+		itemFirst.velocity({
+			scale: 0,
+		},
+		{duration: 0});
+		itemFirst.velocity(
+			{
+				scale: 1,
+			},
+			{
+				display: 'block'
+			}, {duration: 300}
+		);
 
-    if (productsList.find('[data-type=item-block]').length == 1) {
-      let totalSumm = restMinOrder - price;
+		if (productsList.find('[data-type=item-block]').length == 1) {
+			const totalSumm = restMinOrder - price;
 
-      if (type != 'delete') {
-        productsList.append('<div class="cart-block-item cart-block-item--long"><div class="cart-block-promo set-tab"><div class="tab-container"><div class="tabs"><div class="tab active" data-toggle-target=".card-content">карта лояльности</div><div class="tab" data-toggle-target=".promo-content">промокод</div></div><div class="tab-content card-content active"><div class="error">Карта не привязана к указанному телефону</div><input class="control num--js" type="text" name="number" placeholder="Номер карты"><input class="control num--js" type="text" name="phone" placeholder="Номер телефона"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div><div class="tab-content promo-content"><div class="error">Промокод недействителен</div><input class="control promo--js" type="text" name="promo" placeholder="Промокод"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div></div></div></div>');
-        productsList.append('<div class="cart-block-summ"><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div>');
-      }
+			if (type != 'delete') {
+				productsList.append('<div class="cart-block-item cart-block-item--long"><div class="cart-block-promo set-tab"><div class="tab-container"><div class="tabs"><div class="tab active" data-toggle-target=".card-content">карта лояльности</div><div class="tab" data-toggle-target=".promo-content">промокод</div></div><div class="tab-content card-content active"><div class="error">Карта не привязана к указанному телефону</div><input class="control num--js" type="text" name="number" placeholder="Номер карты"><input class="control num--js" type="text" name="phone" placeholder="Номер телефона"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div><div class="tab-content promo-content"><div class="error">Промокод недействителен</div><input class="control promo--js" type="text" name="promo" placeholder="Промокод"><button class="disabled btn btn--full btn--primary btn__sm" disabled>применить</button></div></div></div></div>');
+				productsList.append('<div class="cart-block-summ"><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div>');
+			}
 
-      productsList.find('.cart-block-body-null').remove();
-      containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
+			productsList.find('.cart-block-body-null').remove();
+			containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
 
-      if (price < restMinOrder) {
-        containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>'+totalSumm+'</span> ₽ до минимальной суммы заказа</a>');
-      } else {
-        containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
-      }
-    }
-  }
+			if (price < restMinOrder) {
+				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>' + totalSumm + '</span> ₽ до минимальной суммы заказа</a>');
+			} else {
+				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
+			}
+		}
+	}
 
-  const pr = exist.find('.cart-pr');
-  const prData = pr.data('pr');
-  pr.find('span').text((prData * curCount).toString().replace(regexp, ' '));
-  let summ = 0;
-  let count = 0;
-  let items = productsList.find('[data-type=item-block]');
+	const pr = exist.find('.cart-pr');
+	const prData = pr.data('pr');
+	pr.find('span').text((prData * curCount).toString().replace(regexp, ' '));
+	let summ = 0;
+	let count = 0;
+	const items = productsList.find('[data-type=item-block]');
 
-  items.each((index, item) => {
-    if($(item).find('.cart-pr span').length) {
-      summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-      count += parseInt($(item).find('.cart-count').text(), 10);
-    }
-  });
+	items.each((index, item) => {
+		if($(item).find('.cart-pr span').length) {
+			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+			count += parseInt($(item).find('.cart-count').text(), 10);
+		}
+	});
 
-  containerSidebar.find('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	containerSidebar.find('.card-summ b span').text(summ.toString().replace(regexp, ' '));
 
-  const totalSumm = restMinOrder - summ;
+	const totalSumm = restMinOrder - summ;
 
-  if (summ < restMinOrder) {
-    containerSidebar.find('[data-type=button-order] span').text(totalSumm);
-  } else {
-    containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
-  }
+	if (summ < restMinOrder) {
+		containerSidebar.find('[data-type=button-order] span').text(totalSumm);
+	} else {
+		containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" href="/order/">Заказать</a>');
+	}
 }
 
 

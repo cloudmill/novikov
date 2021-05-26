@@ -26,10 +26,10 @@ $.fn.isInViewport = function() {
 };
 
 const screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+const isMobile = window.matchMedia('only screen and (max-width: 767px)').matches;
 
 function scrollX() {
 
-	const isMobile = window.matchMedia('only screen and (max-width: 767px)').matches;
 	if (!isMobile) {
 		$('.scrollContentX').mCustomScrollbar({
 			axis: 'x',
@@ -120,7 +120,9 @@ $(document).ready(() => {
 	scrollX();
 
 	if ($('[data-type=container-form] .cart-block-body').length) {
-		$('.cart-block-body').mCustomScrollbar();
+		if (!isMobile) {
+			$('.cart-block-body').mCustomScrollbar();
+		}
 	}
 
 	$('.scroll-to--js a').click(function() {
