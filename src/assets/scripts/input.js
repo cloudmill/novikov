@@ -199,39 +199,39 @@ $('.order--js').on('click', function(e) {
 		return false;
 	}
 
-  let name = container.find('input[name=name]').val(),
-    phone = container.find('[data-type=contact-phone]').val(),
-    email = container.find('input[name=email]').val(),
-    containerDataFilter = container.find('.tab-content.active'),
-    address = containerDataFilter.find('[data-type=address]').text(),
-    payment = containerDataFilter.find('input[name=payment]:checked').val(),
-    data = null;
+	const name = container.find('input[name=name]').val();
+	const phone = container.find('[data-type=contact-phone]').val();
+	const email = container.find('input[name=email]').val();
+	const containerDataFilter = container.find('.tab-content.active');
+	const address = containerDataFilter.find('[data-type=address]').text();
+	const payment = containerDataFilter.find('input[name=payment]:checked').val();
+	let data = null;
 
-  data = {
-    name: name,
-    phone: phone,
-    email: email,
-    address: address,
-    payment: payment,
-  }
+	data = {
+		name: name,
+		phone: phone,
+		email: email,
+		address: address,
+		payment: payment,
+	};
 
-  if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
-    data['datetime'] = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
-  }
+	if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
+		data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
+	}
 
-  $.ajax({
-    type: 'POST',
-    url: '/local/templates/main/include/ajax/order.php',
-    dataType: 'json',
-    data: data,
-    success: function(res) {
-      if (res.success === true) {
-        window.location.replace('/order-finish/?ORDER_ID=' + res.order_id);
-      } else {
-        console.log('error order');
-      }
-    }
-  });
+	$.ajax({
+		type: 'POST',
+		url: '/local/templates/main/include/ajax/order.php',
+		dataType: 'json',
+		data: data,
+		success: function(res) {
+			if (res.success === true) {
+				window.location.replace('/order-finish/?ORDER_ID=' + res.order_id);
+			} else {
+				console.log('error order');
+			}
+		}
+	});
 
 });
 
@@ -356,29 +356,21 @@ $('.promos--js').change(function() {
 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
 	}
 });
-// $('.num--js').change(function() {
-// 	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
-// 	if (
-// 		$('input[name=number]') && $(this).val().length > 0 &&
-//     $('input[name=phone]') && phone.test($(this).val())
-// 	) {
-// 		$(this).addClass('filled').parent().find('button').removeClass('disabled').attr('disabled', false);
-// 	} else {
-// 		$(this).removeClass('filled').parent().find('button').addClass('disabled').attr('disabled', true);
-// 	}
-// 	if ($('input[name=phone]')) {
-// 		const data = $(this).val().replace(/[\. ()_-]+/g, '');
-// 		$(this).attr('data-phone', data);
-// 	}
-// });
+
 $('.num--js').change(function() {
+	const phone = /^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
 	if (
-		$('input[name=number]') && $(this).val().length > 0 &&
-    ($('input[name=chk]') && $(this).prop('checked')) || ($('input[name=chk]').prop('checked'))
+		$('.num--js.phone[name=phone]') && phone.test($('.num--js[name=phone]').val()) &&
+		$('.num--js[name=number]') && $('.num--js[name=number]').val().length > 0 &&
+    $('.num--js[name=chk]') && $('.num--js[name=chk]').prop('checked')
 	) {
 		$(this).addClass('filled').closest('.tab-content').find('button').removeClass('disabled').attr('disabled', false);
 	} else {
 		$(this).removeClass('filled').closest('.tab-content').find('button').addClass('disabled').attr('disabled', true);
+	}
+	if ($('.num--js.phone[name=phone]')) {
+		const data = $(this).val().replace(/[\. ()_-]+/g, '');
+		$(this).attr('data-phone', data);
 	}
 });
 
