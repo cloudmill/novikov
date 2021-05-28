@@ -2,7 +2,7 @@ extends ../layouts/master.pug
 
 block header
   include ../components/_popup
-  include ../partials/_header.pug
+  include ../partials/_header-null.pug
 
 block pageName
   - pageName = "custom"
@@ -10,7 +10,7 @@ block pageName
 block content
   include ../components/_cartPopup
   form.cart-form(action='', method='POST', data-sticky-container)
-    .sticky(data-margin-top="100")
+    .sticky.form-menu(data-margin-top="100")
       include ../components/_cart-block
     main.page-order.page-order-menu
       .back-link(data-aos='fade-up')

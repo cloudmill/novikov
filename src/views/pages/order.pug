@@ -2,13 +2,13 @@ extends ../layouts/master.pug
 
 block header
   include ../components/_popup
-  include ../partials/_header.pug
+  include ../partials/_header-null.pug
 
 block pageName
   - pageName = "custom"
 
 block content
-  form(action='', method='POST', data-type='container-form')
+  form.form-menu(action='', method='POST', data-type='container-form')
     include ../components/_cart-block
     main.page-order
       .back-link(data-aos='fade-up')

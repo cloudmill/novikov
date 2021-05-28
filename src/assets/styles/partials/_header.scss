@@ -468,10 +468,21 @@
 
 .sticky {
   z-index: 120;
-  .cart-block {
-    position: absolute;
-    height: 99vh;
-    top: -100px;
+
+  @media screen and (min-width: $screen-md-min) {
+    .cart-block {
+      position: absolute;
+      height: 99vh;
+      top: -100px;
+    }
+  }
+}
+
+*:not(.form-menu) {
+  > .cart-block {
+    &:not(.active) {
+      display: none;
+    }
   }
 }
 .cart-block {
@@ -482,7 +493,7 @@
   bottom: 0;
   right: -285px;
   width: 285px;
-  z-index: 123;
+  z-index: 197;
   @include transitionEase(right);
   display: flex;
   flex-direction: column;
@@ -558,7 +569,7 @@
     font-size: 16px;
     line-height: 140%;
     color: #000;
-    width: 441px;
+    max-width: 441px;
     min-height: 80px;
     display: flex;
     align-items: center;

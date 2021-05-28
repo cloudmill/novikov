@@ -135,7 +135,7 @@
   }
   &-wrapper {
     max-width: 800px;
-    padding: 0 10px;
+    padding: 0 10px 100px;
     @media screen and (min-width: $screen-md-min) {
       padding: 0 20px;
     }

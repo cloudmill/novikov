@@ -13,6 +13,9 @@ html {
 .cart-form {
   .sticky {
     z-index: 121;
+    @media screen and (max-width: $screen-sm-max) {
+      position: static !important;
+    }
   }
 }
 
