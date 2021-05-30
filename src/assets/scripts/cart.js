@@ -96,7 +96,7 @@ export function updateCartList(el, productsList, type) {
 			const totalSumm = restMinOrder - price;
 
 			if (type != 'delete') {
-				productsList.after('<div class="cart-block-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div></div>');
+				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div></div>');
 			}
 
 			productsList.find('.cart-block-body-null').remove();
