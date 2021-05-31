@@ -440,6 +440,7 @@ $('.promo-test--js').click(function() {
 export function deleteProduct(curItem) {
 	const itemsContainer = curItem.parents('[data-type=cart-items-container]');
 	const itemBlock = curItem.parents('[data-type=item-block]');
+  const productsList = itemsContainer.find('[data-type=products_list]');
 
 	// itemBlock.slideUp(300);
 	itemBlock.velocity(
@@ -450,36 +451,43 @@ export function deleteProduct(curItem) {
 	);
 	setTimeout(function() {
 		itemBlock.remove();
+
+    const items = itemsContainer.find('[data-type=item-block]');
+    let summ = 0;
+    let count = 0;
+
+    if (items.length < 1) {
+      productsList.append('<div class="cart-block-body-null"><img src="/local/templates/main/assets/images/icons/null.svg" alt="" /></div>');
+      itemsContainer.find('[data-type=cart-summ]').remove();
+      itemsContainer.find('[data-type=cart-total-summ]').addClass('cart-block-count--null');
+      itemsContainer.find('.btn--primary').addClass('disabled');
+    }
+
+    items.each((index, item) => {
+      if ($(item).find('.cart-pr span').length) {
+        summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+        count += parseInt($(item).find('.cart-count').text(), 10);
+      }
+    });
+
+    $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+
+
+    const cartCount = $('.page-header__cart').find('.count');
+    for (let i = 0; i < cartCount.length; i++) {
+      const actual = count;
+      $(cartCount[i]).find('span').eq(1).text(actual);
+      setTimeout(function() {
+        $(cartCount[i]).find('span').eq(0).text(actual);
+      }, 350);
+    }
+    setTimeout(function() {
+      cartCount.addClass('update-count');
+      setTimeout(function() {
+        cartCount.removeClass('update-count');
+      }, 200);
+    }, 200);
 	}, 500);
-
-	const items = itemsContainer.find('[data-type=item-block]');
-	let summ = 0;
-	let count = 0;
-
-	items.each((index, item) => {
-		if ($(item).find('.cart-pr span').length) {
-			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-			count += parseInt($(item).find('.cart-count').text(), 10);
-		}
-	});
-
-	$('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-
-
-	const cartCount = $('.page-header__cart').find('.count');
-	for (let i = 0; i < cartCount.length; i++) {
-		const actual = count;
-		$(cartCount[i]).find('span').eq(1).text(actual);
-		setTimeout(function() {
-			$(cartCount[i]).find('span').eq(0).text(actual);
-		}, 350);
-	}
-	setTimeout(function() {
-		cartCount.addClass('update-count');
-		setTimeout(function() {
-			cartCount.removeClass('update-count');
-		}, 200);
-	}, 200);
 }
 
 export function appendProduct(curItem) {
