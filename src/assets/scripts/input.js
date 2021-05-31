@@ -399,93 +399,124 @@ function discountAccepted(isPromo, disc) {
 $('.promo-test--js').click(function() {
   let obj = $(this),
     tabContainer = obj.parents('[data-type=tab-content]'),
-    data = {};
+    stepContainer = tabContainer.find('[data-type=step]').filter('.active'),
+    data = {},
+    codeEntering = obj.attr('code-entering'),
+    type = obj.attr('data-discount-type'),
+    url = null,
+    headers = null;
 
-  tabContainer.find('[data-type=get-field]').each(function () {
+  if (codeEntering == 'true') {
+    url = '/local/templates/main/include/ajax/valid_sms_code.php';
+    headers = {};
+  } else {
+    url = 'http://209.250.245.217:3000/site/discountcards/check';
+    headers = {
+      Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
+    };
+  }
+
+  stepContainer.find('[data-type=get-field]').each(function () {
     data[$(this).attr('data-type-field')] = $(this).val();
   });
 
   if (data) {
     $.ajax({
       type: 'POST',
-      url: 'http://209.250.245.217:3000/site/discountcards/check',
-      headers: {
-        Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
-      },
+      url: url,
+      headers: headers,
       dataType: 'json',
       data: data,
       success: function(r) {
-        if (r.is_valid) {
-          steps(obj);
-          sms(data['phone']);
+        if (codeEntering == 'true') {
+          if (r.success) {
+            // applyDiscount(type, obj.find('[data-type=cart-items-container]'));
+          }
+        } else {
+          if (r.is_valid) {
+            sms(data['phone'].replace(/[^\d]/g, ''), obj);
+          } else {
+            tabContainer.find('[data-type=promo-card-error]').addClass('active').text(r.comment);
+          }
+          console.log(r);
         }
-        console.log(r);
       }
     });
   }
-
-  function sms(phone) {
-    console.log(phone);
-
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'api.smstraffic.ru/multi.php',
-    //   headers: {
-    //     Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
-    //   },
-    //   dataType: 'json',
-    //   data: data,
-    //   success: function(r) {
-    //     if (r.is_valid) {
-    //       steps(obj);
-    //       sms(data['phone']);
-    //     }
-    //     console.log(r);
-    //   }
-    // });
-  }
-
-  function steps(item) {
-    if (item.closest('.tab-content').find('.step--third').hasClass('active')) {
-      $('.success-block--promo').addClass('active').find('span').text('10%');
-      discountAccepted(true, 10);
-    }
-    if (item.closest('.tab-content').find('.step--second').hasClass('active')) {
-      item.closest('.tab-content').find('.step').removeClass('active');
-      item.closest('.tab-content').find('.step--first').addClass('active');
-      item.closest('.tab-content').find('.promo-counter').removeClass('active');
-      item.closest('.tab-content').find('.promo-card-error').removeClass('active');
-      $('.success-block--card').addClass('active').find('span').text('11%');
-      discountAccepted(false, 11);
-    }
-    if (item.closest('.tab-content').find('.step--first').hasClass('active')) {
-      item.closest('.tab-content').find('.step').removeClass('active');
-      item.closest('.tab-content').find('.step--second').addClass('active');
-      item.closest('.tab-content').find('.promo-counter').addClass('active');
-
-      let timer2 = '2:00';
-      const interval = setInterval(function() {
-        const timer = timer2.split(':');
-        let minutes = parseInt(timer[0], 10);
-        let seconds = parseInt(timer[1], 10);
-        --seconds;
-        minutes = (seconds < 0) ? --minutes : minutes;
-        seconds = (seconds < 0) ? 59 : seconds;
-        seconds = (seconds < 10) ? '0' + seconds : seconds;
-        $('.countdown').html(minutes + ':' + seconds);
-        if (minutes < 0) clearInterval(interval);
-        if ((seconds <= 0) && (minutes <= 0)) {
-          clearInterval(interval);
-          $('.promo-card-error').addClass('active');
-        }
-        timer2 = minutes + ':' + seconds;
-      }, 1000);
-    }
-
-    item.addClass('disabled').attr('disabled', true);
-  }
 });
 
+function applyDiscount(type, cartItemsContainer) {
+  $.ajax({
+    type: 'POST',
+    url: window.location.href,
+    dataType: 'html',
+    data: {
+      discount: type + '-' + r.discount_percent,
+    },
+    success: function(data) {
+      cartItemsContainer.empty();
+
+      cartItemsContainer.append($(data));
+    }
+  });
+}
+
+function sms(phone, obj) {
+  $.ajax({
+    type: 'POST',
+    url: '/local/templates/main/include/ajax/sms-service-api.php',
+    dataType: 'json',
+    data: {
+      phone: phone,
+    },
+    success: function(r) {
+      if (r.success === true) {
+        steps(obj);
+        obj.attr('code-entering', 'true');
+      }
+    }
+  });
+}
+
+function steps(item) {
+  if (item.closest('.tab-content').find('.step--third').hasClass('active')) {
+    $('.success-block--promo').addClass('active').find('span').text('10%');
+    discountAccepted(true, 10);
+  }
+  if (item.closest('.tab-content').find('.step--second').hasClass('active')) {
+    item.closest('.tab-content').find('.step').removeClass('active');
+    item.closest('.tab-content').find('.step--first').addClass('active');
+    item.closest('.tab-content').find('.promo-counter').removeClass('active');
+    item.closest('.tab-content').find('.promo-card-error').removeClass('active');
+    $('.success-block--card').addClass('active').find('span').text('11%');
+    discountAccepted(false, 11);
+  }
+  if (item.closest('.tab-content').find('.step--first').hasClass('active')) {
+    item.closest('.tab-content').find('.step').removeClass('active');
+    item.closest('.tab-content').find('.step--second').addClass('active');
+    item.closest('.tab-content').find('.promo-counter').addClass('active');
+
+    let timer2 = '2:00';
+    const interval = setInterval(function() {
+      const timer = timer2.split(':');
+      let minutes = parseInt(timer[0], 10);
+      let seconds = parseInt(timer[1], 10);
+      --seconds;
+      minutes = (seconds < 0) ? --minutes : minutes;
+      seconds = (seconds < 0) ? 59 : seconds;
+      seconds = (seconds < 10) ? '0' + seconds : seconds;
+      $('.countdown').html(minutes + ':' + seconds);
+      if (minutes < 0) clearInterval(interval);
+      if ((seconds <= 0) && (minutes <= 0)) {
+        clearInterval(interval);
+        $('.promo-card-error').addClass('active');
+      }
+      timer2 = minutes + ':' + seconds;
+    }, 1000);
+  }
+
+  item.addClass('disabled').attr('disabled', true);
+}
 
 export function deleteProduct(curItem) {
   const itemsContainer = curItem.parents('[data-type=cart-items-container]');
