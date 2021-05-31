@@ -481,7 +481,9 @@
 *:not(.form-menu) {
   > .cart-block {
     &:not(.active) {
-      display: none;
+      @media screen and (max-width: $screen-sm-max) {
+        display: none;
+      }
     }
   }
 }
