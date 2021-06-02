@@ -377,119 +377,92 @@ $('.num--js').change(function() {
 
 const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
-function discountAccepted(isPromo, disc) {
-  $('.cart-block-img').addClass('accepted');
-
-  if (isPromo) {
-    $('.cart-block-img').text('Промокод применен');
-  } else {
-    $('.cart-block-img').html('Карта лояльности <br /> применена');
-  }
-  const getTotal = $('.cart-block-bottom .card-summ').data('summ');
-  const discount  = getTotal * parseInt(disc, 10) / 100;
-  const actual = getTotal - discount;
-  $('[data-type=container-form] .cart-block-summ').append(`<div>
-    <div>Скидка ${disc}%</div>
-    <div class="card-summ"><b><span>-${discount.toString().replace(regexp, ' ')}</span> ₽</b></div>
-    </div>`
-  );
-  $('[data-type=container-form] .cart-block-count .card-summ span').text(actual.toString().replace(regexp, ' '));
-}
-
 $('.promo-test--js').click(function() {
   let obj = $(this),
     tabContainer = obj.parents('[data-type=tab-content]'),
     stepContainer = tabContainer.find('[data-type=step]').filter('.active'),
     data = {},
     codeEntering = obj.attr('code-entering'),
-    type = obj.attr('data-discount-type'),
-    url = null,
-    headers = null;
-
-  if (codeEntering == 'true') {
-    url = '/local/templates/main/include/ajax/valid_sms_code.php';
-    headers = {};
-  } else {
-    url = 'http://209.250.245.217:3000/site/discountcards/check';
-    headers = {
-      Authorization: 'Bearer b52c96bea30646abf8170f333bbd42b9',
-    };
-  }
+    url = codeEntering == 'true' ? '/local/templates/main/include/ajax/valid_sms_code.php' : '/local/templates/main/include/ajax/discount.php';
 
   stepContainer.find('[data-type=get-field]').each(function () {
     data[$(this).attr('data-type-field')] = $(this).val();
   });
 
+  if (codeEntering == 'true') {
+    if (localStorage.getItem('percent_discount')) {
+      data['percent_discount'] = localStorage.getItem('percent_discount');
+    };
+  };
+
   if (data) {
     $.ajax({
       type: 'POST',
       url: url,
-      headers: headers,
       dataType: 'json',
       data: data,
       success: function(r) {
-        if (codeEntering == 'true') {
+        let errorBlock = tabContainer.find('[data-type=promo-card-error]');
+
+        if (codeEntering == 'false') {
           if (r.success) {
-            // applyDiscount(type, obj.find('[data-type=cart-items-container]'));
+            if (r.percent_discount) {
+              localStorage.setItem('percent_discount', r.percent_discount);
+            }
+
+            if (errorBlock.hasClass('active')) {
+              errorBlock.removeClass('active');
+            }
+
+            steps(obj);
+            obj.attr('code-entering', 'true');
+          } else {
+            errorBlock.addClass('active').text(r.comment);
           }
         } else {
-          if (r.is_valid) {
-            sms(data['phone'].replace(/[^\d]/g, ''), obj);
+          if (r.success) {
+            let container = $('[data-type=cart-items-container]');
+
+            steps(obj, data['percent_discount']);
+
+            $.ajax({
+              type: 'POST',
+              url: window.location.href,
+              dataType: 'html',
+              data: {
+                discountApplied: true,
+              },
+              success: function(r) {
+                container.empty();
+
+                container.append($(r));
+              }
+            });
+
+            localStorage.removeItem('percent_discount');
           } else {
-            tabContainer.find('[data-type=promo-card-error]').addClass('active').text(r.comment);
+            errorBlock.addClass('active').text(r.comment);
           }
-          console.log(r);
         }
       }
     });
   }
 });
 
-function applyDiscount(type, cartItemsContainer) {
-  $.ajax({
-    type: 'POST',
-    url: window.location.href,
-    dataType: 'html',
-    data: {
-      discount: type + '-' + r.discount_percent,
-    },
-    success: function(data) {
-      cartItemsContainer.empty();
-
-      cartItemsContainer.append($(data));
-    }
-  });
-}
-
-function sms(phone, obj) {
-  $.ajax({
-    type: 'POST',
-    url: '/local/templates/main/include/ajax/sms-service-api.php',
-    dataType: 'json',
-    data: {
-      phone: phone,
-    },
-    success: function(r) {
-      if (r.success === true) {
-        steps(obj);
-        obj.attr('code-entering', 'true');
-      }
-    }
-  });
-}
-
-function steps(item) {
+function steps(item, discount) {
   if (item.closest('.tab-content').find('.step--third').hasClass('active')) {
-    $('.success-block--promo').addClass('active').find('span').text('10%');
-    discountAccepted(true, 10);
+    $('.success-block--promo').addClass('active').find('span').text(discount + '%');
+    $('.cart-block-img').addClass('accepted');
+    $('.cart-block-img').text('Промокод применен');
   }
   if (item.closest('.tab-content').find('.step--second').hasClass('active')) {
     item.closest('.tab-content').find('.step').removeClass('active');
     item.closest('.tab-content').find('.step--first').addClass('active');
     item.closest('.tab-content').find('.promo-counter').removeClass('active');
     item.closest('.tab-content').find('.promo-card-error').removeClass('active');
-    $('.success-block--card').addClass('active').find('span').text('11%');
-    discountAccepted(false, 11);
+    $('.success-block--card').addClass('active').find('span').text(discount + '%');
+    $('.cart-block-img').addClass('accepted');
+    $('.cart-block-img').html('Карта лояльности <br /> применена');
   }
   if (item.closest('.tab-content').find('.step--first').hasClass('active')) {
     item.closest('.tab-content').find('.step').removeClass('active');
