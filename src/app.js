@@ -93,7 +93,16 @@ $(document).ready(() => {
 		center: true
 	});
 	let counter = 0;
+
+	let scrollAmount = 'auto';
+	if (result.os === 'Windows 10') {
+		scrollAmount = 100;
+	}
 	$('.scrollContent').mCustomScrollbar({
+		mouseWheel: {
+			scrollAmount: scrollAmount,
+			normalizeDelta: true
+		},
 		callbacks: {
 			whileScrolling: function() {
 				// AOS.refresh();
