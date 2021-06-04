@@ -92,6 +92,7 @@ $(document).ready(() => {
 	const rellax = new Rellax('.rellax', {
 		center: true
 	});
+  let counter = 0;
 	$('.scrollContent').mCustomScrollbar({
 		callbacks: {
 			whileScrolling: function() {
@@ -114,14 +115,16 @@ $(document).ready(() => {
 					// eslint-disable-next-line no-unused-vars
 					const sticky = new Sticky('.sticky');
 				}
-
 				if($('.page-order-menu').length) {
 					const last = this.mcs.content.find('.order-menu-menu__item');
 					const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
 					const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
 
 					if(d > Math.round(offset) - window.innerHeight + setHeight) {
-						console.log('check');
+						counter++;
+						if(counter < 2) {
+							console.log('check');
+						}
 					}
 				}
 			},
