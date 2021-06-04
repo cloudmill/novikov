@@ -249,16 +249,19 @@ function mainRestFilterKitchen() {
 }
 
 function mainRestFilterFeature() {
-  $(document).on('click', '[data-type=filter-feature-select]', function() {
-    const container = $(this).parents('[data-type=main_container]');
-    const parentsButton = $(this).parents('[data-type=filter-feature]');
+  $(document).on('change', '[data-type=select-filter-feature]', function() {
+    const obj = $(this);
+    const container = obj.parents('[data-type=main_container]');
+    const checkedFeature = container.find('[data-type=select-filter-feature]:checked');
     const itemsCont = container.find('[data-type=items_container]');
     const itemsContMap = container.find('[data-type=items-container-map]');
-    const feautureId = $(this).attr('data-id');
+    let feautureIds = [];
     const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchenId = container.find('[data-type=restaurants-kitchens-filter-select]').val();
 
-    console.log(parentsButton.find('input:checkbox'));
+    checkedFeature.each(function (i) {
+      feautureIds[i] = $(this).attr('data-id');
+    });
 
     $.ajax({
       type: 'POST',
@@ -267,7 +270,7 @@ function mainRestFilterFeature() {
       data: {
         regionId: regionId,
         kitchenId: kitchenId,
-        feautureId: feautureId,
+        feautureIds: feautureIds,
       },
       success: function(data) {
         const itemsContResponse = $(data).find('[data-type=items_container]').children();
