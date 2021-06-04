@@ -92,7 +92,7 @@ $(document).ready(() => {
 	const rellax = new Rellax('.rellax', {
 		center: true
 	});
-  let counter = 0;
+	let counter = 0;
 	$('.scrollContent').mCustomScrollbar({
 		callbacks: {
 			whileScrolling: function() {
@@ -101,7 +101,7 @@ $(document).ready(() => {
 				const d = -this.mcs.top;
 				x.each(function() {
 					const topOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
-					if(d > Math.round(topOffset) - window.innerHeight) {
+					if (d > Math.round(topOffset) - window.innerHeight) {
 						$(this).addClass('aos-animate');
 					} else {
 						$(this).removeClass('aos-animate');
@@ -115,15 +115,38 @@ $(document).ready(() => {
 					// eslint-disable-next-line no-unused-vars
 					const sticky = new Sticky('.sticky');
 				}
-				if($('.page-order-menu').length) {
-					const last = this.mcs.content.find('.order-menu-menu__item');
-					const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
-					const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
 
-					if(d > Math.round(offset) - window.innerHeight + setHeight) {
-						counter++;
-						if(counter < 2) {
-							console.log('check');
+				if ($('.page-order-menu').length) {
+					const scrollContent = this.mcs.content;
+					const url = scrollContent.find('[data-type=url-page-nav]').val();
+					if (url) {
+						const itemsContainer = scrollContent.find('[data-type=items_container]');
+						const last = scrollContent.find('.order-menu-menu__item');
+						const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
+						const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
+
+						if (d > Math.round(offset) - window.innerHeight + setHeight) {
+							counter++;
+							if (counter < 2) {
+								$.ajax({
+									url: url,
+									type: 'POST',
+									data: {
+										ajaxPaginate: true,
+									},
+									success: function(data) {
+										const urlResponse = $(data).find('[data-type=url-page-nav]').val();
+										const itemsResponse = $(data).find('[data-type=item]');
+
+										if (urlResponse) {
+											scrollContent.find('[data-type=url-page-nav]').val(urlResponse);
+										}
+
+										itemsContainer.append(itemsResponse);
+										counter = 0;
+									}
+								});
+							}
 						}
 					}
 				}
@@ -139,7 +162,7 @@ $(document).ready(() => {
 	}
 
 	$('.scroll-to--js a').click(function() {
-	  const id = $(this).attr('href');
+		const id = $(this).attr('href');
 		$('.scrollContentX').mCustomScrollbar('scrollTo', id);
 		setTimeout(() => {
 			$('.scroll-to--js a').removeClass('active');
