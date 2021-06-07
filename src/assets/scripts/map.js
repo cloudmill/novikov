@@ -237,7 +237,8 @@ export function initMapRest() {
 }
 
 function initMap() {
-	const markers = [];
+  const bounds = new google.maps.LatLngBounds();
+
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
 		zoom: 10,
@@ -247,27 +248,25 @@ function initMap() {
 		scrollwheel: false,
 		styles: mapStyle,
 	};
+
 	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
+	const dataCoordStr = $('[data-type=map-data]').val();
+	const dataCoordinates = JSON.parse(`${dataCoordStr}`);
+	const itemIcon = $('[data-type=map-icon]').val();
 
-	const itemId = $('input[name=item-id]').val();
-	const coord = $('input[name=coordinates-val]').val() && $('input[name=coordinates-val]').val().split(',');
-	const itemIcon = $('input[name=map-icon]').val();
+  for (let key in dataCoordinates) {
+    let latLng = dataCoordinates[key].split(',');
 
-	const marker = new google.maps.Marker({
-		position: new google.maps.LatLng(coord && coord[0], coord && coord[1]),
-		icon: itemIcon,
-		map: map,
-		id: itemId
-	});
+    const marker = new google.maps.Marker({
+      position: new google.maps.LatLng(latLng[0], latLng[1]),
+      icon: itemIcon,
+      map: map,
+    });
 
-	markers.push(marker);
+    bounds.extend(marker.position);
+  }
 
-	if(coord) {
-		map.setCenter({
-			lat: coord[0],
-			lng: coord[1]
-		});
-	}
+  map.fitBounds(bounds);
 }
 
 $(function() {
