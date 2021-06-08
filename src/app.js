@@ -147,6 +147,7 @@ $(document).ready(() => {
 
 						if (d > Math.round(offset) - window.innerHeight + setHeight) {
 							counter++;
+
 							if (counter < 2) {
 								$.ajax({
 									url: url,
@@ -155,7 +156,7 @@ $(document).ready(() => {
 										ajaxPaginate: true,
 									},
 									success: function(data) {
-										const urlResponse = $(data).find('[data-type=url-page-nav]').val();
+										const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
 										const itemsResponse = $(data).find('[data-type=item]');
 
 										if (urlResponse) {
