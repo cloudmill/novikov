@@ -1,8 +1,11 @@
 import Swiper from 'swiper/swiper-bundle.min';
 // import AOS from 'aos';
 
-// const icon = '/local/templates/main/assets/images/icons/line.svg';
-const iconHtml = 'assets/images/icons/line.svg';
+let iconLine = 'assets/images/icons/line.svg';
+
+if (window.location.host == 'nov.hellem.ru') {
+  iconLine = '/local/templates/main/assets/images/icons/line.svg';
+}
 
 if ($('.main-swiper').length) {
 	let handle;
@@ -18,7 +21,7 @@ if ($('.main-swiper').length) {
 			el: '.swiper-pagination',
 			type: 'custom',
 			renderCustom: function(sl, current, total) {
-				return `<span>${current}</span> ` + ' <img src=' + iconHtml + ' /> ' + total;
+				return `<span>${current}</span> ` + ' <img src=' + iconLine + ' /> ' + total;
 			}
 		},
 		navigation: {
@@ -135,7 +138,7 @@ if ($('.vertical-swiper').length) {
 				el: pagin[0],
 				type: 'custom',
 				renderCustom: function(sw, current, total) {
-					return `<span>${current}</span> ` + ' <img src=' + iconHtml + ' /> ' + total;
+					return `<span>${current}</span> ` + ' <img src=' + iconLine + ' /> ' + total;
 				}
 			},
 			navigation: {
@@ -173,7 +176,7 @@ if ($('.slideshow-swiper').length) {
 				el: pagin[0],
 				type: 'custom',
 				renderCustom: function(swiper, current, total) {
-					return `<span>${current}</span> ` + ' <img src=' + iconHtml + ' /> ' + total;
+					return `<span>${current}</span> ` + ' <img src=' + iconLine + ' /> ' + total;
 				}
 			},
 			navigation: {
