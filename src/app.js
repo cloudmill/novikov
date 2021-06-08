@@ -101,7 +101,6 @@ $(document).ready(() => {
 	$('.scrollContent').mCustomScrollbar({
 		mouseWheel: {
 			scrollAmount: scrollAmount,
-			normalizeDelta: true
 		},
 		callbacks: {
 			whileScrolling: function() {
