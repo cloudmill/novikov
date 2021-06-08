@@ -495,6 +495,8 @@ export function deleteProduct(curItem) {
   const itemsContainer = curItem.parents('[data-type=cart-items-container]');
   const itemBlock = curItem.parents('[data-type=item-block]');
   const productsList = itemsContainer.find('[data-type=products_list]');
+  const containerSidebar = curItem.parents('[data-type=main_container]');
+  const restMinOrder = $('[data-type=rest-min-order]').val();
 
   // itemBlock.slideUp(300);
   itemBlock.velocity(
@@ -514,20 +516,28 @@ export function deleteProduct(curItem) {
       productsList.append('<div class="cart-block-body-null"><img src="/local/templates/main/assets/images/icons/null.svg" alt="" /></div>');
       itemsContainer.find('[data-type=cart-summ]').remove();
       itemsContainer.find('[data-type=cart-total-summ]').addClass('cart-block-count--null');
+      itemsContainer.find('[data-type=total]').text(0);
       itemsContainer.find('.btn--primary').addClass('disabled');
+      containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" disabled style="display: block" href="#"><span>Заказать</span></a>');
+    } else {
+      items.each((index, item) => {
+        if ($(item).find('.cart-pr span').length) {
+          summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
+          count += parseInt($(item).find('.cart-count').text(), 10);
+        }
+      });
+
+      $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+
+      const totalSumm = restMinOrder - summ;
+
+      if (summ < restMinOrder) {
+        containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" disabled style="display: block" href="#"><span>' + totalSumm + '</span> ₽ до минимальной суммы заказа</a>');
+      }
     }
 
-    items.each((index, item) => {
-      if ($(item).find('.cart-pr span').length) {
-        summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
-        count += parseInt($(item).find('.cart-count').text(), 10);
-      }
-    });
-
-    $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
-
-
     const cartCount = $('.page-header__cart').find('.count');
+
     for (let i = 0; i < cartCount.length; i++) {
       const actual = count;
       $(cartCount[i]).find('span').eq(1).text(actual);
@@ -535,6 +545,7 @@ export function deleteProduct(curItem) {
         $(cartCount[i]).find('span').eq(0).text(actual);
       }, 350);
     }
+
     setTimeout(function() {
       cartCount.addClass('update-count');
       setTimeout(function() {
