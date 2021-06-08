@@ -251,7 +251,7 @@ function initMap() {
 
 	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
 	const dataCoordStr = $('[data-type=map-data]').val();
-	const dataCoordinates = JSON.parse(`${dataCoordStr}`);
+	const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
 	const itemIcon = $('[data-type=map-icon]').val();
 
   for (let key in dataCoordinates) {

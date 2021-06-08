@@ -113,23 +113,40 @@
     display: flex;
     align-items: flex-end;
     margin-top: 0;
-    margin-left: 50px;
+    margin-left: 40px;
     @media screen and (min-width: $screen-md-min) {
       margin-left: 0;
+      font-size: 42px;
+    }
+    @media screen and (min-width: $screen-lg-min) {
+      margin-left: 0;
+      font-size: 50px;
+    }
+    @media screen and (min-width: $screen-xl-min) {
+      font-size: 60px;
     }
     .select2 {
       display: inline-block;
       font-weight: 400;
       width: auto !important;
       padding: 1px 10px 0 5px;
+      margin-left: 0;
       @media screen and (min-width: $screen-md-min) {
         margin-left: 12px;
+        padding: 5px 10px 0 10px;
+      }
+      @media screen and (min-width: $screen-xl-min) {
         padding: 10px 10px 0 10px;
       }
       .select2-selection__arrow {
         top: 0;
         @media screen and (min-width: $screen-md-min) {
           top: 5px;
+        }
+      }
+      &-container--open .select2-dropdown--below {
+        @media screen and (max-width: $screen-sm-max) {
+          min-width: 150px;
         }
       }
       //@media screen and (min-width: $screen-md-min) {
@@ -148,8 +165,11 @@
           padding-right: 35px;
         }
         @media screen and (min-width: $screen-lg-min) {
-          font-size: 60px;
+          font-size: 50px;
           padding-bottom: 5px;
+        }
+        @media screen and (min-width: $screen-xl-min) {
+          font-size: 60px;
         }
 
         &:hover {
@@ -187,6 +207,12 @@
     }
   }
 
+  .tab-container {
+    &.filter {
+      overflow: visible;
+    }
+  }
+
   .tabs {
     display: inline-flex;
     border: 1px solid #E5E5E5;
@@ -205,12 +231,21 @@
       background-color: black;
       @include transitionEase(left);
       @media screen and (min-width: $screen-md-min) {
+        width: 112px;
+      }
+      @media screen and (min-width: $screen-xl-min) {
         width: 130px;
       }
     }
     &.active {
       &:after {
-        left: 119px;
+        left: 73px;
+        @media screen and (min-width: $screen-md-min) {
+          left: 104px;
+        }
+        @media screen and (min-width: $screen-xl-min) {
+          left: 119px;
+        }
       }
     }
     .tab {

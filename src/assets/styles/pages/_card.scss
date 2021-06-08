@@ -355,9 +355,19 @@ html {
 
           .mobile-btn {
             text-align: center;
-            position: relative;
-            z-index: 2;
-            bottom: -13px;
+            z-index: 198;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 15px;
+
+            @media screen and (min-width: $screen-md-min) {
+              position: relative;
+              left: auto;
+              right: auto;
+              bottom: -13px;
+              z-index: 2;
+            }
           }
         }
 
@@ -983,8 +993,9 @@ html {
         justify-content: space-between;
         position: absolute;
         right: 0;
-        bottom: -18px;
+        bottom: 0;
         @media screen and (min-width: $screen-md-min) {
+          bottom: -18px;
           left: 23px;
           right: auto;
           width: 77px;
@@ -1023,7 +1034,7 @@ html {
       }
 
       &--left {
-        padding-bottom: 48px;
+        padding-bottom: 55px;
         margin-bottom: 80px;
         @media screen and (min-width: $screen-md-min) {
           padding-left: 120px;

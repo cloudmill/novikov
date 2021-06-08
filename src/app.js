@@ -70,6 +70,18 @@ function scrollX() {
 		});
 	} else {
 		$('.scrollContentX').mCustomScrollbar('destroy');
+
+		$(window).scroll(function() {
+			const sections = $('.section');
+
+			sections.each(function() {
+				const leftOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
+				if (leftOffset < -100) {
+					$('.menu li a').removeClass('active');
+					$('.menu li a[href="#' + $(this).attr('id') + '"]').addClass('active');
+				}
+			});
+		});
 	}
 }
 
