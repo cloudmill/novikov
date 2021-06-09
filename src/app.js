@@ -161,7 +161,9 @@ $(document).ready(() => {
 
 										if (urlResponse) {
 											scrollContent.find('[data-type=url-page-nav]').val(urlResponse);
-										}
+										} else {
+                      scrollContent.find('[data-type=url-page-nav]').remove();
+                    }
 
 										itemsContainer.append(itemsResponse);
 										counter = 0;

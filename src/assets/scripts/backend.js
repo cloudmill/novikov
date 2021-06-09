@@ -296,6 +296,7 @@ function menuRestaurantSections() {
 		const selectSection = $(this).parents('[data-type=select-section]');
 		const sectId = $(this).attr('data-id');
 		const itemsContainer = container.find('[data-type=items_container');
+		const urlItem = container.find('[data-type=url-page-nav]');
 
 		selectSection.addClass('active').siblings().removeClass('active');
 
@@ -310,6 +311,17 @@ function menuRestaurantSections() {
 				itemsContainer.children().remove();
 
 				const itemsContainerResponse = $(data).children();
+        const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
+
+        if (urlResponse) {
+          if (urlItem.length) {
+            urlItem.val(urlResponse);
+          } else {
+            itemsContainer.before('<input type="hidden" data-type="url-page-nav" value="' + urlResponse + '">');
+          }
+        } else {
+          urlItem.remove();
+        }
 
 				itemsContainer.append(itemsContainerResponse);
 			}
