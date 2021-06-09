@@ -4,7 +4,7 @@ import Swiper from 'swiper/swiper-bundle.min';
 let iconLine = 'assets/images/icons/line.svg';
 
 if (window.location.host == 'nov.hellem.ru') {
-  iconLine = '/local/templates/main/assets/images/icons/line.svg';
+	iconLine = '/local/templates/main/assets/images/icons/line.svg';
 }
 
 if ($('.main-swiper').length) {
@@ -346,10 +346,10 @@ initSwiper();
 
 $('.set-tab .tab').on('click', function(evt) {
 	evt.preventDefault();
-	$('.set-tab .tab').removeClass('active');
+	$(this).parent().find('.tab').removeClass('active');
 	$(this).addClass('active');
 	const sel = this.getAttribute('data-toggle-target');
-	$('.set-tab .tab-content').removeClass('active').filter(sel).addClass('active');
+	$(this).closest('.set-tab').find('.tab-content').removeClass('active').filter(sel).addClass('active');
 	$(this).parent().removeClass('active');
 	if (sel === '.map') {
 		$(this).parent().addClass('active');
