@@ -199,21 +199,20 @@ $('.order--js').on('click', function(e) {
     return false;
   }
 
-  const name = container.find('input[name=name]').val();
-  const phone = container.find('[data-type=contact-phone]').val();
-  const email = container.find('input[name=email]').val();
-  const containerDataFilter = container.find('.tab-content.active');
-  const address = containerDataFilter.find('[data-type=address]').text();
-  const payment = containerDataFilter.find('input[name=payment]:checked').val();
-  let data = null;
+  let data = {};
 
-  data = {
-    name: name,
-    phone: phone,
-    email: email,
-    address: address,
-    payment: payment,
-  };
+  container.find('[data-type=container-contact-data]').find('input:not([type=checkbox])').each(function () {
+    data[$(this).attr('data-field')] = $(this).val();
+  });
+
+  console.log(data);
+
+  const containerDataFilter = container.find('.tab-content.active');
+  const payment = containerDataFilter.find('input[name=payment]:checked').val();
+
+  data.payment = payment;
+  data.deliveryId = containerDataFilter.attr('data-delivery-id');
+  data.address = containerDataFilter.find('[data-type=address]').text() + (containerDataFilter.find('input[name=number]').val() ? ', квартира № ' + containerDataFilter.find('input[name=number]').val() : '');
 
   if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
     data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();

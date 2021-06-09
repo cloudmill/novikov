@@ -183,6 +183,8 @@ $(document).on('click', '.success--js', function() {
 
 	$('.order-delivery, .order-wrapper__item--date, .order-payment').addClass('active');
 
+	$('[data-delivery-type=delivery]').attr('data-delivery-id', $(this).attr('data-delivery-id'));
+
 	if (true) {
 		// показать блок даты, если доставка возможна
 		$('.order-wrapper__item--date').addClass('active');
