@@ -110,6 +110,7 @@ module.exports = env => {
 									menu: require('../src/views/data/menu.json'),
 									index: require('../src/views/data/index.json'),
 									order: require('../src/views/data/order.json'),
+									orderMini: require('../src/views/data/order-mini.json'),
 								}
 							}
 						}
