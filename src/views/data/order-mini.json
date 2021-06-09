@@ -1,0 +1,44 @@
+[
+  {
+    "img": "menu/menu-1.jpg",
+    "name": "Битые азиатские огурцы",
+    "weight": "256 г",
+    "price": "550 ₽",
+    "big": true
+  },
+  {
+    "img": "menu/menu-2.jpg",
+    "name": "Хрустящий тофу ролл",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-3.jpg",
+    "name": "Спринг ролл с овощами и грибами",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-4.jpg",
+    "name": "Тартар из лосося",
+    "weight": "256 г",
+    "price": "790 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-5.jpg",
+    "name": "Азиатский зеленый салат с киноа",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  },
+  {
+    "img": "menu/menu-6.jpg",
+    "name": "Фо бо вьетнамский суп",
+    "weight": "256 г",
+    "price": "690 ₽",
+    "big": false
+  }
+]

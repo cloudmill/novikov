@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Novikov</title>
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="canonical" href="URL">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<meta name="description" content="Index page">
+		<meta name="keywords" content="index, page">
+		<meta name="author" content="">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:site" content="">
+		<meta name="twitter:image" content="">
+		<meta name="twitter:description" content="">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="">
+		<meta property="og:description" content="">
+		<meta property="og:image" content="assets/images/opengraph.jpg">
+		<meta property="og:type" content="website"><!-- iOS-->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Novikov">
+		<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.svg"><!-- Android-->
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="theme-color" content="#f8aa27">
+		<link rel="icon" type="image/png" href="images/favicons/android-chrome-192x192.png" sizes="192x192"><!-- Windows-->
+		<meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+		<meta name="msapplication-TileColor" content="#f8aa27">
+		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet" type="text/css">
+		<!--link(type='font/woff', href=require('font'), rel='preload', as='font', crossorigin)-->
+		<link rel="shortcut icon" href="assets/favicon.ico">
+		<link href="vendors.css" rel="stylesheet">
+		<link href="app.css" rel="stylesheet">
+	</head>
+
+	<body class="page-custom">
+		<!--[if lt IE 9]><p class="browsehappy">Данный сайт построен на передовых, современных технологиях и не поддерживает Ваш браузер. Настоятельно рекомендуем выбрать и установить любой из &nbsp;<a href="http://browsehappy.com/" target="_blank">современных браузеров.</a> Это бесплатно и займет всего несколько минут.</p><![endif]-->
+		<div class="loading"></div>
+		<div class="popup" id="mapMe" style="display: none">
+			<div class="close-popup close-popup--js"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="80" height="80" fill="black"></rect>
+					<rect x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white"></rect>
+					<rect x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white"></rect>
+				</svg></div>
+			<div class="popup-inner">
+				<div class="row between__xs bottom__xs">
+					<div class="col col__lg-8 col__md-8 col__xs-12">
+						<div class="input"><input class="control input__field autocomplete" type="text" name="search" id="search-o" placeholder="" required="required" /><label class="input__label" for="search-o"><span class="input__label-content">Улица, дом</span></label>
+							<div class="control-error"></div>
+						</div>
+					</div>
+					<div class="col col__lg-4 col__md-4 col__xs-12 text--right"><button class="btn btn--full btn--primary success--js">Подтвердить адрес</button></div>
+				</div>
+			</div>
+			<div class="relative">
+				<div class="error-tool">Выбранный адрес не входит в зону доставки</div>
+				<div id="map"></div>
+			</div>
+		</div>
+		<div class="popup popup--md" id="promo" style="display: none">
+			<div class="close-popup close-popup--js"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="80" height="80" fill="black"></rect>
+					<rect x="28" y="28.9426" width="1.33333" height="33.3333" transform="rotate(-45 28 28.9426)" fill="white"></rect>
+					<rect x="51.5703" y="28" width="1.33333" height="33.3333" transform="rotate(45 51.5703 28)" fill="white"></rect>
+				</svg></div>
+			<div class="popup-inner">
+				<div class="cart-block-promo set-tab">
+					<div class="success-block success-block--card">
+						<div>Скидка по карте лояльности <span>10%</span></div>
+					</div>
+					<div class="success-block success-block--promo">
+						<div>Промокод применен. <br> Скидка <span>5%</span></div>
+					</div>
+					<div class="tab-container">
+						<div class="tabs">
+							<div class="tab active" data-toggle-target=".card-content">карта лояльности</div>
+							<div class="tab" data-toggle-target=".promo-content">промокод</div>
+						</div>
+						<div class="tab-content card-content active">
+							<div class="step step--first active">
+								<div class="form__group"><input class="control num--js" type="text" name="number" placeholder="Номер карты"></div>
+								<div class="form__group"><input class="control num--js" type="text" name="phone" placeholder="Телефон"></div>
+							</div>
+							<div class="step step--second">
+								<p>На номер телефона, который привязан к карте, мы отправили код с SMS</p>
+								<div class="form__group"><input class="control num--js" type="text" name="code" placeholder="Введите код из SMS"></div>
+							</div>
+							<div class="form__group checkbox"><input class="num--js" type="checkbox" id="signIt-r" name="chk" required><label for="signIt-r">Даю согласание на обработку <a href="#">персональных данных</a>
+									<div class="control-error"></div>
+								</label></div><button class="disabled btn btn--full btn--primary promo-test--js" disabled>Продолжить</button><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-counter"><a href="#">Отправить код еще раз через&nbsp;</a><span class="countdown"></span></div><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-error">К вашей карте не привязан номер телефона. Сделать это можно <a href="#">по ссылке</a></div><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-card-error">Введенный код больше не действителен</div>
+						</div>
+						<div class="tab-content promo-content">
+							<div class="step step--third active">
+								<div class="form__group"><input class="control promos--js" type="text" name="promo" placeholder="Промокод"></div>
+								<div class="form__group checkbox"><input class="num--js" type="checkbox" id="signIt-l" name="chk" required><label for="signIt-l">Даю согласание на обработку <a href="#">персональных данных</a>
+										<div class="control-error"></div>
+									</label></div>
+							</div><button class="disabled btn btn--full btn--primary promo-test--js" disabled>Продолжить</button><!-- для появления добавить класс .active, текст можно удалить-->
+							<div class="promo-error">Промокод больше не действителен</div><!-- второй блок убрать, меняем только текст на бэке-->
+							<div class="promo-error">Подарочный сертификат больше не действителен</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<header class="page-header" data-aos="fade-down">
+			<div class="page-header__menu col__xl-4 col__lg-6 col__md-4 col__xs-4"><button class="header-menu--js btn btn-icon btn--default ui-button-circle-icon">
+					<div class="burger"><span></span><span></span><span></span></div><span class="ui-button-circle-icon__label-wr" data-text="Меню"><span class="ui-button-circle-icon__label">Меню</span></span>
+				</button><a class="btn btn-border ui-button-circle-icon" href="#"><span class="add"><img src="assets/images/header.png" alt="" /></span><span class="ui-button-circle-icon__label-wr" data-text="Заказать цветы"><span class="ui-button-circle-icon__label">Заказать цветы</span></span></a></div>
+			<div class="page-header__logo col__xl-4 col__lg-3 col__md-4 col__xs-4"><a href="/"><img src="assets/images/logo.svg" alt="Novikov"></a></div>
+			<div class="page-header__info col__xl-4 col__lg-5 col__md-5 col__xs-4">
+				<ul class="page-header__lang hidden__sm hidden__xs">
+					<li class="active"><a href="#">Ru</a></li>
+					<li><a href="#">En</a></li>
+				</ul><a class="page-header__search header-search--js" href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="14.0676" cy="9.8995" r="6.5" transform="rotate(45 14.0676 9.8995)" stroke="black"></circle>
+						<line x1="9.73194" y1="14.4212" x2="5.04271" y2="19.1104" stroke="black"></line>
+					</svg></a><a class="page-header__cart page-header__cart--js" href="#"><svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M15.8692 1.51345C15.7408 2.34816 15.4773 3.43541 14.916 4.27727C13.9059 5.79246 12.0315 6.2998 11.3671 6.44073C11.1453 6.48776 10.9295 6.49992 10.731 6.49992H5.04588C2.79016 6.49992 1.12349 8.60239 1.63822 10.7986L3.51322 18.7986C3.88411 20.381 5.29556 21.4999 6.92088 21.4999H23.0791C24.7044 21.4999 26.1159 20.381 26.4867 18.7986L28.3617 10.7986C28.8765 8.60239 27.2098 6.49992 24.9541 6.49992H19V5.49992H24.9541C27.8543 5.49992 29.9972 8.20309 29.3354 11.0268L27.4604 19.0268C26.9835 21.0613 25.1688 22.4999 23.0791 22.4999H6.92088C4.83118 22.4999 3.01646 21.0613 2.53961 19.0268L0.664606 11.0268C0.00280368 8.2031 2.14567 5.49992 5.04588 5.49992H10.731C10.8907 5.49992 11.0308 5.4898 11.1596 5.46249C11.796 5.32752 13.3102 4.88326 14.084 3.72257C14.5227 3.06444 14.7592 2.15169 14.8808 1.36139C14.9405 0.973584 14.9704 0.629915 14.9853 0.383738C14.9927 0.260879 14.9964 0.16291 14.9982 0.0965809C14.9991 0.0634318 14.9996 0.0382326 14.9998 0.0218298L15 0.00394544L15 0.000160787L15 -0.000244141C15 -0.000165398 15 -7.71449e-05 15.5 -7.71449e-05C16 -7.71449e-05 16 3.01818e-05 16 0.000147019V0.000428783L16 0.00116449L16 0.00332033L15.9999 0.0103351L15.9997 0.0349006C15.9994 0.0558514 15.9989 0.085828 15.9978 0.123968C15.9958 0.200217 15.9916 0.309279 15.9834 0.444233C15.9671 0.713681 15.9345 1.08876 15.8692 1.51345Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M9.51159 18.1568L7.82523 11.0747L8.79803 10.8431L10.4844 17.9252L9.51159 18.1568Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7981 18.1568L22.4845 11.0747L21.5117 10.8431L19.8253 17.9252L20.7981 18.1568Z" fill="black"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 18V11H15.5V18H14.5Z" fill="black"></path>
+					</svg>
+					<div class="count"><span>0</span><span>1</span></div>
+				</a>
+			</div>
+		</header>
+		<nav class="navbar"><button class="header-menu--js btn btn-icon btn--default ui-button-circle-icon"><img src="assets/images/icons/cross.svg" alt="" /><span class="ui-button-circle-icon__label-wr" data-text="Меню"><span class="ui-button-circle-icon__label">Меню</span></span></button>
+			<ul class="main-nav">
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/restaurants.html" title="Рестораны"><span class="word-wrap"><span>Рестораны</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/projects.html" title="Проекты"><span class="word-wrap"><span>Проекты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/partners.html" title="Партнеры"><span class="word-wrap"><span>Партнеры</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/discount.html" title="Дисконтные карты"><span class="word-wrap"><span>Дисконтные карты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/certificates.html" title="Сертификаты"><span class="word-wrap"><span>Сертификаты</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/about.html" title="О компании"><span class="word-wrap"><span>О компании</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/vacancies.html" title="Вакансии"><span class="word-wrap"><span>Вакансии</span></span></a></li>
+				<li class="main-nav__item"><a class="main-nav__link wrapTitle" href="/novikov/dist/contacts.html" title="Контакты"><span class="word-wrap"><span>Контакты</span></span></a></li>
+			</ul>
+		</nav>
+		<div class="search-block">
+			<div class="container">
+				<form class="search-block-form" method="POST" action=""><input type="text" placeholder="что вы хотите найти?"><button type="submit"><svg width="77" height="78" viewBox="0 0 77 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<ellipse cx="38.5" cy="38.6095" rx="38.5" ry="38.6095" fill="#1D1D1D"></ellipse>
+							<path d="M41.8651 34.3018L41.475 34.6145L41.8651 34.3018ZM41.8651 42.9171L41.475 42.6044L41.8651 42.9171ZM26 39.1095H51V38.1095H26V39.1095ZM51 38.6095C51 38.1095 51.0002 38.1095 51.0003 38.1095C51.0003 38.1095 51.0004 38.1095 51.0005 38.1095C51.0006 38.1095 51.0005 38.1095 51.0005 38.1095C51.0003 38.1095 50.9997 38.1095 50.9989 38.1095C50.9971 38.1094 50.994 38.1094 50.9896 38.1094C50.9809 38.1093 50.9668 38.109 50.9477 38.1086C50.9096 38.1076 50.8514 38.1057 50.775 38.1017C50.6223 38.0938 50.3973 38.0778 50.1153 38.0454C49.5506 37.9806 48.7609 37.8507 47.867 37.5909C46.0757 37.0701 43.8965 36.0365 42.2553 33.9891L41.475 34.6145C43.2868 36.8748 45.6751 37.995 47.5879 38.5511C48.5461 38.8297 49.3927 38.9691 50.0013 39.0389C50.3059 39.0738 50.5517 39.0915 50.7232 39.1004C50.809 39.1048 50.8762 39.1071 50.923 39.1083C50.9464 39.1088 50.9646 39.1091 50.9775 39.1093C50.984 39.1094 50.9891 39.1094 50.9929 39.1094C50.9948 39.1095 50.9963 39.1095 50.9975 39.1095C50.9981 39.1095 50.9986 39.1095 50.999 39.1095C50.9992 39.1095 50.9995 39.1095 50.9996 39.1095C50.9998 39.1095 51 39.1095 51 38.6095ZM42.2553 33.9891C41.3338 32.8396 40.8007 31.3641 40.4996 30.1475C40.3502 29.5439 40.2604 29.0145 40.2081 28.6371C40.182 28.4486 40.1653 28.2985 40.1552 28.1967C40.1502 28.1458 40.1468 28.1071 40.1447 28.0816C40.1437 28.0689 40.143 28.0595 40.1425 28.0536C40.1423 28.0507 40.1422 28.0486 40.1421 28.0474C40.1421 28.0468 40.142 28.0465 40.142 28.0463C40.142 28.0462 40.142 28.0462 40.142 28.0463C40.142 28.0463 40.142 28.0464 40.142 28.0464C40.142 28.0465 40.142 28.0466 39.6431 28.0796C39.1442 28.1126 39.1442 28.1127 39.1442 28.1129C39.1442 28.113 39.1443 28.1131 39.1443 28.1132C39.1443 28.1135 39.1443 28.1138 39.1443 28.1142C39.1444 28.115 39.1445 28.116 39.1445 28.1172C39.1447 28.1197 39.1449 28.123 39.1453 28.1273C39.1459 28.1358 39.1468 28.1478 39.1481 28.1632C39.1506 28.1941 39.1545 28.2385 39.1601 28.2953C39.1714 28.4088 39.1895 28.5718 39.2176 28.7743C39.2736 29.1789 39.3694 29.7435 39.5289 30.3878C39.8455 31.667 40.4233 33.3026 41.475 34.6145L42.2553 33.9891ZM51 38.6095C51 38.1095 50.9998 38.1095 50.9996 38.1095C50.9995 38.1095 50.9992 38.1095 50.999 38.1095C50.9986 38.1095 50.9981 38.1095 50.9975 38.1095C50.9963 38.1095 50.9948 38.1095 50.9929 38.1095C50.9891 38.1095 50.984 38.1096 50.9775 38.1096C50.9646 38.1098 50.9464 38.1101 50.923 38.1107C50.8762 38.1118 50.809 38.1141 50.7232 38.1186C50.5517 38.1275 50.3059 38.1451 50.0013 38.18C49.3927 38.2499 48.5461 38.3892 47.5879 38.6678C45.6751 39.2239 43.2868 40.3442 41.475 42.6044L42.2553 43.2299C43.8965 41.1824 46.0757 40.1489 47.867 39.628C48.7609 39.3682 49.5506 39.2383 50.1153 39.1735C50.3973 39.1412 50.6223 39.1251 50.775 39.1172C50.8514 39.1132 50.9096 39.1113 50.9477 39.1104C50.9668 39.1099 50.9809 39.1097 50.9896 39.1096C50.994 39.1095 50.9971 39.1095 50.9989 39.1095C50.9997 39.1095 51.0003 39.1095 51.0005 39.1095C51.0005 39.1095 51.0006 39.1095 51.0005 39.1095C51.0004 39.1095 51.0003 39.1095 51.0003 39.1095C51.0002 39.1095 51 39.1095 51 38.6095ZM41.475 42.6044C40.4233 43.9163 39.8455 45.552 39.5289 46.8312C39.3694 47.4754 39.2736 48.04 39.2176 48.4447C39.1895 48.6472 39.1714 48.8102 39.1601 48.9237C39.1545 48.9804 39.1506 49.0249 39.1481 49.0557C39.1468 49.0711 39.1459 49.0832 39.1453 49.0916C39.1449 49.0959 39.1447 49.0993 39.1445 49.1017C39.1445 49.1029 39.1444 49.1039 39.1443 49.1047C39.1443 49.1051 39.1443 49.1054 39.1443 49.1057C39.1443 49.1058 39.1442 49.106 39.1442 49.106C39.1442 49.1062 39.1442 49.1063 39.6431 49.1393C40.142 49.1724 40.142 49.1725 40.142 49.1726C40.142 49.1726 40.142 49.1726 40.142 49.1727C40.142 49.1727 40.142 49.1727 40.142 49.1726C40.142 49.1725 40.1421 49.1721 40.1421 49.1715C40.1422 49.1703 40.1423 49.1683 40.1425 49.1653C40.143 49.1594 40.1437 49.15 40.1447 49.1373C40.1468 49.1119 40.1502 49.0731 40.1552 49.0222C40.1653 48.9204 40.182 48.7704 40.2081 48.5819C40.2604 48.2044 40.3502 47.675 40.4996 47.0714C40.8007 45.8548 41.3338 44.3794 42.2553 43.2299L41.475 42.6044Z" fill="white"></path>
+						</svg></button><a class="search-block--js" href="#"><svg width="77" height="78" viewBox="0 0 77 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M76.5 38.6095C76.5 59.6581 59.4855 76.719 38.5 76.719C17.5145 76.719 0.5 59.6581 0.5 38.6095C0.5 17.5609 17.5145 0.5 38.5 0.5C59.4855 0.5 76.5 17.5609 76.5 38.6095Z" fill="#000" stroke="#1D1D1D"></path>
+							<rect x="27" y="27.9428" width="1.33333" height="33.3333" transform="rotate(-45 27 27.9428)" fill="white"></rect>
+							<rect x="50.5703" y="27.0001" width="1.33333" height="33.3333" transform="rotate(45 50.5703 27.0001)" fill="white"></rect>
+						</svg></a></form>
+			</div>
+		</div>
+		<div class="scrollContent main">
+			<div class="cart-popup">
+				<div class="cart-popup__inner">
+					<p>Все ранее выбранные продукты будут удалены из корзины. Продолжить?</p>
+					<div class="row center__xs">
+						<div class="col"><a class="btn btn--info cart-popup-close__js" href="#">Отмена</a></div>
+						<div class="col"><a class="btn btn--primary cart-popup-close__js" href="#">Да</a></div>
+					</div>
+				</div>
+			</div>
+			<form class="cart-form" action="" method="POST" data-sticky-container>
+				<div class="sticky form-menu" data-margin-top="100">
+					<div class="cart-block active">
+						<div class="cart-block-head" data-aos="fade-right">
+							<div class="head">ваш заказ</div>
+							<div class="page-header__close page-header__close--js"><svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<circle cx="30" cy="30" r="29.5" stroke="#E5E5E5" fill="white"></circle>
+									<rect x="18" y="18.9428" width="1.33333" height="33.3333" transform="rotate(-45 18 18.9428)" fill="black"></rect>
+									<rect x="41.5703" y="18.0001" width="1.33333" height="33.3333" transform="rotate(45 41.5703 18.0001)" fill="black"></rect>
+								</svg></div>
+							<div class="page-header__cart active"><svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M15.8692 1.51345C15.7408 2.34816 15.4773 3.43541 14.916 4.27727C13.9059 5.79246 12.0315 6.2998 11.3671 6.44073C11.1453 6.48776 10.9295 6.49992 10.731 6.49992H5.04588C2.79016 6.49992 1.12349 8.60239 1.63822 10.7986L3.51322 18.7986C3.88411 20.381 5.29556 21.4999 6.92088 21.4999H23.0791C24.7044 21.4999 26.1159 20.381 26.4867 18.7986L28.3617 10.7986C28.8765 8.60239 27.2098 6.49992 24.9541 6.49992H19V5.49992H24.9541C27.8543 5.49992 29.9972 8.20309 29.3354 11.0268L27.4604 19.0268C26.9835 21.0613 25.1688 22.4999 23.0791 22.4999H6.92088C4.83118 22.4999 3.01646 21.0613 2.53961 19.0268L0.664606 11.0268C0.00280368 8.2031 2.14567 5.49992 5.04588 5.49992H10.731C10.8907 5.49992 11.0308 5.4898 11.1596 5.46249C11.796 5.32752 13.3102 4.88326 14.084 3.72257C14.5227 3.06444 14.7592 2.15169 14.8808 1.36139C14.9405 0.973584 14.9704 0.629915 14.9853 0.383738C14.9927 0.260879 14.9964 0.16291 14.9982 0.0965809C14.9991 0.0634318 14.9996 0.0382326 14.9998 0.0218298L15 0.00394544L15 0.000160787L15 -0.000244141C15 -0.000165398 15 -7.71449e-05 15.5 -7.71449e-05C16 -7.71449e-05 16 3.01818e-05 16 0.000147019V0.000428783L16 0.00116449L16 0.00332033L15.9999 0.0103351L15.9997 0.0349006C15.9994 0.0558514 15.9989 0.085828 15.9978 0.123968C15.9958 0.200217 15.9916 0.309279 15.9834 0.444233C15.9671 0.713681 15.9345 1.08876 15.8692 1.51345Z" fill="black"></path>
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M9.51159 18.1568L7.82523 11.0747L8.79803 10.8431L10.4844 17.9252L9.51159 18.1568Z" fill="black"></path>
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7981 18.1568L22.4845 11.0747L21.5117 10.8431L19.8253 17.9252L20.7981 18.1568Z" fill="black"></path>
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 18V11H15.5V18H14.5Z" fill="black"></path>
+								</svg>
+								<div class="count"><span>8</span><span>9</span></div>
+							</div>
+						</div>
+						<div class="cart-block-body" data-type="cart-items-container">
+							<div class="head">ваш заказ</div>
+							<div class="cart-block-item" data-type="item-block">
+								<div class="cart-block-item-size">
+									<div>Дисконтная карта</div>
+									<div class="incDec">
+										<div class="cart-id dec--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<circle cx="12.0001" cy="12" r="11.5" stroke="#E5E5E5"></circle>
+												<path d="M9.55975 13.031H15.4398V12.149H9.55975V13.031Z" fill="black"></path>
+											</svg></div>
+										<div class="cart-count">1</div>
+										<div class="cart-id inc--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<circle cx="12" cy="12" r="11.5" stroke="#E5E5E5"></circle>
+												<path d="M11.9648 15.159H12.8468V12.401H15.5978V11.519H12.8468V8.76099H11.9648V11.519H9.20679V12.401H11.9648V15.159Z" fill="black"></path>
+											</svg></div>
+									</div>
+								</div>
+								<div class="cart-block-item-price">
+									<div class="cart-pr" data-pr="10000"><span>10 000</span> ₽</div>
+									<div class="cart-wr">256 г</div>
+									<div class="cart-rm cart-rm--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
+											<path d="M9.74145 14.1991L10.3651 14.8228L12.3153 12.8726L14.2655 14.8228L14.8892 14.1991L12.939 12.2489L14.8793 10.3086L14.2556 9.68494L12.3153 11.6252L10.3651 9.67504L9.74145 10.2987L11.6917 12.2489L9.74145 14.1991Z" fill="black"></path>
+										</svg></div>
+								</div>
+							</div>
+							<div class="cart-block-item" data-type="item-block">
+								<div class="cart-block-item-size">
+									<div>Light</div>
+									<div class="incDec">
+										<div class="cart-id dec--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<circle cx="12.0001" cy="12" r="11.5" stroke="#E5E5E5"></circle>
+												<path d="M9.55975 13.031H15.4398V12.149H9.55975V13.031Z" fill="black"></path>
+											</svg></div>
+										<div class="cart-count">1</div>
+										<div class="cart-id inc--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<circle cx="12" cy="12" r="11.5" stroke="#E5E5E5"></circle>
+												<path d="M11.9648 15.159H12.8468V12.401H15.5978V11.519H12.8468V8.76099H11.9648V11.519H9.20679V12.401H11.9648V15.159Z" fill="black"></path>
+											</svg></div>
+									</div>
+								</div>
+								<div class="cart-block-item-price">
+									<div class="cart-pr" data-pr="3000"><span>3 000</span> ₽</div>
+									<div class="cart-rm cart-rm--js"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
+											<path d="M9.74145 14.1991L10.3651 14.8228L12.3153 12.8726L14.2655 14.8228L14.8892 14.1991L12.939 12.2489L14.8793 10.3086L14.2556 9.68494L12.3153 11.6252L10.3651 9.67504L9.74145 10.2987L11.6917 12.2489L9.74145 14.1991Z" fill="black"></path>
+										</svg></div>
+								</div>
+							</div>
+						</div>
+						<div class="cart-block-summ">
+							<div>
+								<div>Сумма заказа</div>
+								<div class="card-summ"><b><span>10 000</span> ₽</b></div>
+							</div>
+						</div>
+						<div class="cart-block-bottom">
+							<div class="cart-block-count">
+								<div>Итого</div>
+								<div class="card-summ" data-summ="10000"><b><span>10 000</span> ₽</b></div>
+							</div><a class="btn btn--full btn--primary order--js" href="#">Заказать</a><!-- кнопка при минимальном заказе, удалить style='display: none'--><a class="btn btn--full btn--primary form--js disabled" href="#" disabled style="display: none">200 ₽ до минимальной суммы заказа</a>
+						</div>
+					</div>
+				</div>
+				<main class="page-order page-order-menu">
+					<div class="back-link" data-aos="fade-up"><a class="btn-icon" href="#"><svg width="45" height="29" viewBox="0 0 45 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="14.5" cy="14.5" r="14" stroke="#E5E5E5"></circle>
+								<circle class="circ" cx="14.5" cy="14.5" r="0" fill="#EE1623"></circle>
+								<rect x="45" y="15" width="34" height="1" transform="rotate(-180 45 15)" fill="black"></rect>
+								<path d="M15.1914 17.4157L15.5886 17.1119L15.1914 17.4157ZM15.1914 11.5844L15.5886 11.8881L15.5886 11.8881L15.1914 11.5844ZM9.29348 14.5C9.29348 15 9.2933 15 9.29313 15C9.2931 15 9.29294 15 9.29287 15C9.29272 15 9.29263 15 9.29259 15C9.29251 15 9.29265 15 9.29301 15C9.29372 15 9.2953 15 9.29773 15.0001C9.30257 15.0001 9.3108 15.0003 9.32224 15.0006C9.34514 15.0012 9.38091 15.0024 9.4283 15.005C9.52314 15.0101 9.66424 15.0206 9.84181 15.042C10.1975 15.0848 10.6962 15.1707 11.2606 15.3428C12.392 15.6876 13.7624 16.3699 14.7942 17.7194L15.5886 17.1119C14.391 15.5458 12.8124 14.7703 11.5522 14.3862C10.9208 14.1938 10.363 14.0975 9.96123 14.0492C9.76004 14.025 9.59712 14.0127 9.48263 14.0064C9.42536 14.0033 9.38013 14.0017 9.3482 14.0009C9.33224 14.0005 9.31959 14.0003 9.31042 14.0001C9.30583 14.0001 9.30212 14.0001 9.29929 14C9.29787 14 9.29668 14 9.29571 14C9.29523 14 9.2948 14 9.29443 14C9.29424 14 9.294 14 9.29391 14C9.29369 14 9.29348 14 9.29348 14.5ZM14.7942 17.7194C15.3693 18.4714 15.7074 19.4457 15.8999 20.261C15.995 20.6638 16.0521 21.0172 16.0854 21.2689C16.102 21.3945 16.1125 21.4943 16.1189 21.5615C16.1221 21.5951 16.1242 21.6206 16.1255 21.6371C16.1261 21.6453 16.1265 21.6513 16.1268 21.6549C16.1269 21.6567 16.127 21.658 16.1271 21.6586C16.1271 21.6589 16.1271 21.6591 16.1271 21.6591C16.1271 21.6591 16.1271 21.659 16.1271 21.659C16.1271 21.6589 16.1271 21.6589 16.1271 21.6588C16.1271 21.6587 16.1271 21.6586 16.6261 21.6271C17.1251 21.5956 17.1251 21.5955 17.1251 21.5954C17.1251 21.5953 17.125 21.5952 17.125 21.5951C17.125 21.5948 17.125 21.5946 17.125 21.5943C17.1249 21.5937 17.1249 21.5929 17.1248 21.592C17.1247 21.5901 17.1245 21.5877 17.1243 21.5846C17.1239 21.5785 17.1233 21.57 17.1224 21.5592C17.1207 21.5376 17.1182 21.5067 17.1145 21.4675C17.107 21.389 17.0951 21.2769 17.0767 21.1379C17.0401 20.8602 16.9774 20.4731 16.8731 20.0313C16.6668 19.1573 16.2875 18.0259 15.5886 17.1119L14.7942 17.7194ZM9.29348 14.5C9.29348 15 9.29369 15 9.29391 15C9.294 15 9.29424 15 9.29443 15C9.2948 15 9.29523 15 9.29571 15C9.29668 15 9.29787 15 9.29929 15C9.30212 15 9.30583 14.9999 9.31042 14.9999C9.31959 14.9998 9.33224 14.9996 9.3482 14.9991C9.38013 14.9983 9.42536 14.9967 9.48263 14.9936C9.59712 14.9874 9.76004 14.9751 9.96123 14.9509C10.363 14.9026 10.9208 14.8063 11.5522 14.6138C12.8124 14.2297 14.391 13.4543 15.5886 11.8881L14.7942 11.2807C13.7624 12.6301 12.392 13.3125 11.2606 13.6573C10.6962 13.8293 10.1975 13.9153 9.84181 13.958C9.66424 13.9794 9.52314 13.9899 9.4283 13.9951C9.38091 13.9976 9.34514 13.9989 9.32224 13.9995C9.3108 13.9998 9.30257 13.9999 9.29773 14C9.2953 14 9.29372 14 9.29301 14C9.29265 14 9.29251 14 9.29259 14C9.29263 14 9.29272 14 9.29287 14C9.29294 14 9.2931 14 9.29313 14C9.2933 14 9.29348 14 9.29348 14.5ZM15.5886 11.8881C16.2875 10.9741 16.6668 9.84269 16.8731 8.96877C16.9774 8.52696 17.0401 8.13981 17.0767 7.86216C17.0951 7.72312 17.107 7.611 17.1145 7.53255C17.1182 7.49331 17.1207 7.46246 17.1224 7.44083C17.1233 7.43001 17.1239 7.4215 17.1243 7.41539C17.1245 7.41234 17.1247 7.40989 17.1248 7.40805C17.1249 7.40714 17.1249 7.40637 17.125 7.40576C17.125 7.40546 17.125 7.40519 17.125 7.40496C17.125 7.40485 17.1251 7.40471 17.1251 7.40465C17.1251 7.40452 17.1251 7.4044 16.6261 7.3729C16.1271 7.34139 16.1271 7.34129 16.1271 7.3412C16.1271 7.34118 16.1271 7.3411 16.1271 7.34106C16.1271 7.34099 16.1271 7.34096 16.1271 7.34096C16.1271 7.34097 16.1271 7.34113 16.1271 7.34144C16.127 7.34207 16.1269 7.34329 16.1268 7.34511C16.1266 7.34874 16.1261 7.35472 16.1255 7.36296C16.1242 7.37943 16.1221 7.40489 16.1189 7.4385C16.1125 7.50577 16.102 7.60552 16.0854 7.73116C16.0521 7.98284 15.995 8.33618 15.8999 8.73899C15.7074 9.5543 15.3693 10.5286 14.7942 11.2807L15.5886 11.8881Z" fill="black"></path>
+							</svg><span>Страница ресторана</span></a></div>
+					<div class="order-menu">
+						<div class="row order-menu-info">
+							<div class="col col__xl-3 col__md-4 col__xs-12" data-aos="fade-up"><img src="assets/images/menu/logo.jpg" alt="" /></div>
+							<div class="col col__xl-9 col__md-8 col__xs-12" data-aos="fade-up">
+								<h1 class="select-wrapper">
+									<div class="wrapTitle" data-aos="data-aos"><span class="word-wrap"><span>BOLSHOI&nbsp;</span></span></div>
+								</h1>
+								<div class="row">
+									<div class="col col__xl-3 col__xs-6">
+										<div class="order-menu-name">кухни</div>
+										<ul class="order-menu-list">
+											<li>Европейская</li>
+											<li>Русская</li>
+										</ul>
+									</div>
+									<div class="col col__xl-6 col__xs-6">
+										<div class="order-menu-adr">
+											<div>Москва, ул. Петровка, 3/6, стр. 2</div><a class="lead" href="tel:84957898652">8 495 789 86 52</a>
+										</div>
+									</div>
+									<div class="col col__xl-3 col__xs-12">
+										<div class="order-menu-noti">
+											<div class="tooltip"><a class="tooltip-name lead" href="#">Условия доставки</a>
+												<div class="tooltip-inner">
+													<div class="tooltip-desc">
+														<div class="innerList">
+															<div class="innerList-head">
+																<div class="innerList-name">Минимальный заказ</div>
+																<div class="innerList-price">3000₽</div>
+															</div>
+															<div class="innerList-body">
+																<div class="innerList-name">Стоимость доставки</div>
+																<div class="innerList-body__item">
+																	<div class="innerList-subname">Патриаршие пруды</div>
+																	<div class="innerList-price">Бесплатно</div>
+																</div>
+																<div class="innerList-body__item">
+																	<div class="innerList-subname">Третье транспортное кольцо</div>
+																	<div class="innerList-price">350 ₽</div>
+																</div>
+																<div class="innerList-body__item">
+																	<div class="innerList-subname">В пределах МКАД</div>
+																	<div class="innerList-price">700 ₽</div>
+																</div>
+																<div class="innerList-body__item">
+																	<div class="innerList-subname">За пределами МКАД 10 км</div>
+																	<div class="innerList-price">1000 ₽</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="order-list" id="mainMenu">
+							<ul class="order-nav" id="autoNav">
+								<li class="active"><a href="#">все</a></li>
+								<li><a href="#">Роллы</a></li>
+								<li><a href="#">Бестселлеры</a></li>
+								<li><a href="#">Маки</a></li>
+								<li><a href="#">Горячие блюда</a></li>
+								<li><a href="#">Закуски</a></li>
+								<li><a href="#">Салаты</a></li>
+								<li><a href="#">Суши</a></li>
+								<li><a href="#">Горячие блюда</a></li>
+								<li><a href="#">Закуски</a></li>
+								<li><a href="#">Салаты</a></li>
+								<li><a href="#">Суши</a></li>
+								<li><a href="#">Горячие блюда</a></li>
+								<li><a href="#">Закуски</a></li>
+								<li><a href="#">Салаты</a></li>
+								<li><a href="#">Суши</a></li>
+								<li><a href="#">Горячие блюда</a></li>
+								<li class="auto-nav-more" id="autoNavMore"><a class="more-btn" href="#"><span>еще</span><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M8.75 2.17391L8.4351 1.78553L8.75 2.17391ZM4.25 2.17391L4.5649 1.78553L4.25 2.17391ZM6.5 7C7 7 7 7.00017 7 7.00033C7 7.00037 7 7.00052 7 7.0006C7 7.00075 7 7.00086 7 7.00092C7 7.00105 7 7.001 7 7.00078C7 7.00033 7.00001 6.99917 7.00003 6.99732C7.00008 6.99362 7.00018 6.98717 7.0004 6.97808C7.00084 6.95991 7.00178 6.93124 7.00374 6.89308C7.00766 6.8167 7.01566 6.70262 7.03197 6.55882C7.06466 6.27064 7.13035 5.86651 7.26179 5.40919C7.52585 4.49052 8.04578 3.38859 9.0649 2.56229L8.4351 1.78553C7.20422 2.78354 6.59915 4.09465 6.30071 5.13294C6.1509 5.65412 6.07597 6.11445 6.03834 6.44611C6.0195 6.61224 6.00992 6.74692 6.00505 6.84183C6.00262 6.88931 6.00135 6.92691 6.0007 6.9536C6.00037 6.96695 6.0002 6.97757 6.0001 6.98535C6.00006 6.98923 6.00003 6.99241 6.00002 6.99486C6.00001 6.99608 6.00001 6.99712 6 6.99798C6 6.99841 6 6.99879 6 6.99913C6 6.9993 6 6.99952 6 6.9996C6 6.99981 6 7 6.5 7ZM9.0649 2.56229C9.62648 2.10696 10.3586 1.8363 10.9786 1.68108C11.284 1.60462 11.5519 1.55869 11.7424 1.532C11.8374 1.51868 11.9126 1.51024 11.9629 1.5052C11.9881 1.50268 12.0069 1.50102 12.0189 1.50003C12.0249 1.49953 12.0291 1.4992 12.0316 1.49902C12.0328 1.49893 12.0336 1.49887 12.0339 1.49885C12.034 1.49884 12.0341 1.49884 12.034 1.49884C12.0339 1.49885 12.0339 1.49885 12.0338 1.49886C12.0337 1.49886 12.0336 1.49887 12.0336 1.49887C12.0335 1.49888 12.0334 1.49888 12 1C11.9666 0.501117 11.9665 0.501125 11.9663 0.501134C11.9663 0.501138 11.9661 0.501147 11.966 0.501155C11.9658 0.501169 11.9656 0.501186 11.9653 0.501205C11.9647 0.501244 11.9641 0.501291 11.9633 0.501347C11.9617 0.50146 11.9596 0.501609 11.9571 0.501799C11.952 0.502177 11.9451 0.502715 11.9364 0.503437C11.9189 0.504881 11.8943 0.507062 11.8633 0.510176C11.8011 0.5164 11.7128 0.526371 11.6036 0.54167C11.3856 0.572212 11.0821 0.6243 10.7357 0.711019C10.0521 0.882156 9.15918 1.19845 8.4351 1.78553L9.0649 2.56229ZM6.5 7C7 7 7 6.99981 7 6.9996C7 6.99952 7 6.9993 7 6.99913C7 6.99879 7 6.99841 7 6.99798C6.99999 6.99712 6.99999 6.99608 6.99998 6.99486C6.99997 6.99241 6.99994 6.98924 6.9999 6.98535C6.9998 6.97757 6.99963 6.96695 6.9993 6.9536C6.99865 6.92691 6.99738 6.88931 6.99495 6.84183C6.99008 6.74692 6.9805 6.61224 6.96166 6.44611C6.92403 6.11445 6.8491 5.65412 6.69929 5.13294C6.40085 4.09465 5.79578 2.78354 4.5649 1.78553L3.9351 2.56229C4.95422 3.38859 5.47415 4.49052 5.73821 5.40919C5.86965 5.86651 5.93534 6.27064 5.96803 6.55882C5.98434 6.70262 5.99234 6.8167 5.99626 6.89308C5.99822 6.93124 5.99916 6.95991 5.9996 6.97808C5.99982 6.98717 5.99992 6.99362 5.99997 6.99732C5.99999 6.99917 6 7.00032 6 7.00078C6 7.001 6 7.00105 6 7.00092C6 7.00086 6 7.00075 6 7.0006C6 7.00052 6 7.00037 6 7.00033C6 7.00017 6 7 6.5 7ZM4.5649 1.78553C3.84082 1.19845 2.94789 0.882155 2.2643 0.711019C1.91791 0.624299 1.61438 0.572211 1.39639 0.54167C1.28719 0.52637 1.19889 0.5164 1.13675 0.510175C1.10566 0.507062 1.08108 0.504881 1.06365 0.503437C1.05493 0.502715 1.04799 0.502177 1.04293 0.501798C1.04039 0.501609 1.03833 0.501459 1.03673 0.501347C1.03594 0.50129 1.03526 0.501243 1.0347 0.501205C1.03443 0.501186 1.03418 0.501169 1.03396 0.501154C1.03385 0.501147 1.03371 0.501137 1.03366 0.501133C1.03352 0.501125 1.0334 0.501116 1 1C0.966604 1.49888 0.966494 1.49888 0.96639 1.49887C0.966366 1.49887 0.966269 1.49886 0.96622 1.49886C0.966122 1.49885 0.966053 1.49885 0.966013 1.49884C0.965934 1.49884 0.965971 1.49884 0.966125 1.49885C0.966431 1.49887 0.9672 1.49893 0.968422 1.49902C0.970866 1.4992 0.975121 1.49953 0.981104 1.50002C0.993073 1.50102 1.01195 1.50268 1.03708 1.5052C1.08739 1.51024 1.1626 1.51868 1.25764 1.532C1.44814 1.55869 1.71605 1.60462 2.02145 1.68108C2.64144 1.8363 3.37352 2.10696 3.9351 2.56229L4.5649 1.78553Z" fill="black"></path>
+										</svg></a>
+									<ul class="auto-nav-more-list" id="autoNavMoreList"></ul>
+								</li>
+							</ul>
+						</div>
+						<div class="order-menu-menu">
+							<div class="order-menu-menu__item order-menu-menu__item--sm order-menu-menu__item--big" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-1.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Битые азиатские огурцы</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">550 ₽</div>
+								</div>
+							</div>
+							<div class="order-menu-menu__item order-menu-menu__item--sm" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-2.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Хрустящий тофу ролл</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">690 ₽</div>
+								</div>
+							</div>
+							<div class="order-menu-menu__item order-menu-menu__item--sm" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-3.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Спринг ролл с овощами и грибами</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">690 ₽</div>
+								</div>
+							</div>
+							<div class="order-menu-menu__item order-menu-menu__item--sm" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-4.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Тартар из лосося</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">790 ₽</div>
+								</div>
+							</div>
+							<div class="order-menu-menu__item order-menu-menu__item--sm" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-5.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Азиатский зеленый салат с киноа</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">690 ₽</div>
+								</div>
+							</div>
+							<div class="order-menu-menu__item order-menu-menu__item--sm" data-aos="fade-up">
+								<div class="order-menu-menu__item-img"><img src="assets/images/menu/menu-6.jpg" alt="" /><!-- .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"-->
+								</div>
+								<div class="relative">
+									<div class="order-menu-menu__item-add cd-add-to-cart"><img src="assets/images/icons/add.svg" alt="" /></div>
+								</div>
+								<div class="order-menu-menu__item-desc">
+									<div class="order-menu-menu__item-name">Фо бо вьетнамский суп</div>
+									<div class="order-menu-menu__item-weight">256 г</div>
+									<div class="order-menu-menu__item-price">690 ₽</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</form>
+			<footer class="page-footer">
+				<div class="page-footer-top" data-aos="fade-up">
+					<div class="container">
+						<div class="row bottom__xs">
+							<div class="col col__lg-6 col__xs-12">
+								<div class="alpha">Будьте в курсе</div>
+								<p class="text__mg">Гастрономические новости, советы, акции и многое другое</p>
+							</div>
+							<div class="col col__lg-6 col__xs-12">
+								<form method="POST" action="">
+									<div class="form-inner">
+										<div class="form__group">
+											<div class="input"><input class="control" type="text" placeholder="E–mail" required>
+												<div class="control-error"></div>
+											</div><button class="form--js" type="submit"><img src="assets/images/icons/link-next-w.svg" alt="" /></button>
+										</div>
+										<div class="checkbox"><input type="checkbox" id="signIt" required><label for="signIt">Даю согласание на обработку <a href="#">персональных данных</a>
+												<div class="control-error"></div>
+											</label></div>
+									</div><!-- добавить класс .shown чтобы показать блок-->
+									<div class="form-answer">
+										<h4>Вы подписались успешно</h4><button class="back--js"><img src="assets/images/icons/link-next-w.svg" alt="" /></button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page-footer-bottom" data-aos="fade-up">
+					<div class="container">
+						<div class="row">
+							<div class="col col__xl-6 col__lg-5 col__md-4 col__xs-12 hidden__xs hidden__sm"><img src="assets/images/logo-w.svg" alt="" /></div>
+							<div class="col col__xl-6 col__lg-7 col__md-8 col__xs-12">
+								<div class="row between__xs">
+									<div class="col">
+										<ul class="footer-menu">
+											<li><a href="/novikov/dist/restaurants.html">Рестораны</a></li>
+											<li><a href="/novikov/dist/about.html">О компании</a></li>
+											<li><a href="/novikov/dist/partners.html">Партнеры</a></li>
+										</ul>
+									</div>
+									<div class="col col__md col__xs-7">
+										<ul class="footer-menu">
+											<li><a href="/novikov/dist/certificates.html">Подарочные сертификаты</a></li>
+											<li><a href="#">Карта лояльности</a></li>
+											<li><a href="/novikov/dist/discount.html">Дисконтные карты</a></li>
+										</ul>
+									</div>
+									<div class="col hidden__xs hidden__sm">
+										<ul class="footer-menu">
+											<li><a href="/novikov/dist/events.html">События</a></li>
+											<li><a href="/novikov/dist/projects.html">Проекты</a></li>
+											<li><a href="/novikov/dist/vacancies.html">Вакансии</a></li>
+											<li><a href="/novikov/dist/contacts.html">Контакты</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col col__md-12 col__xs-5">
+								<ul class="footer-menu">
+									<li><a href="#">Instagram</a></li>
+									<li><a href="#">Telegram</a></li>
+									<li><a href="#">Facebook</a></li>
+								</ul>
+							</div>
+							<div class="col col__xl-6 col__lg-5 col__md-4 col__xs-7 page-footer-app"><a href="#"><img src="assets/images/appStore.svg" alt="" /></a></div>
+							<div class="col col__xl-6 col__lg-7 col__md-8 col__xs-12 page-footer-app"><a class="copy" href="#">Политика конфиденциальности</a><a class="copy" href="#">Договор оферты</a></div>
+						</div>
+						<div class="page-footer-copy">
+							<div class="row">
+								<div class="col col__xl-6 col__lg-5 col__xs-12"></div>
+								<div class="col col__xl-6 col__lg-7 col__xs-12">
+									<div class="row between__xs middle__xs">
+										<div class="col">
+											<div class="copy">© Novikov Group 2021. Все права защищены</div>
+										</div>
+										<div class="col">
+											<div class="cloudmill">Сделано в <a href="#">CloudMill</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOHU9S0Ohhctt2VS6Qu3JrmaIjqFQNYk"></script>
+		<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;amp;apikey=2844f35b-1df5-4037-b64b-f91b25aabb18"></script>
+		<script type="text/javascript" src="assets/vendor.js"></script>
+		<script type="text/javascript" src="assets/app.js"></script>
+	</body>
+
+</html>

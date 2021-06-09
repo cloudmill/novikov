@@ -358,6 +358,16 @@
           min-height: 99px;
         }
       }
+      &--sm {
+        @media screen and (min-width: $screen-xl-min) {
+          &:nth-child(5),
+          &:nth-child(6),
+          &:nth-child(7),
+          &:nth-child(8) {
+            margin-top: 0;
+          }
+        }
+      }
       &-img {
         overflow: hidden;
         position: relative;

@@ -1,0 +1,102 @@
+extends ../layouts/master.pug
+
+block header
+  include ../components/_popup
+  include ../partials/_header-null.pug
+
+block pageName
+  - pageName = "custom"
+
+block content
+  include ../components/_cartPopup
+  form.cart-form(action='', method='POST', data-sticky-container)
+    .sticky.form-menu(data-margin-top="100")
+      include ../components/_cart-block
+    main.page-order.page-order-menu
+      .back-link(data-aos='fade-up')
+        a.btn-icon(href='#')
+          include ../components/_prev
+          span Страница ресторана
+      .order-menu
+        .row.order-menu-info
+          .col.col__xl-3.col__md-4.col__xs-12(data-aos='fade-up')
+            +img('menu/logo.jpg')
+          .col.col__xl-9.col__md-8.col__xs-12(data-aos='fade-up')
+            h1.select-wrapper
+              +wrapTitle(['BOLSHOI'])
+            .row
+              .col.col__xl-3.col__xs-6
+                .order-menu-name кухни
+                ul.order-menu-list
+                  li Европейская
+                  li Русская
+              .col.col__xl-6.col__xs-6
+                .order-menu-adr
+                  div Москва, ул. Петровка, 3/6, стр. 2
+                  a.lead(href='tel:84957898652') 8 495 789 86 52
+              .col.col__xl-3.col__xs-12
+                .order-menu-noti
+                  .tooltip
+                    a.tooltip-name.lead(href='#') Условия доставки
+                    .tooltip-inner
+                      .tooltip-desc
+                        .innerList
+                          .innerList-head
+                            .innerList-name Минимальный заказ
+                            .innerList-price 3000₽
+                          .innerList-body
+                            .innerList-name Стоимость доставки
+                            .innerList-body__item
+                              .innerList-subname Патриаршие пруды
+                              .innerList-price Бесплатно
+                            .innerList-body__item
+                              .innerList-subname Третье транспортное кольцо
+                              .innerList-price 350 ₽
+                            .innerList-body__item
+                              .innerList-subname В пределах МКАД
+                              .innerList-price 700 ₽
+                            .innerList-body__item
+                              .innerList-subname За пределами МКАД 10 км
+                              .innerList-price 1000 ₽
+        #mainMenu.order-list
+          ul#autoNav.order-nav
+            li.active: a(href='#') все
+            li: a(href='#') Роллы
+            li: a(href='#') Бестселлеры
+            li: a(href='#') Маки
+            li: a(href='#') Горячие блюда
+            li: a(href='#') Закуски
+            li: a(href='#') Салаты
+            li: a(href='#') Суши
+            li: a(href='#') Горячие блюда
+            li: a(href='#') Закуски
+            li: a(href='#') Салаты
+            li: a(href='#') Суши
+            li: a(href='#') Горячие блюда
+            li: a(href='#') Закуски
+            li: a(href='#') Салаты
+            li: a(href='#') Суши
+            li: a(href='#') Горячие блюда
+            li#autoNavMore.auto-nav-more
+              a.more-btn(href='#')
+                span еще
+                include ../components/_arr-s
+              ul#autoNavMoreList.auto-nav-more-list
+        .order-menu-menu
+          each item in orderMini
+            - let parent = ''
+            - if (item.big) parent = 'order-menu-menu__item--big'
+            .order-menu-menu__item.order-menu-menu__item--sm(class=parent, data-aos='fade-up')
+              .order-menu-menu__item-img
+                +img(item.img)
+                // .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"
+              .relative: .order-menu-menu__item-add.cd-add-to-cart: +img('icons/add.svg')
+              .order-menu-menu__item-desc
+                .order-menu-menu__item-name= item.name
+                .order-menu-menu__item-weight= item.weight
+                .order-menu-menu__item-price= item.price
+
+
+block footer
+  include ../partials/_footer.pug
+
