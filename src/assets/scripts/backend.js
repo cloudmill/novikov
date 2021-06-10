@@ -18,6 +18,7 @@ $(function() {
 	basket();
   restaurantsTabs();
   ckeckValidateCard();
+  getLatLng();
 });
 
 function restaurantsFilter() {
@@ -486,5 +487,35 @@ function ckeckValidateCard() {
         }
       }
     });
+  });
+}
+
+function getLatLng() {
+  $('[data-type=get-coord]').on('click', function () {
+    let obj = $(this),
+      container = obj.parents('[data-type=coordinates-container]'),
+      coordInp = container.find('[data-type=coord-inp]').val();
+
+    if (coordInp) {
+      $.ajax({
+        type: 'POST',
+        url: window.location.href,
+        dataType: 'json',
+        data: {
+          dataCoord: coordInp,
+        },
+        success: function(data) {
+          if (data.success === true) {
+            let resultCoord = JSON.stringify(data.coordinates);
+
+            if (!container.find('[data-type=coord-result]').length) {
+              obj.after('<br>Результат: <input type="text" value="'+ resultCoord + '" data-type="coord-result">');
+            } else {
+              container.find('[data-type=coord-result]').val(resultCoord);
+            }
+          }
+        }
+      });
+    }
   });
 }
