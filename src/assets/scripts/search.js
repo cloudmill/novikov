@@ -99,26 +99,37 @@ function initMap() {
 				.then(response => response.text())
 				.then(result => {
 					res = JSON.parse(result);
-					selectAddress = res.suggestions[0].value;
-
-					let buttonDisabled = null;
+					let selectAddress = res.suggestions.length ? res.suggestions[0].value : null,
+            buttonDisabled = null,
+            errorBlock = $('.error-tool'),
+            buttonSuccess = $('.success--js'),
+            inputSearch = $('.autocomplete');
 
 					if (isPolygonCheck) {
-						if ($('.error-tool').hasClass('active')) {
-							$('.error-tool').removeClass('active');
-						}
-						buttonDisabled = false;
+            if (errorBlock.hasClass('active')) {
+              errorBlock.removeClass('active');
+            }
 
-						$('.success--js').attr('data-value', selectAddress);
-						$('.success--js').attr('data-delivery-id', e.get('target').properties.get('deliveryId'));
+            buttonDisabled = false;
+            buttonSuccess.attr('data-value', selectAddress);
+            buttonSuccess.attr('data-delivery-id', e.get('target').properties.get('deliveryId'));
 					} else {
-						$('.error-tool').addClass('active');
+            errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
 						buttonDisabled = true;
 					}
 
-					$('.success--js').prop('disabled', buttonDisabled);
+          inputSearch.val(selectAddress);
 
-					$('.autocomplete').val(selectAddress);
+          if (!selectAddress) {
+            if (errorBlock.hasClass('active')) {
+              errorBlock.addClass('active').text('Серверу не удается определить выбранное местоположение');
+            }
+
+            inputSearch.val('');
+            buttonDisabled = true;
+          }
+
+          buttonSuccess.prop('disabled', buttonDisabled);
 				})
 				.catch(error => console.log('error', error));
 		}
