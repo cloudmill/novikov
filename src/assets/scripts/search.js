@@ -31,7 +31,6 @@ function initMap() {
 		let restGeo = [55.753220, 37.622513];
 		const geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address';
 		let res = null;
-		let selectAddress = null;
 
 		if (strRestGeo) {
 			restGeo = strRestGeo.split(',').map(Number);
@@ -53,10 +52,9 @@ function initMap() {
 
 		const polygonDataStr = JSON.parse($('[data-type=data-delivery-zones]').val());
 		let polygonData = null;
-		let counter = 0;
 
 		for (const key in polygonDataStr) {
-			polygonData = JSON.parse(`[${polygonDataStr[key].POLYGON}]`);
+			polygonData = JSON.parse(polygonDataStr[key].POLYGON);
 
 			const polygon = new ymaps.Polygon(
 				[polygonData],
@@ -66,12 +64,9 @@ function initMap() {
 				}
 			);
 			polygons.push(polygon);
-			map.geoObjects.add(polygons[counter]);
-			polygons[counter].options.setParent(map.options);
-			polygons[counter].geometry.setMap(map);
-
-			counter++;
 		}
+
+    ymaps.geoQuery(polygons).addToMap(map);
 
 		marker = new ymaps.Placemark(map.getCenter(), {}, {
 			iconLayout: 'default#image',
@@ -90,6 +85,8 @@ function initMap() {
 
 		map.geoObjects.events.add('click', function(e) {
 			marker.geometry.setCoordinates(e.get('coords'));
+
+			console.log('click polygon');
 
 			fetchResult(e, true);
 		});
@@ -121,9 +118,11 @@ function initMap() {
           inputSearch.val(selectAddress);
 
           if (!selectAddress) {
-            if (errorBlock.hasClass('active')) {
-              errorBlock.addClass('active').text('Серверу не удается определить выбранное местоположение');
+            if (!errorBlock.hasClass('active')) {
+              errorBlock.addClass('active');
             }
+
+            errorBlock.text('Серверу не удается определить выбранное местоположение');
 
             inputSearch.val('');
             buttonDisabled = true;
