@@ -59,8 +59,9 @@ function initMap() {
 			const polygon = new ymaps.Polygon(
 				[polygonData],
 				{
-					hintContent: 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.',
+					hintContent: polygonDataStr[key].PRICE > 0 ? 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.' : 'Бесплатная доставка',
 					deliveryId: key,
+          deliveryPrice: polygonDataStr[key].PRICE,
 				}
 			);
 			polygons.push(polygon);
@@ -110,6 +111,7 @@ function initMap() {
             buttonDisabled = false;
             buttonSuccess.attr('data-value', selectAddress);
             buttonSuccess.attr('data-delivery-id', e.get('target').properties.get('deliveryId'));
+            buttonSuccess.attr('data-delivery-price', e.get('target').properties.get('deliveryPrice'));
 					} else {
             errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
 						buttonDisabled = true;
@@ -190,6 +192,12 @@ $(document).on('click', '.success--js', function() {
 	if (isNONValid) {
 		return false;
 	}
+
+  let deliveryPrice = $(this).attr('data-delivery-price');
+  if (deliveryPrice) {
+    $('[data-type=container-base-price]').append('<div><div>Сумма доставки</div><div class="card-summ"><b><span data-type="order-price">' + deliveryPrice + '</span> ₽</b></div></div>');
+
+  }
 
 	$('.order-delivery, .order-wrapper__item--date, .order-payment').addClass('active');
 
