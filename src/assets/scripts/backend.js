@@ -373,7 +373,7 @@ function basket() {
         if (data.success === true) {
           if (type == 'add') {
             updateCartCount();
-            updateCartList(curItem, productsList);
+            updateCartList(curItem, productsList, data.basketProductId);
           } else if (type == 'delete') {
             deleteProduct(curItem);
           } else {

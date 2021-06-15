@@ -23,7 +23,7 @@ export function updateCartCount() {
 	}
 }
 
-export function updateCartList(el, productsList, type) {
+export function updateCartList(el, productsList, basketProductId) {
 	const regexp = /\B(?=(\d{3})+(?!\d))/g;
 	const id = el.data('product-id');
 	const name = el.data('product-name');
@@ -34,9 +34,9 @@ export function updateCartList(el, productsList, type) {
 	const curCount = Number(exist.find('.cart-count').text()) + 1;
 	const restMinOrder = $('[data-type=rest-min-order]').val();
 
-	if (type == 'delete') {
-		productsList.find('[data-type=item-block]').remove();
-	}
+	// if (type == 'delete') {
+	// 	productsList.find('[data-type=item-block]').remove();
+	// }
 
 	if (exist.length) {
 		exist.find('.cart-count').text(curCount);
@@ -47,14 +47,14 @@ export function updateCartList(el, productsList, type) {
 		    <div class="cart-block-item-size">
           <div>${name}</div>
           <div class="incDec">
-            <div class="cart-id dec--js" data-type="cart" data-product-id="${id}" data-calculate="-" data-func-type="update">
+            <div class="cart-id dec--js" data-type="cart" data-product-id="${basketProductId}" data-calculate="-" data-func-type="update">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12.0001" cy="12" r="11.5" stroke="#E5E5E5"></circle>
                 <path d="M9.55975 13.031H15.4398V12.149H9.55975V13.031Z" fill="black"></path>
               </svg>
             </div>
             <div class="cart-count">1</div>
-            <div class="cart-id inc--js" data-type="cart" data-product-id="${id}" data-calculate="+" data-func-type="update">
+            <div class="cart-id inc--js" data-type="cart" data-product-id="${basketProductId}" data-calculate="+" data-func-type="update">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="11.5" stroke="#E5E5E5"></circle>
                 <path d="M11.9648 15.159H12.8468V12.401H15.5978V11.519H12.8468V8.76099H11.9648V11.519H9.20679V12.401H11.9648V15.159Z" fill="black"></path>
@@ -67,7 +67,7 @@ export function updateCartList(el, productsList, type) {
           <div class="cart-wr">
             ${weight} г
           </div>
-          <div class="cart-rm cart-rm--js">
+          <div class="cart-rm cart-rm--js" data-type="cart" data-product-id="${basketProductId}" data-func-type="delete" data-quantity="0">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
               <path d="M9.74145 14.1991L10.3651 14.8228L12.3153 12.8726L14.2655 14.8228L14.8892 14.1991L12.939 12.2489L14.8793 10.3086L14.2556 9.68494L12.3153 11.6252L10.3651 9.67504L9.74145 10.2987L11.6917 12.2489L9.74145 14.1991Z" fill="black"></path>
@@ -95,9 +95,9 @@ export function updateCartList(el, productsList, type) {
 		if (productsList.find('[data-type=item-block]').length == 1) {
 			const totalSumm = restMinOrder - price;
 
-			if (type != 'delete') {
+			// if (type != 'delete') {
 				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div></div>');
-			}
+			// }
 
 			productsList.find('.cart-block-body-null').remove();
 			containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
