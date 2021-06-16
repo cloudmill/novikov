@@ -64,9 +64,6 @@ export function updateCartList(el, productsList, basketProductId) {
         </div>
         <div class="cart-block-item-price">
           <div class="cart-pr" data-pr=${price}><span>${price.toString().replace(regexp, ' ')}</span> ₽</div>
-          <div class="cart-wr">
-            ${weight} г
-          </div>
           <div class="cart-rm cart-rm--js" data-type="cart" data-product-id="${basketProductId}" data-func-type="delete" data-quantity="0">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
