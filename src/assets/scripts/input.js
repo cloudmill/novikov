@@ -508,6 +508,7 @@ export function deleteProduct(curItem) {
     itemBlock.remove();
 
     const items = itemsContainer.find('[data-type=item-block]');
+    let basePrice = 0;
     let summ = 0;
     let count = 0;
 
@@ -521,12 +522,17 @@ export function deleteProduct(curItem) {
     } else {
       items.each((index, item) => {
         if ($(item).find('.cart-pr span').length) {
+          basePrice += parseInt($(item).find('.cart-pr').attr('data-base-pr-calc').replace(' ', ''), 10);
           summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
           count += parseInt($(item).find('.cart-count').text(), 10);
         }
       });
 
-      $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+      let discount = basePrice - summ;
+
+      $('[data-type=order-price]').text(basePrice.toString().replace(regexp, ' '));
+      $('[data-type=total]').text(summ.toString().replace(regexp, ' '));
+      $('[data-type=discount]').text(discount);
 
       const totalSumm = restMinOrder - summ;
 
@@ -563,18 +569,24 @@ export function appendProduct(curItem) {
   const $rooms = curItem.parent().find('.cart-count');
   const pr = curItem.closest('.cart-block-item').find('.cart-pr');
   const prData = pr.data('pr');
+  const basePrData = pr.attr('data-base-pr');
   let a = $rooms.text();
   a++;
   $rooms.text(a);
   pr.find('span').text((prData * a).toString().replace(regexp, ' '));
+  pr.attr('data-base-pr-calc', (basePrData * a).toString().replace(regexp, ' '));
+  let basePrice = 0;
   let summ = 0;
   let count = 0;
   items.each((index, item) => {
     if ($(item).find('.cart-pr span').length) {
+      basePrice += parseInt($(item).find('.cart-pr').attr('data-base-pr-calc').replace(' ', ''), 10);
       summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
       count += parseInt($(item).find('.cart-count').text(), 10);
     }
   });
+
+  let discount = basePrice - summ;
 
   const cartCount = $('.page-header__cart').find('.count');
   for (let i = 0; i < cartCount.length; i++) {
@@ -590,7 +602,10 @@ export function appendProduct(curItem) {
       cartCount.removeClass('update-count');
     }, 200);
   }, 200);
-  $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+  $('[data-type=order-price]').text(basePrice.toString().replace(regexp, ' '));
+  $('[data-type=total]').text(summ.toString().replace(regexp, ' '));
+  $('[data-type=discount]').text(discount);
+
   if ($('.summ--js').length) {
     const price = $('.summ--js').data('pr');
     let summ1 = 0;
@@ -616,19 +631,26 @@ export function removeProduct(curItem) {
   const $rooms = curItem.parent().find('.cart-count');
   const pr = curItem.closest('.cart-block-item').find('.cart-pr');
   const prData = pr.data('pr');
+  const basePrData = pr.attr('data-base-pr');
   let b = $rooms.text();
   if (b > 1) {
     b--;
     $rooms.text(b);
     pr.find('span').text((prData * b).toString().replace(regexp, ' '));
+    pr.attr('data-base-pr-calc', (basePrData * b).toString().replace(regexp, ' '));
+    let basePrice = 0;
     let summ = 0;
     let count = 0;
     items.each((index, item) => {
       if ($(item).find('.cart-pr span').length) {
+        basePrice += parseInt($(item).find('.cart-pr').attr('data-base-pr-calc').replace(' ', ''), 10);
         summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
         count += parseInt($(item).find('.cart-count').text(), 10);
       }
     });
+
+    let discount = basePrice - summ;
+
     const cartCount = $('.page-header__cart').find('.count');
     for (let i = 0; i < cartCount.length; i++) {
       const actual = count;
@@ -643,7 +665,9 @@ export function removeProduct(curItem) {
         cartCount.removeClass('update-count');
       }, 200);
     }, 200);
-    $('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+    $('[data-type=order-price]').text(basePrice.toString().replace(regexp, ' '));
+    $('[data-type=total]').text(summ.toString().replace(regexp, ' '));
+    $('[data-type=discount]').text(discount);
     if ($('.summ--js').length) {
       const price = $('.summ--js').data('pr');
       let summ1 = 0;
