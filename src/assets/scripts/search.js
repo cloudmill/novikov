@@ -161,19 +161,21 @@ function initMap() {
         deliveryPriceBlock = $('[data-type=delivery-price]'),
         totalPriceBlock = $('[data-type=total]'),
         calcBasePrice = basePriceBlock.attr('data-price'),
-        calcTotalPrice = totalPriceBlock.attr('data-price');
+        calcTotalPrice = totalPriceBlock.attr('data-price'),
+        currency = ' ₽';
 
-      if (selectDeliveryPrice) {
+      if (selectDeliveryPrice && selectDeliveryPrice > 0) {
         calcBasePrice = Number(basePriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
         calcTotalPrice = Number(totalPriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
       } else {
-        selectDeliveryPrice = 'индивидуально';
+        selectDeliveryPrice = selectDeliveryPrice !== null ? 'Бесплатно' : 'Индивидуально';
+        currency = '';
       }
 
       if ($('[data-type=container-delivery-price]').length) {
-        deliveryPriceBlock.text(selectDeliveryPrice);
+        $('[data-type=container-delivery-price]').replaceWith('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
       } else {
-        $('[data-type=container-base-price]').append('<div data-type="container-delivery-price"><div>Сумма доставки</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span> ₽</b></div></div>');
+        $('[data-type=container-base-price]').append('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
       }
 
       basePriceBlock.text(calcBasePrice);
