@@ -335,6 +335,7 @@ function basket() {
     let curItem = $(this);
     let container = curItem.parents('[data-type=main_container]');
     let productId = curItem.attr('data-product-id');
+    let productRKId = curItem.attr('data-r-keeper-id');
     let productNameEn = curItem.attr('data-product-name-en');
     let quantity = curItem.parents('.incDec').find('.cart-count').text();
     let type = curItem.attr('data-func-type');
@@ -358,6 +359,7 @@ function basket() {
     } else {
       data = {
         productId: productId,
+        productRKId: productRKId,
         productNameEn: productNameEn,
         type: type,
         restCode: restCode,
