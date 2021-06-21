@@ -205,17 +205,19 @@ $('.order--js').on('click', function(e) {
     data[$(this).attr('data-field')] = $(this).val();
   });
 
-  console.log(data);
-
   const containerDataFilter = container.find('.tab-content.active');
   const payment = containerDataFilter.find('input[name=payment]:checked').val();
+  const paymentTitle = containerDataFilter.find('input[name=payment]:checked').attr('data-title');
 
   data.payment = payment;
+  data.paymentTitle = paymentTitle;
   data.deliveryId = containerDataFilter.attr('data-delivery-id');
   data.address = containerDataFilter.find('[data-type=address]').text() + (containerDataFilter.find('input[name=number]').val() ? ', квартира № ' + containerDataFilter.find('input[name=number]').val() : '');
 
   if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
     data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();
+  } else {
+    data.isPickup = true;
   }
 
   $.ajax({
