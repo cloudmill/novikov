@@ -146,7 +146,6 @@ function moveMarker(map) {
 }
 
 export function initMapRest() {
-	const bounds = new google.maps.LatLngBounds();
 	const markers = [];
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
@@ -200,8 +199,9 @@ export function initMapRest() {
 		itemRadio.push('<div class="radio"><input class="city" type="radio" id="point' + itemRadio.length + '" name="pvz_radio" value="' + id + '"><label class="label" for="point' + itemRadio.length + '"><b>' + name + '</b><br/>' + adr + '</label></div>');
 	});
 
-
 	let marker;
+  const bounds = new google.maps.LatLngBounds();
+
 	locations.forEach((item, i) => {
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(item[0], item[1]),
@@ -225,9 +225,11 @@ export function initMapRest() {
 		})(marker));
 	});
 
-	const markerCluster = new MarkerClusterer(map, markers, mcOptions);
+  google.maps.event.addListenerOnce(map, 'idle', function() {
+    map.fitBounds(bounds);
+  });
 
-	map.fitBounds(bounds);
+	new MarkerClusterer(map, markers, mcOptions);
 
 	if (parseFloat(list.attr('data-zoom')) > 0) {
 		map.setZoom(parseFloat(list.attr('data-zoom')));
@@ -270,9 +272,6 @@ function initMap() {
 }
 
 $(function() {
-	if ($('#pvz_map').length) {
-		initMapRest();
-	}
 	if ($('#oneMap').length) {
 		initMap();
 	}

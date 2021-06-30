@@ -426,6 +426,10 @@ function restaurantsTabs() {
       tab = container.find(selector);
 
     tab.addClass('active').siblings().removeClass('active');
+
+    if (tab.hasClass('map')) {
+      initMapRest();
+    }
   });
 }
 
