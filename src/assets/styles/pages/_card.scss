@@ -182,7 +182,7 @@ html {
         }
 
         &--lines {
-          .col__xl-6 {
+          .col {
             @media screen and (min-width: $screen-md-min) {
               border-left: 1px solid #E5E5E5;
               padding: 0 50px;
