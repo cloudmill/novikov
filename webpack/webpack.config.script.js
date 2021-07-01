@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const TerserPlugin = require('terser-webpack-plugin');
 const globImporter = require('node-sass-glob-importer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Files
 
@@ -49,12 +50,12 @@ module.exports = () => {
 				{
 					test: /\.css$/,
 					use: [
-						'style-loader',
+						MiniCssExtractPlugin.loader,
 						{
 							loader: 'css-loader',
 							options: {
 								importLoaders: 1,
-								sourceMap: true
+								sourceMap: false
 							},
 						},
 					],
@@ -62,8 +63,8 @@ module.exports = () => {
 				{
 					test: /\.scss$/,
 					use: [
-						'style-loader',
-						{loader: 'css-loader', options: {importLoaders: 1, sourceMap: true}},
+					  MiniCssExtractPlugin.loader,
+						{loader: 'css-loader', options: {importLoaders: 1, sourceMap: false}},
 						{
 							loader: 'sass-loader',
 							options: {
@@ -76,8 +77,11 @@ module.exports = () => {
 					]
 				},
 				{
+					test: /\.pug$/,
+				},
+				{
 					test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
-					use: [
+					loaders: [
 						{
 							loader: 'url-loader',
 						}
@@ -127,6 +131,11 @@ module.exports = () => {
 		},
 
 		plugins: [
+			new MiniCssExtractPlugin({
+				filename: '[name].css',
+				chunkFilename: 'vendors.css',
+			}),
+
 			new webpack.ProvidePlugin({
 				$: 'jquery',
 				jQuery: 'jquery',
