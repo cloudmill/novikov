@@ -200,7 +200,7 @@ export function initMapRest() {
 	});
 
 	let marker;
-  const bounds = new google.maps.LatLngBounds();
+	const bounds = new google.maps.LatLngBounds();
 
 	locations.forEach((item, i) => {
 		marker = new google.maps.Marker({
@@ -225,9 +225,9 @@ export function initMapRest() {
 		})(marker));
 	});
 
-  google.maps.event.addListenerOnce(map, 'idle', function() {
-    map.fitBounds(bounds);
-  });
+	google.maps.event.addListenerOnce(map, 'idle', function() {
+		map.fitBounds(bounds);
+	});
 
 	new MarkerClusterer(map, markers, mcOptions);
 
@@ -239,7 +239,7 @@ export function initMapRest() {
 }
 
 function initMap() {
-  const bounds = new google.maps.LatLngBounds();
+	const bounds = new google.maps.LatLngBounds();
 
 	const mapOptions = {
 		center: new google.maps.LatLng(59.91916157, 30.3251195),
@@ -256,23 +256,28 @@ function initMap() {
 	const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
 	const itemIcon = $('[data-type=map-icon]').val();
 
-  for (let key in dataCoordinates) {
-    let latLng = dataCoordinates[key].split(',');
+	for (const key in dataCoordinates) {
+		const latLng = dataCoordinates[key].split(',');
 
-    const marker = new google.maps.Marker({
-      position: new google.maps.LatLng(latLng[0], latLng[1]),
-      icon: itemIcon,
-      map: map,
-    });
+		const marker = new google.maps.Marker({
+			position: new google.maps.LatLng(latLng[0], latLng[1]),
+			icon: itemIcon,
+			map: map,
+		});
 
-    bounds.extend(marker.position);
-  }
+		bounds.extend(marker.position);
+	}
 
-  map.fitBounds(bounds);
+	map.fitBounds(bounds);
 }
 
 $(function() {
 	if ($('#oneMap').length) {
+		$('#oneMap').hover(function() {
+			$('.scrollContentX').mCustomScrollbar('disable');
+		}, function() {
+			$('.scrollContentX').mCustomScrollbar('update');
+		});
 		initMap();
 	}
 });

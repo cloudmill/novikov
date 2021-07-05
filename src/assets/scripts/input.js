@@ -381,7 +381,6 @@ const regexp = /\B(?=(\d{3})+(?!\d))/g;
 $('.promo-test--js').click(function() {
   let obj = $(this),
     tabContainer = obj.parents('[data-type=tab-content]'),
-    errorBlock = tabContainer.find('[data-type=promo-card-error]'),
     stepContainer = tabContainer.find('[data-type=step]').filter('.active'),
     data = {},
     codeEntering = obj.attr('code-entering'),
@@ -391,6 +390,12 @@ $('.promo-test--js').click(function() {
     data[$(this).attr('data-type-field')] = $(this).val();
   });
 
+  if (codeEntering == 'true') {
+    if (localStorage.getItem('percent_discount')) {
+      data['percent_discount'] = localStorage.getItem('percent_discount');
+    };
+  };
+
   if (data) {
     $.ajax({
       type: 'POST',
@@ -398,8 +403,14 @@ $('.promo-test--js').click(function() {
       dataType: 'json',
       data: data,
       success: function(r) {
+        let errorBlock = tabContainer.find('[data-type=promo-card-error]');
+
         if (codeEntering == 'false') {
           if (r.success) {
+            if (r.percent_discount) {
+              localStorage.setItem('percent_discount', r.percent_discount);
+            }
+
             if (errorBlock.hasClass('active')) {
               errorBlock.removeClass('active');
             }
@@ -413,7 +424,7 @@ $('.promo-test--js').click(function() {
           if (r.success) {
             let container = $('[data-type=cart-items-container]');
 
-            steps(obj, r.percent_discount);
+            steps(obj, data['percent_discount']);
 
             $.ajax({
               type: 'POST',
@@ -428,6 +439,8 @@ $('.promo-test--js').click(function() {
                 container.append($(r));
               }
             });
+
+            localStorage.removeItem('percent_discount');
           } else {
             errorBlock.addClass('active').text(r.comment);
           }
