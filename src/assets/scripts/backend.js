@@ -92,7 +92,6 @@ function selectProject() {
 
 		const container = $(this).parents('[data-type=main_container]');
 		const projectId = $(this).attr('data-id');
-		const projectListContainer = container.find('[data-type=project_list_container]');
 		const projectItemContainer = container.find('[data-type=item_container]');
 		const selectProject = $(this).parents('[data-type=select_project_style]');
 		const url = window.location.href;
@@ -107,11 +106,11 @@ function selectProject() {
 				projectId: projectId,
 			},
 			success: function(data) {
-				projectItemContainer.remove();
+				projectItemContainer.empty();
 
-				const projectItemContainerResponse = $(data).find('[data-type=item_container]');
+				const projectItemContainerResponse = $(data).find('[data-type=item_container]').children();
 
-				projectListContainer.after(projectItemContainerResponse);
+        projectItemContainer.append(projectItemContainerResponse);
 			}
 		});
 	});
