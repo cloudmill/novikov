@@ -273,11 +273,13 @@ function initMap() {
 
 $(function() {
 	if ($('#oneMap').length) {
-		$('#oneMap').hover(function() {
-			$('.scrollContentX').mCustomScrollbar('disable');
-		}, function() {
-			$('.scrollContentX').mCustomScrollbar('update');
-		});
+		// $(document).on('click', '#oneMap', function() {
+		// 	$('.scrollContentX').mCustomScrollbar('disable');
+    //
+		// 	setTimeout(()=> {
+		// 		$('.scrollContentX').mCustomScrollbar('update');
+		// 	}, 1000);
+		// });
 		initMap();
 	}
 });

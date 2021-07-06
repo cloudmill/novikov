@@ -199,7 +199,7 @@ html {
       top: 55px;
       left: 0;
       //right: 0;
-      z-index: 99;
+      z-index: 121;
       overflow-x: auto;
       background-color: white;
       //transition: all 1s;
@@ -314,10 +314,16 @@ html {
               @include transitionEase();
               border-bottom: 1px solid transparent;
 
-              &.active,
-              &:hover {
+              &.active {
                 color: black;
                 border-color: $color-type-2a;
+              }
+
+              @media screen and (min-width: $screen-md-min) {
+                &:hover {
+                  color: black;
+                  border-color: $color-type-2a;
+                }
               }
             }
           }
@@ -403,6 +409,13 @@ html {
             width: 940px;
             min-width: 940px;
             margin-right: 20px;
+          }
+        }
+
+        &.section-item--long {
+          @media screen and (min-width: $screen-md-min) {
+            width: 1560px;
+            min-width: 1560px;
           }
         }
       }
@@ -1443,6 +1456,36 @@ html {
     }
   }
 
+  .column-items {
+    column-gap: 40px;
+    column-fill: balance;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 33%;
+      width: 1px;
+      height: 100%;
+      display: block;
+      border-left: 1px solid #E5E5E5;
+    }
+
+    &--two {
+      column-count: 2;
+    }
+
+    &--three {
+      column-count: 3;
+    }
+
+    &--one {
+      column-count: 1;
+    }
+  }
+
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .card .section:not(:nth-child(2)):after {
@@ -1469,6 +1512,10 @@ html {
     .card #about .section-item:nth-child(3) {
       width: 780px;
       min-width: 780px;
+    }
+    .card #about .section-item.section-item--long {
+      width: 1560px;
+      min-width: 1560px;
     }
     .card .vertical-swiper--left {
       padding-left: 90px;
@@ -1651,7 +1698,6 @@ html {
     }
   }
 }
-
 
 .form-main {
   height: 100%;
