@@ -255,63 +255,37 @@ $('.form--js').on('click', function(e) {
 
   // результат валидации формы
   const isNONValid = result.includes(false);
-  console.log(isNONValid);
+
   if (isNONValid) {
     return false;
   }
 
-  // сбор данных формы
-  // const form = $(this).closest('form');
-  const name = container.find('input[name=name]');
-  const email = container.find('input[name=email]');
-  const phone = container.find('input[name=phone]');
-  const text = container.find('textarea[name=desc]');
-  const type = container.attr('data-type-title');
-  const file = container.find('input[name=file]');
-  const curForm = $(this);
+  let thisObj = $(this),
+    formContainer = thisObj.parents('[data-type=form-container]'),
+    dataContainer = formContainer.find('.tab-content.active').length > 0 ? formContainer.find('.tab-content.active') : formContainer,
+    url = formContainer.attr('data-url'),
+    contentType = 'application/x-www-form-urlencoded; charset=UTF-8',
+    processData = true,
+    data = {},
+    file = formContainer.find('[data-type=file]').length > 0 ? formContainer.find('[data-type=file]') : null;
 
-  let url = null;
-  let contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
-  let processData = true;
-  let data = null;
-
-  if (path[1] === 'vacancies') {
-    url = '/local/templates/main/include/ajax/vacancy_form_submit.php';
+  if (file) {
+    data = new FormData();
     contentType = false;
     processData = false;
-
-    data = new FormData();
-    data.append('UF_NAME', name.val());
-    data.append('UF_MAIL', email.val());
-    data.append('UF_TEXT', text.val());
-    data.append('UF_PHONE', phone.val());
-    data.append('UF_TYPE', type);
-    data.append('UF_VACANCY_NAME', container.attr('data-vacancy-name'));
-    data.append('UF_VACANCY_RESTAURANT', container.attr('data-vacancy-restaurant'));
-    data.append('UF_VACANCY_REGION', container.attr('data-vacancy-region'));
     data.append('file', file[0].files[0]);
-  } else if (path[1] === 'contacts') {
-    url = '/local/templates/main/include/ajax/contact_form.php';
-
-    data = {
-      UF_NAME: name.val(),
-      UF_MAIL: email.val(),
-      UF_TEXT: text.val(),
-      UF_TYPE: type,
-    };
-  } else if (path[1] === 'restaurants' && type === 'Забронировать стол') {
-    url = '/local/templates/main/include/ajax/booking.php';
-
-    data = {
-      UF_NAME: name.val(),
-      UF_PHONE: phone.val(),
-      UF_EMAIL: email.val(),
-      UF_PERSONS_NUMBER: container.find('input[name=count]').val(),
-      UF_DATE: container.find('input[name=date]').val() + ' ' + container.find('[data-type=select-time').val(),
-      UF_WISHES: container.find('input[name=text]').val(),
-      UF_TYPE: type,
-    };
   }
+
+  dataContainer
+    .find(
+      '[data-type=get-field]'
+    )
+    .each(function () {
+      let field = $(this).attr('data-field'),
+        val = $(this).val();
+
+      file ? data.append(field, val) : (data[field] = val);
+    });
 
   if (url !== undefined) {
     $.ajax({
@@ -321,16 +295,16 @@ $('.form--js').on('click', function(e) {
       data: data,
       contentType: contentType,
       processData: processData,
-      success: function(a) {
-        if (a.success === true) {
+      success: function(r) {
+        if (r.success === true) {
           let classActiveVal = null;
           // открытие формы ответа
           // контакты
           const mediaQuery = matchMedia('(min-width: 1024px)');
           if (mediaQuery.matches) {
-            curForm.closest('.form-inner').css('visibility', 'hidden').css('opacity', 0).next().slideDown(500).css('display', 'flex');
+            thisObj.closest('.form-inner').css('visibility', 'hidden').css('opacity', 0).next().slideDown(500).css('display', 'flex');
           } else {
-            curForm.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
+            thisObj.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
           }
 
           if (path[1] === 'vacancies') {
@@ -339,7 +313,7 @@ $('.form--js').on('click', function(e) {
             classActiveVal = 'shown';
           }
 
-          container.find('[data-type=response-form]').addClass(classActiveVal);
+          formContainer.find('[data-type=response-form]').addClass(classActiveVal);
         }
       }
     });
