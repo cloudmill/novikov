@@ -246,7 +246,9 @@ function initMap() {
 		zoom: 10,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
-		zoomControl: true,
+		zoomControl: false,
+    panControl: false,
+    disableDefaultUI: true,
 		scrollwheel: false,
 		styles: mapStyle,
 	};
