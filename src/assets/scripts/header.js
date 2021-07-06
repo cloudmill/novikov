@@ -41,9 +41,9 @@ $('.hr-block--js').click(function() {
 	$('.vacancy-block').toggleClass('active');
 	$('.overlay').toggleClass('active');
 
-	$('.vacancy-block').attr('data-vacancy-name', vacancyName);
-	$('.vacancy-block').attr('data-vacancy-restaurant', vacancyRestaurant);
-	$('.vacancy-block').attr('data-vacancy-region', vacancyRegion);
+	$('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_NAME" value="'+vacancyName+'">');
+  $('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_RESTAURANT" value="'+vacancyRestaurant+'">');
+  $('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_REGION" value="'+vacancyRegion+'">');
 
 	return false;
 });
