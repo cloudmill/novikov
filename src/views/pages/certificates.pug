@@ -1,96 +1,98 @@
 extends ../layouts/master.pug
 
 block header
-  include ../partials/_header-ac.pug
+  include ../partials/_header-null.pug
 
 block pageName
   - pageName = "custom"
 
 block content
-  include ../components/_cart-block-null
-  main.page-certificates
-    .certificates-main(data-aos='fade-up')
-      h1
-        +wrapTitle(['Подарочные', 'сертификаты'])
-      p Подарочный сертификат Novikov Group дает право на посещение любого из ресторанов–участников программы лояльности. Сертификат является единоразовым и, если счет превысит номинал карты, возможно просто доплатить разницу.
-      .certificates-main__back.rellax: +img('certificates/main2.jpg')
-    .certificates-liner(data-aos='fade-up')
-      .marquee
-        .track
-          .content
-            +img('standard.svg')
-    .certificates-desc(data-aos='fade-up')
-      .row
-        .col.col__xl-5.col__lg-5.col__md-6.col__xs-12
-          h3 Подарочный сертификат Novikov Group – это универсальный и, самое главное, оригинальный подарок к любому празднику.
-        .col.col__xl-5.col__lg-5.col__md-6.col__xs-12
-          p Приобрести подарочные сертификаты (кроме сертификата Black exclusive номиналом 30 000 рублей) можно в ресторанах-участниках адресной программы, а также сделать заказ онлайн на нашем сайте.
-          p В FARШ, Krispy Kreme и Prime Star приобрести и использовать сертификаты нельзя.
-    .certificates-list(data-aos='fade-up')
-      .certificates-list__item.certificates-list__item--lite(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Lite
-          .price 3 000 ₽
-        .certificates-list__item-add
-          .marquee
-            .track
-              .content Доступно только в ресторане — Доступно только в ресторане - Доступно только в ресторане — Доступно только в ресторане
-        .certificates-list__item-img: +img('certificates/card-1.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Lite' data-price='3000'): +img('icons/add.svg')
-      .certificates-list__item.certificates-list__item--standard(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Standard
-          .price 5 000 ₽
-        .certificates-list__item-img: +img('certificates/card-2.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Standard' data-price='5000'): +img('icons/add.svg')
-      .certificates-list__item.certificates-list__item--classic(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Classic
-          .price 10 000 ₽
-        .certificates-list__item-img: +img('certificates/card-3.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Classic' data-price='10000'): +img('icons/add.svg')
-      .certificates-list__item.certificates-list__item--platinum(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Platinum
-          .price 15 000 ₽
-        .certificates-list__item-img: +img('certificates/card-4.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Platinum' data-price='15000'): +img('icons/add.svg')
-      .certificates-list__item.certificates-list__item--exclusive(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Exclusive
-          .price 30 000 ₽
-        .certificates-list__item-img: +img('certificates/card-5.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Exclusive' data-price='30000'): +img('icons/add.svg')
-      .certificates-list__item.certificates-list__item--exclusive(data-aos='fade-up')
-        .certificates-list__item-top
-          .type Exclusive
-          .price 35 000 ₽
-        .certificates-list__item-img: +img('certificates/card-5.svg')
-        .certificates-list__item-bottom
-          .info
-            div Срок действия 1 год
-            div Использование единоразово
-          .add.cd-add-to-cart(data-name='Exclusive' data-price='35000'): +img('icons/add.svg')
+  .cart-form(data-sticky-container)
+    .sticky.form-menu(data-margin-top="100")
+      include ../components/_cart-block-null-ac
+    main.page-certificates
+      .certificates-main(data-aos='fade-up')
+        h1
+          +wrapTitle(['Подарочные', 'сертификаты'])
+        p Подарочный сертификат Novikov Group дает право на посещение любого из ресторанов–участников программы лояльности. Сертификат является единоразовым и, если счет превысит номинал карты, возможно просто доплатить разницу.
+        .certificates-main__back.rellax: +img('certificates/main2.jpg')
+      .certificates-liner(data-aos='fade-up')
+        .marquee
+          .track
+            .content
+              +img('standard.svg')
+      .certificates-desc(data-aos='fade-up')
+        .row
+          .col.col__xl-5.col__lg-5.col__md-6.col__xs-12
+            h3 Подарочный сертификат Novikov Group – это универсальный и, самое главное, оригинальный подарок к любому празднику.
+          .col.col__xl-5.col__lg-5.col__md-6.col__xs-12
+            p Приобрести подарочные сертификаты (кроме сертификата Black exclusive номиналом 30 000 рублей) можно в ресторанах-участниках адресной программы, а также сделать заказ онлайн на нашем сайте.
+            p В FARШ, Krispy Kreme и Prime Star приобрести и использовать сертификаты нельзя.
+      .certificates-list(data-aos='fade-up')
+        .certificates-list__item.certificates-list__item--lite(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Lite
+            .price 3 000 ₽
+          .certificates-list__item-add
+            .marquee
+              .track
+                .content Доступно только в ресторане — Доступно только в ресторане - Доступно только в ресторане — Доступно только в ресторане
+          .certificates-list__item-img: +img('certificates/card-1.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Lite' data-price='3000'): +img('icons/add.svg')
+        .certificates-list__item.certificates-list__item--standard(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Standard
+            .price 5 000 ₽
+          .certificates-list__item-img: +img('certificates/card-2.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Standard' data-price='5000'): +img('icons/add.svg')
+        .certificates-list__item.certificates-list__item--classic(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Classic
+            .price 10 000 ₽
+          .certificates-list__item-img: +img('certificates/card-3.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Classic' data-price='10000'): +img('icons/add.svg')
+        .certificates-list__item.certificates-list__item--platinum(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Platinum
+            .price 15 000 ₽
+          .certificates-list__item-img: +img('certificates/card-4.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Platinum' data-price='15000'): +img('icons/add.svg')
+        .certificates-list__item.certificates-list__item--exclusive(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Exclusive
+            .price 30 000 ₽
+          .certificates-list__item-img: +img('certificates/card-5.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Exclusive' data-price='30000'): +img('icons/add.svg')
+        .certificates-list__item.certificates-list__item--exclusive(data-aos='fade-up')
+          .certificates-list__item-top
+            .type Exclusive
+            .price 35 000 ₽
+          .certificates-list__item-img: +img('certificates/card-5.svg')
+          .certificates-list__item-bottom
+            .info
+              div Срок действия 1 год
+              div Использование единоразово
+            .add.cd-add-to-cart(data-name='Exclusive' data-price='35000'): +img('icons/add.svg')
 
 
 block footer
