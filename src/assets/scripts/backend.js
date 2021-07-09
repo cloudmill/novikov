@@ -1,3 +1,4 @@
+import { sliderSwiper } from './sliders.js';
 import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
 import { updateCartCount } from './cart.js';
@@ -111,6 +112,7 @@ function selectProject() {
 				const projectItemContainerResponse = $(data).find('[data-type=item_container]').children();
 
         projectItemContainer.append(projectItemContainerResponse);
+        sliderSwiper();
 			}
 		});
 	});
