@@ -146,133 +146,57 @@ function moveMarker(map) {
 }
 
 export function initMapRest() {
-	const markers = [];
-	const mapOptions = {
-		center: new google.maps.LatLng(59.91916157, 30.3251195),
-		zoom: 15,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		mapTypeControl: false,
-		zoomControl: true,
-		scrollwheel: false,
-		styles: mapStyle,
-	};
-	const map = new google.maps.Map(document.getElementById('pvz_map'), mapOptions);
-
-	const content = [];
-	const locations = [];
-	const mapItems = $('[data-type=map-item]');
-
-	mapItems.each(function() {
-		const dataItem = [];
-		const coordItem = $(this).attr('data-adr').split(',');
-
-		dataItem.push(Number(coordItem[0]));
-		dataItem.push(Number(coordItem[1]));
-		dataItem.push($(this).attr('data-map-icon'));
-		dataItem.push($(this).attr('id'));
-
-		locations.push(dataItem);
-	});
-
-	const list = $('.pvz_list');
-	const items = list.find('span');
-	// const pvz_price = $('input[name=pvz_price]').val();
-	// const pvz_time = $('input[name=pvz_time]').val();
-	const itemRadio = [];
-
-	items.each(function() {
-		const item = $(this);
-		const id = item.attr('data-id');
-		const name = item.attr('data-name');
-		const phone = item.attr('data-phone');
-		const adr = item.attr('data-adr');
-		const time = item.attr('data-time');
-		let coord = item.attr('data-map');
-
-		coord = coord.split(',');
-		coord['0'] = parseFloat(coord['0']);
-		coord['1'] = parseFloat(coord['1']);
-
-		locations[locations.length] = coord;
-		content.push('<h6>' + name + '</h6> <p>' + phone + '  <br /> ' + adr + '  <br /> ' + time + '</p>');
-
-		itemRadio.push('<div class="radio"><input class="city" type="radio" id="point' + itemRadio.length + '" name="pvz_radio" value="' + id + '"><label class="label" for="point' + itemRadio.length + '"><b>' + name + '</b><br/>' + adr + '</label></div>');
-	});
-
-	let marker;
-	const bounds = new google.maps.LatLngBounds();
-
-	locations.forEach((item, i) => {
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(item[0], item[1]),
-			icon: item[2],
-			map: map,
-			id: i
-		});
-		marker.set('data-href', item[3]);
-
-		bounds.extend(marker.position);
-
-		markers.push(marker);
-
-		google.maps.event.addListener(marker, 'click', (function() {
-			return function() {
-				$('.mapList-item').removeClass('active');
-				$('#' + item[3]).addClass('active');
-				$('.scrollContent').mCustomScrollbar('scrollTo', '#' + item[3]);
-				return false;
-			};
-		})(marker));
-	});
-
-	google.maps.event.addListenerOnce(map, 'idle', function() {
-		map.fitBounds(bounds);
-	});
-
-	new MarkerClusterer(map, markers, mcOptions);
-
-	if (parseFloat(list.attr('data-zoom')) > 0) {
-		map.setZoom(parseFloat(list.attr('data-zoom')));
-	}
-
-	moveMarker(map);
-}
-
-function initMap() {
-	const bounds = new google.maps.LatLngBounds();
-
-	const mapOptions = {
-		center: new google.maps.LatLng(59.91916157, 30.3251195),
-		zoom: 10,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		mapTypeControl: false,
-		zoomControl: false,
-		panControl: false,
-		disableDefaultUI: true,
-		scrollwheel: false,
-		styles: mapStyle,
-	};
-
-	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
-	const dataCoordStr = $('[data-type=map-data]').val();
-	const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
-	const itemIcon = $('[data-type=map-icon]').val();
-
-	for (const key in dataCoordinates) {
-		const latLng = dataCoordinates[key].split(',');
-
-		const marker = new google.maps.Marker({
-			position: new google.maps.LatLng(latLng[0], latLng[1]),
-			icon: itemIcon,
-			map: map,
+	ymaps.ready(function() {
+		const map = new ymaps.Map('yandexMap', {
+			center: [55.753220, 37.622513],
+			zoom: 14,
+			controls: ['zoomControl', 'geolocationControl']
+		}, {
+			suppressMapOpenBlock: true,
 		});
 
-		bounds.extend(marker.position);
-	}
+		map.behaviors.disable('scrollZoom');
 
-	map.fitBounds(bounds);
+		const locations = [];
+		const mapItems = $('[data-type=map-item]');
+
+		mapItems.each(function() {
+			const dataItem = [];
+			const coordItem = $(this).attr('data-adr').split(',');
+
+			dataItem.push(Number(coordItem[0]));
+			dataItem.push(Number(coordItem[1]));
+			dataItem.push($(this).attr('data-map-icon'));
+			dataItem.push($(this).attr('id'));
+
+			locations.push(dataItem);
+		});
+
+		const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
+
+		locations.forEach((item, i) => {
+			const icon = item[2] ? item[2] : defaultIcon;
+			const marker = new ymaps.Placemark(
+				[item[0], item[1]],
+				{
+					id: i,
+				},
+				{
+					iconLayout: 'default#image',
+					iconImageHref: icon,
+					iconImageSize: [30, 42],
+					iconImageOffset: [-5, -38]
+				});
+
+			map.geoObjects.add(marker);
+		});
+
+		const allPoints = ymaps.geoQuery(map.geoObjects);
+		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
+
+		moveMarker(map);
+	});
 }
-
 
 function initMapYandex() {
 	ymaps.ready(function() {
@@ -296,35 +220,41 @@ function initMapYandex() {
 			map.behaviors.disable('drag');
 		}
 
-		const marker = new ymaps.Placemark(map.getCenter(), {
-			balloonContent: `<div class="balloonContent"><h4>${name}</h4><p>${adr}</p><a href="tel:${phone}">${phone}</a><a href="${url}" target="_blank">${url}</a></div>`
-		}, {
-			iconLayout: 'default#image',
-			iconImageHref: '/assets/images/icons/navi.svg',
-			iconImageSize: [30, 42],
-			iconImageOffset: [-5, -38],
-			balloonCloseButton: false,
-			hideIconOnBalloonOpen: false
-		});
+		const dataCoordStr = $('[data-type=map-data]').val();
+		const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
+		const itemIcon = $('[data-type=map-icon]').val();
+		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
 
-		marker.events.add('click', function(e) {
-			const href = marker.options._options.iconImageHref;
-			if(href === '/assets/images/icons/navi.svg') {
-				e.get('target').options.set('iconImageHref', '/assets/images/icons/navi-red.svg');
-			} else {
-				e.get('target').options.set('iconImageHref', '/assets/images/icons/navi.svg');
-			}
-		});
+		for (const key in dataCoordinates) {
+			const coord = dataCoordinates[key].split(',');
+			const marker = new ymaps.Placemark([coord[0], coord[1]], {
+				balloonContent: `<div class="balloonContent"><h4>${name}</h4><p>${adr}</p><a href="tel:${phone}">${phone}</a><a href="${url}" target="_blank">${url}</a></div>`
+			}, {
+				iconLayout: 'default#image',
+				iconImageHref: icon,
+				iconImageSize: [30, 42],
+				iconImageOffset: [-5, -38],
+				balloonCloseButton: false,
+				hideIconOnBalloonOpen: false
+			});
 
-		map.geoObjects.add(marker);
+			marker.events.add('click', function(e) {
+				const href = marker.options._options.iconImageHref;
+				if(href === icon) {
+					e.get('target').options.set('iconImageHref', '/assets/images/icons/navi-red.svg');
+				} else {
+					e.get('target').options.set('iconImageHref', '/assets/images/icons/navi.svg');
+				}
+			});
 
+			map.geoObjects.add(marker);
+		}
+		const allPoints = ymaps.geoQuery(map.geoObjects);
+		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
 	});
 }
 
 $(function() {
-	if ($('#oneMap').length) {
-		initMap();
-	}
 	if ($('#yandexMap').length) {
 		initMapYandex();
 	}
