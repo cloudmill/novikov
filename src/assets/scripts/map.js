@@ -177,7 +177,7 @@ export function initMapRest() {
     locations.forEach((item, i) => {
       const icon = item[2] ? item[2] : defaultIcon;
       const marker = new ymaps.Placemark(
-        [coord[0], coord[1]],
+        [item[0], item[1]],
         {
           id: i,
         },
