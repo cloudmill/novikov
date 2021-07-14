@@ -276,6 +276,10 @@ function initMap() {
 
 function initMapYandex() {
 	ymaps.ready(function() {
+		const name = $('#yandexMap').data('name');
+		const adr = $('#yandexMap').data('adr');
+		const phone = $('#yandexMap').data('phone');
+		const url = $('#yandexMap').data('url');
 		const map = new ymaps.Map('yandexMap', {
 			center: [55.753220, 37.622513],
 			zoom: 14,
@@ -292,11 +296,24 @@ function initMapYandex() {
 			map.behaviors.disable('drag');
 		}
 
-		const marker = new ymaps.Placemark(map.getCenter(), {}, {
+		const marker = new ymaps.Placemark(map.getCenter(), {
+			balloonContent: `<div class="balloonContent"><h4>${name}</h4><p>${adr}</p><a href="tel:${phone}">${phone}</a><a href="${url}" target="_blank">${url}</a></div>`
+		}, {
 			iconLayout: 'default#image',
-			iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
+			iconImageHref: '/assets/images/icons/navi.svg',
 			iconImageSize: [30, 42],
-			iconImageOffset: [-5, -38]
+			iconImageOffset: [-5, -38],
+			balloonCloseButton: false,
+			hideIconOnBalloonOpen: false
+		});
+
+		marker.events.add('click', function(e) {
+			const href = marker.options._options.iconImageHref;
+			if(href === '/assets/images/icons/navi.svg') {
+				e.get('target').options.set('iconImageHref', '/assets/images/icons/navi-red.svg');
+			} else {
+				e.get('target').options.set('iconImageHref', '/assets/images/icons/navi.svg');
+			}
 		});
 
 		map.geoObjects.add(marker);

@@ -1760,3 +1760,33 @@ html {
   position: relative;
   transition: all 0s !important;
 }
+
+
+.ymaps-2-1-78-balloon,
+[class$="-balloon_layout_normal"],
+[class$="-balloon_layout"],
+[class$="-balloon"] {
+  background: #FFFFFF !important;
+  box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 10px 0px !important;
+  margin-top: -30px !important;
+  margin-left: -30px !important;
+}
+[class$="balloon__tail"]:after {
+  display: none !important;
+}
+
+.balloonContent {
+  font-size: 12px;
+  a,
+  p {
+    margin-bottom: 5px;
+    display: block;
+  }
+  h4 {
+    font-size: 13px;
+    font-family: Lighthaus;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+}
