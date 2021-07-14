@@ -238,42 +238,6 @@ export function initMapRest() {
 	moveMarker(map);
 }
 
-function initMap() {
-	const bounds = new google.maps.LatLngBounds();
-
-	const mapOptions = {
-		center: new google.maps.LatLng(59.91916157, 30.3251195),
-		zoom: 10,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		mapTypeControl: false,
-		zoomControl: false,
-		panControl: false,
-		disableDefaultUI: true,
-		scrollwheel: false,
-		styles: mapStyle,
-	};
-
-	const map = new google.maps.Map(document.getElementById('oneMap'), mapOptions);
-	const dataCoordStr = $('[data-type=map-data]').val();
-	const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
-	const itemIcon = $('[data-type=map-icon]').val();
-
-	for (const key in dataCoordinates) {
-		const latLng = dataCoordinates[key].split(',');
-
-		const marker = new google.maps.Marker({
-			position: new google.maps.LatLng(latLng[0], latLng[1]),
-			icon: itemIcon,
-			map: map,
-		});
-
-		bounds.extend(marker.position);
-	}
-
-	map.fitBounds(bounds);
-}
-
-
 function initMapYandex() {
 	ymaps.ready(function() {
 		const map = new ymaps.Map('yandexMap', {
@@ -314,9 +278,6 @@ function initMapYandex() {
 }
 
 $(function() {
-	if ($('#oneMap').length) {
-		initMap();
-	}
 	if ($('#yandexMap').length) {
 		initMapYandex();
 	}
