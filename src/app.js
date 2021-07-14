@@ -179,7 +179,17 @@ $(document).ready(() => {
 
 				if ($('.page-order-menu').length) {
 					const scrollContent = this.mcs.content;
-					const url = scrollContent.find('[data-type=url-page-nav]').val();
+					const pageNav = scrollContent.find('[data-type=url-page-nav]');
+					const url = pageNav.val();
+          const sectId = pageNav.attr('data-sect-id');
+          const data = {
+            ajaxPaginate: true,
+          };
+
+          if (sectId) {
+            data['sectId'] = sectId;
+          }
+
 					if (url) {
 						const itemsContainer = scrollContent.find('[data-type=items_container]');
 						const last = scrollContent.find('.order-menu-menu__item');
@@ -193,9 +203,7 @@ $(document).ready(() => {
 								$.ajax({
 									url: url,
 									type: 'POST',
-									data: {
-										ajaxPaginate: true,
-									},
+									data: data,
 									success: function(data) {
 										const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
 										const itemsResponse = $(data).find('[data-type=item]');

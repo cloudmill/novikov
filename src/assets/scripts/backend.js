@@ -310,19 +310,14 @@ function menuRestaurantSections() {
 				sectId: sectId,
 			},
 			success: function(data) {
+        urlItem.remove();
 				itemsContainer.children().remove();
 
 				const itemsContainerResponse = $(data).children();
-        const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
+        const urlResponse = $(data).filter('[data-type=url-page-nav]');
 
         if (urlResponse) {
-          if (urlItem.length) {
-            urlItem.val(urlResponse);
-          } else {
-            itemsContainer.before('<input type="hidden" data-type="url-page-nav" value="' + urlResponse + '">');
-          }
-        } else {
-          urlItem.remove();
+          itemsContainer.before(urlResponse);
         }
 
 				itemsContainer.append(itemsContainerResponse);
@@ -334,7 +329,7 @@ function menuRestaurantSections() {
 function basket() {
   $(document).on('click', '[data-type=cart]', function() {
     let curItem = $(this);
-    let container = curItem.parents('[data-type=main_container]');
+    let container = curItem.parents('[data-type=body]');
     let productId = curItem.attr('data-product-id');
     let productRKId = curItem.attr('data-r-keeper-id');
     let productNameEn = curItem.attr('data-product-name-en');
