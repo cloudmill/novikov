@@ -124,7 +124,7 @@ export const mapStyle = [
 ];
 const mcOptions = {
 	styles: [{
-	  url: '/local/templates/main/assets/images/icons/bubble.svg',
+		url: '/local/templates/main/assets/images/icons/bubble.svg',
 		width: 60,
 		height: 60,
 		fontFamily: 'Manrope',
@@ -163,7 +163,7 @@ export function initMapRest() {
 	const mapItems = $('[data-type=map-item]');
 
 	mapItems.each(function() {
-	  const dataItem = [];
+		const dataItem = [];
 		const coordItem = $(this).attr('data-adr').split(',');
 
 		dataItem.push(Number(coordItem[0]));
@@ -217,8 +217,8 @@ export function initMapRest() {
 
 		google.maps.event.addListener(marker, 'click', (function() {
 			return function() {
-			  $('.mapList-item').removeClass('active');
-			  $('#' + item[3]).addClass('active');
+				$('.mapList-item').removeClass('active');
+				$('#' + item[3]).addClass('active');
 				$('.scrollContent').mCustomScrollbar('scrollTo', '#' + item[3]);
 				return false;
 			};
@@ -247,8 +247,8 @@ function initMap() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
 		zoomControl: false,
-    panControl: false,
-    disableDefaultUI: true,
+		panControl: false,
+		disableDefaultUI: true,
 		scrollwheel: false,
 		styles: mapStyle,
 	};
@@ -273,15 +273,42 @@ function initMap() {
 	map.fitBounds(bounds);
 }
 
+
+function initMapYandex() {
+	ymaps.ready(function() {
+		const map = new ymaps.Map('yandexMap', {
+			center: [55.753220, 37.622513],
+			zoom: 14,
+			controls: ['zoomControl', 'geolocationControl']
+		}, {
+			suppressMapOpenBlock: true,
+		});
+
+		map.behaviors.disable('scrollZoom');
+
+		// на мобильных устройствах... (проверяем по userAgent браузера)
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			// ... отключаем перетаскивание карты
+			map.behaviors.disable('drag');
+		}
+
+		const marker = new ymaps.Placemark(map.getCenter(), {}, {
+			iconLayout: 'default#image',
+			iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
+			iconImageSize: [30, 42],
+			iconImageOffset: [-5, -38]
+		});
+
+		map.geoObjects.add(marker);
+
+	});
+}
+
 $(function() {
 	if ($('#oneMap').length) {
-		// $(document).on('click', '#oneMap', function() {
-		// 	$('.scrollContentX').mCustomScrollbar('disable');
-    //
-		// 	setTimeout(()=> {
-		// 		$('.scrollContentX').mCustomScrollbar('update');
-		// 	}, 1000);
-		// });
 		initMap();
+	}
+	if ($('#yandexMap').length) {
+		initMapYandex();
 	}
 });
