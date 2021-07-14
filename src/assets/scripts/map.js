@@ -292,15 +292,24 @@ function initMapYandex() {
 			map.behaviors.disable('drag');
 		}
 
-		const marker = new ymaps.Placemark(map.getCenter(), {}, {
-			iconLayout: 'default#image',
-			iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
-			iconImageSize: [30, 42],
-			iconImageOffset: [-5, -38]
-		});
+    const dataCoordStr = $('[data-type=map-data]').val();
+    const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
+    const itemIcon = $('[data-type=map-icon]').val();
+    const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
 
-		map.geoObjects.add(marker);
+    for (const key in dataCoordinates) {
+      let coord = dataCoordinates[key].split(',');
+      const marker = new ymaps.Placemark([coord[0], coord[1]], {}, {
+        iconLayout: 'default#image',
+        iconImageHref: icon,
+        iconImageSize: [30, 42],
+        iconImageOffset: [-5, -38]
+      });
 
+      map.geoObjects.add(marker);
+    }
+    const allPoints = ymaps.geoQuery(map.geoObjects);
+    map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
 	});
 }
 
