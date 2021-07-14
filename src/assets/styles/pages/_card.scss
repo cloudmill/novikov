@@ -1464,23 +1464,31 @@ html {
     position: relative;
 
     &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 33%;
-      width: 1px;
-      height: 100%;
-      display: block;
-      border-left: 1px solid #E5E5E5;
+      @media screen and (min-width: $screen-md-min) {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 33%;
+        width: 1px;
+        height: 100%;
+        display: block;
+        border-left: 1px solid #E5E5E5;
+      }
     }
 
     &--two {
-      column-count: 2;
+      column-count: 1;
+      @media screen and (min-width: $screen-md-min) {
+        column-count: 2;
+      }
     }
 
     &--three {
-      column-count: 3;
+      column-count: 1;
+      @media screen and (min-width: $screen-md-min) {
+        column-count: 3;
+      }
     }
 
     &--one {
