@@ -298,7 +298,7 @@ $('.form--js').on('click', function(e) {
       processData: processData,
       success: function(r) {
         if (r.success === true) {
-          let classActiveVal = null;
+          let classActiveVal = 'active';
           // открытие формы ответа
           // контакты
           const mediaQuery = matchMedia('(min-width: 1024px)');
@@ -308,9 +308,7 @@ $('.form--js').on('click', function(e) {
             thisObj.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
           }
 
-          if (path[1] === 'vacancies') {
-            classActiveVal = 'active';
-          } else if (path[1] === 'contacts') {
+          if (path[1] === 'contacts') {
             classActiveVal = 'shown';
           }
 

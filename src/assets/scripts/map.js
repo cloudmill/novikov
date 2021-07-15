@@ -240,10 +240,10 @@ function initMapYandex() {
 
 			marker.events.add('click', function(e) {
 				const href = marker.options._options.iconImageHref;
-				if(href === icon) {
-					e.get('target').options.set('iconImageHref', '/assets/images/icons/navi-red.svg');
+				if (href === icon) {
+					e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/icons/navi-red.svg');
 				} else {
-					e.get('target').options.set('iconImageHref', '/assets/images/icons/navi.svg');
+					e.get('target').options.set('iconImageHref', icon);
 				}
 			});
 
