@@ -169,6 +169,7 @@ $('.input__file-close').on('click', function() {
 $('.back--js').on('click', function(e) {
   e.preventDefault();
   $(this).closest('form').find('.form-answer').removeClass('shown');
+  $(this).closest('form').find('.form-inner').css('visibility', 'visible').css('opacity', 1);
 });
 
 $('.order--js').on('click', function(e) {

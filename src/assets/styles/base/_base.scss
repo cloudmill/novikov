@@ -19,9 +19,13 @@
 
 body {
   font-feature-settings: 'liga' off;
-  @media screen and (min-width: $screen-md-min) {
-    overflow: hidden !important;
-    height: 100vh !important;
+
+  // добавить в body если скролл кастомный!!
+  &.page-fixed {
+    @media screen and (min-width: $screen-md-min) {
+      overflow: hidden !important;
+      height: 100vh !important;
+    }
   }
 
   &.page-horizontal {
