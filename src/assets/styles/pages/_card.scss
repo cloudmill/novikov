@@ -1481,6 +1481,9 @@ html {
       column-count: 1;
       @media screen and (min-width: $screen-md-min) {
         column-count: 2;
+        &:after {
+          right: 50%;
+        }
       }
     }
 
@@ -1493,6 +1496,9 @@ html {
 
     &--one {
       column-count: 1;
+      &:after {
+        display: none;
+      }
     }
   }
 
