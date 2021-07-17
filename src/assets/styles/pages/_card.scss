@@ -365,7 +365,11 @@ html {
             position: fixed;
             left: 0;
             right: 0;
+            padding: 0 10px;
             bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             @media screen and (min-width: $screen-md-min) {
               position: relative;
@@ -373,6 +377,40 @@ html {
               right: auto;
               bottom: -13px;
               z-index: 2;
+            }
+
+            .ui-button-circle-icon {
+              &:hover {
+                circle {
+                  fill: white;
+                }
+              }
+            }
+
+            .box--js {
+              &:hover {
+                path,
+                rect,
+                line {
+                  fill: white;
+                }
+              }
+            }
+
+            .ui-button-circle-icon__label-wr:after,
+            .ui-button-circle-icon__label {
+              padding-left: 0;
+              padding-right: 0;
+            }
+
+            .btn {
+              font-size: 12px;
+              padding: 10px 5px;
+              white-space: nowrap;
+
+              svg {
+                width: 18px;
+              }
             }
           }
         }
@@ -561,8 +599,11 @@ html {
 
     #footer {
       .section-item {
+        margin: 0 -10px -10px;
+        width: calc(100% + 20px);
         @media screen and (min-width: $screen-md-min) {
           width: 100vw;
+          margin: 0;
           height: 100vh;
           background-color: $baseColor;
         }

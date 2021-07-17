@@ -56,6 +56,7 @@ block content
                     +fieldInput('text', 'date', 'date-o', '', 'Дата', true)
                   .col.select-wrapper.col__xs-6
                     select.select-template(style='width: 100%')
+                      option(value='01') Ближайшее время
                       option(value='11') 11:00
                       option(value='12') 12:00
                       option(value='13') 13:00
@@ -79,11 +80,12 @@ block content
               .order-wrapper__item(data-aos='fade-up')
                 h3 дата и время доставки
                 .row.order-date
-                  .col.col__xs-6
+                  .col.order-date_input
                     +fieldInput('text', 'date', 'date-op', '', 'Дата', true)
-                  .col.select-wrapper.col__xs-6
-                    select.select-template(style='width: 180px')
+                  .col.select-wrapper
+                    select.select-template(style='width: 210px')
                       option(value='11') 11:00
+                      option(value='01') Ближайшее время
                       option(value='12') 12:00
                       option(value='13') 13:00
               .order-wrapper__item(data-aos='fade-up', style='z-index: 0')

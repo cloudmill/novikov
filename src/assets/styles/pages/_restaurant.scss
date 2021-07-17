@@ -125,11 +125,28 @@
     @media screen and (min-width: $screen-xl-min) {
       font-size: 60px;
     }
+    .wrapTitle {
+      position: relative;
+      padding-top: 10px;
+      min-width: 150px;
+      .br {
+        display: block;
+        @media screen and (min-width: $screen-md-min) {
+          display: initial;
+        }
+      }
+      .word-wrap:first-child {
+        padding-left: 10px;
+        @media screen and (min-width: $screen-md-min) {
+          padding-left: 0;
+        }
+      }
+    }
     .select2 {
       display: inline-block;
       font-weight: 400;
       width: auto !important;
-      padding: 1px 10px 0 5px;
+      padding: 1px 10px 0 10px;
       margin-left: 0;
       @media screen and (min-width: $screen-md-min) {
         margin-left: 12px;
@@ -144,6 +161,30 @@
           top: 5px;
         }
       }
+      &.select2-container {
+        position: static;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          background: #F5F5F5;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          opacity: 0;
+          transition: opacity .5s;
+        }
+
+        &.select2-container--open {
+          &:after {
+            opacity: 1;
+          }
+        }
+      }
+
       &-container--open .select2-dropdown--below {
         @media screen and (max-width: $screen-sm-max) {
           min-width: 150px;
@@ -159,6 +200,7 @@
         font-size: 18px;
         padding-bottom: 3px;
         padding-right: 20px;
+        position: relative;
         @media screen and (min-width: $screen-md-min) {
           font-size: 42px;
           padding-bottom: 7px;

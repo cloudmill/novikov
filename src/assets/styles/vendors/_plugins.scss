@@ -186,8 +186,14 @@ body:not(.safari) {
     top: 0;
     right: 5px;
     height: 75%;
-    background: url('../images/icons/select.svg') center right no-repeat;
+    background: url('../images/icons/select.svg') no-repeat center right / 10px auto;
     @include transitionEase();
+    width: 10px;
+
+    @media screen and (min-width: $screen-md-min) {
+      width: 20px;
+      background: url('../images/icons/select.svg') no-repeat center right;
+    }
 
     b {
       display: none;
@@ -206,7 +212,11 @@ body:not(.safari) {
       color: $color-type-2a;
     }
     .select2-selection__arrow {
-      background: url('../images/icons/selectr.svg') center right no-repeat;
+      background: url('../images/icons/selectr.svg') no-repeat center right / 10px auto;
+
+      @media screen and (min-width: $screen-md-min) {
+        background: url('../images/icons/selectr.svg') no-repeat center right;
+      }
     }
   }
 }

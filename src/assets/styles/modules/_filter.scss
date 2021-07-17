@@ -19,12 +19,22 @@
         margin-left: auto;
       }
     }
+    .select2-container--default .select2-results__option {
+      font-size: 12px;
+      @media screen and (min-width: $screen-md-min) {
+        font-size: 18px;
+      }
+    }
     .select2.select2-container {
-      width: 180px !important;
-      margin-left: 20px;
+      width: 140px !important;
+      font-size: 12px;
+      margin-left: 10px;
       padding: 0 10px 0 10px;
       @media screen and (min-width: $screen-md-min) {
+        margin-left: 20px;
+        width: 180px !important;
         padding: 10px 10px 0 10px;
+        font-size: 18px;
       }
       &.select2-container--default .select2-selection--single {
         padding-bottom: 3px;

@@ -131,7 +131,18 @@
 
 .order {
   &-date {
-    max-width: 390px;
+    //max-width: 390px;
+    &_input {
+      width: 195px;
+    }
+
+    .select2 {
+      //min-width: 200px;
+    }
+
+    .select2-container--default .select2-selection--single {
+      padding-right: 15px;
+    }
   }
   &-wrapper {
     max-width: 800px;
