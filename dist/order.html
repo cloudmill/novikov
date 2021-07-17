@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<title>Novikov</title>
 		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no">
 		<link rel="canonical" href="URL">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="format-detection" content="address=no">
@@ -311,6 +311,7 @@
 												</div>
 											</div>
 											<div class="col select-wrapper col__xs-6"><select class="select-template" style="width: 100%">
+													<option value="01">Ближайшее время</option>
 													<option value="11">11:00</option>
 													<option value="12">12:00</option>
 													<option value="13">13:00</option>
@@ -343,13 +344,14 @@
 									<div class="order-wrapper__item" data-aos="fade-up">
 										<h3>дата и время доставки</h3>
 										<div class="row order-date">
-											<div class="col col__xs-6">
+											<div class="col order-date_input">
 												<div class="input"><input class="control input__field" type="text" name="date" id="date-op" placeholder="" required="required" /><label class="input__label" for="date-op"><span class="input__label-content">Дата</span></label>
 													<div class="control-error"></div>
 												</div>
 											</div>
-											<div class="col select-wrapper col__xs-6"><select class="select-template" style="width: 180px">
+											<div class="col select-wrapper"><select class="select-template" style="width: 210px">
 													<option value="11">11:00</option>
+													<option value="01">Ближайшее время</option>
 													<option value="12">12:00</option>
 													<option value="13">13:00</option>
 												</select></div>
