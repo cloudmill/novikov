@@ -23,7 +23,7 @@ export function updateCartCount() {
 	}
 }
 
-export function updateCartList(el, productsList, basketProductId) {
+export function updateCartList(el, productsList, basketProductId, type = 'add') {
 	const regexp = /\B(?=(\d{3})+(?!\d))/g;
 	const id = el.data('product-id');
 	const name = el.data('product-name');
@@ -34,9 +34,9 @@ export function updateCartList(el, productsList, basketProductId) {
 	const curCount = Number(exist.find('.cart-count').text()) + 1;
 	const restMinOrder = $('[data-type=rest-min-order]').val();
 
-	// if (type == 'delete') {
-	// 	productsList.find('[data-type=item-block]').remove();
-	// }
+	if (type == 'delete') {
+		productsList.find('[data-type=item-block]').remove();
+	}
 
 	if (exist.length) {
 		exist.find('.cart-count').text(curCount);
@@ -92,9 +92,9 @@ export function updateCartList(el, productsList, basketProductId) {
 		if (productsList.find('[data-type=item-block]').length == 1) {
 			const totalSumm = restMinOrder - price;
 
-			// if (type != 'delete') {
+			if (type != 'delete') {
 				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div></div>');
-			// }
+			}
 
 			productsList.find('.cart-block-body-null').remove();
 			containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
