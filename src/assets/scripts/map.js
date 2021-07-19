@@ -147,7 +147,7 @@ function moveMarker(map) {
 
 export function initMapRest() {
 	ymaps.ready(function() {
-		const map = new ymaps.Map('yandexMap', {
+		const map = new ymaps.Map('restYMaps', {
 			center: [55.753220, 37.622513],
 			zoom: 14,
 			controls: ['zoomControl', 'geolocationControl']
@@ -190,10 +190,10 @@ export function initMapRest() {
 			map.geoObjects.add(marker);
 		});
 
-		// const allPoints = ymaps.geoQuery(map.geoObjects);
-		// map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
+		const allPoints = ymaps.geoQuery(map.geoObjects);
+		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
 
-		// moveMarker(map);
+		moveMarker(map);
 	});
 }
 
