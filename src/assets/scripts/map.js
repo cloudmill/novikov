@@ -159,23 +159,22 @@ export function initMapRest() {
 
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
+    const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
 
 		mapItems.each(function() {
 			const dataItem = [];
 			const coordItem = $(this).attr('data-adr').split(',');
+			const icon = $(this).attr('data-map-icon') ? $(this).attr('data-map-icon') : defaultIcon;
 
 			dataItem.push(Number(coordItem[0]));
 			dataItem.push(Number(coordItem[1]));
-			dataItem.push($(this).attr('data-map-icon'));
+			dataItem.push(icon);
 			dataItem.push($(this).attr('id'));
 
 			locations.push(dataItem);
 		});
 
-		const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
-
 		locations.forEach((item, i) => {
-			const icon = item[2] ? item[2] : defaultIcon;
 			const marker = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
@@ -183,7 +182,7 @@ export function initMapRest() {
 				},
 				{
 					iconLayout: 'default#image',
-					iconImageHref: icon,
+					iconImageHref: item[2],
 					iconImageSize: [30, 42],
 					iconImageOffset: [-5, -38]
 				});
@@ -191,10 +190,10 @@ export function initMapRest() {
 			map.geoObjects.add(marker);
 		});
 
-		const allPoints = ymaps.geoQuery(map.geoObjects);
-		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
+		// const allPoints = ymaps.geoQuery(map.geoObjects);
+		// map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
 
-		moveMarker(map);
+		// moveMarker(map);
 	});
 }
 
