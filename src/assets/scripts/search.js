@@ -41,7 +41,7 @@ function initMap() {
 
 		map = new ymaps.Map('map', {
 			center: restGeo,
-			zoom: 14,
+			zoom: 9,
 			controls: ['zoomControl', 'geolocationControl']
 		}, {
 			suppressMapOpenBlock: true,
@@ -103,13 +103,14 @@ function initMap() {
             errorBlock = $('.error-tool'),
             buttonSuccess = $('.success--js'),
             inputSearch = $('.autocomplete'),
-            inputBlock = $('.input');
+            inputBlock = $('[data-type=input-block]'),
+            deliveryTextInfo = $('[data-type=delivery-text-info]').length ? $('[data-type=delivery-text-info]').val() : 'Выбранный адрес не входит в зону доставки. Сумма доставки фиксируется менеджером';
 
 					if (isPolygonCheck) {
             buttonDisabled = false;
             buttonSuccess.attr('data-value', selectAddress);
             if (isOutsideDelivery) {
-              errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки. Сумма доставки фиксируется менеджером');
+              errorBlock.addClass('active').text(deliveryTextInfo);
               selectDeliveryId = outsideDelivery;
               selectDeliveryPrice = null;
 
