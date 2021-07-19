@@ -102,7 +102,8 @@ function initMap() {
             buttonDisabled = null,
             errorBlock = $('.error-tool'),
             buttonSuccess = $('.success--js'),
-            inputSearch = $('.autocomplete');
+            inputSearch = $('.autocomplete'),
+            inputBlock = $('.input');
 
 					if (isPolygonCheck) {
             buttonDisabled = false;
@@ -131,6 +132,10 @@ function initMap() {
               errorBlock.addClass('active');
             }
 
+            if (inputBlock.hasClass('input--filled')) {
+              inputBlock.removeClass('input--filled');
+            }
+
             errorBlock.text('Серверу не удается определить выбранное местоположение');
 
             inputSearch.val('');
@@ -138,6 +143,7 @@ function initMap() {
           }
 
           buttonSuccess.prop('disabled', buttonDisabled);
+          inputBlock.addClass('input--filled');
 				})
 				.catch(error => console.log('error', error));
 		}
