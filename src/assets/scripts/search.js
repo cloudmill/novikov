@@ -41,7 +41,7 @@ function initMap() {
 
 		map = new ymaps.Map('map', {
 			center: restGeo,
-			zoom: 14,
+			zoom: 9,
 			controls: ['zoomControl', 'geolocationControl']
 		}, {
 			suppressMapOpenBlock: true,
