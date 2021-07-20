@@ -178,7 +178,7 @@ export function initMapRest() {
 			const marker = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
-					id: i,
+					id: item[3],
 				},
 				{
 					iconLayout: 'default#image',
@@ -189,6 +189,12 @@ export function initMapRest() {
 
 			map.geoObjects.add(marker);
 		});
+
+    map.geoObjects.events.add('click', function(e) {
+      let id = e.get('target').properties.get('id');
+      $('#' + id).addClass('active').siblings().removeClass('active');
+      $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
+    });
 
 		const allPoints = ymaps.geoQuery(map.geoObjects);
 		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
