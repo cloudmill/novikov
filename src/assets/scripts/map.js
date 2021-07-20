@@ -140,8 +140,7 @@ function moveMarker(map) {
 		const lat = parseFloat(latlngStr[0]);
 		const lng = parseFloat(latlngStr[1]);
 
-		// marker.setPosition(new google.maps.LatLng(lat, lng));
-		map.panTo(new google.maps.LatLng(lat, lng));
+		map.setCenter([lat, lng], 17);
 	});
 }
 
