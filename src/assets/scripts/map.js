@@ -169,6 +169,10 @@ export function initMapRest() {
 			dataItem.push(Number(coordItem[1]));
 			dataItem.push(icon);
 			dataItem.push($(this).attr('id'));
+      dataItem.push($(this).attr('data-name'));
+      dataItem.push($(this).attr('data-address'));
+      dataItem.push($(this).attr('data-phone'));
+      dataItem.push($(this).attr('data-site'));
 
 			locations.push(dataItem);
 		});
@@ -178,6 +182,7 @@ export function initMapRest() {
 				[item[0], item[1]],
 				{
 					id: item[3],
+          balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`
 				},
 				{
 					iconLayout: 'default#image',
