@@ -204,10 +204,6 @@ export function initMapRest() {
 
 function initMapYandex() {
 	ymaps.ready(function() {
-		const name = $('#yandexMap').data('name');
-		const adr = $('#yandexMap').data('adr');
-		const phone = $('#yandexMap').data('phone');
-		const url = $('#yandexMap').data('url');
 		const map = new ymaps.Map('yandexMap', {
 			center: [55.753220, 37.622513],
 			zoom: 14,
@@ -224,15 +220,16 @@ function initMapYandex() {
 			map.behaviors.disable('drag');
 		}
 
-		const dataCoordStr = $('[data-type=map-data]').val();
-		const dataCoordinates = dataCoordStr && JSON.parse(`${dataCoordStr}`);
+		const pointData = JSON.parse($('[data-type=map-data]').val());
 		const itemIcon = $('[data-type=map-icon]').val();
 		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
 
-		for (const key in dataCoordinates) {
-			const coord = dataCoordinates[key].split(',');
+		for (const key in pointData) {
+			const coord = pointData[key].COORDINATES.split(',');
+			const phone = '<a href="tel:'+pointData[key].PHONE+'">pointData[key].PHONE</a>';
+      const site = '<a href="'+pointData[key].SITE+'" target="_blank">pointData[key].SITE</a>';
 			const marker = new ymaps.Placemark([coord[0], coord[1]], {
-				balloonContent: `<div class="balloonContent"><h4>${name}</h4><p>${adr}</p><a href="tel:${phone}">${phone}</a><a href="${url}" target="_blank">${url}</a></div>`
+				balloonContent: `<div class="balloonContent"><h4>${pointData[key].NAME}</h4><p>${pointData[key].ADDRESS}</p>${phone + site}</div>`
 			}, {
 				iconLayout: 'default#image',
 				iconImageHref: icon,
