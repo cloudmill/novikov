@@ -6,6 +6,7 @@ import { updateCartList } from './cart.js';
 import { deleteProduct } from './input.js';
 import { appendProduct } from './input.js';
 import { removeProduct } from './input.js';
+import { scrollContent } from '../../app.js';
 
 $(function() {
 	restaurantsFilter();
@@ -209,6 +210,7 @@ function ajaxFilterRestaurantsItems(data, itemsContainer, itemsContainerMap, kit
       kitchensFiltBlock.after(propFeatureBlockResponse);
 
       initMapRest();
+      scrollContent();
 		}
 	});
 }
@@ -245,6 +247,7 @@ function mainRestFilterKitchen() {
         itemsContMap.append(itemsContMapResponse);
 
         initMapRest();
+        scrollContent();
 			}
 		});
 	});
@@ -285,6 +288,7 @@ function mainRestFilterFeature() {
         itemsContMap.append(itemsContMapResponse);
 
         initMapRest();
+        scrollContent();
       }
     });
   });
