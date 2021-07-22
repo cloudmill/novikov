@@ -169,9 +169,19 @@ function mainRestFilterRegion() {
 				regionId: regionId,
 			},
 			success: function(data) {
+        itemsContainer.empty();
+        itemsContainerMap.empty();
 				kitchensOption.remove();
+        propFeatureBlock.remove();
 
-				const kitchensOptionResponse = $(data).find('[data-type=restaurants-kitchens-filter-select] option');
+				const itemsContainerResponse = $(data).find('[data-type=items_container]').children(),
+            itemsContainerMapResponse = $(data).find('[data-type=items-container-map]').children(),
+            kitchensOptionResponse = $(data).find('[data-type=restaurants-kitchens-filter-select] option'),
+            propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
+
+        itemsContainer.append(itemsContainerResponse);
+        itemsContainerMap.append(itemsContainerMapResponse);
+        kitchensFiltBlock.after(propFeatureBlockResponse);
 
 				kitchensSelect.append(kitchensOptionResponse);
 
@@ -179,39 +189,9 @@ function mainRestFilterRegion() {
 					$(this).val($(this).find('[selected]').val()).trigger('change');
 				});
 
-				const dataFilter = {
-					regionId: regionId,
-					kitchenId: kitchensSelect.val(),
-				};
-
-				ajaxFilterRestaurantsItems(dataFilter, itemsContainer, itemsContainerMap, kitchensFiltBlock, propFeatureBlock);
+        initMapRest();
 			}
 		});
-	});
-}
-
-function ajaxFilterRestaurantsItems(data, itemsContainer, itemsContainerMap, kitchensFiltBlock, propFeatureBlock) {
-	$.ajax({
-		type: 'POST',
-		url: window.location.href,
-		dataType: 'html',
-		data: data,
-		success: function(data) {
-			itemsContainer.empty();
-      itemsContainerMap.empty();
-      propFeatureBlock.remove();
-
-			const itemsContainerResponse = $(data).find('[data-type=items_container]').children();
-      const itemsContainerMapResponse = $(data).find('[data-type=items-container-map]').children();
-			const propFeatureBlockResponse = $(data).find('[data-type=filter-feature]');
-
-      itemsContainer.append(itemsContainerResponse);
-      itemsContainerMap.append(itemsContainerMapResponse);
-      kitchensFiltBlock.after(propFeatureBlockResponse);
-
-      initMapRest();
-      scrollContent();
-		}
 	});
 }
 
@@ -427,9 +407,9 @@ function restaurantsTabs() {
 
     tab.addClass('active').siblings().removeClass('active');
 
-    if (tab.hasClass('map')) {
-      initMapRest();
-    }
+    // if (tab.hasClass('map')) {
+    //   initMapRest();
+    // }
   });
 }
 
