@@ -418,7 +418,7 @@ $('.promo-test--js').click(function() {
 					if (r.success) {
 						const container = $('[data-type=cart-items-container]');
 
-						steps(obj, data.percent_discount);
+						steps(obj, r.percent_discount);
 
 						$.ajax({
 							type: 'POST',
@@ -427,10 +427,10 @@ $('.promo-test--js').click(function() {
 							data: {
 								discountApplied: true,
 							},
-							success: function(r) {
+							success: function(response) {
 								container.empty();
 
-								container.append($(r));
+								container.append($(response));
 							}
 						});
 
