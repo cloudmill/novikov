@@ -244,7 +244,7 @@ $('.order--js').on('click', function(e) {
 
 	$.ajax({
 		type: 'POST',
-		url: '/local/templates/main/include/ajax/order.php',
+		url: $(this).attr('data-url'),
 		dataType: 'json',
 		data: data,
 		success: function(res) {
