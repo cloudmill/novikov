@@ -160,6 +160,7 @@ function mainRestFilterRegion() {
 		const kitchensOption = container.find('[data-type=restaurants-kitchens-filter-select] option');
     const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
     const propFeatureBlock = container.find('[data-type=filter-feature]');
+    const mapContainer =  container.find('[data-type=items-container-map]');
 
 		$.ajax({
 			type: 'POST',
@@ -189,7 +190,10 @@ function mainRestFilterRegion() {
 					$(this).val($(this).find('[selected]').val()).trigger('change');
 				});
 
-        initMapRest();
+				if (mapContainer.hasClass('active')) {
+          initMapRest();
+          scrollContent();
+        }
 			}
 		});
 	});
@@ -203,6 +207,7 @@ function mainRestFilterKitchen() {
 		const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchensFiltBlock = container.find('[data-type=kitchens-filt-block]');
     const propFeatureBlock = container.find('[data-type=filter-feature]');
+    const mapContainer =  container.find('[data-type=items-container-map]');
 
 		$.ajax({
 			type: 'POST',
@@ -226,8 +231,10 @@ function mainRestFilterKitchen() {
         itemsCont.append(itemsContResponse);
         itemsContMap.append(itemsContMapResponse);
 
-        initMapRest();
-        scrollContent();
+        if (mapContainer.hasClass('active')) {
+          initMapRest();
+          scrollContent();
+        }
 			}
 		});
 	});
@@ -243,6 +250,7 @@ function mainRestFilterFeature() {
     let feautureIds = [];
     const regionId = container.find('[data-type=restaurants-region-filter-select]').val();
     const kitchenId = container.find('[data-type=restaurants-kitchens-filter-select]').val();
+    const mapContainer =  container.find('[data-type=items-container-map]');
 
     checkedFeature.each(function (i) {
       feautureIds[i] = $(this).attr('data-id');
@@ -267,8 +275,10 @@ function mainRestFilterFeature() {
         itemsCont.append(itemsContResponse);
         itemsContMap.append(itemsContMapResponse);
 
-        initMapRest();
-        scrollContent();
+        if (mapContainer.hasClass('active')) {
+          initMapRest();
+          scrollContent();
+        }
       }
     });
   });
@@ -409,6 +419,7 @@ function restaurantsTabs() {
 
     if (tab.hasClass('map') && $('#restYMaps').children().length === 0) {
       initMapRest();
+      scrollContent();
     }
   });
 }
