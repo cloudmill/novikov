@@ -407,9 +407,9 @@ function restaurantsTabs() {
 
     tab.addClass('active').siblings().removeClass('active');
 
-    // if (tab.hasClass('map')) {
-    //   initMapRest();
-    // }
+    if (tab.hasClass('map') && $('#restYMaps').children().length === 0) {
+      initMapRest();
+    }
   });
 }
 
