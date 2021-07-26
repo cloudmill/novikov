@@ -139,8 +139,12 @@ function moveMarker(map) {
 		const latlngStr = coords.split(',', 2);
 		const lat = parseFloat(latlngStr[0]);
 		const lng = parseFloat(latlngStr[1]);
+		const id = $(this).attr('id');
 
 		map.setCenter([lat, lng], 17);
+    placemarks[id].balloon.open();
+
+    console.log(map.geoObjects);
 	});
 }
 
@@ -159,6 +163,7 @@ export function initMapRest() {
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
     const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
+    const placemarks = {};
 
 		mapItems.each(function() {
 			const dataItem = [];
@@ -178,7 +183,7 @@ export function initMapRest() {
 		});
 
 		locations.forEach((item, i) => {
-			const marker = new ymaps.Placemark(
+      placemarks[item[3]] = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
 					id: item[3],
@@ -190,9 +195,11 @@ export function initMapRest() {
 					iconImageSize: [30, 42],
 					iconImageOffset: [-5, -38]
 				});
-
-			map.geoObjects.add(marker);
 		});
+
+    console.log(placemarks);
+
+    // map.geoObjects.add(placemarks);
 
     map.geoObjects.events.add('click', function(e) {
       let id = e.get('target').properties.get('id');
