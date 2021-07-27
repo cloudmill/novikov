@@ -1,3 +1,4 @@
+import AOS from 'aos';
 import { sliderSwiper } from './sliders.js';
 import { initSwiper } from './sliders.js';
 import { initMapRest } from './map.js';
@@ -423,6 +424,12 @@ function restaurantsTabs() {
       initMapRest();
       scrollContent();
     }
+
+    setTimeout(() => {
+      AOS.refresh({
+        offset: 50,
+      });
+    }, 400);
   });
 }
 
