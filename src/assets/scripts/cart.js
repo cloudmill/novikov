@@ -28,6 +28,9 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 	const id = el.data('product-id');
 	const name = el.data('product-name');
 	const price = el.data('price');
+  const basePrice = el.data('base-pr');
+  const basePriceCalc = el.data('base-pr-calc');
+  const discount = basePrice - price;
 	const weight = el.data('weight');
 	const exist = productsList.find('[data-item-id=' + id + ']');
 	const containerSidebar = el.parents('[data-type=main_container]');
@@ -40,6 +43,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 
 	if (exist.length) {
 		exist.find('.cart-count').text(curCount);
+    console.log('exist');
 	} else {
 		productsList
 			.prepend(`
@@ -63,7 +67,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
           </div>
         </div>
         <div class="cart-block-item-price">
-          <div class="cart-pr" data-pr=${price}><span>${price.toString().replace(regexp, ' ')}</span> ₽</div>
+          <div class="cart-pr" data-pr=${price} data-base-pr=${basePrice} data-base-pr-calc=${basePriceCalc}><span>${price.toString().replace(regexp, ' ')}</span> ₽</div>
           <div class="cart-rm cart-rm--js" data-type="cart" data-product-id="${basketProductId}" data-func-type="delete" data-quantity="0">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="circle" d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z" fill="#F3F3F3"></path>
@@ -90,16 +94,20 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 		);
 
 		if (productsList.find('[data-type=item-block]').length == 1) {
-			const totalSumm = restMinOrder - price;
+			const totalSumm = restMinOrder - basePrice;
 
 			if (type != 'delete') {
-				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span>${price}</span> ₽</b></div></div></div>');
+				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span data-type="order-price">'+ basePrice +'</span> ₽</b></div></div></div>');
+
+        if (discount !== 0) {
+          containerSidebar.find('[data-type=cart-summ]').append('<div><div>Скидка</div><div className="card-summ"><b><span data-type="discount">'+ discount +' ₽</span></b></div></div>');
+        }
 			}
 
 			productsList.find('.cart-block-body-null').remove();
 			containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
 
-			if (price < restMinOrder) {
+			if (basePrice < restMinOrder) {
 				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>' + totalSumm + '</span> ₽ до минимальной суммы заказа</a>');
 			} else {
 				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
@@ -109,21 +117,29 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 
 	const pr = exist.find('.cart-pr');
 	const prData = pr.data('pr');
+
 	pr.find('span').text((prData * curCount).toString().replace(regexp, ' '));
+  pr.attr('data-base-pr-calc', (basePrice * curCount).toString().replace(regexp, ' '));
+  let oldPrice = 0;
 	let summ = 0;
 	let count = 0;
 	const items = productsList.find('[data-type=item-block]');
 
 	items.each((index, item) => {
 		if($(item).find('.cart-pr span').length) {
+      oldPrice += parseInt($(item).find('.cart-pr').attr('data-base-pr-calc').replace(' ', ''), 10);
 			summ += parseInt($(item).find('.cart-pr span').text().replace(' ', ''), 10);
 			count += parseInt($(item).find('.cart-count').text(), 10);
 		}
 	});
 
-	containerSidebar.find('.card-summ b span').text(summ.toString().replace(regexp, ' '));
+	const totalDiscount = oldPrice - summ;
 
-	const totalSumm = restMinOrder - summ;
+	containerSidebar.find('[data-type=order-price]').text(oldPrice.toString().replace(regexp, ' '));
+  containerSidebar.find('[data-type=discount]').text(totalDiscount.toString().replace(regexp, ' ') + ' ₽');
+  containerSidebar.find('[data-type=total]').text(summ.toString().replace(regexp, ' '));
+
+	const totalSumm = restMinOrder - oldPrice;
 
 	if (summ < restMinOrder) {
 		containerSidebar.find('[data-type=button-order] span').text(totalSumm);
