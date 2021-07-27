@@ -100,7 +100,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 				productsList.after('<div class="cart-block-summ" data-type="cart-summ"><div><div>Сумма заказа</div><div class="card-summ"><b><span data-type="order-price">'+ basePrice +'</span> ₽</b></div></div></div>');
 
         if (discount !== 0) {
-          containerSidebar.find('[data-type=cart-summ]').append('<div><div>Скидка</div><div className="card-summ"><b><span data-type="discount">'+ discount +' ₽</span></b></div></div>');
+          containerSidebar.find('[data-type=cart-summ]').append('<div><div>Скидка</div><div className="card-summ"><b><span data-type="discount">'+ discount +'</span> ₽</b></div></div>');
         }
 			}
 
@@ -136,7 +136,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 	const totalDiscount = oldPrice - summ;
 
 	containerSidebar.find('[data-type=order-price]').text(oldPrice.toString().replace(regexp, ' '));
-  containerSidebar.find('[data-type=discount]').text(totalDiscount.toString().replace(regexp, ' ') + ' ₽');
+  containerSidebar.find('[data-type=discount]').text(totalDiscount.toString().replace(regexp, ' '));
   containerSidebar.find('[data-type=total]').text(summ.toString().replace(regexp, ' '));
 
 	const totalSumm = restMinOrder - oldPrice;
