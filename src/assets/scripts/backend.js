@@ -129,6 +129,8 @@ function eventsFilter() {
 		const itemsCont = container.find('[data-type=items_container]');
 		const pageNav = container.find('[data-type=page_nav_block]');
 
+    container.find('.filter-global li.span').css({'width': `${$(this).width() + 40}px`, 'left': `${$(this).position().left}px`});
+
 		$.ajax({
 			type: 'POST',
 			url: window.location.href,
