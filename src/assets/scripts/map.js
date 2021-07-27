@@ -133,7 +133,7 @@ const mcOptions = {
 	}]
 };
 
-function moveMarker(map) {
+function moveMarker(map, placemarks) {
 	$('.mapList-item').click(function() {
 		const coords = $(this).data('adr');
 		const latlngStr = coords.split(',', 2);
@@ -141,10 +141,10 @@ function moveMarker(map) {
 		const lng = parseFloat(latlngStr[1]);
 		const id = $(this).attr('id');
 
+		$(this).addClass('active').siblings().removeClass('active');
+
 		map.setCenter([lat, lng], 17);
     placemarks[id].balloon.open();
-
-    console.log(map.geoObjects);
 	});
 }
 
@@ -195,11 +195,9 @@ export function initMapRest() {
 					iconImageSize: [30, 42],
 					iconImageOffset: [-5, -38]
 				});
+
+      map.geoObjects.add(placemarks[item[3]]);
 		});
-
-    console.log(placemarks);
-
-    // map.geoObjects.add(placemarks);
 
     map.geoObjects.events.add('click', function(e) {
       let id = e.get('target').properties.get('id');
@@ -210,7 +208,7 @@ export function initMapRest() {
 		const allPoints = ymaps.geoQuery(map.geoObjects);
 		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
 
-		moveMarker(map);
+		moveMarker(map, placemarks);
 	});
 }
 
