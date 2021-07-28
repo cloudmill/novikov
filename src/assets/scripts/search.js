@@ -2,6 +2,7 @@ import 'devbridge-autocomplete';
 // import {mapStyle} from './map';
 import {validateField} from './input';
 import {myModal} from './popup';
+import {initSwiper} from "./sliders";
 
 const DA_URL = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
 const DA_API_KEY = '4ea50958b736a6ac3b71ab59a97b96202ace7e85';
@@ -33,6 +34,7 @@ function initMap() {
       res = null,
       selectDeliveryId = null,
       selectDeliveryPrice = null,
+      selectDeliveryRkId = null,
       outsideDelivery = $('[data-type=data-delivery-outside]').val();
 
 		if (strRestGeo) {
@@ -62,6 +64,7 @@ function initMap() {
 				{
 					hintContent: polygonDataStr[key].PRICE > 0 ? 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.' : 'Бесплатная доставка',
 					deliveryId: key,
+          deliveryRkId: polygonDataStr[key].DELIVERY_ID,
           deliveryPrice: polygonDataStr[key].PRICE,
 				}
 			);
@@ -120,6 +123,7 @@ function initMap() {
               }
               selectDeliveryId = e.get('target').properties.get('deliveryId');
               selectDeliveryPrice = e.get('target').properties.get('deliveryPrice');
+              selectDeliveryRkId = e.get('target').properties.get('deliveryRkId');
             }
 					} else {
             errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
@@ -162,6 +166,16 @@ function initMap() {
 
       if (selectDeliveryId) {
         $('.tab-content.active').attr('data-delivery-id', selectDeliveryId);
+
+        $.ajax({
+          type: 'POST',
+          url: '/local/templates/main/include/ajax/selectDelivery.php',
+          dataType: 'json',
+          data: {
+            deliveryId: selectDeliveryRkId,
+          },
+          success: function(data) {}
+        });
       }
 
       let basePriceBlock = $('[data-type=order-price]'),
