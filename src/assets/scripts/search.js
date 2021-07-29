@@ -63,8 +63,8 @@ function initMap() {
 				[polygonData],
 				{
 					hintContent: polygonDataStr[key].PRICE > 0 ? 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.' : 'Бесплатная доставка',
-					deliveryId: key,
-          deliveryRkId: polygonDataStr[key].DELIVERY_ID,
+					deliveryId: polygonDataStr[key].DELIVERY_ID,
+          deliveryRkId: polygonDataStr[key].DELIVERY_RK_ID,
           deliveryPrice: polygonDataStr[key].PRICE,
 				}
 			);
