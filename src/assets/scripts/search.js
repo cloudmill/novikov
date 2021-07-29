@@ -145,10 +145,6 @@ function initMap() {
 
           buttonSuccess.prop('disabled', buttonDisabled);
           inputBlock.addClass('input--filled');
-
-
-          console.log(selectDeliveryId);
-          console.log(selectDeliveryRkId);
 				})
 				.catch(error => console.log('error', error));
 		}
