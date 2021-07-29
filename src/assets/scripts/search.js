@@ -49,10 +49,6 @@ function initMap() {
 			suppressMapOpenBlock: true,
 		});
 
-		// console debug
-		window.debMap = map;
-		// console debug
-
 		const polygonDataStr = JSON.parse($('[data-type=data-delivery-zones]').val());
 		let polygonData = null;
 
@@ -116,14 +112,14 @@ function initMap() {
               errorBlock.addClass('active').text(deliveryTextInfo);
               selectDeliveryId = outsideDelivery;
               selectDeliveryPrice = null;
-
+              selectDeliveryRkId = null;
             } else {
               if (errorBlock.hasClass('active')) {
                 errorBlock.removeClass('active');
               }
               selectDeliveryId = e.get('target').properties.get('deliveryId');
-              selectDeliveryPrice = e.get('target').properties.get('deliveryPrice');
               selectDeliveryRkId = e.get('target').properties.get('deliveryRkId');
+              selectDeliveryPrice = e.get('target').properties.get('deliveryPrice');
             }
 					} else {
             errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
@@ -149,6 +145,10 @@ function initMap() {
 
           buttonSuccess.prop('disabled', buttonDisabled);
           inputBlock.addClass('input--filled');
+
+
+          console.log(selectDeliveryId);
+          console.log(selectDeliveryRkId);
 				})
 				.catch(error => console.log('error', error));
 		}
@@ -164,9 +164,10 @@ function initMap() {
         return false;
       }
 
-      if (selectDeliveryId) {
-        $('.tab-content.active').attr('data-delivery-id', selectDeliveryId);
+      let thisObj = $(this),
+        deliveryVal = thisObj.attr('data-value');
 
+      if (selectDeliveryId) {
         $.ajax({
           type: 'POST',
           url: '/local/templates/main/include/ajax/selectDelivery.php',
@@ -174,51 +175,54 @@ function initMap() {
           data: {
             deliveryId: selectDeliveryRkId,
           },
-          success: function(data) {}
+          success: function(r) {
+            if (r.success === true) {
+              let basePriceBlock = $('[data-type=order-price]'),
+                totalPriceBlock = $('[data-type=total]'),
+                calcBasePrice = basePriceBlock.attr('data-price'),
+                calcTotalPrice = totalPriceBlock.attr('data-price'),
+                currency = ' ₽';
+
+              if (selectDeliveryPrice && (selectDeliveryPrice > 0)) {
+                calcBasePrice = Number(basePriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
+                calcTotalPrice = Number(totalPriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
+              } else {
+                selectDeliveryPrice = selectDeliveryPrice !== null ? 'Бесплатно' : 'Индивидуально';
+                currency = '';
+              }
+
+              if ($('[data-type=container-delivery-price]').length) {
+                $('[data-type=container-delivery-price]').replaceWith('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
+              } else {
+                $('[data-type=container-base-price]').append('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
+              }
+
+              basePriceBlock.text(calcBasePrice);
+              totalPriceBlock.text(calcTotalPrice);
+
+              $('.order-delivery, .order-wrapper__item--date, .order-payment').addClass('active');
+              $('.tab-content.active').attr('data-delivery-id', selectDeliveryId);
+
+              if (true) {
+                // показать блок даты, если доставка возможна
+                $('.order-wrapper__item--date').addClass('active');
+              } else {
+                // ИЛИ показать блок курьера, если доставка НЕвозможна
+                $('.order-wrapper__item--taxi').addClass('active');
+              }
+
+              $('.order-delivery-adr p').text(deliveryVal);
+              $('.order-delivery .input input').val(deliveryVal);
+              $('.order-delivery .input').removeClass('error').find('.control-error').text('');
+
+              myModal.close();
+              return false;
+            } else {
+              console.log(r.errors);
+            }
+          }
         });
       }
-
-      let basePriceBlock = $('[data-type=order-price]'),
-        deliveryPriceBlock = $('[data-type=delivery-price]'),
-        totalPriceBlock = $('[data-type=total]'),
-        calcBasePrice = basePriceBlock.attr('data-price'),
-        calcTotalPrice = totalPriceBlock.attr('data-price'),
-        currency = ' ₽';
-
-      if (selectDeliveryPrice && selectDeliveryPrice > 0) {
-        calcBasePrice = Number(basePriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
-        calcTotalPrice = Number(totalPriceBlock.attr('data-price')) + Number(selectDeliveryPrice);
-      } else {
-        selectDeliveryPrice = selectDeliveryPrice !== null ? 'Бесплатно' : 'Индивидуально';
-        currency = '';
-      }
-
-      if ($('[data-type=container-delivery-price]').length) {
-        $('[data-type=container-delivery-price]').replaceWith('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
-      } else {
-        $('[data-type=container-base-price]').append('<div data-type="container-delivery-price"><div>Доставка</div><div class="card-summ"><b><span data-type="delivery-price">' + selectDeliveryPrice + '</span>' + currency + '</b></div></div>');
-      }
-
-      basePriceBlock.text(calcBasePrice);
-      totalPriceBlock.text(calcTotalPrice);
-
-      $('.order-delivery, .order-wrapper__item--date, .order-payment').addClass('active');
-
-      $('[data-delivery-type=delivery]').attr('data-delivery-id', $(this).attr('data-delivery-id'));
-
-      if (true) {
-        // показать блок даты, если доставка возможна
-        $('.order-wrapper__item--date').addClass('active');
-      } else {
-        // ИЛИ показать блок курьера, если доставка НЕвозможна
-        $('.order-wrapper__item--taxi').addClass('active');
-      }
-      $('.order-delivery-adr p').text($(this).attr('data-value'));
-      $('.order-delivery .input input').val($(this).attr('data-value'));
-      $('.order-delivery .input').removeClass('error').find('.control-error').text('');
-
-      myModal.close();
-      return false;
     });
 	});
 }
