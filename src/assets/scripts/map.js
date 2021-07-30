@@ -193,7 +193,9 @@ export function initMapRest() {
 					iconLayout: 'default#image',
 					iconImageHref: item[2],
 					iconImageSize: [30, 42],
-					iconImageOffset: [-5, -38]
+					iconImageOffset: [-5, -38],
+          balloonCloseButton: false,
+          hideIconOnBalloonOpen: false,
 				});
 
       map.geoObjects.add(placemarks[item[3]]);
