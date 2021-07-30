@@ -33,7 +33,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
   const discount = basePrice - price;
 	const weight = el.data('weight');
 	const exist = productsList.find('[data-item-id=' + id + ']');
-	const containerSidebar = el.parents('[data-type=main_container]');
+	const containerSidebar = el.parents('[data-type=body]');
 	const curCount = Number(exist.find('.cart-count').text()) + 1;
 	const restMinOrder = $('[data-type=rest-min-order]').val();
 
@@ -43,7 +43,6 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 
 	if (exist.length) {
 		exist.find('.cart-count').text(curCount);
-    console.log('exist');
 	} else {
 		productsList
 			.prepend(`
@@ -107,7 +106,7 @@ export function updateCartList(el, productsList, basketProductId, type = 'add') 
 			productsList.find('.cart-block-body-null').remove();
 			containerSidebar.find('.cart-block-count').removeClass('cart-block-count--null');
 
-			if (basePrice < restMinOrder) {
+			if (restMinOrder && (basePrice < restMinOrder)) {
 				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js disabled" data-type="button-order" href="#" style="display: block" disabled><span>' + totalSumm + '</span> ₽ до минимальной суммы заказа</a>');
 			} else {
 				containerSidebar.find('[data-type=button-order]').replaceWith('<a class="btn btn--full btn--primary form--js" data-type="button-order" href="/order/">Заказать</a>');
