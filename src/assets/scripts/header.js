@@ -41,9 +41,9 @@ $('.hr-block--js').click(function() {
 	$('.vacancy-block').toggleClass('active');
 	$('.overlay').toggleClass('active');
 
-	$('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_NAME" value="'+vacancyName+'">');
-  $('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_RESTAURANT" value="'+vacancyRestaurant+'">');
-  $('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_REGION" value="'+vacancyRegion+'">');
+	$('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_NAME" value="' + vacancyName + '">');
+	$('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_RESTAURANT" value="' + vacancyRestaurant + '">');
+	$('[data-type=container-form]').append('<input type="hidden" data-type="get-field" data-field="UF_VACANCY_REGION" value="' + vacancyRegion + '">');
 
 	return false;
 });
@@ -52,13 +52,20 @@ $('.box--js').click(function() {
 	const tab = $(this).data('tab');
 	$('.' + className).toggleClass('active');
 	$('.overlay').toggleClass('active');
-	console.log(tab);
 	if (tab) {
 		$('.tab-container .tab-content').removeClass('active');
 		$('.tab-container .tabs .tab').removeClass('active');
 		$('.tab-container').find('.' + tab).addClass('active');
 		$('.tab-container .tabs .tab[data-toggle-target=".' + tab + '"]').addClass('active');
 	}
+	return false;
+});
+// ЭТО ДЛЯ ТЕСТИРОВАНИЯ ВЕРСТКИ НА СТРАНИЦЕ restaurants.html. Если мешает бэку удалить класс .test-tab--js!
+$('.test-tab--js .tab').click(function() {
+	const className = $(this).data('toggle-target');
+	$('.test-tab--js .tab').removeClass('active');
+	$('.tab-content').removeClass('active');
+	$('.tab-content' + className).addClass('active');
 	return false;
 });
 $('.page-header__close--js').click(function() {

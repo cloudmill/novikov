@@ -144,7 +144,7 @@ function moveMarker(map, placemarks) {
 		$(this).addClass('active').siblings().removeClass('active');
 
 		map.setCenter([lat, lng], 17);
-    placemarks[id].balloon.open();
+		placemarks[id].balloon.open();
 	});
 }
 
@@ -162,8 +162,8 @@ export function initMapRest() {
 
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
-    const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
-    const placemarks = {};
+		const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
+		const placemarks = {};
 
 		mapItems.each(function() {
 			const dataItem = [];
@@ -174,38 +174,38 @@ export function initMapRest() {
 			dataItem.push(Number(coordItem[1]));
 			dataItem.push(icon);
 			dataItem.push($(this).attr('id'));
-      dataItem.push($(this).attr('data-name'));
-      dataItem.push($(this).attr('data-address'));
-      dataItem.push($(this).attr('data-phone'));
-      dataItem.push($(this).attr('data-site'));
+			dataItem.push($(this).attr('data-name'));
+			dataItem.push($(this).attr('data-address'));
+			dataItem.push($(this).attr('data-phone'));
+			dataItem.push($(this).attr('data-site'));
 
 			locations.push(dataItem);
 		});
 
-		locations.forEach((item, i) => {
-      placemarks[item[3]] = new ymaps.Placemark(
+		locations.forEach((item) => {
+			placemarks[item[3]] = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
 					id: item[3],
-          balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`
+					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`
 				},
 				{
 					iconLayout: 'default#image',
 					iconImageHref: item[2],
 					iconImageSize: [30, 42],
-					iconImageOffset: [-5, -38],
-          balloonCloseButton: false,
-          hideIconOnBalloonOpen: false,
+					iconImageOffset: [40, -10],
+					balloonCloseButton: false,
+					hideIconOnBalloonOpen: false,
 				});
 
-      map.geoObjects.add(placemarks[item[3]]);
+			map.geoObjects.add(placemarks[item[3]]);
 		});
 
-    map.geoObjects.events.add('click', function(e) {
-      let id = e.get('target').properties.get('id');
-      $('#' + id).addClass('active').siblings().removeClass('active');
-      $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
-    });
+		map.geoObjects.events.add('click', function(e) {
+			const id = e.get('target').properties.get('id');
+			$('#' + id).addClass('active').siblings().removeClass('active');
+			$('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
+		});
 
 		const allPoints = ymaps.geoQuery(map.geoObjects);
 		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
@@ -234,12 +234,12 @@ function initMapYandex() {
 
 		const pointData = JSON.parse($('[data-type=map-data]').val());
 		const itemIcon = $('[data-type=map-icon]').val();
-		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
+		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/images/icons/navi.svg';
 
 		for (const key in pointData) {
 			const coord = pointData[key].COORDINATES.split(',');
-			const phone = '<a href="tel:'+pointData[key].PHONE+'">'+pointData[key].PHONE+'</a>';
-      const site = '<a href="'+pointData[key].SITE+'" target="_blank">'+pointData[key].SITE+'</a>';
+			const phone = '<a href="tel:' + pointData[key].PHONE + '">' + pointData[key].PHONE + '</a>';
+			const site = '<a href="' + pointData[key].SITE + '" target="_blank">' + pointData[key].SITE + '</a>';
 			const marker = new ymaps.Placemark([coord[0], coord[1]], {
 				balloonContent: `<div class="balloonContent"><h4>${pointData[key].NAME}</h4><p>${pointData[key].ADDRESS}</p>${phone + site}</div>`
 			}, {
@@ -254,7 +254,7 @@ function initMapYandex() {
 			marker.events.add('click', function(e) {
 				const href = marker.options._options.iconImageHref;
 				if (href === icon) {
-					e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/icons/navi-red.svg');
+					e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/images/icons/navi-red.svg');
 				} else {
 					e.get('target').options.set('iconImageHref', icon);
 				}
@@ -270,5 +270,9 @@ function initMapYandex() {
 $(function() {
 	if ($('#yandexMap').length) {
 		initMapYandex();
+	}
+	// ЭТО ДЛЯ ТЕСТИРОВАНИЯ ВЕРСТКИ НА СТРАНИЦЕ restaurants.html. Если мешает бэку, закомменить!
+	if ($('#restYMaps').length) {
+		initMapRest();
 	}
 });
