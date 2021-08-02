@@ -214,13 +214,18 @@ export function initMapRest() {
 				[item[0], item[1]],
 				{
 					id: index,
-					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`
+					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`,
+					hintOptions: {
+						maxWidth: 220,
+						showTimeout: 200,
+						offset: [10, 300]
+					},
 				},
 				{
 					iconLayout: 'default#image',
 					iconImageHref: item[2],
 					iconImageSize: [30, 42],
-					iconImageOffset: [40, -10],
+					iconImageOffset: [-5, -38],
 					balloonCloseButton: false,
 					hideIconOnBalloonOpen: false,
 				}
