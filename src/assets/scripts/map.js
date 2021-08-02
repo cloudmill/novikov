@@ -133,6 +133,8 @@ const mcOptions = {
 	}]
 };
 
+let clusterer;
+
 function moveMarker(map, placemarks) {
 	$('.mapList-item').click(function() {
 		const coords = $(this).data('adr');
@@ -160,6 +162,31 @@ export function initMapRest() {
 
 		map.behaviors.disable('scrollZoom');
 
+
+		const clusterIcons = [
+			{
+				href: 'assets/images/icons/navi-e.svg',
+				size: [30, 42],
+				offset: [40, -10],
+			},
+			{
+				href: 'assets/images/icons/navi-e.svg',
+				size: [30, 42],
+				offset: [40, -10],
+			},
+		];
+		const MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+			'<div style="color: #FFFFFF; font-weight: bold;margin-top: 3px">{{ properties.geoObjects.length }}</div>'
+		);
+		clusterer = new ymaps.Clusterer({
+			clusterIcons: clusterIcons,
+			clusterIconContentLayout: MyIconContentLayout,
+			groupByCoordinates: false,
+			clusterDisableClickZoom: true,
+			clusterHideIconOnBalloonOpen: false,
+			geoObjectHideIconOnBalloonOpen: false
+		});
+
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
 		const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
@@ -182,11 +209,11 @@ export function initMapRest() {
 			locations.push(dataItem);
 		});
 
-		locations.forEach((item) => {
-			placemarks[item[3]] = new ymaps.Placemark(
+		locations.forEach((item, index) => {
+			const placeMark = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
-					id: item[3],
+					id: index,
 					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`
 				},
 				{
@@ -196,9 +223,11 @@ export function initMapRest() {
 					iconImageOffset: [40, -10],
 					balloonCloseButton: false,
 					hideIconOnBalloonOpen: false,
-				});
+				}
+			);
 
-			map.geoObjects.add(placemarks[item[3]]);
+			clusterer.add(placeMark);
+			map.geoObjects.add(placeMark);
 		});
 
 		map.geoObjects.events.add('click', function(e) {
@@ -208,7 +237,10 @@ export function initMapRest() {
 		});
 
 		const allPoints = ymaps.geoQuery(map.geoObjects);
-		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
+		console.log(allPoints);
+		map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
+		// map.geoObjects.add(clusterer);
+
 
 		moveMarker(map, placemarks);
 	});
@@ -263,7 +295,7 @@ function initMapYandex() {
 			map.geoObjects.add(marker);
 		}
 		const allPoints = ymaps.geoQuery(map.geoObjects);
-		map.setBounds(allPoints.getBounds(), { checkZoomRange: true });
+		map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
 	});
 }
 

@@ -49,6 +49,10 @@
         width: 220px !important;
         margin-left: 0;
       }
+
+      .select2-selection__arrow {
+        height: 100%;
+      }
     }
   }
   &-checkbox {
