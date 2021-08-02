@@ -38,7 +38,7 @@ function scrollX() {
 			advanced: { updateOnContentResize: false, updateOnImageLoad: false },
 			callbacks: {
 				whileScrolling: function() {
-					const getL = this.mcs.leftPct > 82;
+					const getL = this.mcs.leftPct > 80;
 					const containerPos = $('.mCSB_container').width() - window.innerWidth - window.innerWidth;
 					if (getL) {
 						$('.page-card .card-bottom').css('left', `${this.mcs.left + containerPos}px`);
