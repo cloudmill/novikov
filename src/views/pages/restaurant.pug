@@ -88,10 +88,10 @@ block content
             .swiper-pagination
             .swiper-wrapper
               - for (let x = 2; x < 8; x++)
-              .swiper-slide
-                .image
-                  .logo: +img('card/logo.jpg')
-                  +img('card/slide.jpg')
+                .swiper-slide
+                  .image
+                    .logo: +img('card/logo.jpg')
+                    +img('card/slide.jpg')
         .section-item.section-item--long
           .row.card-info-text
             .col.col__xl-3.col__lg-3.col__md-3.col__xs-12(data-aos='fade-left')
@@ -191,9 +191,9 @@ block content
           .vertical-swiper.swiper-container.vertical-swiper--right.aos-init-left
             .swiper-wrapper
               - for (let x = 2; x < 8; x++)
-              .swiper-slide
-                .image
-                  +img('card/slide-2.jpg')
+                .swiper-slide
+                  .image
+                    +img('card/slide-2.jpg')
             include ../components/_sw-arrows-tb
             .swiper-pagination
       section#event.section
@@ -205,19 +205,19 @@ block content
             .carousel-swiper-two.swiper-container.carousel-swiper-img.aos-init-left
               .swiper-wrapper
                 - for (let x = 2; x < 5; x++)
-                .swiper-slide
-                  a.events-item(href='#')
-                    .events-item-img
-                      .events-item-logo: +img('index/logo-1.jpg')
-                      +img('index/event-1.jpg')
-                    .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
-                    .events-item-date 27.03.2021
-                .swiper-slide
-                  a.events-item(href='#')
-                    .events-item-img
-                      +img('index/event-2.jpg')
-                    .events-item-title Ресторан savva дарит скидку зрителям большого театра
-                    .events-item-date 27.03.2021
+                  .swiper-slide
+                    a.events-item(href='#')
+                      .events-item-img
+                        .events-item-logo: +img('index/logo-1.jpg')
+                        +img('index/event-1.jpg')
+                      .events-item-title Долгожданная премьера эксклюзивных вин проекта Taste Wine Selection of Fine Wines
+                      .events-item-date 27.03.2021
+                  .swiper-slide
+                    a.events-item(href='#')
+                      .events-item-img
+                        +img('index/event-2.jpg')
+                      .events-item-title Ресторан savva дарит скидку зрителям большого театра
+                      .events-item-date 27.03.2021
       section#maps.section
         .section-item
           .card-info-map.aos-init-left
