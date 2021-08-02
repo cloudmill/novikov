@@ -215,11 +215,6 @@ export function initMapRest() {
 				{
 					id: index,
 					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`,
-					hintOptions: {
-						maxWidth: 220,
-						showTimeout: 200,
-						offset: [10, 300]
-					},
 				},
 				{
 					iconLayout: 'default#image',
@@ -271,7 +266,7 @@ function initMapYandex() {
 
 		const pointData = JSON.parse($('[data-type=map-data]').val());
 		const itemIcon = $('[data-type=map-icon]').val();
-		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/images/icons/navi.svg';
+		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
 
 		for (const key in pointData) {
 			const coord = pointData[key].COORDINATES.split(',');
@@ -285,17 +280,19 @@ function initMapYandex() {
 				iconImageSize: [30, 42],
 				iconImageOffset: [-5, -38],
 				balloonCloseButton: false,
-				hideIconOnBalloonOpen: false
+				hideIconOnBalloonOpen: false,
 			});
 
 			marker.events.add('click', function(e) {
 				const href = marker.options._options.iconImageHref;
 				if (href === icon) {
-					e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/images/icons/navi-red.svg');
+					e.get('target').options.set('iconImageHref', 'assets/images/icons/navi-red.svg');
 				} else {
 					e.get('target').options.set('iconImageHref', icon);
 				}
 			});
+
+			map.events.add('click', e => e.get('target').balloon.close());
 
 			map.geoObjects.add(marker);
 		}
