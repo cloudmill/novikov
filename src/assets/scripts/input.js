@@ -230,11 +230,13 @@ $('.order--js').on('click', function(e) {
 	const containerDataFilter = container.find('.tab-content.active');
 	const payment = containerDataFilter.find('input[name=payment]:checked').val();
 	const paymentTitle = containerDataFilter.find('input[name=payment]:checked').attr('data-title');
+	const deliveryType = containerDataFilter.attr('data-delivery-type-val');
 
 	data.payment = payment;
 	data.paymentTitle = paymentTitle;
 	data.deliveryId = containerDataFilter.attr('data-delivery-id');
 	data.address = containerDataFilter.find('[data-type=address]').text() + (containerDataFilter.find('input[name=number]').val() ? ', квартира № ' + containerDataFilter.find('input[name=number]').val() : '');
+  data.deliveryType = deliveryType;
 
 	if (containerDataFilter.attr('data-delivery-type') == 'delivery') {
 		data.datetime = containerDataFilter.find('input[name=date]').val() + ' ' + containerDataFilter.find('[data-type=select-time]').val();

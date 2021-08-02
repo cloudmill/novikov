@@ -35,7 +35,8 @@ function initMap() {
       selectDeliveryId = null,
       selectDeliveryPrice = null,
       selectDeliveryRkId = null,
-      outsideDelivery = $('[data-type=data-delivery-outside]').val();
+      outsideDelivery = $('[data-type=data-delivery-outside]').val(),
+      deliveryType = false;
 
 		if (strRestGeo) {
 			restGeo = strRestGeo.split(',').map(Number);
@@ -113,6 +114,7 @@ function initMap() {
               selectDeliveryId = outsideDelivery;
               selectDeliveryPrice = null;
               selectDeliveryRkId = null;
+              deliveryType = 'Доставка такси';
             } else {
               if (errorBlock.hasClass('active')) {
                 errorBlock.removeClass('active');
@@ -120,6 +122,7 @@ function initMap() {
               selectDeliveryId = e.get('target').properties.get('deliveryId');
               selectDeliveryRkId = e.get('target').properties.get('deliveryRkId');
               selectDeliveryPrice = e.get('target').properties.get('deliveryPrice');
+              deliveryType = 'Доставка курьером';
             }
 					} else {
             errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
@@ -198,6 +201,7 @@ function initMap() {
 
               $('.order-delivery, .order-wrapper__item--date, .order-payment').addClass('active');
               $('.tab-content.active').attr('data-delivery-id', selectDeliveryId);
+              $('.tab-content.active').attr('data-delivery-type-val', deliveryType);
 
               if (true) {
                 // показать блок даты, если доставка возможна
