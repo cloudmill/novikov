@@ -339,12 +339,12 @@ html {
       .section-item {
         &:first-child {
           @media screen and (min-width: $screen-md-min) {
-            width: 500px;
-            min-width: 500px;
+            width: 600px;
+            min-width: 600px;
             margin-right: 30px;
           }
           @media screen and (min-width: $screen-lg-min) {
-            margin-right: 100px;
+            //margin-right: 100px;
           }
           @media screen and (min-width: $screen-md-min) and (min-height: 600px) and (max-height: 799px) {
             h1 {
@@ -1848,8 +1848,8 @@ html {
 
 #yandexMap {
   .ymaps-2-1-79-balloon, [class$="balloon"] {
-    margin-top: -30px;
-    margin-left: -65px;
+    margin-top: -40px;
+    margin-left: -60px;
     width: 270px !important;
     background: #fff;
     box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.15);

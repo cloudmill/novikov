@@ -277,8 +277,8 @@ function initMapYandex() {
 			}, {
 				iconLayout: 'default#image',
 				iconImageHref: icon,
-				iconImageSize: [30, 42],
-				iconImageOffset: [-5, -38],
+				iconImageSize: [50, 58],
+				iconImageOffset: [-10, -45],
 				balloonCloseButton: false,
 				hideIconOnBalloonOpen: false,
 			});
@@ -290,6 +290,9 @@ function initMapYandex() {
 				} else {
 					e.get('target').options.set('iconImageHref', icon);
 				}
+			});
+			map.events.add('balloonclose', function() {
+				marker.options.set('iconImageHref', icon);
 			});
 
 			map.events.add('click', e => e.get('target').balloon.close());
