@@ -151,8 +151,8 @@ function moveMarker(map, placemarks) {
 export function initMapRest() {
 	ymaps.ready(function() {
 		const map = new ymaps.Map('restYMaps', {
-			center: [55.753220, 37.622513],
-			zoom: 14,
+			center: [66.413923, 94.241914],
+			zoom: 3,
 			controls: ['zoomControl', 'geolocationControl']
 		}, {
 			suppressMapOpenBlock: true,
