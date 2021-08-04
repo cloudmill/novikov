@@ -133,8 +133,6 @@ const mcOptions = {
 	}]
 };
 
-let clusterer;
-
 function moveMarker(map, placemarks) {
 	$('.mapList-item').click(function() {
 		const coords = $(this).data('adr');
@@ -162,24 +160,17 @@ export function initMapRest() {
 
 		map.behaviors.disable('scrollZoom');
 
-
-		const clusterIcons = [
-			{
-				href: 'assets/images/icons/navi-e.svg',
-				size: [30, 42],
-				offset: [40, -10],
-			},
-			{
-				href: 'assets/images/icons/navi-e.svg',
-				size: [30, 42],
-				offset: [40, -10],
-			},
-		];
 		const MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
 			'<div style="color: #FFFFFF; font-weight: bold;margin-top: 3px">{{ properties.geoObjects.length }}</div>'
 		);
-		clusterer = new ymaps.Clusterer({
-			clusterIcons: clusterIcons,
+    const clusterer = new ymaps.Clusterer({
+			clusterIcons: [
+        {
+          href: '/local/templates/main/assets/images/icons/navi-e.svg',
+          size: [30, 42],
+          offset: [40, -10],
+        },
+      ],
 			clusterIconContentLayout: MyIconContentLayout,
 			groupByCoordinates: false,
 			clusterDisableClickZoom: true,
@@ -210,7 +201,7 @@ export function initMapRest() {
 		});
 
 		locations.forEach((item, index) => {
-			const placeMark = new ymaps.Placemark(
+      placemarks[item[3]] = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
 					id: index,
@@ -226,9 +217,10 @@ export function initMapRest() {
 				}
 			);
 
-			clusterer.add(placeMark);
-			map.geoObjects.add(placeMark);
+			clusterer.add(placemarks[item[3]]);
 		});
+
+    map.geoObjects.add(clusterer);
 
 		map.geoObjects.events.add('click', function(e) {
 			const id = e.get('target').properties.get('id');
@@ -237,10 +229,7 @@ export function initMapRest() {
 		});
 
 		const allPoints = ymaps.geoQuery(map.geoObjects);
-		console.log(allPoints);
 		map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
-		// map.geoObjects.add(clusterer);
-
 
 		moveMarker(map, placemarks);
 	});
@@ -309,7 +298,7 @@ $(function() {
 		initMapYandex();
 	}
 	// ЭТО ДЛЯ ТЕСТИРОВАНИЯ ВЕРСТКИ НА СТРАНИЦЕ restaurants.html. Если мешает бэку, закомменить!
-	if ($('#restYMaps').length) {
-		initMapRest();
-	}
+	// if ($('#restYMaps').length) {
+	// 	initMapRest();
+	// }
 });
