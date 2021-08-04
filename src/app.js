@@ -128,89 +128,89 @@ function scrollX() {
 }
 
 export function scrollContent() {
-  const rellax = new Rellax('.rellax', {
-    center: true
-  });
-  let counter = 0;
+	const rellax = new Rellax('.rellax', {
+		center: true
+	});
+	let counter = 0;
 
-  let scrollAmount = 'auto';
-  if (result.os === 'Windows 10') {
-    scrollAmount = 100;
-  }
-  $('.scrollContent').mCustomScrollbar({
-    mouseWheel: {
-      scrollAmount: scrollAmount,
-    },
-    callbacks: {
-      whileScrolling: function() {
-        // AOS.refresh();
-        const x = this.mcs.content.find('.aos-init');
-        const d = -this.mcs.top;
-        x.each(function() {
-          const topOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
-          if (d > Math.round(topOffset) - window.innerHeight) {
-            $(this).addClass('aos-animate');
-          } else {
-            $(this).removeClass('aos-animate');
-          }
-        });
-        if ($('.rellax').length) {
-          rellax.refresh();
-        }
+	let scrollAmount = 'auto';
+	if (result.os === 'Windows 10') {
+		scrollAmount = 100;
+	}
+	$('.scrollContent').mCustomScrollbar({
+		mouseWheel: {
+			scrollAmount: scrollAmount,
+		},
+		callbacks: {
+			whileScrolling: function() {
+				// AOS.refresh();
+				const x = this.mcs.content.find('.aos-init');
+				const d = -this.mcs.top;
+				x.each(function() {
+					const topOffset = $(this).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
+					if (d > Math.round(topOffset) - window.innerHeight) {
+						$(this).addClass('aos-animate');
+					} else {
+						$(this).removeClass('aos-animate');
+					}
+				});
+				if ($('.rellax').length) {
+					rellax.refresh();
+				}
 
-        if (screenWidth > 1150 && $('.sticky').length) {
-          // eslint-disable-next-line no-unused-vars
-          const sticky = new Sticky('.sticky');
-        }
+				if (screenWidth > 1150 && $('.sticky').length) {
+					// eslint-disable-next-line no-unused-vars
+					const sticky = new Sticky('.sticky');
+				}
 
-        if ($('.page-order-menu').length) {
-          const scrollContent = this.mcs.content;
-          const pageNav = scrollContent.find('[data-type=url-page-nav]');
-          const url = pageNav.val();
-          const sectId = pageNav.attr('data-sect-id');
-          const data = {
-            ajaxPaginate: true,
-          };
+				if ($('.page-order-menu').length) {
+					const scrollContent = this.mcs.content;
+					const pageNav = scrollContent.find('[data-type=url-page-nav]');
+					const url = pageNav.val();
+					const sectId = pageNav.attr('data-sect-id');
+					const data = {
+						ajaxPaginate: true,
+					};
 
-          if (sectId) {
-            data['sectId'] = sectId;
-          }
+					if (sectId) {
+						data.sectId = sectId;
+					}
 
-          if (url) {
-            const itemsContainer = scrollContent.find('[data-type=items_container]');
-            const last = scrollContent.find('.order-menu-menu__item');
-            const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
-            const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
+					if (url) {
+						const itemsContainer = scrollContent.find('[data-type=items_container]');
+						const last = scrollContent.find('.order-menu-menu__item');
+						const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
+						const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
 
-            if (d > Math.round(offset) - window.innerHeight + setHeight) {
-              counter++;
+						if (d > Math.round(offset) - window.innerHeight + setHeight) {
+							counter++;
 
-              if (counter < 2) {
-                $.ajax({
-                  url: url,
-                  type: 'POST',
-                  data: data,
-                  success: function(data) {
-                    const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
-                    const itemsResponse = $(data).find('[data-type=item]');
+							if (counter < 2) {
+								$.ajax({
+									url: url,
+									type: 'POST',
+									data: data,
+									success: function(data) {
+										const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
+										const itemsResponse = $(data).find('[data-type=item]');
 
-                    if (urlResponse) {
-                      scrollContent.find('[data-type=url-page-nav]').val(urlResponse);
-                    } else {
-                      scrollContent.find('[data-type=url-page-nav]').remove();
-                    }
+										if (urlResponse) {
+											scrollContent.find('[data-type=url-page-nav]').val(urlResponse);
+										} else {
+											scrollContent.find('[data-type=url-page-nav]').remove();
+										}
 
-                    itemsContainer.append(itemsResponse);
-                    counter = 0;
-                  }
-                });
-              }
-            }
-          }
-        }
-      },
-    }
-  });
+										itemsContainer.append(itemsResponse);
+										counter = 0;
+									}
+								});
+							}
+						}
+					}
+				}
+			},
+		}
+	});
 }
 
 $(document).ready(() => {
@@ -229,9 +229,9 @@ $(document).ready(() => {
 
 	require('Scripts/backend');
 
-	scrollContent();
+	// scrollContent();
 
-	scrollX();
+	// scrollX();
 
 	if ($('[data-type=container-form] .cart-block-body').length) {
 		if (!isMobile) {
@@ -272,6 +272,14 @@ $(document).ready(() => {
 			return false;
 		});
 	}
+
+	const scrollContainer = document.querySelector('.card-scroller');
+
+	scrollContainer.addEventListener('wheel', (evt) => {
+		evt.preventDefault();
+		AOS.init({offset: 50});
+		scrollContainer.scrollLeft += evt.deltaY;
+	});
 
 });
 
