@@ -143,7 +143,7 @@ function moveMarker(map, placemarks) {
 
 		$(this).addClass('active').siblings().removeClass('active');
 
-		map.setCenter([lat, lng], 17);
+		map.setCenter([lat, lng], 20);
 		placemarks[id].balloon.open();
 	});
 }
@@ -167,30 +167,23 @@ export function initMapRest() {
 			clusterIcons: [
         {
           href: '/local/templates/main/assets/images/icons/navi-e.svg',
-          size: [30, 42],
-          offset: [40, -10],
+          size: [50, 58],
+          offset: [-10, -45],
         },
       ],
 			clusterIconContentLayout: MyIconContentLayout,
-			groupByCoordinates: false,
-			clusterDisableClickZoom: true,
-			clusterHideIconOnBalloonOpen: false,
-			geoObjectHideIconOnBalloonOpen: false
 		});
 
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
-		const defaultIcon = '/local/templates/main/assets/images/icons/navi.svg';
+		const icon = '/local/templates/main/assets/images/icons/navi.svg';
 		const placemarks = {};
 
 		mapItems.each(function() {
 			const dataItem = [];
 			const coordItem = $(this).attr('data-adr').split(',');
-			const icon = $(this).attr('data-map-icon') ? $(this).attr('data-map-icon') : defaultIcon;
-
 			dataItem.push(Number(coordItem[0]));
 			dataItem.push(Number(coordItem[1]));
-			dataItem.push(icon);
 			dataItem.push($(this).attr('id'));
 			dataItem.push($(this).attr('data-name'));
 			dataItem.push($(this).attr('data-address'));
@@ -200,36 +193,48 @@ export function initMapRest() {
 			locations.push(dataItem);
 		});
 
-		locations.forEach((item, index) => {
-      placemarks[item[3]] = new ymaps.Placemark(
+		locations.forEach((item) => {
+      placemarks[item[2]] = new ymaps.Placemark(
 				[item[0], item[1]],
 				{
-					id: index,
-					balloonContent: `<div class="balloonContent"><h4>${item[4]}</h4><p>${item[5]}</p><a href="tel:">${item[6]}</a><a href="${item[7]}" target="_blank">${item[7]}</a></div>`,
+					id: item[2],
+					balloonContent: `<div class="balloonContent"><h4>${item[3]}</h4><p>${item[4]}</p><a href="tel:">${item[5]}</a><a href="${item[6]}" target="_blank">${item[6]}</a></div>`,
 				},
 				{
 					iconLayout: 'default#image',
-					iconImageHref: item[2],
-					iconImageSize: [30, 42],
-					iconImageOffset: [-5, -38],
+					iconImageHref: icon,
+					iconImageSize: [50, 58],
+					iconImageOffset: [-10, -45],
 					balloonCloseButton: false,
 					hideIconOnBalloonOpen: false,
 				}
 			);
 
-			clusterer.add(placemarks[item[3]]);
+			clusterer.add(placemarks[item[2]]);
+
+      placemarks[item[2]].events.add('click', function(e) {
+        const href = placemarks[item[2]].options._options.iconImageHref;
+        const id = e.get('target').properties.get('id');
+        if (href === icon) {
+          e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/icons/navi-red.svg');
+        } else {
+          e.get('target').options.set('iconImageHref', icon);
+        }
+
+        $('#' + id).addClass('active').siblings().removeClass('active');
+        $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
+      });
+      map.events.add('balloonclose', function() {
+        placemarks[item[2]].options.set('iconImageHref', icon);
+      });
+
+      map.events.add('click', e => e.get('target').balloon.close());
 		});
 
     map.geoObjects.add(clusterer);
 
-		map.geoObjects.events.add('click', function(e) {
-			const id = e.get('target').properties.get('id');
-			$('#' + id).addClass('active').siblings().removeClass('active');
-			$('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
-		});
-
-		const allPoints = ymaps.geoQuery(map.geoObjects);
-		map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
+		// const allPoints = ymaps.geoQuery(map.geoObjects);
+		// map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
 
 		moveMarker(map, placemarks);
 	});
@@ -275,7 +280,7 @@ function initMapYandex() {
 			marker.events.add('click', function(e) {
 				const href = marker.options._options.iconImageHref;
 				if (href === icon) {
-					e.get('target').options.set('iconImageHref', 'assets/images/icons/navi-red.svg');
+					e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/icons/navi-red.svg');
 				} else {
 					e.get('target').options.set('iconImageHref', icon);
 				}
