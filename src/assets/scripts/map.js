@@ -303,7 +303,7 @@ $(function() {
 		initMapYandex();
 	}
 	// ЭТО ДЛЯ ТЕСТИРОВАНИЯ ВЕРСТКИ НА СТРАНИЦЕ restaurants.html. Если мешает бэку, закомменить!
-	// if ($('#restYMaps').length) {
-	// 	initMapRest();
-	// }
+	if ($('#restYMaps').length) {
+		initMapRest();
+	}
 });
