@@ -229,9 +229,9 @@ $(document).ready(() => {
 
 	require('Scripts/backend');
 
-	// scrollContent();
+	scrollContent();
 
-	// scrollX();
+	scrollX();
 
 	if ($('[data-type=container-form] .cart-block-body').length) {
 		if (!isMobile) {
