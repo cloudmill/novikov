@@ -273,13 +273,14 @@ $(document).ready(() => {
 		});
 	}
 
-	const scrollContainer = document.querySelector('.card-scroller');
-
-	scrollContainer.addEventListener('wheel', (evt) => {
-		evt.preventDefault();
-		AOS.init({offset: 50});
-		scrollContainer.scrollLeft += evt.deltaY;
-	});
+	// const scrollContainer = document.querySelector('.card-scroller');
+	// if (scrollContainer) {
+	// 	scrollContainer.addEventListener('wheel', (evt) => {
+	// 		evt.preventDefault();
+	// 		AOS.init({offset: 50});
+	// 		scrollContainer.scrollLeft += evt.deltaY;
+	// 	});
+	// }
 
 });
 
