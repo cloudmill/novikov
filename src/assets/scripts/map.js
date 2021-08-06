@@ -274,8 +274,7 @@ function initMapYandex() {
 		}
 
 		const pointData = JSON.parse($('[data-type=map-data]').val());
-		const itemIcon = $('[data-type=map-icon]').val();
-		const icon = itemIcon ? itemIcon : '/local/templates/main/assets/images/icons/navi.svg';
+		const icon = '/local/templates/main/assets/images/icons/navi.svg';
 
 		for (const key in pointData) {
 			const coord = pointData[key].COORDINATES.split(',');
