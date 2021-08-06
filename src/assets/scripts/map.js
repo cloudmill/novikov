@@ -140,6 +140,7 @@ export function initMapRest() {
 			zoom: 3,
 			controls: ['zoomControl', 'geolocationControl']
 		}, {
+      maxZoom: 20,
 			suppressMapOpenBlock: true,
 		});
 
