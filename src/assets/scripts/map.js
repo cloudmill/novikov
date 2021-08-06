@@ -180,6 +180,8 @@ export function initMapRest() {
 		const placemarks = {};
     const polygonsCollection = new ymaps.GeoObjectCollection();
 
+    let prevSelectPlacemark = null;
+
 		mapItems.each(function() {
 			const dataItem = [];
 			const coordItem = $(this).attr('data-adr').split(',');
@@ -216,6 +218,12 @@ export function initMapRest() {
       polygonsCollection.add(clusterer);
 
       placemarks[item[2]].events.add('click', function(e) {
+        if (prevSelectPlacemark) {
+          prevSelectPlacemark.options.set('iconImageHref', icon);
+        }
+
+        prevSelectPlacemark = placemarks[item[2]];
+
         placemarks[item[2]].options.set('iconImageHref', icon);
 
         const href = placemarks[item[2]].options._options.iconImageHref;
@@ -230,13 +238,17 @@ export function initMapRest() {
         $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
       });
 
+      map.events.add('balloonclose', function() {
+        placemarks[item[2]].options.set('iconImageHref', icon);
+      });
+
       map.events.add('click', e => e.get('target').balloon.close());
 		});
 
     map.geoObjects.add(polygonsCollection);
 
-    map.events.add('balloonclose', function() {
-      polygonsCollection.options.set('iconImageHref', icon);
+    map.geoObjects.events.add('click', function(e) {
+
     });
 
     map.setBounds(polygonsCollection.getBounds());
