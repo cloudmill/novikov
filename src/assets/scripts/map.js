@@ -178,6 +178,7 @@ export function initMapRest() {
 		const mapItems = $('[data-type=map-item]');
 		const icon = '/local/templates/main/assets/images/icons/navi.svg';
 		const placemarks = {};
+    const polygonsCollection = new ymaps.GeoObjectCollection();
 
 		mapItems.each(function() {
 			const dataItem = [];
@@ -212,7 +213,11 @@ export function initMapRest() {
 
 			clusterer.add(placemarks[item[2]]);
 
+      polygonsCollection.add(clusterer);
+
       placemarks[item[2]].events.add('click', function(e) {
+        placemarks[item[2]].options.set('iconImageHref', icon);
+
         const href = placemarks[item[2]].options._options.iconImageHref;
         const id = e.get('target').properties.get('id');
         if (href === icon) {
@@ -224,17 +229,17 @@ export function initMapRest() {
         $('#' + id).addClass('active').siblings().removeClass('active');
         $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
       });
-      map.events.add('balloonclose', function() {
-        placemarks[item[2]].options.set('iconImageHref', icon);
-      });
 
       map.events.add('click', e => e.get('target').balloon.close());
 		});
 
-    map.geoObjects.add(clusterer);
+    map.geoObjects.add(polygonsCollection);
 
-		// const allPoints = ymaps.geoQuery(map.geoObjects);
-		// map.setBounds(allPoints.getBounds(), {checkZoomRange: true});
+    map.events.add('balloonclose', function() {
+      polygonsCollection.options.set('iconImageHref', icon);
+    });
+
+    map.setBounds(polygonsCollection.getBounds());
 
 		moveMarker(map, placemarks);
 	});
@@ -317,7 +322,7 @@ $(function() {
 		initMapYandex();
 	}
 	// ЭТО ДЛЯ ТЕСТИРОВАНИЯ ВЕРСТКИ НА СТРАНИЦЕ restaurants.html. Если мешает бэку, закомменить!
-	if ($('#restYMaps').length) {
-		initMapRest();
-	}
+	// if ($('#restYMaps').length) {
+		// initMapRest();
+	// }
 });
