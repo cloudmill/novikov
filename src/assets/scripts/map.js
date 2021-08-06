@@ -133,21 +133,6 @@ const mcOptions = {
 	}]
 };
 
-function moveMarker(map, placemarks) {
-	$('.mapList-item').click(function() {
-		const coords = $(this).data('adr');
-		const latlngStr = coords.split(',', 2);
-		const lat = parseFloat(latlngStr[0]);
-		const lng = parseFloat(latlngStr[1]);
-		const id = $(this).attr('id');
-
-		$(this).addClass('active').siblings().removeClass('active');
-
-		map.setCenter([lat, lng], 20);
-		placemarks[id].balloon.open();
-	});
-}
-
 export function initMapRest() {
 	ymaps.ready(function() {
 		const map = new ymaps.Map('restYMaps', {
@@ -177,6 +162,7 @@ export function initMapRest() {
 		const locations = [];
 		const mapItems = $('[data-type=map-item]');
 		const icon = '/local/templates/main/assets/images/icons/navi.svg';
+		const iconActive = '/local/templates/main/assets/images/icons/navi-red.svg';
 		const placemarks = {};
     const polygonsCollection = new ymaps.GeoObjectCollection();
 
@@ -224,12 +210,10 @@ export function initMapRest() {
 
         prevSelectPlacemark = placemarks[item[2]];
 
-        placemarks[item[2]].options.set('iconImageHref', icon);
-
         const href = placemarks[item[2]].options._options.iconImageHref;
         const id = e.get('target').properties.get('id');
         if (href === icon) {
-          e.get('target').options.set('iconImageHref', '/local/templates/main/assets/images/icons/navi-red.svg');
+          e.get('target').options.set('iconImageHref', iconActive);
         } else {
           e.get('target').options.set('iconImageHref', icon);
         }
@@ -238,22 +222,35 @@ export function initMapRest() {
         $('.scrollContent').mCustomScrollbar('scrollTo', '#' + id);
       });
 
-      map.events.add('balloonclose', function() {
-        placemarks[item[2]].options.set('iconImageHref', icon);
-      });
-
       map.events.add('click', e => e.get('target').balloon.close());
 		});
 
     map.geoObjects.add(polygonsCollection);
 
-    map.geoObjects.events.add('click', function(e) {
+    map.events.add('balloonclose', function() {
+      prevSelectPlacemark.options.set('iconImageHref', icon);
+      $('[data-type=map-item]').filter('.active').removeClass('active');
+    });
 
+    $('[data-type=map-item]').click(function() {
+      const coords = $(this).data('adr');
+      const latlngStr = coords.split(',', 2);
+      const lat = parseFloat(latlngStr[0]);
+      const lng = parseFloat(latlngStr[1]);
+      const id = $(this).attr('id');
+
+      $(this).addClass('active').siblings().removeClass('active');
+
+      if (prevSelectPlacemark) {
+        prevSelectPlacemark.options.set('iconImageHref', icon);
+      }
+
+      prevSelectPlacemark = placemarks[id];
+      map.setCenter([lat, lng], 20);
+      placemarks[id].balloon.open();
     });
 
     map.setBounds(polygonsCollection.getBounds());
-
-		moveMarker(map, placemarks);
 	});
 }
 
