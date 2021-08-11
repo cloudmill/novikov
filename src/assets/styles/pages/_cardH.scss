@@ -1,9 +1,9 @@
-//.page-card {
-//  .card {
-//    @media screen and (min-width: $screen-md-min) {
-//      overflow-x: auto;
-//      overflow-y: hidden;
-//      display: flex;
-//    }
-//  }
-//}
+.page-card {
+  .card {
+    @media screen and (min-width: $screen-md-min) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+    }
+  }
+}
