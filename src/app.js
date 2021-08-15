@@ -164,8 +164,8 @@ export function scrollContent() {
 				}
 
 				if ($('.page-order-menu').length) {
-					const scrollContent = this.mcs.content;
-					const pageNav = scrollContent.find('[data-type=url-page-nav]');
+					const scrollContentBlock = this.mcs.content;
+					const pageNav = scrollContentBlock.find('[data-type=url-page-nav]');
 					const url = pageNav.val();
 					const sectId = pageNav.attr('data-sect-id');
 					const data = {
@@ -177,8 +177,8 @@ export function scrollContent() {
 					}
 
 					if (url) {
-						const itemsContainer = scrollContent.find('[data-type=items_container]');
-						const last = scrollContent.find('.order-menu-menu__item');
+						const itemsContainer = scrollContentBlock.find('[data-type=items_container]');
+						const last = scrollContentBlock.find('.order-menu-menu__item');
 						const offset = $(last[last.length - 1]).offset().top - $('.mCSB_container').offset().top + $('.mCSB_container').scrollTop();
 						const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
 
@@ -195,9 +195,9 @@ export function scrollContent() {
 										const itemsResponse = $(data).find('[data-type=item]');
 
 										if (urlResponse) {
-											scrollContent.find('[data-type=url-page-nav]').val(urlResponse);
+                      scrollContentBlock.find('[data-type=url-page-nav]').val(urlResponse);
 										} else {
-											scrollContent.find('[data-type=url-page-nav]').remove();
+                      scrollContentBlock.find('[data-type=url-page-nav]').remove();
 										}
 
 										itemsContainer.append(itemsResponse);
@@ -229,7 +229,7 @@ $(document).ready(() => {
 
 	require('Scripts/backend');
 
-	// scrollContent();
+	scrollContent();
 
 	// scrollX();
 
