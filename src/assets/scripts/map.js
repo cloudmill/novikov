@@ -230,7 +230,6 @@ export function initMapRest() {
 
     map.events.add('balloonclose', function() {
       prevSelectPlacemark.options.set('iconImageHref', icon);
-      $('[data-type=map-item]').filter('.active').removeClass('active');
     });
 
     $('[data-type=map-item]').click(function() {
