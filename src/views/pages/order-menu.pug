@@ -58,7 +58,7 @@ block content
                             .innerList-body__item
                               .innerList-subname За пределами МКАД 10 км
                               .innerList-price 1000 ₽
-        #mainMenu.order-list
+        #mainMenu.order-list(data-type="sections_container")
           ul#autoNav.order-nav
             li.active: a(href='#') все
             li: a(href='#') Роллы
@@ -82,11 +82,11 @@ block content
                 span еще
                 include ../components/_arr-s
               ul#autoNavMoreList.auto-nav-more-list
-        .order-menu-menu
+        .order-menu-menu(data-type="items_container")
           each item in order
             - let parent = ''
             - if (item.big) parent = 'order-menu-menu__item--big'
-            .order-menu-menu__item(class=parent, data-aos='fade-up')
+            .order-menu-menu__item(class=parent, data-aos='fade-up', data-type="item")
               .order-menu-menu__item-img
                 +img(item.img)
                 // .show-popup--js - добавление этого класса показывает попап "Все ранее выбранные продукты будут удалены из корзины. Продолжить?"

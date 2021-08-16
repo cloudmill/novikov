@@ -195,9 +195,9 @@ export function scrollContent() {
 										const itemsResponse = $(data).find('[data-type=item]');
 
 										if (urlResponse) {
-                      scrollContentBlock.find('[data-type=url-page-nav]').val(urlResponse);
+											scrollContentBlock.find('[data-type=url-page-nav]').val(urlResponse);
 										} else {
-                      scrollContentBlock.find('[data-type=url-page-nav]').remove();
+											scrollContentBlock.find('[data-type=url-page-nav]').remove();
 										}
 
 										itemsContainer.append(itemsResponse);
@@ -275,11 +275,57 @@ $(document).ready(() => {
 
 	const scrollContainer = document.querySelector('.card-scroller');
 	if (scrollContainer) {
+		let menuData;
+		$('.scroll-to--js a').each(function() {
+			menuData = {
+			  ...menuData,
+				[$(this).attr('href')]: $($(this).attr('href')).offset().left - 5
+			};
+		});
+		$('.scroll-to--js a').click(function() {
+			const id = menuData[$(this).attr('href')];
+			if (!$(this).hasClass('active')) {
+				$('.card-scroller').animate({scrollLeft: id}, 800);
+				$('.aos-init-left').each(function() {
+					$(this).addClass('aos-animate aos-init').data('aos', 'fade-left');
+				});
+			}
+			setTimeout(() => {
+				$('.scroll-to--js a').removeClass('active');
+				$(this).addClass('active');
+			}, 100);
+			return false;
+		});
+
 		scrollContainer.addEventListener('wheel', (evt) => {
 			evt.preventDefault();
 			scrollContainer.scrollLeft += evt.deltaY;
 			// const sections = $('.aos-init-left');
 			// sections.removeClass('aos-animate');
+
+      if (
+        menuData['#about'] <= $('.card-scroller').scrollLeft() &&
+        menuData['#chief'] - window.innerWidth + 200 >= $('.card-scroller').scrollLeft()
+      ) {
+        $('.menu li a').removeClass('active');
+        $('.menu li a[href="#about"]').addClass('active');
+      }
+      if ($('.card-scroller').scrollLeft() >= menuData['#chief'] - window.innerWidth + 200) {
+        $('.menu li a').removeClass('active');
+        $('.menu li a[href="#chief"]').addClass('active');
+      }
+      if ($('.card-scroller').scrollLeft() >= menuData['#banket'] - window.innerWidth + 200) {
+        $('.menu li a').removeClass('active');
+        $('.menu li a[href="#banket"]').addClass('active');
+      }
+      if ($('.card-scroller').scrollLeft() >= menuData['#event'] - window.innerWidth + 200) {
+        $('.menu li a').removeClass('active');
+        $('.menu li a[href="#event"]').addClass('active');
+      }
+      if ($('.card-scroller').scrollLeft() >= menuData['#maps'] - window.innerWidth + 200) {
+        $('.menu li a').removeClass('active');
+        $('.menu li a[href="#maps"]').addClass('active');
+      }
 
 			$('.aos-init-left').each(function() {
 				if ($(this).isInViewport()) {
@@ -290,6 +336,56 @@ $(document).ready(() => {
 		});
 	}
 
+});
+
+
+$(window).scroll(function() {
+  let counter = 0;
+  const d = $(window).scrollTop();
+  if ($('.page-order-menu').length) {
+    const scrollContentBlock = $('.page-order-menu');
+    const pageNav = scrollContentBlock.find('[data-type=url-page-nav]');
+    const url = pageNav.val();
+    const sectId = pageNav.attr('data-sect-id');
+    const data = {
+      ajaxPaginate: true,
+    };
+
+    if (sectId) {
+      data.sectId = sectId;
+    }
+
+    if (url) {
+      const itemsContainer = scrollContentBlock.find('[data-type=items_container]');
+      const last = scrollContentBlock.find('.order-menu-menu__item');
+      const offset = $(last[last.length - 1]).offset().top;
+      const setHeight = $(last[last.length - 1]).height() / 2; // тут значение КОГДА сработает условие. В начале блока, в конце и т.д.
+      if (d > Math.round(offset) - window.innerHeight + setHeight) {
+        counter++;
+
+        if (counter < 2) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function(data) {
+              const urlResponse = $(data).filter('[data-type=url-page-nav]').val();
+              const itemsResponse = $(data).find('[data-type=item]');
+
+              if (urlResponse) {
+                scrollContentBlock.find('[data-type=url-page-nav]').val(urlResponse);
+              } else {
+                scrollContentBlock.find('[data-type=url-page-nav]').remove();
+              }
+
+              itemsContainer.append(itemsResponse);
+              counter = 0;
+            }
+          });
+        }
+      }
+    }
+  }
 });
 
 $(window).resize(scrollX);
