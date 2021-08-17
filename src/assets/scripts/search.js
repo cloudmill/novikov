@@ -36,7 +36,8 @@ export function deliveryMap() {
       selectDeliveryPrice = null,
       selectDeliveryRkId = null,
       outsideDelivery = $('[data-type=data-delivery-outside]').val(),
-      deliveryType = false;
+      deliveryType = false,
+      polygonsBounds = null;
 
     const polygonsCollection = new ymaps.GeoObjectCollection();
 
@@ -69,8 +70,11 @@ export function deliveryMap() {
       );
 
       map.geoObjects.add(polygon);
-      map.setBounds(polygon.geometry.getBounds());
+
+      polygonsBounds = polygon.geometry.getBounds();
     }
+
+    map.setBounds(polygonsBounds);
 
     marker = new ymaps.Placemark(map.getCenter(), {}, {
       iconLayout: 'default#image',
