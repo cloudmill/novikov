@@ -4,33 +4,33 @@ import {validateField} from './input';
 import {myModal} from './popup';
 import {initSwiper} from "./sliders";
 
-const DA_URL = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
-const DA_API_KEY = '4ea50958b736a6ac3b71ab59a97b96202ace7e85';
+export function deliveryMap() {
+  const DA_URL = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
+  const DA_API_KEY = '4ea50958b736a6ac3b71ab59a97b96202ace7e85';
 
-function fetchDaData(query, url) {
-	const options = {
-		method: 'POST',
-		mode: 'cors',
-		headers: {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json',
-			'Authorization': 'Token ' + DA_API_KEY
-		},
-		body: JSON.stringify(query)
-	};
+  function fetchDaData(query, url) {
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Token ' + DA_API_KEY
+      },
+      body: JSON.stringify(query)
+    };
 
-	return fetch(url, options);
-}
+    return fetch(url, options);
+  }
 
-let marker = [];
-let map = [];
-const polygons = [];
+  let marker = [];
+  let map = [];
+  const polygons = [];
 
-function initMap() {
-	ymaps.ready(function() {
+  ymaps.ready(function() {
     const geocoderUrlApi = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address';
-		const strRestGeo = $('[data-type=data-rest-geo]').val();
-		let restGeo = [55.753220, 37.622513],
+    const strRestGeo = $('[data-type=data-rest-geo]').val();
+    let restGeo = [55.753220, 37.622513],
       res = null,
       selectDeliveryId = null,
       selectDeliveryPrice = null,
@@ -38,67 +38,69 @@ function initMap() {
       outsideDelivery = $('[data-type=data-delivery-outside]').val(),
       deliveryType = false;
 
-		if (strRestGeo) {
-			restGeo = strRestGeo.split(',').map(Number);
-		}
+    const polygonsCollection = new ymaps.GeoObjectCollection();
 
-		map = new ymaps.Map('map', {
-			center: restGeo,
-			zoom: 9,
-			controls: ['zoomControl', 'geolocationControl']
-		}, {
-			suppressMapOpenBlock: true,
-		});
+    if (strRestGeo) {
+      restGeo = strRestGeo.split(',').map(Number);
+    }
 
-		const polygonDataStr = JSON.parse($('[data-type=data-delivery-zones]').val());
-		let polygonData = null;
+    map = new ymaps.Map('map', {
+      center: restGeo,
+      zoom: 9,
+      controls: ['zoomControl', 'geolocationControl']
+    }, {
+      suppressMapOpenBlock: true,
+    });
 
-		for (const key in polygonDataStr) {
-			polygonData = JSON.parse(polygonDataStr[key].POLYGON);
+    const polygonDataStr = JSON.parse($('[data-type=data-delivery-zones]').val());
+    let polygonData = null;
 
-			const polygon = new ymaps.Polygon(
-				[polygonData],
-				{
-					hintContent: polygonDataStr[key].PRICE > 0 ? 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.' : 'Бесплатная доставка',
-					deliveryId: polygonDataStr[key].DELIVERY_ID,
+    for (const key in polygonDataStr) {
+      polygonData = JSON.parse(polygonDataStr[key].POLYGON);
+
+      const polygon = new ymaps.Polygon(
+        [polygonData],
+        {
+          hintContent: polygonDataStr[key].PRICE > 0 ? 'Стоимость доставки составит: ' + polygonDataStr[key].PRICE + ' руб.' : 'Бесплатная доставка',
+          deliveryId: polygonDataStr[key].DELIVERY_ID,
           deliveryRkId: polygonDataStr[key].DELIVERY_RK_ID,
           deliveryPrice: polygonDataStr[key].PRICE,
-				}
-			);
-			polygons.push(polygon);
-		}
+        }
+      );
 
-    ymaps.geoQuery(polygons).addToMap(map);
+      map.geoObjects.add(polygon);
+      map.setBounds(polygon.geometry.getBounds());
+    }
 
-		marker = new ymaps.Placemark(map.getCenter(), {}, {
-			iconLayout: 'default#image',
-			iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
-			iconImageSize: [30, 42],
-			iconImageOffset: [-5, -38]
-		});
+    marker = new ymaps.Placemark(map.getCenter(), {}, {
+      iconLayout: 'default#image',
+      iconImageHref: '/local/templates/main/assets/images/icons/navi.svg',
+      iconImageSize: [30, 42],
+      iconImageOffset: [-5, -38]
+    });
 
-		map.geoObjects.add(marker);
+    map.geoObjects.add(marker);
 
-		map.events.add('click', function(e) {
-			marker.geometry.setCoordinates(e.get('coords'));
+    map.events.add('click', function(e) {
+      marker.geometry.setCoordinates(e.get('coords'));
 
-			let isPolygonCheck = outsideDelivery ? true : false;
+      let isPolygonCheck = outsideDelivery ? true : false;
 
-			fetchResult(e, isPolygonCheck, isPolygonCheck);
-		});
+      fetchResult(e, isPolygonCheck, isPolygonCheck);
+    });
 
-		map.geoObjects.events.add('click', function(e) {
-			marker.geometry.setCoordinates(e.get('coords'));
+    map.geoObjects.events.add('click', function(e) {
+      marker.geometry.setCoordinates(e.get('coords'));
 
-			fetchResult(e, true);
-		});
+      fetchResult(e, true);
+    });
 
-		function fetchResult(e, isPolygonCheck, isOutsideDelivery = false) {
-			fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
-				.then(response => response.text())
-				.then(result => {
-					res = JSON.parse(result);
-					let selectAddress = res.suggestions.length ? res.suggestions[0].value : null,
+    function fetchResult(e, isPolygonCheck, isOutsideDelivery = false) {
+      fetchDaData({ lat: e.get('coords')[0], lon: e.get('coords')[1] }, geocoderUrlApi)
+        .then(response => response.text())
+        .then(result => {
+          res = JSON.parse(result);
+          let selectAddress = res.suggestions.length ? res.suggestions[0].value : null,
             buttonDisabled = null,
             errorBlock = $('.error-tool'),
             buttonSuccess = $('.success--js'),
@@ -106,7 +108,7 @@ function initMap() {
             inputBlock = $('[data-type=input-block]'),
             deliveryTextInfo = $('[data-type=delivery-text-info]').length ? $('[data-type=delivery-text-info]').val() : 'Выбранный адрес не входит в зону доставки. Сумма доставки фиксируется менеджером';
 
-					if (isPolygonCheck) {
+          if (isPolygonCheck) {
             buttonDisabled = false;
             buttonSuccess.attr('data-value', selectAddress);
             if (isOutsideDelivery) {
@@ -124,10 +126,10 @@ function initMap() {
               selectDeliveryPrice = e.get('target').properties.get('deliveryPrice');
               deliveryType = 'Доставка курьером';
             }
-					} else {
+          } else {
             errorBlock.addClass('active').text('Выбранный адрес не входит в зону доставки');
-						buttonDisabled = true;
-					}
+            buttonDisabled = true;
+          }
 
           inputSearch.val(selectAddress);
 
@@ -148,9 +150,9 @@ function initMap() {
 
           buttonSuccess.prop('disabled', buttonDisabled);
           inputBlock.addClass('input--filled');
-				})
-				.catch(error => console.log('error', error));
-		}
+        })
+        .catch(error => console.log('error', error));
+    }
 
     $(document).on('click', '.success--js', function() {
       const result = [];
@@ -224,56 +226,50 @@ function initMap() {
         });
       }
     });
-	});
+  });
+
+  function moveMarker(lat, lng) {
+    let buttonDisabled = null;
+
+    map.setCenter([lat, lng], 15);
+    marker.geometry.setCoordinates([lat, lng]);
+
+    const isContains = polygons.some((polygon) => polygon.geometry.contains([lat, lng]));
+
+    if (!isContains) {
+      $('.error-tool').addClass('active');
+      buttonDisabled = true;
+    } else {
+      buttonDisabled = false;
+    }
+
+    $('.success--js').prop('disabled', buttonDisabled);
+  }
+
+  $('.autocomplete').autocomplete({
+    lookup: function(query, done) {
+      let res = [];
+      const queryData = {query: query};
+      fetchDaData(queryData, DA_URL)
+        .then(response => response.text())
+        .then(result => {
+          res = JSON.parse(result);
+          done(res);
+        })
+        .catch(error => console.log('error', error));
+    },
+    onSelect: function(suggestion) {
+      $('.error-tool').removeClass('active');
+      $('.success--js').attr('data-value', suggestion.value);
+      moveMarker(suggestion.data.geo_lat, suggestion.data.geo_lon);
+
+      // TODO: проверка на доступность адреса. Бэку допилить
+      // if (false) {
+      // 	$('.error-tool').addClass('active');
+      // }
+    },
+    minChars: 3,
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Извините, ничего не найдено',
+  });
 }
-
-function moveMarker(lat, lng) {
-	let buttonDisabled = null;
-
-	map.setCenter([lat, lng], 15);
-	marker.geometry.setCoordinates([lat, lng]);
-
-	const isContains = polygons.some((polygon) => polygon.geometry.contains([lat, lng]));
-
-	if (!isContains) {
-		$('.error-tool').addClass('active');
-		buttonDisabled = true;
-	} else {
-		buttonDisabled = false;
-	}
-
-	$('.success--js').prop('disabled', buttonDisabled);
-}
-
-$('.autocomplete').autocomplete({
-	lookup: function(query, done) {
-		let res = [];
-		const queryData = {query: query};
-		fetchDaData(queryData, DA_URL)
-			.then(response => response.text())
-			.then(result => {
-				res = JSON.parse(result);
-				done(res);
-			})
-			.catch(error => console.log('error', error));
-	},
-	onSelect: function(suggestion) {
-		$('.error-tool').removeClass('active');
-		$('.success--js').attr('data-value', suggestion.value);
-		moveMarker(suggestion.data.geo_lat, suggestion.data.geo_lon);
-
-		// TODO: проверка на доступность адреса. Бэку допилить
-		// if (false) {
-		// 	$('.error-tool').addClass('active');
-		// }
-	},
-	minChars: 3,
-	showNoSuggestionNotice: true,
-	noSuggestionNotice: 'Извините, ничего не найдено',
-});
-
-$(function() {
-	if ($('#map').length) {
-		initMap();
-	}
-});
