@@ -69,6 +69,8 @@ export function deliveryMap() {
         }
       );
 
+      polygons.push(polygon);
+
       map.geoObjects.add(polygon);
 
       polygonsBounds = polygon.geometry.getBounds();
