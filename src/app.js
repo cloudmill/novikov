@@ -339,8 +339,8 @@ $(document).ready(() => {
 });
 
 
+let counter = 0;
 $(window).scroll(function() {
-  let counter = 0;
   const d = $(window).scrollTop();
   if ($('.page-order-menu').length) {
     const scrollContentBlock = $('.page-order-menu');
