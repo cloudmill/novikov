@@ -22,6 +22,7 @@ $(function() {
   restaurantsTabs();
   ckeckValidateCard();
   getLatLng();
+  deliveryTabs();
 });
 
 function restaurantsFilter() {
@@ -430,6 +431,35 @@ function restaurantsTabs() {
         offset: 50,
       });
     }, 400);
+  });
+}
+
+function deliveryTabs() {
+  $(document).on('click', '[data-type=delivery-tab]', function (e) {
+    e.preventDefault();
+
+    let body = $(this).parents('body'),
+      deliveryPriceBlock = body.find('[data-type=container-delivery-price]'),
+      deliveryPrice = deliveryPriceBlock.find('[data-type=delivery-price]'),
+      deliveryPriceData = Number(deliveryPriceBlock.find('[data-type=delivery-price]').text()),
+      orderPrice = body.find('[data-type=order-price]'),
+      orderPriceData = Number(body.find('[data-type=order-price]').text()),
+      totalPrice = body.find('[data-type=total]'),
+      totalPriceData = Number(body.find('[data-type=total]').text()),
+      tabContent = $(this).closest('.set-tab').find('.tab-content');
+
+    $(this).addClass('active').siblings().removeClass('active');
+    tabContent.removeClass('active').filter($(this).data('toggle-target')).addClass('active');
+
+    if (!$(this).data('delivery')) {
+      deliveryPriceBlock.hide();
+      orderPrice.text(orderPriceData - deliveryPriceData);
+      totalPrice.text(totalPriceData - deliveryPriceData);
+    } else {
+      deliveryPriceBlock.show();
+      orderPrice.text(orderPriceData + deliveryPriceData);
+      totalPrice.text(totalPriceData + deliveryPriceData);
+    }
   });
 }
 

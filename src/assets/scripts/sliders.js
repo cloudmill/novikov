@@ -347,7 +347,7 @@ export function initSwiper() {
 
 initSwiper();
 
-$('.set-tab .tab').on('click', function(evt) {
+$('.set-tab .tab:not(.delivery-tab)').on('click', function(evt) {
 	evt.preventDefault();
 	$(this).parent().find('.tab').removeClass('active');
 	$(this).addClass('active');
