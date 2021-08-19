@@ -3,7 +3,7 @@ import Swiper from 'swiper/swiper-bundle.min';
 
 let iconLine = 'assets/images/icons/line.svg';
 
-if (window.location.host == 'nov.hellem.ru') {
+if (window.location.host == 'novikovgroup.ru.swtest.ru') {
 	iconLine = '/local/templates/main/assets/images/icons/line.svg';
 }
 
