@@ -55,24 +55,24 @@ block content
           .carousel-swiper-l.swiper-container.carousel-swiper-img(data-aos='fade-up')
             .swiper-wrapper
               - for (let x = 2; x < 4; x++)
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     +img('index/slide-1.jpg')
                     .logo: +img('index/logo-1.jpg')
                   .restaurant-desc
                     h3 Nino
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     +img('index/slide-2.jpg')
                     .logo: +img('index/logo-2.jpg')
                   .restaurant-desc
                     h3 СЫРОВАРНЯ АЛЬМЕТЬЕВСК
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     +img('index/slide-3.jpg')
                   .restaurant-desc
                     h3 aqua
-                .swiper-slide.restaurant
+                a.swiper-slide.restaurant(href='#')
                   .restaurant-img
                     +img('index/slide-4.jpg')
                   .restaurant-desc

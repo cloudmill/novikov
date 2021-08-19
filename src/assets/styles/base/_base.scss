@@ -42,40 +42,40 @@ section, article, aside, footer, header, nav, hgroup, main {
   display: block;
 }
 
-//html::-webkit-scrollbar {
-//  width: 6px !important;
-//  height: 6px !important;
-//  -webkit-appearance: none !important;
-//  -webkit-overflow-scrolling: touch
-//}
-//
-//html::-webkit-scrollbar:horizontal {
-//  height: 6px !important
-//}
-//
-//html::-webkit-scrollbar:vertical {
-//  width: 6px !important
-//}
-//
-//html::-webkit-scrollbar-track-piece {
-//  background: #eff7fd !important
-//}
-//
-//html::-webkit-scrollbar-thumb {
-//  background-color: #000 !important
-//}
-//
-//html::-webkit-scrollbar-thumb:window-inactive {
-//  background: #000 !important
-//}
-//
-//html::-webkit-scrollbar-button, html::-webkit-scrollbar-track {
-//  background-color: transparent
-//}
-//
-//html::-webkit-resizer, html::-webkit-scrollbar-corner {
-//  background-color: transparent
-//}
+html::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+  -webkit-appearance: none !important;
+  -webkit-overflow-scrolling: touch
+}
+
+html::-webkit-scrollbar:horizontal {
+  height: 6px !important
+}
+
+html::-webkit-scrollbar:vertical {
+  width: 6px !important
+}
+
+html::-webkit-scrollbar-track-piece {
+  background: #eff7fd !important
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #000 !important
+}
+
+html::-webkit-scrollbar-thumb:window-inactive {
+  background: #000 !important
+}
+
+html::-webkit-scrollbar-button, html::-webkit-scrollbar-track {
+  background-color: transparent
+}
+
+html::-webkit-resizer, html::-webkit-scrollbar-corner {
+  background-color: transparent
+}
 
 //
 // Delete focus border

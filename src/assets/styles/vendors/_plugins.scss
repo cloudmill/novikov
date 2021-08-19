@@ -185,7 +185,7 @@ body:not(.safari) {
   .select2-selection__arrow {
     top: 0;
     right: 5px;
-    height: 75%;
+    height: 65%;
     background: url('../images/icons/select.svg') no-repeat center right / 10px auto;
     @include transitionEase();
     width: 10px;
