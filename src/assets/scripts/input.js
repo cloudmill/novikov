@@ -331,7 +331,7 @@ $('.form--js').on('click', function(e) {
 						thisObj.closest('.form-inner').css('display', 'none').next().css('display', 'flex');
 					}
 
-					if (path[1] === 'contacts') {
+					if (path[1] === 'contacts' || !path[1]) {
 						classActiveVal = 'shown';
 					}
 
