@@ -336,6 +336,7 @@ function basket() {
     let restCode = curItem.attr('data-rest-code');
     let calculate = curItem.attr('data-calculate');
     let productsList = container.find('[data-type=products_list]');
+    let discountCardProduct = curItem.attr('data-discount-card');
     let data = null;
 
     if (type == 'update') {
@@ -355,6 +356,7 @@ function basket() {
         productId: productId,
         productRKId: productRKId,
         productNameEn: productNameEn,
+        discountCardProduct: discountCardProduct,
         type: type,
         restCode: restCode,
       };
@@ -366,7 +368,13 @@ function basket() {
       dataType: 'json',
       data: data,
       success: function(data) {
-        if (data.success === true) {
+        if (data.success === true && data.redirect) {
+          window.location.replace('/order/');
+
+          return false;
+        }
+
+        if (data.success === true && !data.clear_basket) {
           if (type == 'add') {
             updateCartCount();
             updateCartList(curItem, productsList, data.basketProductId);
@@ -379,7 +387,7 @@ function basket() {
               removeProduct(curItem);
             }
           }
-        } else if (data.success == 'another restaurant') {
+        } else if (data.success === true && data.clear_basket) {
           container.find('[data-type=another-rest]').addClass('active');
 
           anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList);
