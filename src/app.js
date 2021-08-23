@@ -75,7 +75,7 @@ function scrollX() {
 
 		$('.scroll-to--js a').click(function() {
 			const id = $(this).attr('href');
-			$('.scrollContentX').mCustomScrollbar('scrollTo', id);
+			// $('.scrollContentX').mCustomScrollbar('scrollTo', id);
 			setTimeout(() => {
 				$('.scroll-to--js a').removeClass('active');
 				$(this).addClass('active');
@@ -277,10 +277,12 @@ $(document).ready(() => {
 	if (scrollContainer) {
 		let menuData;
 		$('.scroll-to--js a').each(function() {
-			menuData = {
-			  ...menuData,
-				[$(this).attr('href')]: $($(this).attr('href')).offset().left - 5
-			};
+		  if ($($(this).attr('href'))) {
+        menuData = {
+          ...menuData,
+          [$(this).attr('href')]: $($(this).attr('href')).offset().left - 5
+        };
+      }
 		});
 		$('.scroll-to--js a').click(function() {
 			const id = menuData[$(this).attr('href')];
