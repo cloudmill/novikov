@@ -6,6 +6,7 @@ $('.mobile-nav--js').click(function() {
 
 $('.header-search--js').click(function() {
 	$('.search-block').addClass('active');
+	$('.search-block-input').focus();
 	return false;
 });
 $('.header-menu--js').click(function() {
