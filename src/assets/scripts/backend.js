@@ -390,7 +390,15 @@ function basket() {
         } else if (data.success === true && data.clear_basket) {
           container.find('[data-type=another-rest]').addClass('active');
 
-          anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList);
+          let dataAnotherRest = {
+            productId: productId,
+            productRKId: productRKId,
+            productNameEn: productNameEn,
+            discountCardProduct: discountCardProduct,
+            restCode: restCode,
+          };
+
+          anotherRestaurant(dataAnotherRest, curItem, productsList);
         } else {
           console.log('Ошибка добавление товара');
         }
@@ -399,7 +407,7 @@ function basket() {
   });
 }
 
-function anotherRestaurant(container, productId, productNameEn, restCode, curItem, productsList) {
+function anotherRestaurant(data, curItem, productsList) {
   $('[data-type=add-product-another-rest]').click(function (e) {
     e.preventDefault();
 
@@ -407,14 +415,14 @@ function anotherRestaurant(container, productId, productNameEn, restCode, curIte
       type: 'POST',
       url: '/local/templates/main/include/ajax/basket_delete_all.php',
       dataType: 'json',
-      data: {
-        productId: productId,
-        productNameEn: productNameEn,
-        restCode: restCode,
-      },
-      success: function(data) {
-        if (data.success === true) {
+      data: data,
+      success: function(r) {
+        if (r.success === true && !r.redirect) {
           updateCartList(curItem, productsList, data.basketProductId, 'delete');
+        } else if (r.success === true && r.redirect) {
+          window.location.replace('/order/');
+        } else {
+          console.log('error');
         }
       }
     });
