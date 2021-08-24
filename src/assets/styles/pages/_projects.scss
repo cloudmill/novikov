@@ -37,6 +37,9 @@
 
 .projectList {
   padding-bottom: 1px;
+  @media screen and (min-width: $screen-md-min) {
+    min-height: 800px;
+  }
   > li {
     margin-bottom: 15px;
     list-style-type: none;
